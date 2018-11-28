@@ -1,12 +1,5 @@
 # Apuntes - [Java]
 
-## Referencia
-
-* <https://docs.oracle.com/javase/tutorial/index.html>
-* <https://docs.oracle.com/javase/tutorial/java/TOC.html>
-* <https://docs.oracle.com/javase/tutorial/tutorialLearningPaths.html>
-* <https://docs.oracle.com/en/java/javase/11/>
-
 ## Paradigma de la "Programación Orientada a Objetos" (POO)
 
 Java se basa en la 'Programación Orientada a Objetos (POO)'. En la década de los 60 nació la programación estructurada impulsada por lenguajes como Pascal o C. Con el aumento de la complejidad de los programas se adoptó un nuevo enfoque como es la programación orientada a objetos.
@@ -591,11 +584,11 @@ public class Sample {
 
 ### Clases abstractas
 
-Una clase que defina uno o varios métodos abstractos debe definirse como _abstract_. Un método 'abstract' carece de cuerpo y debe reemplazarlo una subclase. Si la subclase no lo reemplaza, también deberá marcarse como 'abstract'. No se pueden crear objetos de una clase marcada como 'abstract'.
+Una clase que defina uno o varios métodos abstractos debe definirse como `'abstract'`. Un método abstracto carece de cuerpo y debe reemplazarlo una subclase. Si la subclase no lo reemplaza, también deberá marcarse como `'abstract'`. No se pueden crear objetos de una clase marcada como abstracta.
 
-El modificador 'abstract' sólo se puede usar en métodos normales, no se puede aplicar ni en métodos estáticos ni en constructores.
+El modificador `'abstract'` sólo se puede usar en métodos normales, no se puede aplicar ni en métodos estáticos ni en constructores.
 
-Una clase definida como 'abstract' puede tener variables y  métodos normales con implementación como cualquier otra clase.
+Una clase definida como `'abstract'` puede tener variables y métodos normales con implementación como cualquier otra clase.
 
 ```java
 abstract class Vehicle {
@@ -638,7 +631,7 @@ class Car extends SuperCar {
 
 ## Package
 
-Todas las clases en Java pertenecen a un paquete. Si no se especifica uno se usa el paquete predeterminado (o global). Al definir una clase en un paquete, se añade el nombre de dicho paquete a cada clase, lo que evita colisiones de nombres con otras clases. El paquete debe coincidir con la jerarquía de directorios.
+Todas las clases en Java pertenecen a un paquete. Si no se especifica uno se usa el paquete predeterminado (o global). Al definir una clase en un paquete, se añade el nombre de dicho paquete a cada clase, lo que evita colisiones de nombres con otras clases. El paquete debe coincidir con la jerarquía de directorios. Los nombres de paquetes se escriben en minúsculas para evitar conflictos con los nombres de clases o interfaces.
 
 ```java
 package paquete1.paquete2....paqueteN;
@@ -686,11 +679,11 @@ public interface Car {} // 'Public' y en un fichero con el nombre Car.java
 
 ## Interfaces
 
-Las interfaces son sintácticamente similares a las clases abstractas pero en una interfaz todos los métodos carecen de cuerpo. Una clase puede implementar todas las interfaces que desee pero tiene que implementar todos los métodos descritos en la interfaz. Por tanto, el código que conozca la interfaz puede usar objetos de cualquier clase que implemente dicha interfaz. Si una clase no implementa todos los métodos de una interfaz deberá declarase como 'abstract'.
+Las interfaces son sintácticamente similares a las clases abstractas pero en una interfaz todos los métodos carecen de cuerpo. Una clase puede implementar todas las interfaces que desee pero tiene que implementar todos los métodos descritos en la interfaz. Por tanto, el código que conozca la interfaz puede usar objetos de cualquier clase que implemente dicha interfaz. Si una clase no implementa todos los métodos de una interfaz deberá declarase como `'abstract'`.
 
-Antes del JDK 8 una interfaz no podía definir ninguna implementación pero a partir del JDK 8 se puede añadir una implementación predeterminada a un método de interfaz. Un método predeterminado se precede con la palabra clave _default_. Ahora también admite métodos estáticos y, a partir del JDK 9, una interfaz puede incluir métodos 'private'.
+Antes de JDK 8 una interfaz no podía definir ninguna implementación pero a partir de JDK 8 se puede añadir una implementación predeterminada a un método de interfaz. Un método predeterminado se precede con la palabra clave `'default'`. Ahora también admite métodos estáticos y, a partir de JDK 9, una interfaz puede incluir métodos _'private'_.
 
-Una interfaz puede ser **public** (y en un fichero del mismo nombre) o **default** (sin modificador). Los métodos son implícitamente 'public' y las variables declaradas en un interfaz no son variables de instancia, sino 'public', 'final' y 'static' y deben inicializarse. Por tanto son constantes.
+Una interfaz puede ser **'public'** (y en un fichero del mismo nombre) o **'default'** (sin modificador). Los métodos son implícitamente _'public'_ y las variables declaradas en un interfaz no son variables de instancia, sino _'public'_, _'final'_ y _'static'_ y deben inicializarse. Por tanto son constantes.
 
 ```java
 (public) interface Vehicle {
@@ -737,7 +730,7 @@ La inclusión de los métodos predeterminados no varia un aspecto clave de los i
 
 Si una clase hereda de dos interfaces que implementan un método predeterminado con el mismo nombre, la clase está obligada a implementar dicho método si no el compilador genera un error. La versión implementada en la clase tiene preferencia sobre las versiones implementadas en las interfaces.
 
-El JDK 8 añade a las interfaces la capacidad de tener uno o varios métodos estáticos. Como sucede con una clase, un método estático definido por una interfaz se puede invocar de forma independiente a cualquier objeto.
+JDK 8 añade a las interfaces la capacidad de tener uno o varios métodos estáticos. Como sucede con una clase, un método estático definido por una interfaz se puede invocar de forma independiente a cualquier objeto.
 
 ```java
 interface Vehicle {
@@ -751,7 +744,7 @@ public class Sample {
 }
 ```
 
-A partir del JDK 9 una interfaz puede incluir un método 'private' que solo puede invocarse mediante un método predeterminado u otro método 'private' definido por la misma interfaz. Dado que es 'private' este código no puede usarse fuera de la interfaz en la que esté definido.
+A partir de JDK 9 una interfaz puede incluir un método 'private' que solo puede invocarse mediante un método predeterminado u otro método 'private' definido por la misma interfaz. Dado que es 'private' este código no puede usarse fuera de la interfaz en la que esté definido.
 
 ## Excepciones
 
@@ -1824,7 +1817,7 @@ class LambdaExceptionDemo {
 
 Una referencia de método permite hacer referencia a un método sin ejecutarlo. Al evaluar una referencia de método también se crea una instancia de una interfaz funcional.
 
-El nombre de la clase se separa del método mediante un par de puntos '::', un nuevo separador añadido a Java por el JDK 8:
+El nombre de la clase se separa del método mediante un par de puntos '::', un nuevo separador añadido a Java en JDK 8:
 
 * Sintaxis para métodos 'static': `NombreClase::nombreMétodo`
 * Sintaxis para métodos de instancia: `refObj::nombreMétodo`
@@ -1947,13 +1940,150 @@ De los módulos de la plataforma, el más importante es **java.base** Incluye y 
 
 ### Módulos y código legado
 
-Para permitir la compatibilidad con código anterior a la JDK 9, Java introduce dos características para permitir dicha compatibilidad.
+Para permitir la compatibilidad con código anterior a JDK 9, Java introduce dos características para permitir dicha compatibilidad.
 
 Cuando se usa código legado que no forma parte de un módulo nombrado, pasa automáticamente a formar parte del "módulo sin nombre". Este módulo tiene dos atributos importantes. En primer lugar, todos los paquetes que contiene se exportan de forma automática. En segundo lugar, este módulo puede acceder a todos los demás. Por tanto, cuando un programa no usa módulos, todos los módulos de la API de la plataforma Java se vuelven accesibles automáticamente a través del "módulo sin nombre".
 
 Otra característica que permite la compatibilidad con código legado es el uso automático de la ruta de clase en vez de la ruta de módulo.
 
 ---
+
+## Histórico de las versiones de Java
+
+[This JEP is the index of all JDK Enhancement Proposals, known as JEPs.](http://openjdk.java.net/jeps/0)
+
+### JDK 1.0 (23 de Enero de 1996)
+
+### JDK 1.1 (19 de Febrero de 1997)
+
+* Reestructuración intensiva del modelo de eventos AWT (Abstract Windowing Toolkit)
+* Clases internas (inner classes)
+* JavaBeans
+* JDBC (Java Database Connectivity), para la integración de bases de datos
+* RMI (Remote Method Invocation)
+
+### J2SE 1.2 (8 de Diciembre de 1998)
+
+* Palabra reservada (keyword) `strictfp`
+* Reflexión en la programación
+* API gráfica (Swing) fue integrada en las clases básicas
+* Máquina virtual (JVM) de Sun fue equipada con un compilador JIT (Just in Time) por primera vez
+* Java Plug-in
+* Java IDL, una implementación de IDL (Lenguaje de Descripción de Interfaz) para la interoperabilidad con CORBA
+* Colecciones (Collections)
+
+### J2SE 1.3 (8 de Mayo de 2000)
+
+* Inclusión de la máquina virtual de HotSpot JVM (la JVM de HotSpot fue lanzada inicialmente en abril de 1999, para la JVM de J2SE 1.2)
+* RMI fue cambiado para que se basara en CORBA
+* JavaSound
+* Inclusión de 'Java Naming and Directory Interface' (JNDI) en el paquete de bibliotecas principales (anteriormente disponible como una extensión)
+* Java Platform Debugger Architecture (JPDA)
+
+### J2SE 1.4 (6 de Febrero de 2002)
+
+* Palabra reservada `assert`
+* Expresiones regulares modeladas al estilo de las expresiones regulares Perl
+* Encadenación de excepciones. Permite a una excepción encapsular la excepción de bajo nivel original.
+* Non-blocking NIO (New Input/Output)
+* Logging API
+* API I/O para la lectura y escritura de imágenes en formatos como JPEG o PNG
+* Parser XML integrado y procesador XSLT (JAXP)
+* Seguridad integrada y extensiones criptográficas (JCE, JSSE, JAAS)
+* Java Web Start incluido (El primer lanzamiento ocurrió en marzo de 2001 para J2SE 1.3)
+
+### J2SE 5.0 (30 de Septiembre de 2004)
+
+* Genéricos
+* Anotaciones
+* Autoboxing/unboxing
+* Enumeraciones
+* `Varargs` (número de argumentos variable)
+* Bucle `for` mejorado.
+* Utilidades de concurrencia
+* Clase `Scanner`
+
+### Java SE 6 (11 de Diciembre de 2006)
+
+* Incluye un nuevo marco de trabajo y APIs que hacen posible la combinación de Java con lenguajes dinámicos como PHP, Python, Ruby y JavaScript.
+* Incluye el motor Rhino, de Mozilla, una implementación de Javascript en Java.
+* Incluye un cliente completo de Servicios Web y soporta las últimas especificaciones para Servicios Web, como JAX-WS 2.0, JAXB 2.0, STAX y JAXP.
+* Mejoras en la interfaz gráfica y en el rendimiento.
+
+### Java SE 7 (7 de Julio de 2011)
+
+* Soporte para XML dentro del propio lenguaje.
+* Un nuevo concepto de superpaquete.
+* Soporte para `closures`.
+* Introducción de anotaciones estándar para detectar fallos en el software.
+* NIO2.
+* Java Module System.
+* Java Kernel.
+* Nueva API para el manejo de Días y Fechas, la cual reemplazará las antiguas clases `Date` y `Calendar`.
+* Posibilidad de operar con clases `BigDecimal` usando operandos.
+* Uso de `Strings` en bloques `switch`
+* Uso de guiones bajos en literales numéricos (1_000_000)
+
+### Java SE 8 (18 de Marzo de 2014)
+
+* [Lista completa de características](http://openjdk.java.net/projects/jdk8/milestones#General_Availability)
+* [JEP 126](http://openjdk.java.net/jeps/126): Lambda Expressions & Virtual Extension Methods
+* [JEP 153](http://openjdk.java.net/jeps/153): Launch JavaFX Applications
+* [JEP 178](http://openjdk.java.net/jeps/178): Statically-Linked JNI Libraries
+* [JEP 155](http://openjdk.java.net/jeps/155): Concurrency Updates
+* [JEP 174](http://openjdk.java.net/jeps/174): Nashorn Javascript Engine
+* [JEP 104](http://openjdk.java.net/jeps/104): Annotations on Java Types
+* [JEP 150](http://openjdk.java.net/jeps/150): Date & Time API
+
+### Java 9 (21 de Septiembre de 2017)
+
+* [Lista completa de características](http://openjdk.java.net/projects/jdk9/)
+* [JEP 200](http://openjdk.java.net/jeps/200): The Modular JDK
+* [JEP 222](http://openjdk.java.net/jeps/222): 'jshell': The Java Shell (Read-Eval-Print Loop)
+* [JEP 295](http://openjdk.java.net/jeps/295): Compilación _Ahead-of-Time_
+* [JEP 282](http://openjdk.java.net/jeps/282): Herramienta _jlink_ que puede ensamblar y optimizar un conjunto de módulos y sus dependencias en una imagen personalizada en tiempo de ejecución. De manera efectiva, permite producir un ejecutable totalmente utilizable que incluye la JVM para ejecutarlo.
+* [JEP 266](http://openjdk.java.net/jeps/266): More Concurrency Updates. Interfaces supporting the Reactive Streams publish-subscribe framework.
+* [JEP 263](http://openjdk.java.net/jeps/263): Gráficos HiDPI
+* [JEP 224](http://openjdk.java.net/jeps/224): HTML5 Javadoc
+* [JEP 275](http://openjdk.java.net/jeps/275): Modular Java Application Packaging
+
+### Java 10 (20 de Marzo de 2018)
+
+* [Lista completa de características](http://openjdk.java.net/projects/jdk/10/)
+* [JEP 286](http://openjdk.java.net/jeps/286): Local-Variable Type Inference
+* [JEP 317](http://openjdk.java.net/jeps/317): Experimental Java-Based JIT Compiler. This is the integration of the Graal dynamic compiler for the Linux x64 platform
+* [JEP 310](http://openjdk.java.net/jeps/310): Application Class-Data Sharing. This allows application classes to be placed in the shared archive to reduce startup and footprint for Java applications
+* [JEP 322](http://openjdk.java.net/jeps/322): Time-Based Release Versioning
+* [JEP 307](http://openjdk.java.net/jeps/307): Parallel Full GC for G1
+* [JEP 304](http://openjdk.java.net/jeps/304): Garbage-Collector Interface
+* [JEP 314](http://openjdk.java.net/jeps/314): Additional Unicode Language-Tag Extensions
+* [JEP 319](http://openjdk.java.net/jeps/319): Root Certificates
+* [JEP 312](http://openjdk.java.net/jeps/312): Thread-Local Handshakes
+* [JEP 316](http://openjdk.java.net/jeps/316): Heap Allocation on Alternative Memory Devices
+* [JEP 313](http://openjdk.java.net/jeps/313): Remove the Native-Header Generation Tool – javah
+* [JEP 296](http://openjdk.java.net/jeps/296): Consolidate the JDK Forest into a Single Repository
+
+### Java 11 (25 de Septiembre de 2018)
+
+* [Lista completa de características](http://openjdk.java.net/projects/jdk/11/)
+* [JEP 309](http://openjdk.java.net/jeps/309): Dynamic Class-File Constants
+* [JEP 318](http://openjdk.java.net/jeps/318): Epsilon: A No-Op Garbage Collector
+* [JEP 323](http://openjdk.java.net/jeps/323): Local-Variable Syntax for Lambda Parameters
+* [JEP 331](http://openjdk.java.net/jeps/331): Low-Overhead Heap Profiling
+* [JEP 321](http://openjdk.java.net/jeps/321): HTTP Client (Standard)
+* [JEP 332](http://openjdk.java.net/jeps/332): Transport Layer Security (TLS) 1.3
+* [JEP 328](http://openjdk.java.net/jeps/328): Flight Recorder
+* [JEP 335](http://openjdk.java.net/jeps/3335): Deprecate the Nashorn Javascript Engine
+* JavaFX, Java EE and CORBA modules have been removed from JDK
+
+## Reference
+
+* <https://docs.oracle.com/javase/tutorial/index.html>
+* <https://docs.oracle.com/javase/tutorial/java/TOC.html>
+* <https://docs.oracle.com/javase/tutorial/tutorialLearningPaths.html>
+* <https://docs.oracle.com/en/java/javase/11/>
+* <http://openjdk.java.net/>
+* <https://en.wikipedia.org/wiki/Java_version_history>
 
 ## License
 
