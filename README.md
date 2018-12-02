@@ -14,13 +14,7 @@ Para complementar los principios de la programación orientada a objetos, se apl
 
 * La **herencia** es el proceso mediante el que un objeto puede adquirir las propiedades de otro. Gracias a la herencia un objeto solo tiene que definir las cualidades que lo hacen único dentro de la clase y heredar los atributos generales.
 
-## Línea de comandos
-
-Compile the application: `$ javac {filename}.java`
-
-Run the application: `$ java filename`
-
-## Sintaxis
+## Sintaxis básica
 
 Java es _'case sensitive_ lo que significa que Java distingue entre mayúsculas y minúsculas.
 
@@ -64,7 +58,7 @@ public class Sample {
 
 ### Tipos & Variables
 
-En Java se declara una variable usando `<tipo> <nombre>`. Es necesario *declarar* la variable antes de hacer poder hacer referencia a ella. A partir de que se declaran se pueden utilizar, y no antes. Por lo general, debe asignar un valor a una variable antes de poder usarla.
+En Java se declara una variable usando `'<tipo> <nombre>'`. Es necesario *declarar* la variable antes de hacer poder hacer referencia a ella. A partir de que se declaran se pueden utilizar, y no antes. Por lo general, debe asignar un valor a una variable antes de poder usarla.
 
 ```java
 // [Tipos primitivos]
@@ -117,16 +111,16 @@ int octal = 011; // Formato octal que corresponde a 9 en decimal
 
 Secuencias de escape de caracteres:
 
-* \' -> Comilla simple
-* \" -> Comilla doble
-* \\ -> Barra invertida
-* \r -> Retorno de carro
-* \n -> Nueva línea
-* \f -> Salto de formulario
-* \t -> Tabulación horizontal
-* \b -> Retroceso
-* \ddd -> Constante octal (donde ddd es una constante octal)
-* \uxxxx -> Constante hexadecimal (donde xxxx es una constante hexadecimal)
+* `\'` - Comilla simple
+* `\"` - Comilla doble
+* `\\` - Barra invertida
+* `\r` - Retorno de carro
+* `\n` - Nueva línea
+* `\f` - Salto de formulario
+* `\t` - Tabulación horizontal
+* `\b` - Retroceso
+* `\ddd` - Constante octal (donde ddd es una constante octal)
+* `\uxxxx` - Constante hexadecimal (donde xxxx es una constante hexadecimal)
 
 Desde JDK 7 se pueden emplear guiones bajos para mejorar la legibilidad de literales enteros o flotantes:
 
@@ -321,6 +315,33 @@ public class Sample{
 }
 ```
 
+### Paquetes
+
+**Todas las clases en Java pertenecen a un paquete**. Si no se especifica uno se usa el paquete predeterminado (o global).
+
+Al definir una clase en un paquete, se añade el nombre de dicho paquete a cada clase, lo que evita colisiones de nombres con otras clases. El paquete debe coincidir con la jerarquía de directorios. Los nombres de paquetes se escriben en minúsculas para evitar conflictos con los nombres de clases o interfaces.
+
+Para definir un paquete se utiliza la palabra clave `package`:
+
+```java
+package paquete1.paquete2....paqueteN;
+```
+
+### Importación estática
+
+Java admite la importación estática, que tiene la forma _'import static'_ y al usarla, se puede hacer referencia directamente a miembros estáticos por sus nombres, sin necesidad de calificarlos con el nombre de su clase.
+
+```java
+import static java.lang.Math.sqrt;
+// import static java.lang.Math.pow;
+// import static java.lang.Math.*; // importa todos los miembros estáticos
+
+void operation () {
+    sqrt(9); // con importación estática
+    Math.pow(5, 8); // sin importación estática
+}
+```
+
 ## Arrays
 
 El tamaño del array debe decidirse en la declaración. El formato para la declaración de un array es la siguiente: `<tipo_de_dato> [] <nombre_variable> = new <tipo_de_dato>[<tamaño>];`
@@ -425,6 +446,30 @@ Bicicleta bicicleta = new Bicicleta();
 Bicicleta bicicleta2 = bicicleta; // Ahora ambas variables hacen referencia al mismo objeto.
 ```
 
+### Clases anidadas
+
+La clases anidadas no estáticas también se denominan _clases internas_. Una clase interna no existe independientemente de su clase contenedora, ya que el ámbito de una clase interna lo define la clase externa. También se pueden definir clases que sean local de un bloque.
+
+Una clase interna tiene acceso a todas las variables y métodos de su clase externa y puede hacer referencia a los mismos directamente como hacen otros miembros no estáticos de la clase externa.
+
+```java
+class Outern {
+    int a = 5;
+    int b = 10;
+
+    void sum() {
+        Intern intern = new Intern();
+        System.out.println(intern.operation());
+    }
+
+    class Intern {
+        int operation() {
+            return a + b;
+        }
+    }
+}
+```
+
 ## Métodos
 
 La sentencia _return_ tiene dos formas: una forma sirve para devolver un valor y al otra forma sirve para salir de un método cuando retorna _void_
@@ -458,6 +503,12 @@ En Java, cuando se pasa como argumento **un tipo primitivo se pasa por valor**, 
 
 La sobrecarga de métodos es una de las técnicas de Java para implementar el polimorfismo. En Java, dos o más métodos de la misma clase pueden compartir el _mismo nombre_ mientras su 'firma' sea diferente. Por tanto, para sobrecargar un método, basta con declarar métodos con distinta firma. En Java, la firma de un método es el **nombre del método más su lista de parámetros**, sin incluir el tipo devuelto. Por tanto, la sobrecarga de métodos son métodos con el mismo nombre pero distinta lista de parámetros, sin tener en cuenta el tipo de devolución.
 
+### Argumentos de longitud variable: `varargs`
+
+En ocasiones será necesario métodos que acepten una número variable de argumentos. Se define con el símbolo (...) y la firma de un método con argumentos de longitud variable es: `tipo método(tipo ... var) {}`
+
+Dentro del método la variable _var_ se utiliza como una matriz. Un método puede tener parámetros normales además de parámetros de longitud variable. En ese caso, los parámetros normales van delante y por último el parámetro de longitud variable.
+
 ## Static
 
 Se pueden definir como static tanto variables como métodos.
@@ -485,36 +536,6 @@ class staticBlock {
     }
 }
 ```
-
-## Clases anidadas
-
-La clases anidadas no estáticas también se denominan _clases internas_. Una clase interna no existe independientemente de su clase contenedora, ya que el ámbito de una clase interna lo define la clase externa. También se pueden definir clases que sean local de un bloque.
-
-Una clase interna tiene acceso a todas las variables y métodos de su clase externa y puede hacer referencia a los mismos directamente como hacen otros miembros no estáticos de la clase externa.
-
-```java
-class Outern {
-    int a = 5;
-    int b = 10;
-
-    void sum() {
-        Intern intern = new Intern();
-        System.out.println(intern.operation());
-    }
-
-    class Intern {
-        int operation() {
-            return a + b;
-        }
-    }
-}
-```
-
-## Argumentos de longitud variable: varargs
-
-En ocasiones será necesario métodos que acepten una número variable de argumentos. Se define con el símbolo (...) y la firma de un método con argumentos de longitud variable es: `tipo método(tipo ... var) {}`
-
-Dentro del método la variable _var_ se utiliza como una matriz. Un método puede tener parámetros normales además de parámetros de longitud variable. En ese caso, los parámetros normales van delante y por último el parámetro de longitud variable.
 
 ## Herencia
 
@@ -627,14 +648,6 @@ class Car extends SuperCar {
 
     void price() {} // Incorrecto. No se puede sobreescribir un método 'final'
 }
-```
-
-## Package
-
-Todas las clases en Java pertenecen a un paquete. Si no se especifica uno se usa el paquete predeterminado (o global). Al definir una clase en un paquete, se añade el nombre de dicho paquete a cada clase, lo que evita colisiones de nombres con otras clases. El paquete debe coincidir con la jerarquía de directorios. Los nombres de paquetes se escriben en minúsculas para evitar conflictos con los nombres de clases o interfaces.
-
-```java
-package paquete1.paquete2....paqueteN;
 ```
 
 ## Visibilidad de clases, interfaces, métodos y variables
@@ -827,7 +840,7 @@ catch (IOException e) {
 }
 ```
 
-## E/S
+## Entrada/Salida (E/S)
 
 En Java el sistema E/S se define en dos sistemas completos: uno para E/S de **bytes** y otro para E/S de **caracteres**. En el nivel inferior toda la E/S sigue orientada a bytes. La E/S es una especialización y una forma más cómoda de trabajar con caracteres.
 
@@ -1392,21 +1405,6 @@ Integer iOb = 100; // autobox de int
 int i = iOb; // unbox
 ```
 
-## Importación estática
-
-Java admite la importación estática, que tiene la forma _'import static'_ y al usarla, se puede hacer referencia directamente a miembros estáticos por sus nombres, sin necesidad de calificarlos con el nombre de su clase.
-
-```java
-import static java.lang.Math.sqrt;
-// import static java.lang.Math.pow;
-// import static java.lang.Math.*; // importa todos los miembros estáticos
-
-void operation () {
-    sqrt(9); // con importación estática
-    Math.pow(5, 8); // sin importación estática
-}
-```
-
 ## Genéricos
 
 El término 'genérico' significa tipo con parámetros. Los tipos con parámetros permiten crear clases, interfaces y métodos en los que los tipos de datos se especifican como parámetros. Cuando una clase utiliza 'genéricos' se denomina _clase genérica_
@@ -1945,6 +1943,14 @@ Para permitir la compatibilidad con código anterior a JDK 9, Java introduce dos
 Cuando se usa código legado que no forma parte de un módulo nombrado, pasa automáticamente a formar parte del "módulo sin nombre". Este módulo tiene dos atributos importantes. En primer lugar, todos los paquetes que contiene se exportan de forma automática. En segundo lugar, este módulo puede acceder a todos los demás. Por tanto, cuando un programa no usa módulos, todos los módulos de la API de la plataforma Java se vuelven accesibles automáticamente a través del "módulo sin nombre".
 
 Otra característica que permite la compatibilidad con código legado es el uso automático de la ruta de clase en vez de la ruta de módulo.
+
+---
+
+## Línea de comandos
+
+Compilar código: `$ javac filename.java`
+
+Ejecutar el código: `$ java filename`
 
 ---
 
