@@ -1,8 +1,6 @@
 # Apuntes - [Java]
 
-## Paradigma de la "Programación Orientada a Objetos" (POO)
-
-Java se basa en la 'Programación Orientada a Objetos (POO)'. En la década de los 60 nació la programación estructurada impulsada por lenguajes como Pascal o C. Con el aumento de la complejidad de los programas se adoptó un nuevo enfoque como es la programación orientada a objetos.
+Java se basa en la **'Programación Orientada a Objetos (POO)'**. En la década de los 60 nació la programación estructurada impulsada por lenguajes como Pascal o C. Con el aumento de la complejidad de los programas se adoptó un nuevo enfoque como es la programación orientada a objetos.
 
 Desde un punto de vista general, un programa se puede organizar de dos formas: sobre su código (lo que sucede) y sobre sus datos (lo que se ve afectado). En la programación estructura se organiza sobre el código pero en la programación orientada a objetos el código se estructura alrededor de los datos, definiendo estos datos y las rutinas que permiten actuar sobre los mismos.
 
@@ -16,7 +14,10 @@ Para complementar los principios de la programación orientada a objetos, se apl
 
 ## Sintaxis básica
 
-Java es _'case sensitive_ lo que significa que Java distingue entre mayúsculas y minúsculas.
+>Compilar código: `$ javac filename.java`  
+>Ejecutar el código: `$ java filename`
+
+---
 
 ```java
 // Comentarios de una sóla línea comienzan con //
@@ -58,7 +59,7 @@ public class Sample {
 
 ### Tipos & Variables
 
-En Java se declara una variable usando `'<tipo> <nombre>'`. Es necesario *declarar* la variable antes de hacer poder hacer referencia a ella. A partir de que se declaran se pueden utilizar, y no antes. Por lo general, debe asignar un valor a una variable antes de poder usarla.
+Java es _'case sensitive_ lo que significa que Java distingue entre mayúsculas y minúsculas. En Java se declara una variable usando `'<tipo> <nombre>'`. Es necesario *declarar* la variable antes de hacer poder hacer referencia a ella. A partir de que se declaran se pueden utilizar, y no antes. Por lo general, debe asignar un valor a una variable antes de poder usarla.
 
 ```java
 // [Tipos primitivos]
@@ -539,6 +540,12 @@ class staticBlock {
 
 ## Herencia
 
+<!-- markdownlint-disable MD033 -->
+<p align="center">
+    <img style ="float: left;" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-content-man-colour.svg?sanitize=true" width="auto" height="225px">
+</p>
+<!-- markdownlint-enable MD033 -->
+
 La herencia es uno de los tres principios fundamentales de la programación orientada a objetos ya que permite crear clasificaciones jerárquicas.
 
 Se invoca al constructor de la superclase con `super(lista-parámetros)`. Esta instrucción debe ser siempre la primera instrucción ejecutada dentro del constructor de la subclase. El constructor de la superclase inicializa la parte de la superclase y el constructor de la subclase la parte de la subclase. En una jerarquía de clases, los constructores se invocan en orden de derivación, de **superclase a subclase**.
@@ -650,7 +657,7 @@ class Car extends SuperCar {
 }
 ```
 
-## Visibilidad de clases, interfaces, métodos y variables
+## Visibilidad
 
 ### Visibilidad de clases
 
@@ -691,6 +698,12 @@ public interface Car {} // 'Public' y en un fichero con el nombre Car.java
 | Visible desde un paquete diferente por una no subclase |    No   |    No   |     No    |    Sí   |
 
 ## Interfaces
+
+<!-- markdownlint-disable MD033 -->
+<p align="center">
+    <img style ="float: left;" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-notebook-man-colour.svg?sanitize=true" width="auto" height="175px">
+</p>
+<!-- markdownlint-enable MD033 -->
 
 Las interfaces son sintácticamente similares a las clases abstractas pero en una interfaz todos los métodos carecen de cuerpo. Una clase puede implementar todas las interfaces que desee pero tiene que implementar todos los métodos descritos en la interfaz. Por tanto, el código que conozca la interfaz puede usar objetos de cualquier clase que implemente dicha interfaz. Si una clase no implementa todos los métodos de una interfaz deberá declarase como `'abstract'`.
 
@@ -760,6 +773,12 @@ public class Sample {
 A partir de JDK 9 una interfaz puede incluir un método 'private' que solo puede invocarse mediante un método predeterminado u otro método 'private' definido por la misma interfaz. Dado que es 'private' este código no puede usarse fuera de la interfaz en la que esté definido.
 
 ## Excepciones
+
+<!-- markdownlint-disable MD033 -->
+<p align="center">
+    <img style ="float: left;" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-developer-woman-colour.svg?sanitize=true" width="auto" height="175px">
+</p>
+<!-- markdownlint-enable MD033 -->
 
 Una excepción es un error producido en tiempo de ejecución. En Java, todas las excepciones se representan por medio de clases. Todas las clases de excepción se derivan de _Throwable_. Esta clase tiene dos subclases directas: _Exception_ y _Error_.
 
@@ -1150,6 +1169,12 @@ class FileReaderDemo {
 
 ## Programación de subprocesamiento múltiple
 
+<!-- markdownlint-disable MD033 -->
+<p align="center">
+    <img style ="float: left;" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-folder-woman-colour.svg?sanitize=true" width="auto" height="225px">
+</p>
+<!-- markdownlint-enable MD033 -->
+
 Existen dos tipos de multitarea: la basada en **procesos** y la basada en **subprocesos**.
 
 Un proceso es básicamente un programa que se ejecuta. Por tanto la multitarea basada en procesos permite al equipo ejecutar dos o más programas a la vez. En un entorno multitarea basado en subprocesos, el subproceso es la unidad de código menor que se entrega, lo que significa que un mismo programa puede realizar dos o más tareas al mismo tiempo.
@@ -1317,6 +1342,12 @@ class Sample {
 ```
 
 ## Enumeraciones
+
+<!-- markdownlint-disable MD033 -->
+<p align="center">
+    <img style ="float: left;" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-support-woman-colour.svg?sanitize=true" width="auto" height="175px">
+</p>
+<!-- markdownlint-enable MD033 -->
 
 Básicamente, una enumeración es una lista de constantes con nombre que definen un nuevo tipo de datos. Un objeto de un tipo de enumeración solo puede albergar los valores definidos por la lista. Por tanto, una enumeración le permite definir con precisión un nuevo tipo de datos con un número fijo de valores.
 
@@ -1653,6 +1684,12 @@ class Gen<T, V> {
 
 ## Expresiones lambda
 
+<!-- markdownlint-disable MD033 -->
+<p align="center">
+    <img style ="float: left;" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-support-man-colour.svg?sanitize=true" width="auto" height="225px">
+</p>
+<!-- markdownlint-enable MD033 -->
+
 Una expresión lambda es, básicamente, un *método anónimo*. Sin embargo, este método no se ejecuta por sí solo, sino que se usa para implementar un método definido por una interfaz funcional. Las expresiones lambda también suele denominarse clausuras (closure).
 
 Una interfaz funcional es una interfaz que únicamente contiene un método abstracto. Por lo tanto, una interfaz funcional suele representar una única acción. Una interfaz funcional puede incluir métodos predeterminados y/o métodos estáticos pero en todos los casos solo puede haber *un método abstracto* para que la interfaz sea considerada interfaz funcional. Como los métodos de interfaz no predeterminados y no estáticos son implícitamente abstractos, no es necesario utilizar la palabra clave 'abstract'.
@@ -1912,7 +1949,25 @@ public class Sample {
 }
 ```
 
+## Collections
+
+(todo)
+
+## Testing
+
+(todo)
+
+<!-- markdownlint-disable MD033 -->
+<div class="page"/>
+<!-- markdownlint-enable MD033 -->
+
 ## Módulos
+
+<!-- markdownlint-disable MD033 -->
+<p align="center">
+    <img style ="float: left;" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-business-woman-colour.svg?sanitize=true" width="auto" height="225px">
+</p>
+<!-- markdownlint-enable MD033 -->
 
 Con la aparición de JDK 9 se incorporó a Java la característica de los **módulos**. Un módulo es una agrupación de paquetes y recursos a los que se puede hacer referencia conjuntamente a través del nombre del módulo.
 
@@ -1946,19 +2001,13 @@ Otra característica que permite la compatibilidad con código legado es el uso 
 
 ---
 
-## Línea de comandos
-
-Compilar código: `$ javac filename.java`
-
-Ejecutar el código: `$ java filename`
-
----
-
 ## Histórico de las versiones de Java
 
 [This JEP is the index of all JDK Enhancement Proposals, known as JEPs.](http://openjdk.java.net/jeps/0)
 
 ### JDK 1.0 (23 de Enero de 1996)
+
+* Primera versión
 
 ### JDK 1.1 (19 de Febrero de 1997)
 
@@ -2091,7 +2140,7 @@ Ejecutar el código: `$ java filename`
 * <http://openjdk.java.net/>
 * <https://en.wikipedia.org/wiki/Java_version_history>
 
-## License
+### License
 
 [![Licencia de Creative Commons](https://i.creativecommons.org/l/by-sa/4.0/80x15.png)](http://creativecommons.org/licenses/by-sa/4.0/)  
 Esta obra está bajo una [licencia de Creative Commons Reconocimiento-Compartir Igual 4.0 Internacional](http://creativecommons.org/licenses/by-sa/4.0/).
