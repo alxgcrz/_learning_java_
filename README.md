@@ -6,15 +6,15 @@ Desde un punto de vista general, un programa se puede organizar de dos formas: s
 
 Para complementar los principios de la programación orientada a objetos, se aplican los conceptos de **encapsulación, herencia y polimorfismo**.
 
-* La **encapsulación** es un mecanismo que combina el código con los datos que manipula, al tiempo que los protege de interferencias externas. La unidad básica de encapsulación es la _clase_. La clase define la forma de un objeto y especifica los datos y el código que actúa sobre ellos. Los objetos son instancias de una clase.
+* La **encapsulación** es un mecanismo que combina el código con los datos que manipula, al tiempo que los protege de interferencias externas. La unidad básica de encapsulación es la **clase**. La clase define la forma de un objeto y especifica los datos y el código que actúa sobre ellos. Los objetos son instancias de una clase.
 
-* El **polimorfismo** es la propiedad que permite a una interfaz acceder a una clase general de acciones. Este concepto suele expresar como _"una interfaz, múltiples métodos". El compilador en tiempo de ejecución será el encargado de seleccionar el método correcto a invocar.
+* El **polimorfismo** es la propiedad que permite a una interfaz acceder a una clase general de acciones. Este concepto suele expresarse como "una interfaz, múltiples métodos". El compilador en tiempo de ejecución será el encargado de seleccionar el método correcto a invocar.
 
-* La **herencia** es el proceso mediante el que un objeto puede adquirir las propiedades de otro. Gracias a la herencia un objeto solo tiene que definir las cualidades que lo hacen único dentro de la clase y heredar los atributos generales.
+* La **herencia** es el proceso mediante el cual un objeto puede adquirir las propiedades de otro. Gracias a la herencia un objeto solo tiene que definir los atributos que lo hacen único dentro de la clase y heredar los atributos generales.
 
 ## Sintaxis básica
 
->Compilar código: `$ javac filename.java`  
+>Compilar código Java: `$ javac filename.java`  
 >Ejecutar el código: `$ java filename`
 
 ---
@@ -31,10 +31,10 @@ Comentarios JavaDoc lucen así. Suelen describir la clase o varios atributos
 de una clase.
 */
 
-// Todos los programas importan automáticamente el paquete 'java.lang' que define la clase System
-// Importa la clase ArrayList dentro del paquete java.util
+// Todos los programas importan automáticamente el paquete 'java.lang' que define la clase 'System'
+// Importa la clase 'ArrayList' dentro del paquete 'java.util'
 import java.util.ArrayList;
-// Importa todas las clases dentro del paquete java.security
+// Importa todas las clases dentro del paquete 'java.security'
 import java.security.*;
 
 // Para Java un archivo es una unidad de compilación. Pueden contener una o varias clases.
@@ -43,14 +43,14 @@ public class Sample {
 
     // Un programa debe tener un método 'main' como punto de entrada
     public static void main (String[] args) {
-        // Usa System.out.println para imprimir líneas
+        // Usa 'System.out.println' para imprimir líneas
         System.out.println("¡Hola mundo!");
         System.out.println(
             "Entero (int): " + 10 +
             " Doble (double): " + 3.14 +
             " Booleano (boolean): " + true);
 
-        // Para imprimir sin el salto de línea, usa System.out.print
+        // Para imprimir sin el salto de línea, usa 'System.out.print'
         System.out.print("Hola ");
         System.out.print("Mundo");
     }
@@ -59,7 +59,9 @@ public class Sample {
 
 ### Tipos & Variables
 
-Java es _'case sensitive_ lo que significa que Java distingue entre mayúsculas y minúsculas. En Java se declara una variable usando `'<tipo> <nombre>'`. Es necesario *declarar* la variable antes de hacer poder hacer referencia a ella. A partir de que se declaran se pueden utilizar, y no antes. Por lo general, debe asignar un valor a una variable antes de poder usarla.
+Java es _"case sensitive"_ lo que significa que Java distingue entre mayúsculas y minúsculas.
+
+En Java se declara una variable usando `'<tipo> <nombre>'`. Es necesario declarar la variable antes de poder hacer referencia a ella. A partir de que se declaran se pueden utilizar, y no antes. Por lo general, debe asignar un valor a una variable antes de poder usarla aunque en determinados casos Java puede inicializar el valor de las variables, como por ejemplo en variables de instancia.
 
 ```java
 // [Tipos primitivos]
@@ -75,13 +77,13 @@ int fooInt = 1;
 
 // [Long] - Entero complemento a dos con signo de 64-bit (-9,223,372,036,854,775,808 <= long <= 9,223,372,036,854,775,807)
 long fooLong = 100000L;
-// L es usado para denotar que el valor de esta variable es del tipo Long; cualquier cosa sin ella es tratado como un entero por defecto.
+// 'L' es usado para denotar que el valor de esta variable es del tipo Long; cualquier cosa sin ella es tratado como un entero por defecto.
 
 // Nota: Java no tiene tipos sin signo
 
 // [Float] - Número de coma flotante IEEE 754 de precisión simple de 32-bit
 float fooFloat = 234.5f;
-// f es usado para denotar que el valor de esta variable es del tipo float; de otra manera es tratado como un double.
+// 'f 'es usado para denotar que el valor de esta variable es del tipo float; de otra manera es tratado como un double.
 
 // [Double] - Número de coma flotante IEEE 754 de precisión doble de 64-bit
 double fooDouble = 123.4;
@@ -91,13 +93,12 @@ boolean fooBoolean = true;
 boolean barBoolean = false;
 
 // [Char] - Un simple carácter unicode de 16-bit.
-// Como char es un tipo sin signo de 16 bits, se pueden realizar operaciones aritméticas.
-// Las constantes de carácter se incluyen entre comillas simples.
+/* Como char es un tipo sin signo de 16 bits, se pueden realizar operaciones aritméticas. Las constantes de carácter se incluyen entre comillas simples. */
 char fooChar = 'A';
 fooChar++; // now fooChar == 'B'
 ```
 
-En Java, un literal es un valor fijo representado en formato legible para los humanos. Por ejemplo, el número 100 es un literal. Los literales también suelen denominarse constantes. De forma predeterminada, los literales enteros son de tipo _int_ y los literales de coma flotante son de tipo _double_. Los literales de carácter se incluyen entre comillas simples. Java también admite los literales de cadena. Una cadena es un conjunto de caracteres includos entre comillas dobles.
+En Java, un literal es un valor fijo representado en formato legible para los humanos. Por ejemplo, el número 100 es un literal. Los literales también suelen denominarse constantes. De forma predeterminada, los literales enteros son de tipo _`int`_ y los literales de coma flotante son de tipo _`double`_. Los literales de carácter se incluyen entre comillas simples. Java también admite los literales de cadena. Una cadena es un conjunto de caracteres includos entre comillas dobles.
 
 ```java
 int a = 100;
@@ -120,8 +121,8 @@ Secuencias de escape de caracteres:
 * `\f` - Salto de formulario
 * `\t` - Tabulación horizontal
 * `\b` - Retroceso
-* `\ddd` - Constante octal (donde ddd es una constante octal)
-* `\uxxxx` - Constante hexadecimal (donde xxxx es una constante hexadecimal)
+* `\ddd` - Constante octal (donde 'ddd' es una constante octal)
+* `\uxxxx` - Constante hexadecimal (donde 'xxxx' es una constante hexadecimal)
 
 Desde JDK 7 se pueden emplear guiones bajos para mejorar la legibilidad de literales enteros o flotantes:
 
@@ -130,13 +131,13 @@ int x = 123_456_789;
 int z = 123_456_789.5;
 ```
 
-Se usa la palabra clave _'final'_ para hacer **inmutable** las variables. Por convención el nombre de la variable se declara en mayúsculas:
+Se usa la palabra clave _`final`_ para hacer **inmutable** las variables. Por convención el nombre de la variable se declara en mayúsculas:
 
 ```java
 final int HORAS_QUE_TRABAJO_POR_SEMANA = 9001;
 ```
 
-Abreviación para declaración (e inicialización) múltiple de variables:
+Notación abreviada para declarar (e inicializar) múltiples variables:
 
 ```java
 int x, y, z;
@@ -146,11 +147,11 @@ int a = b = c = 100; // el símbolo '=' retorna el valor de su derecha y por tan
 
 En Java, un **identificador** es un nombre asignado a un método, variable u otro elemento definido por el usuario. Pueden tener uno o varios caracteres de longitud.
 
-Los nombres de variable pueden empezar por _cualquier letra, guión bajo o $_. El siguiente carácter puede ser _cualquier letra, dígito, guión bajo o $_. Por lo tanto no pueden empezar con un dígito ni emplear palabras clave de Java.
+Los nombres de variable pueden empezar por *__cualquier letra, guión bajo o $__*. El siguiente carácter puede ser *__cualquier letra, dígito, guión bajo o $__*. Por lo tanto no pueden empezar con un dígito ni emplear palabras clave de Java.
 
 Un bloque de código es un grupo de dos o más instrucciones definidas entre llaves {}. Tras crear un bloque de código se convierte en una unidad lógica que se puede usar como si fuera una instrucción independiente.
 
-Un bloque de código define un ámbito. Las variables definidas en un ámbito o bloque de código no son accesibles fuera de ese ámbito. Cada vez que se accede a un bloque las variables contenidas en ese bloque se inicializan y se destruyen al finalizar el bloque. Además, si se define una variable al inicio de un bloque estará disponible para el código de ese bloque pero si se define al final no se podrá utilizar.
+Un bloque de código define un **ámbito**. Las variables definidas en un ámbito o bloque de código no son accesibles fuera de ese ámbito. Cada vez que se accede a un bloque las variables contenidas en ese bloque se inicializan y se destruyen al finalizar el bloque. Además, si se define una variable al inicio de un bloque estará disponible para el código de ese bloque a partir de su definición. Por lo tanto si se define al final no se podrá utilizar.
 
 Los bloques se pueden anidar, de forma que un bloque de código es contenido por otro bloque de código. Desde el bloque interior se pueden acceder a las variables definidas en el bloque exterior pero el exterior no puede acceder a las variables definidas en el bloque interior.
 
@@ -201,9 +202,9 @@ y = --x; // y = 9. Primero se resta y luego se asigna
 |  False  |  True   |  True   |  False  |  True   |  True   |
 |  True   |  True   |  True   |  True   |  False  |  False  |
 
-En los operadores lógicos AND y OR en modo cortocircuito (&&) y (||) sólo se evalúa el segundo operando cuando es necesario.
+Los operadores lógicos AND y OR pueden funcionar **en modo cortocircuito (&&) y (||)**. En este modo se evalúa el primer operando y el segundo operando sólo se evalúa cuando es necesario.
 
-### Strings
+### Cadenas
 
 ```java
 String fooString = "¡Mi String está aquí!";
@@ -215,7 +216,7 @@ String barString = "¿Imprimiendo en una nueva linea?\n¡Ningun problema!";
 String bazString = "¿Quieres añadir un 'tab'?\t¡Ningun problema!";
 ```
 
-Convertir tipos numéricos primitivos en String y viceversa:
+Conversión de tipos numéricos primitivos en cadenas y viceversa:
 
 ```java
 Integer.parseInt("123"); // retorna una versión entera de "123"
@@ -254,14 +255,14 @@ for(<declaración_de_inicio>; <condicional>; <paso>) {
 } */
 ```
 
-En Java, el cuerpo asociado a un bucle _for_ o de otro tipo puede estar vacío ya que una instrucción vacía es sintácticamente válida. Puede ser útil en algunos casos:
+En Java, el cuerpo asociado a un bucle _`for`_ o de otro tipo puede estar vacío ya que una instrucción vacía es sintácticamente válida. Puede ser útil en algunos casos:
 
 ```java
 int sum = 0;
 for(int i = 1; i<= 5); sum += i++); // Se usa el bucle for para incrementar la variable sum
 ```
 
-En JDK 5 se añadió los bucles _for-each_ que permiten iterar por matrices, Collections, etc...
+En JDK 5 se añadió los bucles _`for-each`_ que permiten iterar por matrices, clases del pquete 'Collections', etc...
 
 ```java
 /*  
@@ -270,7 +271,7 @@ for(tipo var-iteración :  collection) {
 } */
 ```
 
-La estructura _'switch'_ funciona con un tipos numéricos simples como byte, short, char e int. También funciona con tipos enumerados, la clase String y unas pocas clases especiales que envuelven tipos primitivos: Character, Byte, Short e Integer.
+La estructura _`switch`_ funciona con tipos numéricos simples como `byte`, `short`, `char` e `int`. También funciona con tipos enumerados, la clase `String` y unas pocas clases especiales que envuelven tipos primitivos: `Character`, `Byte`, `Short` e `Integer`.
 
 ```java
 int mes = 3;
@@ -291,13 +292,13 @@ switch (mes){
 
 #### Break
 
-Por medio de la instrucción _break_ se puede forzar la salida inmediata de un bucle e ignorar el código restante del cuerpo y la prueba condicional. El control del programa se pasa a la siguiente instrucción después del bucle.
+Por medio de la instrucción _`break`_ se puede forzar la salida inmediata de un bucle e ignorar el código restante del cuerpo y la prueba condicional. El control del programa se pasa a la siguiente instrucción después del bucle.
 
 #### Continue
 
-Con la instrucción _continue_  se fuerza una iteración del bucle, es decir, se ignora el código comprendido entre esta instrucción y la expresión condicional que controla el bucle.
+Con la instrucción _`continue`_ se fuerza una iteración del bucle, es decir, se ignora el código comprendido entre esta instrucción y la expresión condicional que controla el bucle.
 
-Tanto _break_ como _continue_ pueden funcionar junto a una etiqueta permitiendo dirigir el control del programa al bloque de código indicado por la etiqueta. Un _break_ o _continue_ etiquetados se declaran con `break etiqueta` y `continue etiqueta`. El único requisito es que el bloque de código con la etiqueta debe contener la instrucción _break_ o _continue_. Es decir, no se puede utilizar un _break_ como si fuera una instrucción _goto_.
+Tanto _`break`_ como _`continue`_ pueden funcionar junto a una etiqueta permitiendo dirigir el control del programa al bloque de código indicado por la etiqueta. Un _`break`_ o _`continue`_ etiquetados se declaran con '`break etiqueta`' y '`continue etiqueta`'. El único requisito es que el bloque de código con la etiqueta debe contener la instrucción _`break`_ o _`continue`_. Es decir, no se puede utilizar un _`break`_ como si fuera una instrucción _'`goto`'_.
 
 ```java
 public class Sample{
@@ -322,7 +323,7 @@ public class Sample{
 
 Al definir una clase en un paquete, se añade el nombre de dicho paquete a cada clase, lo que evita colisiones de nombres con otras clases. El paquete debe coincidir con la jerarquía de directorios. Los nombres de paquetes se escriben en minúsculas para evitar conflictos con los nombres de clases o interfaces.
 
-Para definir un paquete se utiliza la palabra clave `package`:
+Para definir un paquete se utiliza la palabra clave '`package`':
 
 ```java
 package paquete1.paquete2....paqueteN;
@@ -330,7 +331,7 @@ package paquete1.paquete2....paqueteN;
 
 ### Importación estática
 
-Java admite la importación estática, que tiene la forma _'import static'_ y al usarla, se puede hacer referencia directamente a miembros estáticos por sus nombres, sin necesidad de calificarlos con el nombre de su clase.
+Java admite la importación estática, que tiene la forma `'import static'` y al usarla, se puede hacer referencia directamente a miembros estáticos por sus nombres, sin necesidad de calificarlos con el nombre de su clase.
 
 ```java
 import static java.lang.Math.sqrt;
@@ -345,7 +346,9 @@ void operation () {
 
 ## Arrays
 
-El tamaño del array debe decidirse en la declaración. El formato para la declaración de un array es la siguiente: `<tipo_de_dato> [] <nombre_variable> = new <tipo_de_dato>[<tamaño>];`
+Notación para la declaración de un array (el tamaño del array debe decidirse en la declaración):
+
+>`<tipo_de_dato> [] <nombre_variable> = new <tipo_de_dato>[<tamaño>];`
 
 ```java
 int[] sample = new int[10];
@@ -355,16 +358,12 @@ boolean[] sample = new boolean[100];
 int[] sample1, sample2, sample3;
 ```
 
-Otra forma de declarar e inicializar un array:
+Notación para la declaración e inicialización de un array:
+
+>`<tipo_de_dato> [] <nombre_variable> = {value, value, ...};`
 
 ```java
 int[] sample = {2015, 2016, 2017};
-```
-
-Accediendo un elemento dentro de un array:
-
-```java
-System.out.println("Year: " + sample[0]); // => 2015
 ```
 
 Los arrays comienzan su indexación en cero y son mutables:
@@ -374,21 +373,27 @@ sample[1] = 2018;
 System.out.println("Year @ 1: " + sample[1]); // => 2018
 ```
 
-Al asignar una referencia de una matriz a otra no se crea una copia de la matriz ni se copian los contenidos. Sólo se crea una referencia a la misma matriz, al igual que sucede con cualquier otro objeto:
+Acceder un elemento dentro de un array (un intento de acceso fuera de los límites del array lanza un _`'ArrayIndexOutOfBoundsException'`_):
+
+```java
+System.out.println("Year: " + sample[0]); // => 2015
+```
+
+Al asignar una referencia de una matriz a otra referencia no se crea una copia de la matriz ni se copian los contenidos. Sólo se crea una referencia a la misma matriz, al igual que sucede con cualquier otro objeto. Por lo tanto, a partir de ambas referencias se accede al mismo array:
 
 ```java
 int[] nums = {1, 2, 3};
-int[] other = nums; // Ahora other apunta a la misma matriz que nums.
+int[] other = nums; // Ahora 'other' apunta a la misma matriz que 'nums'.
 ```
 
 ## Clases
 
-Una definición de clase crea un _nuevo tipo de datos_
+Una definición de clase crea un **nuevo tipo de datos**.
 
 ```java
 class Bicicleta {
 
-    // Campos/Variables de instancia
+    // Campos o variables de instancia
     public int ritmo; // Public: Puede ser accedido desde cualquier parte
     private int velocidad;  // Private: Accesible sólo desde esta clase
     protected int engranaje; // Protected: Accesible desde esta clases y sus subclases
@@ -436,11 +441,11 @@ class Bicicleta {
 }
 ```
 
-Todas las clases tienen al menos un constructor predeterminado ya que Java ofrece automáticamente un constructor que inicializa todas las variables miembro en sus valores predeterminados que son **cero, null y false**. Cuando se crea un constructor el predeterminado deja de usarse.
+Todas las clases tienen al menos un constructor predeterminado ya que Java ofrece automáticamente un constructor que inicializa todas las variables miembro en sus valores predeterminados que son **cero(0), 'null' y 'false'**. Cuando se crea un constructor el predeterminado deja de usarse.
 
-Hay otra forma de _this_ que permite que un constructor invoque a otro dentro de la misma clase. Cuando se ejecuta 'this(lista-args)', el constructor sobrecargado que encaja con la lista de parámetros especificada por 'list-args' se ejecuta **primero**. Por tanto no se puede usar `this()` y `super()` al mismo tiempo ya que ambos deben ser la primera instrucción.
+Hay otra forma de _`'this'`_ que permite que un constructor invoque a otro dentro de la misma clase. Cuando se ejecuta `'this(lista-args)'`, el constructor sobrecargado que encaja con la lista de parámetros especificada por _'list-args'_ se **ejecuta primero**. Por tanto no se puede usar `this()` y `super()` al mismo tiempo ya que ambos deben ser la primera instrucción.
 
-El operador _new_ asigna dinámicamente, es decir, en tiempo de ejecución, memoria para un objeto y devuelve una referencia al mismo. Esta referencia es, más o menos, la dirección en memoria del objeto asignado por _new_, que después se almacena en una variable.
+El operador _`'new'`_ asigna dinámicamente, es decir, en tiempo de ejecución, memoria para un objeto y devuelve una referencia al mismo. Esta referencia es, ni más ni menos, que la dirección en memoria del objeto asignado por _`'new'`_, que después se almacena en una variable para poder ser utilizada posteriormente.
 
 ```java
 Bicicleta bicicleta = new Bicicleta();
@@ -449,7 +454,7 @@ Bicicleta bicicleta2 = bicicleta; // Ahora ambas variables hacen referencia al m
 
 ### Clases anidadas
 
-La clases anidadas no estáticas también se denominan _clases internas_. Una clase interna no existe independientemente de su clase contenedora, ya que el ámbito de una clase interna lo define la clase externa. También se pueden definir clases que sean local de un bloque.
+La clases anidadas no estáticas también se denominan **clases internas**. Una clase interna no existe independientemente de su clase contenedora, ya que el ámbito de una clase interna lo define la clase externa. También se pueden definir clases que sean locales de un bloque.
 
 Una clase interna tiene acceso a todas las variables y métodos de su clase externa y puede hacer referencia a los mismos directamente como hacen otros miembros no estáticos de la clase externa.
 
@@ -473,7 +478,21 @@ class Outern {
 
 ## Métodos
 
-La sentencia _return_ tiene dos formas: una forma sirve para devolver un valor y al otra forma sirve para salir de un método cuando retorna _void_
+Notación para la definición de un método:
+
+>`<public/private/protected> <tipo_de_retorno> <nombre_funcion>(<argumentos>)`
+
+Los **parámetros** aparecen en la definición del método. Cuando un método tiene parámetros la parte de su definición que los especifica se denomina 'lista de parámetros'. La _firma_ de un método se compone del nombre del método y la lista de parámetros. En cambio hablamos de **argumentos** cuando usamos valores concretos para realizar la llamada al método. El valor concreto pasado a un método es el argumento. Dentro del método, la variable que recibe el argumento es el parámetro.
+
+```java
+int sum(int a, int b) { // lista de parámetros del método. Junto con el nombre forman la firma
+    return a + b;
+}
+
+sum(10, 20); // Llamada al método usando dos argumentos o valores
+```
+
+Para la devolución de un valor en un método se utiliza la palabra clave _`'return'`_. La sentencia `'return'`  tiene dos formas: una forma sirve para devolver un valor y la otra sirve para salir de un método cuando retorna _`'void'`_.
 
 ```java
 int sum(int a, int b) {
@@ -488,50 +507,44 @@ void isEven(int num) {
 }
 ```
 
-Los **parámetros** aparecen en la definición del método. Cuando un método tiene parámetros la parte de su definición que los especifica se denomina 'lista de parámetros'. La _firma_ de un método se compone del nombre del método y la lista de parámetros. En cambio hablamos de **argumentos** cuando usamos valores concretos para realizar la llamada al método. El valor concreto pasado a un método es el argumento. Dentro del método, la variable que recibe el argumento es el parámetro.
-
-```java
-int sum(int a, int b) { // lista de parámetros del método. Junto con el nombre forman la firma
-    return a + b;
-}
-
-sum(10, 20); // Llamada al método usando dos argumentos o valores
-```
-
 En Java, cuando se pasa como argumento **un tipo primitivo se pasa por valor**, esto es, se crea una copia del argumento y los cambios que suceden dentro del método no afecta al exterior. En cambio, cuando se pasa un **objeto se pasa implícitamente por referencia**, ya que cuando se crea una variable de un tipo de clase se crea una referencia a un objeto y es la referencia y no el objeto lo que se pasa al método. Los cambios realizados en el objeto dentro del método afectan al objeto.
 
 ### Sobrecarga de métodos
 
-La sobrecarga de métodos es una de las técnicas de Java para implementar el polimorfismo. En Java, dos o más métodos de la misma clase pueden compartir el _mismo nombre_ mientras su 'firma' sea diferente. Por tanto, para sobrecargar un método, basta con declarar métodos con distinta firma. En Java, la firma de un método es el **nombre del método más su lista de parámetros**, sin incluir el tipo devuelto. Por tanto, la sobrecarga de métodos son métodos con el mismo nombre pero distinta lista de parámetros, sin tener en cuenta el tipo de devolución.
+La sobrecarga de métodos es una de las técnicas de Java para implementar el **polimorfismo**. En Java, dos o más métodos de la misma clase pueden compartir el mismo nombre siempre y cuando su **_'firma'_ sea diferente**. Por tanto, para sobrecargar un método, basta con declarar métodos con distinta firma. En Java, la firma de un método es el **nombre del método más su lista de parámetros**, sin incluir el tipo devuelto. Por tanto, la sobrecarga de métodos son métodos con el mismo nombre pero distinta lista de parámetros, sin tener en cuenta el tipo de devolución.
 
-### Argumentos de longitud variable: `varargs`
+### Argumentos de longitud variable: `'varargs'`
 
-En ocasiones será necesario métodos que acepten una número variable de argumentos. Se define con el símbolo (...) y la firma de un método con argumentos de longitud variable es: `tipo método(tipo ... var) {}`
+En ocasiones será necesario métodos que acepten una número variable de argumentos. Se define con el símbolo (`...`).
 
-Dentro del método la variable _var_ se utiliza como una matriz. Un método puede tener parámetros normales además de parámetros de longitud variable. En ese caso, los parámetros normales van delante y por último el parámetro de longitud variable.
+La firma de un método con argumentos de longitud variable es:
 
-## Static
+>`tipo método(tipo ... var) {}`
 
-Se pueden definir como static tanto variables como métodos.
+Dentro del método esta variable se utiliza como una matriz. Por lo tanto, para acceder a los parámetros se emplea la misma notación que se emplea en un array. Un método puede tener parámetros normales además de parámetros de longitud variable. En ese caso, **los parámetros normales van delante y por último el parámetro de longitud variable**.
 
-Las variables declarados como static son básicamente variables globales. Todas las instancias de la clase comparten la misma variable.
+## `Static`
 
-Los métodos static tienen ciertas restricciones:
+Se pueden definir como `'static'` tanto variables como métodos.
 
-* Sólo pueden invocar directamente otros métodos static
-* Sólo pueden acceder directamente a datos static
-* Carecen de una referencia this
+Las variables declarados como `'static'` son básicamente **variables globales**. Todas las instancias de la clase comparten la misma variable.
 
-### Bloque static
+Los métodos `'static'` tienen ciertas restricciones:
 
-Cuando una clase requiere de cierta inicialización antes de que pueda crear objetos se puede usar un bloque static que se ejecuta al cargar la clase por primera vez.
+* Sólo pueden invocar directamente otros métodos `'static'`
+* Sólo pueden acceder directamente a datos `'static'`
+* Carecen de una referencia `'this'`
+
+### Bloque `'static'`
+
+Cuando una clase requiere de cierta inicialización antes de que pueda crear objetos se puede usar un bloque `'static'` que se ejecuta al cargar la clase por primera vez.
 
 ```java
 class staticBlock {
     static int a;
     static int b;
 
-    static { // Este bloque se ejecuta al cargar la clase por primera vez y antes que cualquier otro método static
+    static { // Este bloque se ejecuta al cargar la clase por primera vez y antes que cualquier otro método 'static'
         a = 5;
         b = 10;
     }
@@ -546,15 +559,15 @@ class staticBlock {
 </p>
 <!-- markdownlint-enable MD033 -->
 
-La herencia es uno de los tres principios fundamentales de la programación orientada a objetos ya que permite crear clasificaciones jerárquicas.
+La **herencia** es uno de los tres principios fundamentales de la programación orientada a objetos ya que permite crear clasificaciones jerárquicas.
 
-Se invoca al constructor de la superclase con `super(lista-parámetros)`. Esta instrucción debe ser siempre la primera instrucción ejecutada dentro del constructor de la subclase. El constructor de la superclase inicializa la parte de la superclase y el constructor de la subclase la parte de la subclase. En una jerarquía de clases, los constructores se invocan en orden de derivación, de **superclase a subclase**.
+Se invoca al constructor de la superclase con `'super(lista-parámetros)'`. Esta instrucción debe ser siempre la primera instrucción ejecutada dentro del constructor de la subclase. El constructor de la superclase inicializa la parte de la superclase y el constructor de la subclase la parte de la subclase. En una jerarquía de clases, los constructores se invocan en orden de derivación, de **superclase a subclase**.
 
-Con `super.miembro` en donde miembro puede ser un método o una variable de instancia, podemos hacer referencia a métodos o variables de la superclase desde una subclase.
+Con `'super.miembro'` en donde miembro puede ser un método o una variable de instancia, podemos hacer referencia a métodos o variables de la superclase desde una subclase.
 
-Java es un lenguaje de tipado fuerte. Por lo tanto una variable de tipo sólo puede hacer referencia a objetos de ese tipo. Sin embargo, existe una excepción cuando aplicamos la herencia. Se puede asignar a una variable de referencia de una superclase una referencia a un objeto de cualquier subclaese derivada de dicha superclase. Es decir, una referencia de superclase puede hacer referencia a un objeto de subclase.
+Java es un lenguaje de **tipado fuerte**. Por lo tanto una variable de tipo sólo puede hacer referencia a objetos de ese tipo. Sin embargo, existe una excepción cuando aplicamos la herencia. Se puede asignar a una variable de referencia de una superclase una referencia a un objeto de cualquier subclase derivada de dicha superclase. Es decir, una referencia de superclase puede hacer referencia a un objeto de subclase.
 
-Hay que tener en cuenta que cuando se asigna una referencia a un objeto de subclase a una variable de referencia de superclase *sólo* se tiene acceso a las partes del objeto que defina la superclase.
+Hay que tener en cuenta que cuando se asigna una referencia a un objeto de subclase a una variable de referencia de superclase **sólo** se tiene acceso a las partes del objeto que defina la superclase.
 
 ```java
 class Vehicle {
@@ -576,11 +589,11 @@ class Car extends Vehicle {
 
 En una jerarquía de clases, cuando un método de una subclase tiene el mismo tipo de devolución y firma (nombre y parámetros) que un método de su superclase, el método de la subclase reemplaza o sobreescribe al de la superclase.
 
-Si la firma no es exacta, ya no hablamos de sobreescritura de métodos sino de sobrecarga de métodos.
+**Si la firma no es exacta, ya no hablamos de sobreescritura de métodos sino de sobrecarga de métodos**.
 
-La sobreescritura de métodos es importante porque es la forma de implementar el polimorfismo en Java. El compilador, en tiempo de ejecución, será el encargado de invocar el método adecuado.
+La sobreescritura de métodos es importante porque es la forma de implementar el **polimorfismo** en Java. El compilador, en tiempo de ejecución, será el encargado de invocar el método adecuado.
 
-Si usamos la anotación '@Override' en un método le estamos indicando al compilador que es un método sobreescrito y por tanto puede realizar las comprobaciones pertinentes en tiempo de compilación.
+Si usamos la anotación `'@Override'` en un método le estamos indicando al compilador que es un método sobreescrito y por tanto puede realizar las comprobaciones pertinentes en tiempo de compilación, como por ejemplo que el método original sigue existiendo en la superclase o que no ha sido modificado.
 
 ```java
 class Vehicle {
@@ -595,7 +608,7 @@ class Car extends Vehicle {
 class Motocycle extends Vehicle {
     @Override
     void show() {
-        super.show(); // Podemos invocar al método show() de la superclase
+        super.show(); // Podemos invocar al método 'show()' de la superclase
     }
 }
 
@@ -603,8 +616,8 @@ public class Sample {
     public static void main(String ... args) {
         Vehicle vehicle1 = new Car();
         Vehicle vehicle2 = new Motocycle();
-        vehicle1.show(); // El compilador invoca el método show() de Car
-        vehicle2.show(); // El compilador invoca el método show() de Motocycle
+        vehicle1.show(); // El compilador invoca el método 'show()' de 'Car'
+        vehicle2.show(); // El compilador invoca el método 'show()' de 'Motocycle'
 
     }
 }
@@ -612,7 +625,7 @@ public class Sample {
 
 ### Clases abstractas
 
-Una clase que defina uno o varios métodos abstractos debe definirse como `'abstract'`. Un método abstracto carece de cuerpo y debe reemplazarlo una subclase. Si la subclase no lo reemplaza, también deberá marcarse como `'abstract'`. No se pueden crear objetos de una clase marcada como abstracta.
+Una clase que defina uno o varios métodos abstractos debe definirse como `'abstract'`. Un método abstracto carece de cuerpo y debe ser reemplazado en una subclase. Si la subclase no lo reemplaza, también deberá marcarse como `'abstract'`. No se pueden crear objetos de una clase marcada como abstracta.
 
 El modificador `'abstract'` sólo se puede usar en métodos normales, no se puede aplicar ni en métodos estáticos ni en constructores.
 
@@ -629,13 +642,13 @@ class Car extends Vehicle {
 }
 ```
 
-### Modificador 'final'
+### Modificador `'final'`
 
-Para evitar que un método se reemplace, se especifica 'final' como modificador al inicio de su declaración. También se puede evitar que una clase se herede si se precede su declaración como 'final'. De esta forma, todos sus métodos son final de forma implícita.
+Para evitar que un método se reemplace, se especifica `'final'` como modificador al inicio de su declaración. También se puede evitar que una clase se herede si se precede su declaración como `'final'`. De esta forma, todos sus métodos son final de forma implícita.
 
-Los modificadores 'abstract' y 'final' son incompatibles ya que una clase 'abstract' debe ser heredada para proporcionar una implementación completa y el modificador 'final' no permite la herencia.
+Los modificadores `'abstract'` y `'final'` son incompatibles ya que una clase `'abstract'` debe ser heredada para proporcionar una implementación completa y el modificador `'final'` no permite la herencia.
 
-Una variable miembro con el modificador 'final' es como una constante ya que el valor inicial asignado no se puede cambiar mientras dure el programa.
+Una variable miembro con el modificador `'final'` es como una constante ya que el valor inicial asignado no se puede cambiar mientras dure el programa.
 
 ```java
 final class Vehicle {}
@@ -651,7 +664,7 @@ class SuperCar {
 
 class Car extends SuperCar {
     @Override
-    void show() {} // Correct
+    void show() {} // Correcto
 
     void price() {} // Incorrecto. No se puede sobreescribir un método 'final'
 }
@@ -663,28 +676,28 @@ class Car extends SuperCar {
 
 Visibilidad permitidas para las clases:
 
-* **default** (sin modificador) -> Una clase **default** sólo será visible por otras clases dentro del mismo paquete.
-* **public** -> Una clase **public** es visible desde cualquier lugar.
+* `'default'` (sin modificador) -> Una clase sin modificador sólo será visible por otras clases **dentro del mismo paquete**.
+* `'public'` -> Una clase pública es **visible desde cualquier lugar**.
 
-_NOTA_: Una clase declarada como **public** debe encontrarse en un archivo con el mismo nombre.
+**NOTA**: Una clase declarada como `'public'` debe encontrarse en un archivo con el mismo nombre.
 
 ```java
-class Vehicle {} // 'Default'
-public class Car {} // 'Public' y en un fichero con el nombre Car.java
+class Vehicle {} // clase 'default' (sin modificador)
+public class Car {} // clase 'public' y en un fichero con el nombre 'Car.java'
 ```
 
 ### Visibilidad de una interfaz
 
 Visibilidad permitida para las interfaces:
 
-* **default** (sin modificador) -> Una interfaz **default** sólo será visible por otras clases o interfaces dentro del mismo paquete.
-* **public** -> Una interfaz **public** es visible desde cualquier lugar.
+* `'default'` (sin modificador) -> Una interfaz sin modificador sólo será visible por otras clases o interfaces **dentro del mismo paquete**.
+* `'public'` -> Una interfaz pública es visible **desde cualquier lugar**.
 
-_NOTA_: Una interfaz declarada como **public** debe encontrarse en un archivo con el mismo nombre.
+*NOTA*: Una interfaz declarada como `'public'` debe encontrarse en un archivo con el mismo nombre.
 
 ```java
-interface Vehicle {} // 'Default'
-public interface Car {} // 'Public' y en un fichero con el nombre Car.java
+interface Vehicle {} // interfaz 'default' (sin modificador)
+public interface Car {} //  interfaz 'public' y en un fichero con el nombre 'Car.java'
 ```
 
 ### Visibilidad de variables y miembros de instancia
@@ -705,11 +718,11 @@ public interface Car {} // 'Public' y en un fichero con el nombre Car.java
 </p>
 <!-- markdownlint-enable MD033 -->
 
-Las interfaces son sintácticamente similares a las clases abstractas pero en una interfaz todos los métodos carecen de cuerpo. Una clase puede implementar todas las interfaces que desee pero tiene que implementar todos los métodos descritos en la interfaz. Por tanto, el código que conozca la interfaz puede usar objetos de cualquier clase que implemente dicha interfaz. Si una clase no implementa todos los métodos de una interfaz deberá declarase como `'abstract'`.
+Las interfaces son sintácticamente similares a las clases abstractas con la diferencia que **en una interfaz todos los métodos carecen de cuerpo**. Una clase puede implementar todas las interfaces que desee pero tiene que implementar todos los métodos descritos en la interfaz. Por tanto, el código que conozca la interfaz puede usar objetos de cualquier clase que implemente dicha interfaz. Si una clase no implementa todos los métodos de una interfaz deberá declarase como `'abstract'`.
 
-Antes de JDK 8 una interfaz no podía definir ninguna implementación pero a partir de JDK 8 se puede añadir una implementación predeterminada a un método de interfaz. Un método predeterminado se precede con la palabra clave `'default'`. Ahora también admite métodos estáticos y, a partir de JDK 9, una interfaz puede incluir métodos _'private'_.
+Antes de JDK 8 una interfaz no podía definir ninguna implementación pero a partir de JDK 8 se puede añadir una implementación predeterminada a un método de interfaz. Un método predeterminado se precede con la palabra clave `'default'`. Ahora también admite métodos estáticos y, a partir de JDK 9, una interfaz puede incluir métodos `'private'`.
 
-Una interfaz puede ser **'public'** (y en un fichero del mismo nombre) o **'default'** (sin modificador). Los métodos son implícitamente _'public'_ y las variables declaradas en un interfaz no son variables de instancia, sino _'public'_, _'final'_ y _'static'_ y deben inicializarse. Por tanto son constantes.
+Una interfaz puede ser `'public'` (y en un fichero del mismo nombre) o `'default'` (sin modificador). Los métodos son implícitamente `'public'` y las variables declaradas en un interfaz no son variables de instancia, sino que son `'public'`, `'final'` y `'static'` y deben inicializarse. Por tanto son constantes.
 
 ```java
 (public) interface Vehicle {
@@ -724,7 +737,7 @@ Una interfaz puede ser **'public'** (y en un fichero del mismo nombre) o **'defa
 
 // Si una clase implementa varias interfaces, estas se separan mediante comas.
 class Car extends Superclass implements Vehicle { // Clase que implementa la interfaz. Primero se coloca 'extends' y luego 'implements'.
-    public void getWheels() {} // Es necesario indicar 'public' ya que si no indicamos un modificador en un miembro de una clase este es **default** que es más restrictivo que 'public' y eso no está permitido ya que un método de una interfaz es implícitamente 'public'
+    public void getWheels() {} // Es necesario indicar 'public' ya que si no indicamos un modificador en un miembro de una clase este es 'default' que es más restrictivo que 'public' y eso no está permitido ya que un método de una interfaz es implícitamente 'public'
 }
 
 class Sample {
@@ -735,7 +748,7 @@ class Sample {
 }
 ```
 
-Una interfaz puede heredar a otra interfaz por medio de la palabra reservada 'extends'. Cuando una clase implementa una interfaz que hereda de otra interfaz debe proporcionar implementaciones de todos los métodos definidos en la cadena de herencia.
+Una interfaz puede heredar a otra interfaz por medio de la palabra reservada `'extends'`. Cuando una clase implementa una interfaz que hereda de otra interfaz debe proporcionar implementaciones de todos los métodos definidos en la cadena de herencia.
 
 ```java
 interface Vehicle {
@@ -752,9 +765,9 @@ class MyCar implements Car {
 }
 ```
 
-La inclusión de los métodos predeterminados no varia un aspecto clave de los interfaces, y es que no admiten variables de instancia. Por tanto sigue habiendo una diferencia entre interfaces y una clase normal o abstracta. Una clase puede mantener información de estado mediante sus variables de instancia y una interfaz no. Por tanto una interfaz sigue siendo útil para definir lo que debe hacer una clase y no como lo debe hacer.
+La inclusión de los métodos predeterminados no varia un aspecto clave de los interfaces, y es que no admiten variables de instancia. Por tanto sigue habiendo una diferencia entre interfaces y una clase normal o abstracta. **Una clase puede mantener información de estado mediante sus variables de instancia y una interfaz no puede**. Por tanto una interfaz sigue siendo útil para definir lo que debe hacer una clase y no como lo debe hacer.
 
-Si una clase hereda de dos interfaces que implementan un método predeterminado con el mismo nombre, la clase está obligada a implementar dicho método si no el compilador genera un error. La versión implementada en la clase tiene preferencia sobre las versiones implementadas en las interfaces.
+Si una clase hereda de dos interfaces que implementan un método predeterminado con el mismo nombre, la clase está obligada a implementar dicho método ya que si no lo hace el compilador genera un error. La versión implementada en la clase tiene preferencia sobre las versiones implementadas en las interfaces.
 
 JDK 8 añade a las interfaces la capacidad de tener uno o varios métodos estáticos. Como sucede con una clase, un método estático definido por una interfaz se puede invocar de forma independiente a cualquier objeto.
 
@@ -770,7 +783,7 @@ public class Sample {
 }
 ```
 
-A partir de JDK 9 una interfaz puede incluir un método 'private' que solo puede invocarse mediante un método predeterminado u otro método 'private' definido por la misma interfaz. Dado que es 'private' este código no puede usarse fuera de la interfaz en la que esté definido.
+A partir de JDK 9 una interfaz puede incluir un método `'private'` que solo puede invocarse mediante un método predeterminado u otro método `'private'` definido por la misma interfaz. Dado que es `'private'` este código no puede usarse fuera de la interfaz en la que esté definido.
 
 ## Excepciones
 
@@ -780,13 +793,13 @@ A partir de JDK 9 una interfaz puede incluir un método 'private' que solo puede
 </p>
 <!-- markdownlint-enable MD033 -->
 
-Una excepción es un error producido en tiempo de ejecución. En Java, todas las excepciones se representan por medio de clases. Todas las clases de excepción se derivan de _Throwable_. Esta clase tiene dos subclases directas: _Exception_ y _Error_.
+Una excepción es **un error producido en tiempo de ejecución**. En Java, todas las excepciones se representan por medio de clases. Todas las clases de excepción se derivan de `'Throwable'`. Esta clase tiene dos subclases directas: `'Exception'` y `'Error'`.
 
-Las excepciones tipo _Error_ son errores producidos en la propia máquina virtual y no se deben controlar. Los programas sólo deben controlar aquellas excepciones de tipo _Exception_.
+Las excepciones tipo `'Error'` son errores producidos en la propia máquina virtual y no se deben controlar. Los programas sólo deben controlar aquellas excepciones de tipo `'Exception'`.
 
-Mediante la palabra reservada _'throw'_ se pueden lanzar manualmente una excepción.
+Mediante la palabra reservada `'throw'` se pueden lanzar manualmente una excepción.
 
-Las excepciones se tratan en un bloque _'try-catch-finally'_ (finally es opcional):
+Las excepciones se tratan en un bloque `'try-catch-finally'` (`'finally'` es opcional):
 
 ```java
 try {
@@ -806,10 +819,10 @@ finally {
 }
 ```
 
-Si un método genera una excepción que no se va a controlar, debemos declarar dicha excepción en una cláusula _'throws'_. Una vez hecho esta excepción deberá ser capturada en un bloque _try-catch_ superior o por la JVM:
+Si un método genera una excepción que no se va a controlar, debemos declarar dicha excepción en una cláusula `'throws'`. Una vez hecho esta excepción deberá ser capturada en un bloque `'try-catch'` superior o por la JVM:
 
 ```java
-int divide(int a, int b) throws ArithmeticException, MyException { // Con throws relanzamos tanto excepciones de Java como excepciones propias
+int divide(int a, int b) throws ArithmeticException, MyException { // Con 'throws' relanzamos tanto excepciones de Java como excepciones propias
     if(b == 0) {
         throw new ArithmeticException();
     } else {
@@ -820,7 +833,7 @@ int divide(int a, int b) throws ArithmeticException, MyException { // Con throws
 class MyException extends Exception { }
 ```
 
-En JDK 7 se amplió el mecanismo de excepciones al permite la captura múltiple. Con la captura múltiple se permite la captura de dos o más excepciones dentro de la misma cláusula catch. Cada tipo de excepción de la lista se separa con el operdor 'OR'. Cada parámetro es final de forma implícita.
+En JDK 7 se amplió el mecanismo de excepciones al permite la **captura múltiple**. Con la captura múltiple se permite la captura de dos o más excepciones dentro de la misma cláusula catch. Cada tipo de excepción de la lista se separa con el operdor `'OR'`. Cada parámetro es final de forma implícita.
 
 ```java
 try {
@@ -831,14 +844,14 @@ catch (final ArithmeticException | ArrayIndexOutOfBoundsException e) {
 }
 ```
 
-En JDK 7 se añadió otro mecanismo denominado _'try-with-resources'_ o _'try con administración automática de recursos'_. Es un tipo de 'try' que evita situaciones en que un archivo (u otro recurso como bases de datos, etc..) no se libera después de ser necesario. Un _'try-with-resources'_ de este tipo también puede incluir cláusulas 'catch' o 'finally'.
+En JDK 7 se añadió otro mecanismo denominado *__'try-with-resources'__* o **_'try'_ con administración automática de recursos**. Es un tipo de `'try'` que evita situaciones en que un archivo (u otro recurso como bases de datos, etc..) no se libera después de ser necesario. Un *__'try-with-resources'__* de este tipo también puede incluir cláusulas `'catch'` o `'finally'`.
 
-Los recursos que se pueden emplear con este tipo de _'try-with-resources'_ son recursos que implementen la interfaz _AutoCloseable_ que a su vez hereda de _Closeable_. La interfaz _AutoCloseable_ define el método 'close()'. Además, el recurso declarado en la instrucción 'try' es **final** de forma implícita, de forma que no puede ser asignado ni modificado una vez creado y su ámbito se limita al propio 'try'.
+Los recursos que se pueden emplear con este tipo de *__'try-with-resources'__* son recursos que implementen la interfaz `'AutoCloseable'` que a su vez hereda de `'Closeable'`. La interfaz `'AutoCloseable'` define el método `'close()'`. Además, el recurso declarado en la instrucción `'try'` es **'final'** de forma implícita, de forma que no puede ser asignado ni modificado una vez creado y su ámbito se limita al propio `'try'`.
 
 ```java
-// El siguiente código usa un try con recursos para abrir un archivo y
-// después cerrarlo automáticamente al salir del bloque try (ya no es necesario invocar a close())
-try(FileInputStream fin = New FileInputStream(args[0])) { // try con recursos
+// El siguiente código usa un 'try con recursos' para abrir un archivo y
+// después cerrarlo automáticamente al salir del bloque 'try' (ya no es necesario invocar a 'close()')
+try(FileInputStream fin = New FileInputStream(args[0])) { // 'try con recursos'
     // código
 }
 catch (IOException e) {
@@ -849,9 +862,9 @@ catch (IOException e) {
 Se pueden gestionar más de un recurso que estarán separados por un ';':
 
 ```java
-// El siguiente código usa un try-with-resources para abrir un archivo y
-// después cerrarlo automáticamente al salir del bloque try (ya no es necesario invocar a close())
-try(FileInputStream fin = New FileInputStream(args[0]); FileOutputStream fout = New FileOutputStream(args[1])) { // try-with-resources múltiples
+// El siguiente código usa un 'try-with-resources' para abrir un archivo y
+// después cerrarlo automáticamente al salir del bloque 'try' (ya no es necesario invocar a 'close()')
+try(FileInputStream fin = New FileInputStream(args[0]); FileOutputStream fout = New FileOutputStream(args[1])) { // 'try-with-resources' múltiples
     // código
 }
 catch (IOException e) {
@@ -861,42 +874,42 @@ catch (IOException e) {
 
 ## Entrada/Salida (E/S)
 
-En Java el sistema E/S se define en dos sistemas completos: uno para E/S de **bytes** y otro para E/S de **caracteres**. En el nivel inferior toda la E/S sigue orientada a bytes. La E/S es una especialización y una forma más cómoda de trabajar con caracteres.
+En Java el sistema E/S se define en dos sistemas completos: uno para **E/S de bytes** y otro para **E/S de caracteres**. En el nivel inferior toda la E/S sigue orientada a bytes. La E/S de caracteres es una especialización y una forma más cómoda de trabajar con caracteres.
 
-Los programas en Java realizan la E/S a través de _flujos_ (streams).
+Los programas en Java realizan la E/S a través de **flujos** (_streams_).
 
-Todos los programas de Java importan automáticamente el paquete 'java.lang' que define la clase _System_. Esta clase contiene, entre otros elemenos, tres variables de flujo predefinidos:
+Todos los programas de Java importan automáticamente el paquete `'java.lang'` que define la clase `'System'`. Esta clase contiene, entre otros elemenos, tres variables de flujo predefinidos:
 
-* System.in -> hace referencia al flujo estándar de entrada, que es el teclado.
-* System.out -> hace referencia al flujo estándar de salida, que es la consola.
-* System.err -> hace referencia al flujo de error estándar que también es la consola de forma predeterminada.
+* `System.in` - hace referencia al flujo estándar de entrada, que es el teclado.
+* `System.out` - hace referencia al flujo estándar de salida, que es la consola.
+* `System.err` - hace referencia al flujo de error estándar que también es la consola de forma predeterminada.
 
 ### Flujos de bytes
 
-Los flujos de bytes se definen en dos jerarquías de clases. En la parte superior hay dos clases abstractas que definen las características comunes: **InputStream** y **OutputStream**.
+Los flujos de bytes se definen en dos jerarquías de clases. En la parte superior hay dos clases abstractas que definen las características comunes: `'InputStream'` y `'OutputStream'`.
 
 A partir de estas clases se crean subclases concretas con distinta funcionalidad:
 
 * InputStream:
-  * BufferedInputStream -> Flujo de entrada en búfer
-  * ByteArrayInputStream -> Flujo de entrada desde una matriz de bytes
-  * DataInputStream -> Flujo de entrada que contiene métodos para leer los tipos de datos estándar de Java
-  * FileInputStream -> Flujo de entrada que lee desde un archivo
-  * FilterInputStream -> Implementa InputStream
-  * ObjectInputStream -> Flujo de entrada de objetos
-  * PipedInputStream -> Conducción de entrada
-  * PushbackInputStream -> Flujo de entrada que permite devolver bytes al flujo
-  * SequenceInputStream -> Flujo de entrada que combina dos o más flujos de entrada que se leen secuencialmente, uno tras otro
+  * `BufferedInputStream` - Flujo de entrada en búfer
+  * `ByteArrayInputStream` - Flujo de entrada desde una matriz de bytes
+  * `DataInputStream` - Flujo de entrada que contiene métodos para leer los tipos de datos estándar de Java
+  * `FileInputStream` - Flujo de entrada que lee desde un archivo
+  * `FilterInputStream` - Implementa InputStream
+  * `ObjectInputStream` - Flujo de entrada de objetos
+  * `PipedInputStream` - Conducción de entrada
+  * `PushbackInputStream` - Flujo de entrada que permite devolver bytes al flujo
+  * `SequenceInputStream` - Flujo de entrada que combina dos o más flujos de entrada que se leen secuencialmente, uno tras otro
 
 * OutputStream:
-  * BufferedOutputStream -> Flujo de salida en búfer
-  * ByteArrayOutputStream -> Flujo de salida que escribe en una matriz de bytes
-  * DataOutputStream -> Flujo de salida que contiene métodos para escribir los tipos de datos estándar de Java
-  * FileOutputStream -> Flujo de salida que escribe en un archivo
-  * FilterOutputStream -> Implementa OutputStream
-  * ObjectOutputStream -> Flujo de salida para objetos
-  * PipedOutputStream -> Conducción de salida
-  * PrintStream -> Flujo de salida que contiene _print()_ y _println()_
+  * `BufferedOutputStream` - Flujo de salida en búfer
+  * `ByteArrayOutputStream` - Flujo de salida que escribe en una matriz de bytes
+  * `DataOutputStream` - Flujo de salida que contiene métodos para escribir los tipos de datos estándar de Java
+  * `FileOutputStream` - Flujo de salida que escribe en un archivo
+  * `FilterOutputStream` - Implementa OutputStream
+  * `ObjectOutputStream` - Flujo de salida para objetos
+  * `PipedOutputStream` - Conducción de salida
+  * `PrintStream` - Flujo de salida que contiene `'print()'` y `'println()'`
 
 #### Leer entradas de consola
 
@@ -919,9 +932,9 @@ class ReadBytes {
 }
 ```
 
-#### Escribir la salida en la consola con PrintStream
+#### Escribir la salida en la consola con `PrintStream`
 
-Para escribir en consola se utiliza _print()_ o _println()_ que se definen en _PrintStream_ aunque también tiene métodos como _write()_
+Para escribir en consola se utiliza `'print()'` o `'println()'` que se definen en `'PrintStream'` aunque también tiene métodos como `'write()'`
 
 ```java
 class WriteDemo {
@@ -933,7 +946,7 @@ class WriteDemo {
 }
 ```
 
-#### Leer archivos con FileInputStream
+#### Leer archivos con `FileInputStream`
 
 ```java
 /* Display a text file.
@@ -971,7 +984,7 @@ class ShowFile {
 }
 ```
 
-#### Escribir archivos con FileOutputStream
+#### Escribir archivos con `FileOutputStream`
 
 ```java
 
@@ -1027,37 +1040,37 @@ class CopyFile {
 
 ### Flujos de caracteres
 
-Los flujos de caracteres se definen en dos jerarquías de clases. En la parte superior hay dos clases abstractas que definen las características comunes: **Reader** y **Writer**. Las clases concretas derivadas de estas clases operan en flujos de caracteres _Unicode_.
+Los flujos de caracteres se definen en dos jerarquías de clases. En la parte superior hay dos clases abstractas que definen las características comunes: `'Reader'` y `'Writer'`. Las clases concretas derivadas de estas clases operan en flujos de caracteres _Unicode_.
 
 A partir de estas clases se crean subclases concretas con distinta funcionalidad:
 
 * Reader:
-  * BufferedReader -> Flujo de caracteres entrada en búfer
-  * CharArrayReader -> Flujo de entrada que lee desde una matriz de caracteres
-  * FileReader -> Flujo de entrada que lee desde un archivo
-  * FilterReader -> Lector filtrado
-  * InputStreamReader -> Flujo de entrada que traduce bytes en caracteres
-  * LineNumberReader -> Flujo de entrada que cuenta líneas
-  * PipedReader -> Conducción de entrada
-  * PushbackReader -> Flujo de caracteres que permite devolver caracteres al flujo de entrada
-  * StringReader -> Flujo de entrada que lee desde una cadena
+  * `BufferedReader` - Flujo de caracteres entrada en búfer
+  * `CharArrayReader` - Flujo de entrada que lee desde una matriz de caracteres
+  * `FileReader` - Flujo de entrada que lee desde un archivo
+  * `FilterReader` - Lector filtrado
+  * `InputStreamReader` - Flujo de entrada que traduce bytes en caracteres
+  * `LineNumberReader` - Flujo de entrada que cuenta líneas
+  * `PipedReader` - Conducción de entrada
+  * `PushbackReader` - Flujo de caracteres que permite devolver caracteres al flujo de entrada
+  * `StringReader` - Flujo de entrada que lee desde una cadena
 
 * Writer:
-  * BufferedWriter -> Flujo de caracteres de salida en búfer
-  * CharArrayWriter -> Flujo de salida que escribe en una matriz de caracteres
-  * FileWriter -> Flujo de salida que escribe en un archivo
-  * FilterWriter -> Escritor filtrado
-  * OutputStreamWriter -> Flujo de salida que traduce caracteres en bytes
-  * PipedWriter -> Conducción de salida
-  * PrintWriter -> Flujo de salida que contiene _print()_ y _println()_
-  * StringWriter -> Flujo de salida que escribe en una cadena
+  * `BufferedWriter` - Flujo de caracteres de salida en búfer
+  * `CharArrayWriter` - Flujo de salida que escribe en una matriz de caracteres
+  * `FileWriter` - Flujo de salida que escribe en un archivo
+  * `FilterWriter` - Escritor filtrado
+  * `OutputStreamWriter` - Flujo de salida que traduce caracteres en bytes
+  * `PipedWriter` - Conducción de salida
+  * `PrintWriter` - Flujo de salida que contiene `'print()'` y `'println()'`
+  * `StringWriter` - Flujo de salida que escribe en una cadena
 
-#### Leer caracteres desde la consola con BufferedReader
+#### Leer caracteres desde la consola con `BufferedReader`
 
-Como 'System.in' es un flujo de bytes, se convierte en flujo de caracteres mediante un _InputStreamReader_. Este _InputStreamReader_ se pasa a _BufferedReader_, que es una clase óptima que admite un flujo de entrada en búfer.
+Como `'System.in'` es un flujo de bytes, se convierte en flujo de caracteres mediante un `'InputStreamReader'`. Este `'InputStreamReader'` se pasa a `'BufferedReader'`, que es una clase óptima que admite un flujo de entrada en búfer.
 
 ```java
-// Use a BufferedReader to read characters from the console.
+// Use a 'BufferedReader' to read characters from the console.
 import java.io.*;
 
 class BRRead {
@@ -1074,15 +1087,15 @@ class BRRead {
 }
 ```
 
-#### Leer cadenas desde la consola con BufferedReader
+#### Leer cadenas desde la consola con `BufferedReader`
 
 ```java
-// Read a string from console using a BufferedReader.
+// Read a string from console using a 'BufferedReader'.
 import java.io.*;
 
 class BRReadLines {
     public static void main(String args[]) throws IOException {
-        // create a BufferedReader using System.in
+        // create a 'BufferedReader' using 'System.in'
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String str;
         System.out.println("Enter lines of text.");
@@ -1095,12 +1108,12 @@ class BRReadLines {
 }
 ```
 
-#### Salida en consola con PrintWriter
+#### Salida en consola con `PrintWriter`
 
-Aunque para programas pequeños y tareas de depuración se puede utilizar 'System.out', en programas reales es recomendable usar un flujo _PrintWriter_:
+Aunque para programas pequeños y tareas de depuración se puede utilizar `'System.out'`, en programas reales es recomendable usar un flujo `'PrintWriter'`:
 
 ```java
-// Demonstrate PrintWriter
+// Demonstrate 'PrintWriter'
 import java.io.*;
 
 public class PrintWriterDemo {
@@ -1115,11 +1128,11 @@ public class PrintWriterDemo {
 }
 ```
 
-#### Escribir en un fichero con FileWriter
+#### Escribir en un fichero con `FileWriter`
 
 ```java
-// Demonstrate FileWriter.
-// This program uses try-with-resources. It requires JDK 7 or later.
+// Demonstrate 'FileWriter'.
+// This program uses 'try-with-resources'. It requires JDK 7 or later.
 import java.io.*;
 
 class FileWriterDemo {
@@ -1146,11 +1159,11 @@ class FileWriterDemo {
 }
 ```
 
-#### Leer de un fichero con FileReader
+#### Leer de un fichero con `FileReader`
 
 ```java
-// Demonstrate FileReader.
-// This program uses try-with-resources. It requires JDK 7 or later.
+// Demonstrate 'FileReader'.
+// This program uses 'try-with-resources'. It requires JDK 7 or later.
 import java.io.*;
 
 class FileReaderDemo {
@@ -1185,9 +1198,9 @@ Una ventaja del subprocesamiento múltiple es que permite programas más eficace
 
 Un subproceso puede estar en varios estados, como por ejemplo en ejecución o puede estar bloqueado a la espera de un recurso, etc...
 
-Junto a la multitarea basada en subprocesos surge la necesidad de una función especial denominada sincronización, que permite coordinar la ejecución de subprocesos de determinadas formas.
+Junto a la multitarea basada en subprocesos surge la necesidad de una función especial denominada **sincronización**, que permite coordinar la ejecución de subprocesos de determinadas formas.
 
-El sistema de subprocesamiento múltiple de Java se base en la clase _Thread_ y en su interfaz _Runnable_, ambas de 'java.lang'. Para crear un nuevo subproceso, su programa debe ampliar _Thread_ o implemetar la interfaz _Runnable_.
+El sistema de subprocesamiento múltiple de Java se base en la clase `'Thread'` y en su interfaz `'Runnable'`, ambas de `'java.lang'`. Para crear un nuevo subproceso, su programa debe ampliar `'Thread'` o implemetar la interfaz `'Runnable'`.
 
 ```java
 // Create a second thread.
@@ -1252,7 +1265,7 @@ class CurrentThreadDemo {
 }
 ```
 
-_'Thread'_ ofrece dos formas para saber si un subproceso ha finalizado. Por un lado se puede invocar _isAlive()_ en el subproceso, que devolverá true si el subproceso en el que se invoca sigue en ejecución.
+`'Thread'` ofrece dos formas para saber si un subproceso ha finalizado. Por un lado se puede invocar `'isAlive()'` en el subproceso, que devolverá 'true' si el subproceso en el que se invoca sigue en ejecución.
 
 ```java
 do {
@@ -1260,11 +1273,11 @@ do {
 } while (thread.isAlive())
 ```
 
-Otra forma de esperar a que un subproceso termine consiste en invocar _join()_. Este método espera a que termine el subproceso en el que se invoca. Su nombre proviene del concepto del subproceso invocador esperando a que se le una el subproceso especificado.
+Otra forma de esperar a que un subproceso termine consiste en invocar `'join()'`. Este método espera a que termine el subproceso en el que se invoca. Su nombre proviene del concepto del subproceso invocador esperando a que se le una el subproceso especificado.
 
 ### Métodos sincronizados
 
-Al usar varios subprocesos en ocasiones será necesario sincronizar las actividades de los subprocesos para que no accedan a la vez a un mismo recurso. Esto se consigue con la palabra clave _'synchronized'_
+Al usar varios subprocesos en ocasiones será necesario sincronizar las actividades de los subprocesos para que no accedan a la vez a un mismo recurso. Esto se consigue con la palabra clave `'synchronized'`.
 
 Al invocar un método sincronizado, el subproceso invocador accede al monitor del objeto, que lo bloquea. Mientras está bloqueado, ningún otro subproceso puede acceder al método ni a otro método sincronizado definido por la clase del objeto.
 
@@ -1280,10 +1293,10 @@ class SumArray {
 
 ### Bloque sincronizado
 
-No sólo se puede sincronizar métodos si no que Java proporciona un bloque sincronizado. Tras entrar en un bloque _'synchronized'_, ningún otro subproceso puede invocar un método sincronizado en el objeto al que hace referencia 'refObj' hasta que se salga del bloque.
+No sólo se puede sincronizar métodos si no que Java proporciona un **bloque sincronizado**. Tras entrar en un bloque `'synchronized'`, ningún otro subproceso puede invocar un método sincronizado en el objeto al que hace referencia la variable pasada como parámetro hasta que se salga del bloque.
 
 ```java
-synchronized(refObj) { //refObj es una referencia al objeto sincronizado
+synchronized(refObj) { // 'refObj' es una referencia al objeto sincronizado
     // instrucciones que sincronizar
 }
 ```
@@ -1349,17 +1362,24 @@ class Sample {
 </p>
 <!-- markdownlint-enable MD033 -->
 
-Básicamente, una enumeración es una lista de constantes con nombre que definen un nuevo tipo de datos. Un objeto de un tipo de enumeración solo puede albergar los valores definidos por la lista. Por tanto, una enumeración le permite definir con precisión un nuevo tipo de datos con un número fijo de valores.
+Básicamente, una enumeración es una **lista de constantes con nombre** que definen un nuevo tipo de datos. Un objeto de un tipo de enumeración solo puede albergar los valores definidos por la lista. Por tanto, una enumeración le permite definir con precisión un nuevo tipo de datos con un número fijo de valores.
 
-Desde una perspectiva de programación, las enumeraciones son muy útiles siempre que tiene que definir un grupo de valores que representan una colección de elementos. Es importante entender que una constante de enumeración es un objeto de su tipo de enumeración. Una enumeración se crea con la palabra clave _'enum'_
+Desde una perspectiva de programación, las enumeraciones son muy útiles cuando hay que definir un grupo de valores que representan una colección de elementos. Es importante entender que una constante de enumeración es un objeto de su tipo de enumeración. Una enumeración se crea con la palabra clave `'enum'`.
+
+Las constantes de la enumeración son `'public'` y `'static'` de forma implícita.
 
 ```java
 enum Transport {
-    CAR, TRUCK, AIRPLANE, TRAIN, BOAT // Se denominan constantes de enumeración y son 'public' y 'static' implícitamente
+    CAR, TRUCK, AIRPLANE, TRAIN, BOAT // constantes de enumeración
 }
 ```
 
-Estas constantes tienen el tipo de la enumeración que las contiene. Una vez definida la enumeración para crear una variable de este tipo no usamos 'new' como una clase sino que se declaran y usan las enumeraciones como si fueran tipos primitivos. Sin embargo **Java implementa las enumeraciones como si fueran clases**, permitiendo que tengan constructores, métodos, etc.. aunque con dos limitaciones que las diferencia del resto de clases en Java. Una enumeración no puede heredar de otra clase ni puede actuar como superclase de otra clase.
+Estas constantes tienen el tipo de la enumeración que las contiene. Una vez definida la enumeración para crear una variable de este tipo no usamos `'new'` como una clase sino que se declaran y usan las enumeraciones como si fueran tipos primitivos.
+
+Sin embargo **Java implementa las enumeraciones como si fueran clases**, permitiendo que tengan constructores, métodos, etc.. aunque con dos limitaciones que las diferencia del resto de clases en Java:
+
+* Una enumeración no puede heredar de otra clase.
+* Ni puede actuar como superclase de otra clase.
 
 ```java
 Transport transport = Transport.TRUCK; // las constantes, al ser 'static' se invocan de esta forma: 'Enumeration.constante'
@@ -1381,7 +1401,7 @@ switch(transport) { //Podemos usar una enumeración para controlar una instrucci
 }
 ```
 
-Las enumeraciones cuentan con dos métodos predefinidos _values()_ y _valueOf()_ cuyo formato es:
+Las enumeraciones cuentan con dos métodos predefinidos `'values()'` y `'valueOf()'` cuyo formato es:
 
 * `public static tipo-enum[] values()` => devuelve una matriz que contiene una lista de las constantes de enumeración
 
@@ -1412,7 +1432,7 @@ enum Transport {
 }
 ```
 
-Las enumeraciones tienen un método llamado _ordinal()_ que devuelve un valor que indica la posición de la constante dentro de la enumeración. Los valores ordinales empiezan en 0:
+Las enumeraciones tienen un método llamado `'ordinal()'` que devuelve un valor que indica la posición de la constante dentro de la enumeración. Los valores ordinales empiezan en 0:
 
 ```java
 enum Transport {
@@ -1424,32 +1444,32 @@ System.out.println(Transport.TRUCK.ordinal()); // => 3
 
 ### Autoboxing y unboxing
 
-En Java los tipos primitivos no forman parte de la jerarquía de objetos por motivos de eficiencia. Sin embargo existen clases que actuan como envoltorios (wrapper) para tipos primitivos como _Float_, _Double_, _Byte_, _Short_, _Integer_, _Long_, _Character_ y _Boolean_. Todos los envoltorios de tipos numéricos heredan de la clase abstracta **Number**.
+En Java los tipos primitivos no forman parte de la jerarquía de objetos por motivos de eficiencia. Sin embargo existen clases que actuan como envoltorios (_'wrapper'_) para tipos primitivos como `'Float'`, `'Double`', `'Byte'`, `'Short'`, `'Integer'`, `'Long'`, `'Character'` y `'Boolean'`. Todos los envoltorios de tipos numéricos heredan de la clase abstracta `'Number'`.
 
-Encapsular un tipo primitivo en su envoltorio se denomina 'boxing'. Por tanto **autoboxing** es el proceso de encapsular automáticamente un tipo primitivo en su clase envoltorio y **auto-unboxing** es el proceso inverso.
+Encapsular un tipo primitivo en su envoltorio se denomina **'boxing'**. Por tanto **'autoboxing'** es el proceso de encapsular automáticamente un tipo primitivo en su clase envoltorio y **'auto-unboxing'** es el proceso inverso.
 
 ```java
-Integer num = Integer.valueOf(100) // sin autoboxing
+Integer num = Integer.valueOf(100) // sin 'autoboxing'
 
-Integer iOb = 100; // autobox de int
+Integer iOb = 100; // 'autobox' de int
 
 int i = iOb; // unbox
 ```
 
 ## Genéricos
 
-El término 'genérico' significa tipo con parámetros. Los tipos con parámetros permiten crear clases, interfaces y métodos en los que los tipos de datos se especifican como parámetros. Cuando una clase utiliza 'genéricos' se denomina _clase genérica_
+El término **"genérico"** significa tipo con parámetros. Los tipos con parámetros permiten crear clases, interfaces y métodos en los que los tipos de datos se especifican como parámetros. Cuando una clase utiliza genéricos se denomina **"clase genérica"**.
 
 ```java
-// Uso de genéricos en una clase. T es un parámetro de tipo que se sustituye por un tipo real al crear un objeto de la clase
+// Uso de genéricos en una clase. 'T' es un parámetro de tipo que se sustituye por un tipo real al crear un objeto de la clase
 class Gen<T> {
-    T ob; // Declarar un objeto de tipo T.
+    T ob; // Declarar un objeto de tipo 'T'.
 
-    Gen(T o) { // Pasar al constructor una referencia a un objeto de tipo T
+    Gen(T o) { // Pasar al constructor una referencia a un objeto de tipo 'T'
         ob = o;
     }
 
-    T getOb() { // retorna ob de tipo T
+    T getOb() { // retorna 'ob' de tipo 'T'
         return ob;
     }
 
@@ -1462,8 +1482,8 @@ class GenDemo {
     public static void main(String ... args) {
         Gen<Integer> iOb; // Crear una referencia
 
-        // Crear un objeto Gen<Integer> y asignar la referencia a iOb.
-        // Uso de autoboxing para encapsular el valor entero en un objeto Integer
+        // Crear un objeto Gen<Integer> y asignar la referencia a 'iOb'.
+        // Uso de autoboxing para encapsular el valor entero en un objeto 'Integer'
         iOb = new Gen<Integer>(80);
         iOb.showType();
 
@@ -1477,7 +1497,7 @@ class GenDemo {
 
 El compilador no crea diferentes versiones de la clase genérica en función del tipo pasado sino que usa la misma versión. Lo que hace es sustituir el genérico por el tipo real y realiza las conversiones necesarias para que el código se comporte como si hubiera sido escrito con ese tipo.
 
-Al declarar una instancia de un tipo genérico, el argumento de tipo pasado al parámetro de tipo debe ser un tipo de referencia. No se puede usar un tipo primitivo como int o char.
+Al declarar una instancia de un tipo genérico, el argumento de tipo pasado al parámetro de tipo debe ser un tipo de referencia. No se puede usar un tipo primitivo como `'int'` o `'char'`.
 
 Destacar sobre los tipos genéricos es que una referencia a una versión concreta de un tipo genérico no es compatible en cuanto a tipo se refiere con otra versión del mismo tipo genérico.
 
@@ -1505,14 +1525,18 @@ Gen<Integer, Integer> sample1 = new Gen<Integer, Integer>(0, 0);
 
 ### Tipos vinculados (o limitados)
 
-Java ofrece los _'tipos vinculados'_ que permite, al especificar un parámetro de tipo, crear un vínculo superior que declare la superclase de la que deben derivarse todos los argumentos de tipo. Es decir permite limitar los parámetros de tipo a únicamente tipos numéricos por ejemplo, evitando que pasemos parámetros de tipo 'String'.
+Java ofrece los **'tipos vinculados'** que permite, al especificar un parámetro de tipo, crear un vínculo superior que declare la superclase de la que deben derivarse todos los argumentos de tipo. Es decir permite limitar los parámetros de tipo a únicamente tipos numéricos por ejemplo, evitando que pasemos parámetros de tipo `'String'`.
 
-Para ello usamos la cláusula _extends_ al especificar los parámetros de tipo: `<T extends superclass>`. Esto especifica que T solo se puede reemplazar por 'superclass' o subclases de 'superclass'. Por tanto 'superclass' define un *límite superior e inclusivo*.
+Para ello usamos la cláusula `'extends'` al especificar los parámetros de tipo:
 
-Nota: todos los tipos numéricos heredan de la clase abstracta _Number_
+>`<T extends superclass>`
+
+Esto especifica que 'T' solo se puede reemplazar por _'superclass'_ o subclases de _'superclass'_. Por tanto _'superclass'_ define un **límite superior e inclusivo**.
+
+Nota: todos los tipos numéricos heredan de la clase abstracta `'Number'`.
 
 ```java
-class GenNumeric<T extends Number> { // De esta forma limitamos T a tipos numéricos
+class GenNumeric<T extends Number> { // De esta forma limitamos 'T' a tipos numéricos
     T num;
 
     GenNumeric(T n) {
@@ -1528,7 +1552,7 @@ class GenNumeric<T extends Number> { // De esta forma limitamos T a tipos numér
 Los tipos vinculados resultan especialmente útiles para garantizar que un parámetro sea compatible con otro:
 
 ```java
-class Pair<T, V extends T> { // V debe tener el mismo tipo que T o ser una subclase de T
+class Pair<T, V extends T> { // 'V' debe tener el mismo tipo que 'T' o ser una subclase de 'T'
     // code ....
 }
 
@@ -1539,7 +1563,7 @@ Pair<Integer, String> z = new Pair<Integer, String>(); // INCORRECTO, String no 
 
 ### Argumentos comodín
 
-Un argumento comodín se representa mediante '?' y representa un tipo desconocido. Destacar que el comodín '?' no afecta al tipo de parámetros. La limitación se crea con la cláusula _extends_. El comodín simplemente equivale a cualquier tipo válido. En el ejemplo el comodín equivale a cualquier tipo numérico válido. La limitación a tipos numéricos la creamos con la cláusula _extends_
+Un argumento comodín se representa mediante '?' y representa un tipo desconocido. Destacar que el comodín '?' no afecta al tipo de parámetros. La limitación se crea con la cláusula `'extends'`. El comodín simplemente equivale a cualquier tipo válido. Por ejemplo, `<T extends Number>` limita a tipos numéricos y por tanto el comodín equivale a utilizar cualquier tipo numérico válido. La limitación a tipos numéricos se ha creado con la cláusula `'extends'`.
 
 ```java
 class Gen<T extends Number> {
@@ -1554,7 +1578,9 @@ class Sample {
 }
 ```
 
-Los argumentos comodín se pueden vincular con cualquier parámetro de tipo. Un comodín vinculado es especialmente importante para crear un método que solo deba operar en objetos que sean subclases de una superclase concreta. Se especifica con la forma: `<? extends superclase>`
+Los argumentos comodín se pueden vincular con cualquier parámetro de tipo. Un comodín vinculado es especialmente importante para crear un método que solo deba operar en objetos que sean subclases de una superclase concreta. Se especifica con la forma:
+
+> `<? extends superclase>`
 
 ```java
 void sample(Gen<? extends Number> a) {  // Tipos que sean 'Number' o subclases de 'Number'
@@ -1652,7 +1678,7 @@ Gen<Integer, Integer> iOb = new Gent<>(); // Sintaxis reducida para JDK 7 y post
 
 ### Restricciones y ambigüedad
 
-El uso de genéricos puede crear situacines de ambigüedad, sobretodo en casos de sobrecarga de métodos
+El uso de genéricos puede crear situaciones de ambigüedad, sobretodo en casos de sobrecarga de métodos:
 
 ```java
 class Gen<T, V> {
@@ -1665,18 +1691,18 @@ class Gen<T, V> {
 }
 ```
 
-Una restricción importante es que los parámetros de tipo no se pueden utilizar como si fueran tipos normales ni declarar variables estáticas de parámetros de tipo
+Una restricción importante es que los parámetros de tipo no se pueden utilizar como si fueran tipos normales ni declarar variables estáticas de parámetros de tipo:
 
 ```java
 class Gen<T, V> {
     T ob;
-    static V ob; // Incorrecto, no hay variables estáticas de T
+    static V ob; // Incorrecto, no hay variables estáticas de 'T'
 
     void sample() {
         ob = new T(); // Error, no se puede crear instancias de un parámetro de tipo
     }
 
-    static T sample () {} // Error, no se puede usar un tipo T como tipo de devolución
+    static T sample () {} // Error, no se puede usar un tipo 'T' como tipo de devolución
 
     static <T> boolean sample () // Correcto
 }
@@ -1690,9 +1716,9 @@ class Gen<T, V> {
 </p>
 <!-- markdownlint-enable MD033 -->
 
-Una expresión lambda es, básicamente, un *método anónimo*. Sin embargo, este método no se ejecuta por sí solo, sino que se usa para implementar un método definido por una interfaz funcional. Las expresiones lambda también suele denominarse clausuras (closure).
+Básicamente **una expresión lambda es un método anónimo**. Sin embargo, este método no se ejecuta por sí solo, sino que se usa para implementar un método definido por una **interfaz funcional**. Las expresiones lambda también suele denominarse clausuras (_'closure'_).
 
-Una interfaz funcional es una interfaz que únicamente contiene un método abstracto. Por lo tanto, una interfaz funcional suele representar una única acción. Una interfaz funcional puede incluir métodos predeterminados y/o métodos estáticos pero en todos los casos solo puede haber *un método abstracto* para que la interfaz sea considerada interfaz funcional. Como los métodos de interfaz no predeterminados y no estáticos son implícitamente abstractos, no es necesario utilizar la palabra clave 'abstract'.
+**Una interfaz funcional es una interfaz que únicamente contiene un método abstracto**. Por lo tanto, una interfaz funcional suele representar una única acción. Una interfaz funcional puede incluir métodos predeterminados y/o métodos estáticos pero en todos los casos solo puede haber **un solo método abstracto** para que la interfaz sea considerada interfaz funcional. Como los métodos de interfaz no predeterminados y no estáticos son implícitamente abstractos, no es necesario utilizar la palabra clave `'abstract'`.
 
 ```java
 interface Sample { // interfaz funcional
@@ -1702,7 +1728,7 @@ interface Sample { // interfaz funcional
 
 ### Fundamentos
 
-El nuevo operador para las expresiones lambda se denomina operador lambda y tiene la forma '->'. Divide la expresión lambda en dos partes: la parte izquierda especifica los parámetros necesarios y la parte derecha contiene el cuerpo de la expresión. Este cuerpo puede estar compuesto por una única expresión o puede ser un bloque de código. Cuando es una única expresión se denomina _lambda de expresión_ y cuando es un bloque de código se denomina _lambda de bloque_.
+El nuevo operador para las expresiones lambda se denomina **operador lambda** y tiene la forma `'->'`. Divide la expresión lambda en dos partes: la parte izquierda especifica los parámetros necesarios y la parte derecha contiene el cuerpo de la expresión. Este cuerpo puede estar compuesto por una única expresión o puede ser un bloque de código. Cuando es una única expresión se denomina **lambda de expresión** y cuando es un bloque de código se denomina **lambda de bloque**.
 
 ```java
 () -> 98.6;  // Expresión lambda sin parámetros que evalúa un valor constante
@@ -1714,7 +1740,7 @@ El nuevo operador para las expresiones lambda se denomina operador lambda y tien
 n -> 100 * n; // Cuando sólo hay un parámetro los paréntesis son opcionales
 ```
 
-Una expresión lambda no se ejecuta por sí misma, sino que forma la *implementación del método abstracto* definido por la interfaz funcional que especifica su tipo de destino. Como resultado, una expresión lambda solo se puede especificar en un contexto en el que se haya definido un tipo de destino. Uno de estos contextos se crea al asignar una expresión lambda a una referencia de interfaz funcional. Otros contextos de tipo de destino son la inicialización de variables, las instrucciones 'return' y los argumentos de métodos por ejemplo.
+Una expresión lambda no se ejecuta por sí misma, sino que forma la **implementación del método abstracto** definido por la interfaz funcional que especifica su tipo de destino. Como resultado, una expresión lambda solo se puede especificar en un contexto en el que se haya definido un tipo de destino. Uno de estos contextos se crea al asignar una expresión lambda a una referencia de interfaz funcional. Otros contextos de tipo de destino son la inicialización de variables, las instrucciones `'return'` y los argumentos de métodos por ejemplo.
 
 ```java
 interface IFuncional { // interfaz funcional
@@ -1750,9 +1776,9 @@ sample.areEquals(10, 15); // Invocar el método.
 
 ### Bloques de expresión lambda
 
-Para crear una lambda de bloque basta encerrar las instrucciones entre llaves. La lambda de bloque funciona igual que las lambda de expresión con la salvedad que hay que incluir en una lambda de bloque una instrucción _return_ para devolver un valor.
+Para crear una lambda de bloque basta encerrar las instrucciones entre llaves. La lambda de bloque funciona igual que las lambda de expresión con la salvedad que hay que incluir en una lambda de bloque una instrucción `'return'` para devolver un valor.
 
-En una lambda de bloque podemos declarar variables, utilizar bucles, instrucciones 'switch' etc.. Una lambda de bloque funciona como un método.
+En una lambda de bloque podemos declarar variables, utilizar bucles, instrucciones `'switch'`, etc.. Una lambda de bloque funciona como un método.
 
 ### Interfaces funcionales genéricas
 
@@ -1799,11 +1825,11 @@ class LambdaArgumentDemo {
 
 ### Expresiones lambda y captura de variables
 
-Las variables definidas por el ámbito contenedor de una expresión lambda son accesibles desde la propia expresión lambda, como por ejemplo variables de instancia o una variable 'static' definida por su clase contenedora. Una expresión lambda también tiene acceso a _this_, lo que hace referencia a la instancia de invocación de la clase contenedora de la expresión lambda.
+Las variables definidas por el ámbito contenedor de una expresión lambda son accesibles desde la propia expresión lambda, como por ejemplo variables de instancia o una variable `'static'` definida por su clase contenedora. Una expresión lambda también tiene acceso a `'this'`, lo que hace referencia a la instancia de invocación de la clase contenedora de la expresión lambda.
 
-Sin embargo, cuando una expresión lambda usa una variable local desde su ámbito contenedor, se crea una situación especial denominada **captura de variables**. En ese caso, la expresión lambda puede usar únicamente variables locales que sean *eficazmente finales*.
+Sin embargo, cuando una expresión lambda usa una variable local desde su ámbito contenedor, se crea una situación especial denominada **captura de variables**. En ese caso, la expresión lambda puede usar únicamente variables locales que sean **eficazmente finales**.
 
-Un *variable eficazmente final* es aquella cuyo valor no cambia una vez asignada. No es necesario declararla explícitamente como 'final'.
+**Una variable eficazmente final es aquella cuyo valor no cambia una vez asignada**. No es necesario declararla explícitamente como final.
 
 ```java
 interface IFuncional {
@@ -1829,7 +1855,7 @@ class VarCapture {
 
 ### Generar una excepción desde una expresión lambda
 
-Una expresión lambda puede generar una excepción. No obstante, si genera una excepción comprobada, esta tendrá que ser compatible con la excepción (o excepciones) indicadas en la cláusula 'throws' del método abstracto de la interfaz funcional.
+Una expresión lambda puede generar una excepción. No obstante, si genera una excepción comprobada, esta tendrá que ser compatible con la excepción (o excepciones) indicadas en la cláusula `'throws'` del método abstracto de la interfaz funcional.
 
 ```java
 interface IFuncional {
@@ -1852,9 +1878,9 @@ class LambdaExceptionDemo {
 
 Una referencia de método permite hacer referencia a un método sin ejecutarlo. Al evaluar una referencia de método también se crea una instancia de una interfaz funcional.
 
-El nombre de la clase se separa del método mediante un par de puntos '::', un nuevo separador añadido a Java en JDK 8:
+El nombre de la clase se separa del método mediante un par de puntos `'::'`, un nuevo separador añadido a Java en JDK 8:
 
-* Sintaxis para métodos 'static': `NombreClase::nombreMétodo`
+* Sintaxis para métodos `'static'`: `NombreClase::nombreMétodo`
 * Sintaxis para métodos de instancia: `refObj::nombreMétodo`
 
 Si es un método genérico la sintaxis es `NombreClase::<T>nombreMétodo` o `refObj::<T>nombreMétodo`
@@ -1900,7 +1926,7 @@ Al igual que se crean referencias de método, se pueden crear referencias a cons
 
 ```java
 interface IntPredicate {  // Interfaz funcional
-    MyClass create(String n); // Método abstracto que recibe un String como parámetro y retorna 'MyClass'
+    MyClass create(String n); // Método abstracto que recibe un 'String' como parámetro y retorna 'MyClass'
 }
 
 class MyClass {
@@ -1928,17 +1954,17 @@ public class Sample {
 
 ### Interfaces funcionales predefinidas
 
-Java proporciona una serie de interfaces funcionales predefinidas preparadas para utilizar:
+Java proporciona una serie de **interfaces funcionales predefinidas** preparadas para utilizar:
 
-* `UnaryOperator<T>` --> Aplica una operación unaria a un objeto de tipo T y devuelve el resultado, que también es de tipo T. Su método es _apply()_
-* `BinaryOperator<T>` --> Aplica una operación a dos objetos de tipo T y devuelve el resultado, que también es de tipo T. su método es _apply()_
-* `Consumer<T>` --> Aplica una operación a un objeto de tipo T. Su método es _accept()_
-* `Supplier<T>` --> Devuelve un objeto de tipo T. Su método es _get()_
-* `Function<T, V>` --> Aplica una operación a un objeto de T y devuelve el resultado como objeto de V. Su método es _apply()_
-* `Predicate<T>` --> Determina si un objeto de tipo T cumple una restricción. Devuelve un valor boolean que indica el resultado. Su método es _test()_
+* `UnaryOperator<T>` -- Aplica una operación unaria a un objeto de tipo 'T' y devuelve el resultado, que también es de tipo 'T'. Su método es `'apply()'`.
+* `BinaryOperator<T>` -- Aplica una operación a dos objetos de tipo 'T' y devuelve el resultado, que también es de tipo 'T'. su método es `'apply()'`.
+* `Consumer<T>` -- Aplica una operación a un objeto de tipo 'T'. Su método es `'accept()'`.
+* `Supplier<T>` -- Devuelve un objeto de tipo 'T'. Su método es `'get()'`.
+* `Function<T, V>` -- Aplica una operación a un objeto de 'T' y devuelve el resultado como objeto de 'V'. Su método es `'apply()'`.
+* `Predicate<T>` -- Determina si un objeto de tipo 'T' cumple una restricción. Devuelve un valor boolean que indica el resultado. Su método es `'test()'`.
 
 ```java
-import java.util.function.Predicate; // Importar la interfaz predicate
+import java.util.function.Predicate; // Importar la interfaz 'predicate'
 
 public class Sample {
     public static void main(String...args) {
@@ -1971,7 +1997,7 @@ public class Sample {
 
 Con la aparición de JDK 9 se incorporó a Java la característica de los **módulos**. Un módulo es una agrupación de paquetes y recursos a los que se puede hacer referencia conjuntamente a través del nombre del módulo.
 
-La declaración de un módulo son instrucciones en un archivo fuente de Java llamado _module-info.java_. Luego 'javac' compila ese archivo en un archivo de clase y se conoce como descriptor de módulo. Un descriptor de módulo empieza por la palabra clave 'module' y tiene la sintaxis:
+La declaración de un módulo son instrucciones en un archivo fuente de Java llamado _'module-info.java'_. Luego `'javac'` compila ese archivo en un archivo de clase que se conoce como **descriptor de módulo**. Un descriptor de módulo empieza por la palabra clave `'module'` y tiene la sintaxis:
 
 ```java
 module nombreMódulo {
@@ -1981,21 +2007,21 @@ module nombreMódulo {
 
 Para especificar la dependencia de un módulo se utiliza la sintaxis `requires NombreMódulo`.
 
-Para exportar un módulo y permitir su uso en otros módulos se utiliza la sintaxis `exports NombrePaquete`. Cuando un módulo exporta un paquete, hace que todos los tipos públicos y protegidos del paquete sean accesibles para otros módulos. Además, los miembros 'public' y 'protected' de esos tipos también son accesibles. Cualquier paquete no exportado es sólo para uso interno de su módulo. Por tanto, la visibilidad 'public' que es la menos restrictiva es únicamente visible dentro de su propio módulo hasta que no se 'exporte', lo que hace que sea visible para otros módulos.
+Para exportar un módulo y permitir su uso en otros módulos se utiliza la sintaxis `exports NombrePaquete`. Cuando un módulo exporta un paquete, hace que todos los tipos públicos y protegidos del paquete sean accesibles para otros módulos. Además, los miembros `'public'` y `'protected'` de esos tipos también son accesibles. Cualquier paquete no exportado es sólo para uso interno de su módulo. Por tanto, la visibilidad `'public'` que es la menos restrictiva es únicamente visible dentro de su propio módulo hasta que no se _'exporte'_, lo que hace que sea visible para otros módulos.
 
-Tanto 'requires' como 'exports' deben estar solo dentro de una declaración de módulo.
+Tanto `'requires'` como `'exports'` deben estar solo dentro de una declaración de módulo.
 
 ### Módulos de la plataforma
 
 A partir de JDK 9 los paquetes de la API de Java se han incorporado a módulos, permitiendo implementar aplicaciones con únicamente los paquetes necesarios de la JRE, reduciendo considerablemente el tamaño de las aplicaciones.
 
-De los módulos de la plataforma, el más importante es **java.base** Incluye y exporta paquetes esenciales de Java como _java.lang_, _java.io_ o _java.util_ entre otros. Dada su importancia está disponible automáticamente para todos los progamas sin necesidad de usar la instrucción 'import' y todos los módulos lo requieren automáticamente y por tanto tampoco es necesario usar la instrucción 'requires'.
+De los módulos de la plataforma, el más importante es `'java.base'`. Este módulo incluye y exporta paquetes esenciales de Java como `'java.lang'`, `'java.io'` o `'java.util'` entre otros. Dada su importancia está disponible automáticamente para todos los progamas sin necesidad de usar la instrucción `'import'` y todos los módulos lo requieren automáticamente y por tanto tampoco es necesario usar la instrucción `'requires'`.
 
 ### Módulos y código legado
 
 Para permitir la compatibilidad con código anterior a JDK 9, Java introduce dos características para permitir dicha compatibilidad.
 
-Cuando se usa código legado que no forma parte de un módulo nombrado, pasa automáticamente a formar parte del "módulo sin nombre". Este módulo tiene dos atributos importantes. En primer lugar, todos los paquetes que contiene se exportan de forma automática. En segundo lugar, este módulo puede acceder a todos los demás. Por tanto, cuando un programa no usa módulos, todos los módulos de la API de la plataforma Java se vuelven accesibles automáticamente a través del "módulo sin nombre".
+Cuando se usa código legado que no forma parte de un módulo nombrado, pasa automáticamente a formar parte del **"módulo sin nombre"**. Este módulo tiene dos atributos importantes. En primer lugar, todos los paquetes que contiene se exportan de forma automática. En segundo lugar, este módulo puede acceder a todos los demás. Por tanto, cuando un programa no usa módulos, todos los módulos de la API de la plataforma Java se vuelven accesibles automáticamente a través del **"módulo sin nombre"**.
 
 Otra característica que permite la compatibilidad con código legado es el uso automático de la ruta de clase en vez de la ruta de módulo.
 
