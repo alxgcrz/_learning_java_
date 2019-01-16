@@ -555,7 +555,7 @@ class staticBlock {
 
 <!-- markdownlint-disable MD033 -->
 <p align="center">
-    <img style ="float: left;" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-content-man-colour.svg?sanitize=true" width="auto" height="225px">
+    <img style ="float: left;" align="left" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-content-man-colour.svg?sanitize=true" width="auto" height="225px">
 </p>
 <!-- markdownlint-enable MD033 -->
 
@@ -714,7 +714,7 @@ public interface Car {} //  interfaz 'public' y en un fichero con el nombre 'Car
 
 <!-- markdownlint-disable MD033 -->
 <p align="center">
-    <img style ="float: left;" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-notebook-man-colour.svg?sanitize=true" width="auto" height="175px">
+    <img style ="float: left;" align="left" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-notebook-man-colour.svg?sanitize=true" width="auto" height="175px">
 </p>
 <!-- markdownlint-enable MD033 -->
 
@@ -789,7 +789,7 @@ A partir de JDK 9 una interfaz puede incluir un método `'private'` que solo pue
 
 <!-- markdownlint-disable MD033 -->
 <p align="center">
-    <img style ="float: left;" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-developer-woman-colour.svg?sanitize=true" width="auto" height="175px">
+    <img style ="float: left;" align="left" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-developer-woman-colour.svg?sanitize=true" width="auto" height="175px">
 </p>
 <!-- markdownlint-enable MD033 -->
 
@@ -1184,7 +1184,7 @@ class FileReaderDemo {
 
 <!-- markdownlint-disable MD033 -->
 <p align="center">
-    <img style ="float: left;" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-folder-woman-colour.svg?sanitize=true" width="auto" height="225px">
+    <img style ="float: left;" align="left" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-folder-woman-colour.svg?sanitize=true" width="auto" height="225px">
 </p>
 <!-- markdownlint-enable MD033 -->
 
@@ -1358,7 +1358,7 @@ class Sample {
 
 <!-- markdownlint-disable MD033 -->
 <p align="center">
-    <img style ="float: left;" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-support-woman-colour.svg?sanitize=true" width="auto" height="175px">
+    <img style ="float: left;" align="left" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-support-woman-colour.svg?sanitize=true" width="auto" height="175px">
 </p>
 <!-- markdownlint-enable MD033 -->
 
@@ -1712,7 +1712,7 @@ class Gen<T, V> {
 
 <!-- markdownlint-disable MD033 -->
 <p align="center">
-    <img style ="float: left;" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-support-man-colour.svg?sanitize=true" width="auto" height="225px">
+    <img style ="float: left;" align="left" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-support-man-colour.svg?sanitize=true" width="auto" height="225px">
 </p>
 <!-- markdownlint-enable MD033 -->
 
@@ -1979,12 +1979,130 @@ public class Sample {
 
 (todo)
 
-## Testing
+## Pruebas unitarias con JUnit
 
-(todo)
+Un sistema con test unitarios será más fácil modificarlo ya que tendremos la seguridad de que no vamos a romper nada. Nos permitirá refactorizar el código sin miedo ya que podremos detectar posibles errores y fallos de forma más rápida. El uso de test también nos permite detectar malas prácticas de diseño en fases tempranas del desarrollo, lo que permite su solución dando lugar a software de mejor calidad.
 
-<http://innovationlabs.softtek.co/testing-unitario>  
-<https://www.adictosaltrabajo.com/2016/11/24/primeros-pasos-con-junit-5/>  
+### Tipos de pruebas
+
+* **Test unitarios**: prueban una funcionalidad única y se basan en el principio de responsabilidad única (la S de los principios de diseño SOLID)
+* **Integración**: prueban la conexión entre componentes, sería el siguiente paso a los test unitarios.
+* **Funcionales (o Sistema)**: prueban la integración de todos los componentes que desarrollan una funcionalidad concreta (por ejemplo, la automatización de pruebas con Selenium serían test funcionales).
+* **Aceptación de Usuarios**: Pruebas definidas por el *Product Owner* basadas en ejemplos (BDD con Cucumber).
+* **Regresión**: Prueban que los test unitarios y funcionales siguen funcionando a lo largo del tiempo (se pueden lanzar tanto de forma manual como en sistemas de Integración Continua).
+* **Carga**: Prueban la eficiencia del código.
+
+### Características de los tests unitarios
+
+Los tests unitarios deben cumplir los siguientes puntos denominados **Principios FIRST**:
+
+* **Fast**: Rápida ejecución.
+* **Isolated**: Independiente de otros test.
+* **Repeatable**: Se puede repetir en el tiempo.
+* **Self-Validating**: Cada test debe poder validar si es correcto o no a sí mismo.
+* **Timely**: ¿Cuándo se deben desarrollar los test? ¿Antes o después de que esté todo implementado? Sabemos que cuesta hacer primero los test y después la implementación (TDD: Test-driven development), pero es lo suyo para centrarnos en lo que realmente se desea implementar.
+
+Además podemos añadir estos dos puntos más:
+
+* Sólo pruebas de los **métodos públicos** de cada clase.
+* No se debe hacer uso de las **dependencias** de la clase a probar. Esto quizás es discutible porque en algunos casos donde la dependencias son clases de utilidades y se puede ser menos estricto. Se recomienda siempre aplicar el sentido común.
+* Un test no debe implementar ninguna lógica de negocio (nada de if...else...for...etc)
+
+### Framework JUnit4 / JUnit5
+
+JUnit es un framework Java para implementar test en Java. JUnit 5 requiere Java 8 (o superior). JUnit se basa en [anotaciones](https://junit.org/junit5/docs/current/user-guide/#writing-tests-annotations):
+
+* `@Test`: indica que el método que la contiene es un test: expected y timeout.
+* `@Before` (JUnit4) / `@BeforeEach` (JUnit5): ejecuta el método que la contiene justo antes de cada test.
+* `@After` (JUnit4) / `@AfterEach` (JUnit5): ejecuta el método que la contiene justo después de cada test.
+* `@BeforeClass` (JUnit4) / `@BeforeAll` (JUnit5): ejecuta el método (estático) que la contiene justo antes del primer test.
+* `@AfterClass` (JUnit4) / `@AfterAll` (JUnit5): ejecuta el método (estático) que la contiene justo después del último test.
+* `@Ignore` / `@Disabled`: evita la ejecución del tests. No es muy recomendable su uso porque puede ocultar test fallidos. Si dudamos si el test debe estar o no, quizás borrarlo es la mejor de las decisiones.
+* `@DisplayName("cadena")` (JUnit5): Declara un nombre de visualización personalizado para la clase de prueba o el método de prueba. En lugar de usar esta anotación es recomendable utilizar nombres para los métodos lo suficientemente descriptivos como para que no sea necesario usar esta anotación.
+
+```java
+@DisplayName("Aserciones soportadas")
+class StandardTests {
+
+    @BeforeAll
+    static void initAll() {
+    }
+
+    @BeforeEach
+    void init() {
+    }
+
+    @Test
+    void regular_testi_method() {
+        // ...
+    }
+
+    @Test
+    @DisplayName("Verdadero o falso?")
+    void regular_testi_method() {
+        // ...
+    }
+
+    @Test
+    void failingTest() {
+        fail("a failing test");
+    }
+
+    @Test
+    @Disabled("este tests no se ejecuta")
+    void skippedTest() {
+        // not executed
+    }
+
+    @AfterEach
+    void tearDown() {
+    }
+
+    @AfterAll
+    static void tearDownAll() {
+    }
+}
+```
+
+Las condiciones de aceptación del test se implementa con las [aserciones](https://junit.org/junit5/docs/current/api/org/junit/jupiter/api/Assertions.html). Las más comunes son los siguientes:
+
+* **assertTrue/assertFalse (condición a testear)**: Comprueba que la condición es cierta o falsa.
+* **assertEquals/assertNotEquals (valor esperado, valor obtenido)**: Es importante el orden de los valores esperado y obtenido.
+* **assertNull/assertNotNull (object)**: Comprueba que el objeto obtenido es nulo o no.
+* **assertSame/assertNotSame(object1, object2)**: Comprueba si dos objetos son iguales o no.
+* **fail()**: Fuerza que el test termine con fallo. Se puede indicar un mensaje.
+
+```java
+class AssertionsTest {
+
+    @Test
+    void standardAssertions() {
+        assertEquals(2, 2);
+        assertEquals(4, 4, "Ahora el mensaje opcional de la aserción es el último parámetro.");
+        assertTrue(2 == 2, () -> "Al usar una lambda para indicar el mensaje, "
+                + "esta se evalúa cuando se va a mostrar (no cuando se ejecuta el assert), "
+                + "de esta manera se evita el tiempo de construir mensajes complejos innecesariamente.");
+    }
+
+    @Test
+    void groupedAssertions() {
+        // En un grupo de aserciones se ejecutan todas ellas
+        // y ser reportan todas los fallos juntos
+        assertAll("user",
+            () -> assertEquals("Francisco", user.getFirstName()),
+            () -> assertEquals("Pérez", user.getLastName())
+        );
+    }
+
+    @Test
+    void exceptionTesting() {
+        Throwable exception = expectThrows(IllegalArgumentException.class, () -> {
+            throw new IllegalArgumentException("a message");
+        });
+        assertEquals("a message", exception.getMessage());
+    }
+}
+```
 
 <!-- markdownlint-disable MD033 -->
 <div class="page"/>
@@ -1994,7 +2112,7 @@ public class Sample {
 
 <!-- markdownlint-disable MD033 -->
 <p align="center">
-    <img style ="float: left;" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-business-woman-colour.svg?sanitize=true" width="auto" height="225px">
+    <img style ="float: left;" align="left" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-business-woman-colour.svg?sanitize=true" width="auto" height="175px">
 </p>
 <!-- markdownlint-enable MD033 -->
 
@@ -2168,6 +2286,8 @@ Otra característica que permite la compatibilidad con código legado es el uso 
 * <https://docs.oracle.com/en/java/javase/11/>
 * <http://openjdk.java.net/>
 * <https://en.wikipedia.org/wiki/Java_version_history>
+* <https://www.adictosaltrabajo.com/2016/11/24/primeros-pasos-con-junit-5/>
+* <http://innovationlabs.softtek.co/testing-unitario>
 
 ### License
 
