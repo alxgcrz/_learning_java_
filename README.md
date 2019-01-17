@@ -1184,7 +1184,7 @@ class FileReaderDemo {
 
 <!-- markdownlint-disable MD033 -->
 <p align="center">
-    <img style ="float: left;" align="left" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-folder-woman-colour.svg?sanitize=true" width="auto" height="225px">
+    <img style ="float: left;" align="left" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-folder-man-colour.svg?sanitize=true" width="auto" height="225px">
 </p>
 <!-- markdownlint-enable MD033 -->
 
@@ -1977,7 +1977,182 @@ public class Sample {
 
 ## Collections
 
-(todo)
+<!-- markdownlint-disable MD033 -->
+<p align="center">
+    <img style ="float: left;" align="left" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-folder-woman-colour.svg?sanitize=true" width="auto" height="175px">
+</p>
+<!-- markdownlint-enable MD033 -->
+
+Una **colección** -a veces llamada contenedor- es simplemente un objeto que agrupa múltiples elementos en una sola unidad. Las colecciones se utilizan para almacenar, recuperar, manipular y comunicar datos agregados.
+
+Un [framework de colecciones](https://docs.oracle.com/javase/tutorial/collections/intro/index.html) es una arquitectura unificada para representar y manipular colecciones. Todos los marcos de trabajo de colecciones contienen lo siguiente:
+
+* **Interfaces**: Estos son tipos de datos abstractos que representan colecciones. Las interfaces permiten manipular las colecciones independientemente de los detalles de su representación. En los lenguajes orientados a objetos, las interfases generalmente forman una jerarquía.
+* **Implementaciones**: Estas son las implementaciones concretas de las interfaces de colecciones. En esencia, son estructuras de datos reutilizables.
+* **Algoritmos**: Estos son los métodos que realizan cálculos útiles, como la búsqueda y clasificación, en objetos que implementan interfaces de colección. Se dice que los algoritmos son polimórficos: es decir, que se puede utilizar el mismo método en muchas implementaciones diferentes de la interfaz de colección apropiada. En esencia, los algoritmos son funciones reutilizables.
+
+### The 'Collection' Interface
+
+Una [colección](https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html) representa un grupo de objetos conocidos como sus elementos. La interfaz `'Collection'` se utiliza para transmitir colecciones de objetos en las que se desea la máxima generalidad.
+
+La interfaz `'Collection'` contiene métodos que realizan operaciones básicas como `int size()`, `boolean isEmpty()`, `boolean contains(Object element)`, `boolean add(E element)`, `boolean remove(Object element)`, y `Iterator<E> iterator()`.
+
+También contiene métodos que operan en colecciones enteras como `boolean containsAll(Collection<?> c)`, `boolean addAll(Collection<? extends E> c)`, `boolean removeAll(Collection<?> c)`, `boolean retainAll(Collection<?> c)`, y `void clear()`.
+
+La interfaz `'Collection'` hace lo que cabría esperar, dado que una colección representa un grupo de objetos. Tiene métodos que le dicen cuántos elementos hay en la colección ('size', 'isEmpty'), métodos que comprueban si un objeto dado está en la colección ('contains'), métodos que añaden y eliminan un elemento de la colección ('add', 'remove'), y métodos que proporcionan un iterador sobre la colección ('iterator').
+
+Los métodos `toArray()` y `toArray(T[] a)` se proporcionan como un puente entre colecciones y APIs antiguas que esperan matrices en la entrada. Las operaciones de array permiten traducir el contenido de una colección a un array. La forma sencilla sin argumentos crea una nueva matriz de `Object`. La forma más compleja permite al invocador proporcionar un array o elegir el tipo del array de salida en tiempo de ejecución.
+
+```java
+Object[] a = c.toArray();
+
+String[] a = c.toArray(new String[0]);
+```
+
+Hay tres formas de recorrer las colecciones: utilizando operaciones agregadas, con la construcción `for-each` y utilizando iteradores.
+
+En JDK 8 y versiones posteriores, el método preferido para iterar sobre una colección es obtener un flujo y realizar [operaciones agregadas](https://docs.oracle.com/javase/tutorial/collections/streams/index.html) en él. Las operaciones agregadas a menudo se usan junto con las expresiones lambda para hacer que la programación sea más expresiva, utilizando menos líneas de código.
+
+```java
+myShapesCollection.stream()
+.filter(e -> e.getColor() == Color.RED)
+.forEach(e -> System.out.println(e.getName()));
+
+// parallel stream if the collection is large enough
+myShapesCollection.parallelStream()
+.filter(e -> e.getColor() == Color.RED)
+.forEach(e -> System.out.println(e.getName()));
+
+String joined = elements.stream()
+.map(Object::toString)
+.collect(Collectors.joining(", "));
+```
+
+La construcción `for-each` permite recorrer de forma concisa, es decir, de uno en uno, una colección o array utilizando un bucle `for`:
+
+```java
+for (Object o : collection)
+    System.out.println(o);
+```
+
+Un `Iterator` es un objeto que permite recorrer una colección y eliminar elementos de la colección de forma selectiva, si se desea. Se obtiene un `iterator` para una colección llamando a su método `iterator()`.
+
+La interfaz `Iterator` tiene esta forma:
+
+```java
+public interface Iterator<E> {
+    boolean hasNext();
+    E next();
+    void remove(); //optional
+}
+```
+
+El método `hasNext()` devuelve `true` si hay más elementos y el método `next()` devuelve el siguiente elemento. El método `remove()` elimina el último elemento devuelto por el método `next()`. Por tanto sólo puede ser invocado **una vez** por cada llamada a `next()`. Incumplir la regla lanza una excepción.
+
+Por tanto es recomendable usar iteradores en vez de una construcción `for-each` cuando tengamos que eliminar el elemento actual.
+
+```java
+static void filter(Collection<?> c) {
+    for (Iterator<?> it = c.iterator(); it.hasNext(); ) {
+        if (!cond(it.next())) {
+            it.remove();
+        }
+    }
+}
+```
+
+### The 'Set' Interface
+
+Un [`Set`](https://docs.oracle.com/javase/8/docs/api/java/util/Set.html) o conjunto es una colección que **no puede contener elementos duplicados**. Modela la abstracción del conjunto matemático. La interfaz `Set` sólo contiene métodos heredados de `Collection` y añade la restricción de que los elementos duplicados están prohibidos.
+
+La interfaz `Set` también añade un contrato más fuerte sobre el comportamiento de las operaciones `equals` y `hashCode`, permitiendo que las instancias de `Set` sean comparadas de forma significativa incluso si sus tipos de implementación difieren. Dos instancias de `Set` son iguales si contienen los mismos elementos.
+
+La plataforma Java contiene tres implementaciones de `Set` de propósito general:
+
+* **HashSet** que almacena sus elementos en una tabla hash, es la mejor implementación; sin embargo, no ofrece garantías en cuanto al orden de iteración.
+* **TreeSet** que almacena sus elementos en un árbol _'red-black'_, ordena sus elementos en función de sus valores; es sustancialmente más lento que **HashSet**.
+* **LinkedHashSet**: que se implementa como una tabla hash con una lista enlazada que la recorre, ordena sus elementos según el orden en que se insertaron en el conjunto (orden de inserción). Tiene un coste algo más elevado que un **HashSet** pero soluciona el problema del orden.
+
+La interfaz `Set` tiene una subinterface [`SortedSet`](https://docs.oracle.com/javase/8/docs/api/java/util/SortedSet.html), que es un `Set` que mantiene sus elementos en orden ascendente, ordenados de acuerdo al orden natural de los elementos o de acuerdo a un `Comparator` proporcionado a la hora de creación del `SortedSet`.
+
+### The 'List' Interface
+
+Una [`List`](https://docs.oracle.com/javase/8/docs/api/java/util/List.html) es una **colección ordenada que pueden contener elementos duplicados** (a veces llamada secuencia). Además de las operaciones heredadas de `Collection`, la interfaz `List` incluye operaciones para lo siguiente:
+
+* **Acceso por posición** para manipular los elementos de la lista. Esto incluye métodos como `get`, `set`, `add`, `addAll` y `remove`.
+* **Búsqueda** de elementos específicos dentro de la lista y la devolución de su posición numérica dentro de ella. Métodos como `indexOf` y `lastIndexOf`.
+* Extensión de la **iteración** para obtener ventaja de la naturaleza secuencial de las listas con `listIterator`.
+* Operaciones arbitrarias en secciones de la lista con el método `subList`.
+
+La plataforma Java contiene dos implementaciones de `List` de propósito general:
+
+* **ArrayList**, que suele ser la implementación con mejor rendimiento.
+* **LinkedList**, que ofrece un mejor rendimiento en determinadas circunstancias.
+
+### The 'Queue' Interface
+
+Una [`Queue`](https://docs.oracle.com/javase/8/docs/api/java/util/Queue.html) o cola es una colección que contiene elementos antes de ser procesados. Además de las operaciones básicas de una `Collection`, las colas proporcionan operaciones adicionales de inserción, extracción e inspección.
+
+Una **LinkedList** implementa la interfaz `Queue`. La clase ['PriorityQueue'](https://docs.oracle.com/javase/8/docs/api/java/util/PriorityQueue.html) es una cola de prioridad basada en la estructura de pila de datos. Esta cola ordena los elementos según el orden especificado en el momento de la construcción, que puede ser el orden natural de los elementos o el orden impuesto por un comparador explícito.
+
+```java
+public interface Queue<E> extends Collection<E> {
+    E element();
+    boolean offer(E e);
+    E peek();
+    E poll();
+    E remove();
+}
+```
+
+Cada método de `Queue` existe en dos formas: una forma lanza una **excepción** si la operación falla, y la otra forma devuelve un valor **especial** si la operación falla (ya sea nulo o falso, dependiendo de la operación):
+
+| Operación | Lanza excepción | Nulo o false |
+|-----------|:---------------:|:------------:|
+| Insert    | `add(e)`        | `offer(e)`   |
+| Remove    | `remove()`      | `poll()`     |
+| Examine   | `element()`     | `peek()`     |
+
+Las colas ordenan típicamente, aunque no necesariamente, los elementos de una manera **FIFO** (first-in-first-out). Entre las excepciones se encuentran las colas de prioridad, que ordenan los elementos según sus valores.
+
+Cualquiera que sea el orden que se utilice, la cabeza de la `Queue` es el elemento que sería eliminado por una llamada a `remove()` o `poll()`. En una cola FIFO, todos los elementos nuevos se insertan en la cola de la cola. Otros tipos de colas pueden utilizar reglas de colocación diferentes. Cada implementación de cola debe especificar sus propiedades de ordenación.
+
+Es posible que una implementación de `Queue` restrinja el número de elementos que contiene; tales colas se conocen como *__bounded__*.
+
+El método `add()`, que `Queue` hereda de `Collection`, inserta un elemento a menos que viole las restricciones de capacidad de la cola, en cuyo caso lanza `IllegalStateException`. El método `offer()`, que se utiliza únicamente en colas limitadas (_'bounded'_), difiere de `add()` solo en que devuelve `false` si no se inserta el elemento.
+
+Los métodos `remove()` y `poll()` eliminan y devuelven la cabecera o _'head'_ de la cola. Los métodos `remove()` y `poll()` difieren en su comportamiento sólo cuando la cola está vacía. En estas circunstancias, `remove()` lanza `NoSuchElementException`, mientras que `poll()` devuelve nulo.
+
+Los métodos `element()` y `peek()` devuelven, pero no eliminan, la cabecera de la cola.
+
+### The 'Deque' Interface
+
+Una [`Deque`](https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html) es una cola de dos extremos. Este tipo de cola es una colección lineal de elementos que soporta la inserción y extracción de elementos en **ambos extremos**.
+
+La interfaz `Deque` es un tipo de datos abstractos más rico que `Stack` y `Queue` porque implementa tanto stacks como colas al mismo tiempo. Clases predefinidas como ['ArrayDeque'](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayDeque.html) y ['LinkedList'](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html) implementan la interfaz `Deque`.
+
+La interfaz `Deque` define métodos para acceder a los elementos en ambos extremos de la instancia. Se proporcionan métodos para insertar, quitar y examinar los elementos. Tendremos métodos que lancen una excepción o devuelvan el valor nulo.
+
+| Operación           |  First Element  |  Last Element  |
+|---------------------|:---------------:|:--------------:|
+| Insert (Exception)  | `addFirst(e)`   | `addLast(e)`   |
+| Insert (boolean)    | `offerFirst(e)` | `offerLast(e)` |
+| Remove (Exception)  | `removeFirst()` | `removeLast()` |
+| Remove (null)       | `pollFirst()`   | `pollLast()`   |
+| Examine (Exception) | `getFirst()`    | `getLast()`    |
+| Examine (null)      | `peekFirst()`   | `peekLast()`   |
+
+### The 'Map' Interface
+
+Un [`Map`](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html) es un objeto que asigna claves a valores. Un mapa **no puede contener claves duplicadas**. Cada clave puede asignarse a un valor como máximo. Modela la abstracción de la función matemática.
+
+La plataforma Java contiene tres implementaciones de `Map` de propósito general y cuyo comportamiento y rendimiento son análogos a las implementaciones de la interfaz `Set` como son **HashSet**, **TreeSet** y **LinkedHashSet**:
+
+* **HashMap** que almacena sus elementos en una tabla _hash_, es la mejor implementación; sin embargo, no ofrece garantías en cuanto al orden de iteración.
+* **TreeMap** que almacena sus elementos en un árbol _'red-black'_, ordena sus elementos en función de sus valores; es sustancialmente más lento que **HashMap**.
+* **LinkedHashMap**: que se implementa como una tabla _hash_ con una lista enlazada que la recorre, ordena sus elementos según el orden en que se insertaron en el mapa (orden de inserción). Tiene un coste algo más elevado que un **HashMap** pero soluciona el problema del orden.
+
+La interfaz `Map` tiene una subinterface [`SortedMap`](https://docs.oracle.com/javase/8/docs/api/java/util/SortedMap.html), que es un `Map` que mantiene sus elementos en orden ascendente, ordenados de acuerdo al orden natural de las claves o de acuerdo a un `Comparator` proporcionado a la hora de creación del `SortedMap`.
 
 ## Pruebas unitarias con JUnit
 
