@@ -614,7 +614,7 @@ Si usamos la anotación `'@Override'` en un método le estamos indicando al comp
 
 ```java
 class Vehicle {
-    void show() {}
+  void show() {}
 }
 
 class Car extends Vehicle {
@@ -623,20 +623,20 @@ class Car extends Vehicle {
 }
 
 class Motocycle extends Vehicle {
-    @Override
-    void show() {
-        super.show(); // Podemos invocar al método 'show()' de la superclase
-    }
+  @Override
+  void show() {
+    super.show(); // Podemos invocar al método 'show()' de la superclase
+  }
 }
 
 public class Sample {
-    public static void main(String ... args) {
-        Vehicle vehicle1 = new Car();
-        Vehicle vehicle2 = new Motocycle();
-        vehicle1.show(); // El compilador invoca el método 'show()' de 'Car'
-        vehicle2.show(); // El compilador invoca el método 'show()' de 'Motocycle'
+  public static void main(String ... args) {
+    Vehicle vehicle1 = new Car();
+    Vehicle vehicle2 = new Motocycle();
+    vehicle1.show(); // El compilador invoca el método 'show()' de 'Car'
+    vehicle2.show(); // El compilador invoca el método 'show()' de 'Motocycle'
 
-    }
+  }
 }
 ```
 
@@ -650,12 +650,12 @@ Una clase definida como `'abstract'` puede tener variables y métodos normales c
 
 ```java
 abstract class Vehicle {
-    void show();
+  void show();
 }
 
 class Car extends Vehicle {
-    @Override
-    void show() {}
+  @Override
+  void show() {}
 }
 ```
 
@@ -671,19 +671,19 @@ Una variable miembro con el modificador `'final'` es como una constante ya que e
 final class Vehicle {}
 
 class SuperCar {
-    final int MIN_POWER = 545; // Este valor no cambia mientras dure el programa
+  final int MIN_POWER = 545; // Este valor no cambia mientras dure el programa
 
-    void show() {}
-    final void price() {}
+  void show() {}
+  final void price() {}
 }
 
 // class Moto extends Vehicle {} // Una clase final no puede ser heredada
 
 class Car extends SuperCar {
-    @Override
-    void show() {} // Correcto
+  @Override
+  void show() {} // Correcto
 
-    void price() {} // Incorrecto. No se puede sobreescribir un método 'final'
+  void price() {} // Incorrecto. No se puede sobreescribir un método 'final'
 }
 ```
 
@@ -737,24 +737,30 @@ public interface Car {} //  interfaz 'public' y en un fichero con el nombre 'Car
 
 Las interfaces son sintácticamente similares a las clases abstractas con la diferencia que **en una interfaz todos los métodos carecen de cuerpo**. Una clase puede implementar todas las interfaces que desee pero tiene que implementar todos los métodos descritos en la interfaz. Por tanto, el código que conozca la interfaz puede usar objetos de cualquier clase que implemente dicha interfaz. Si una clase no implementa todos los métodos de una interfaz deberá declarase como `'abstract'`.
 
-Antes de JDK 8 una interfaz no podía definir ninguna implementación pero a partir de JDK 8 se puede añadir una implementación predeterminada a un método de interfaz. Un método predeterminado se precede con la palabra clave `'default'`. Ahora también admite métodos estáticos y, a partir de JDK 9, una interfaz puede incluir métodos `'private'`.
+Antes de JDK 8 una interfaz no podía definir ninguna implementación pero a partir de JDK 8 se puede añadir una implementación predeterminada a un método de interfaz. La clase o clases que implementen la interfaz podrán **definir su propia implementación o usar la predeterminada**. Un método predeterminado se precede con la palabra clave `'default'`. Ahora también admite métodos estáticos y, a partir de JDK 9, una interfaz puede incluir métodos `'private'`.
 
 Una interfaz puede ser `'public'` (y en un fichero del mismo nombre) o `'default'` (sin modificador). Los métodos son implícitamente `'public'` y las variables declaradas en un interfaz no son variables de instancia, sino que son `'public'`, `'final'` y `'static'` y deben inicializarse. Por tanto son constantes.
 
+Cuando una clase implementa varias interfaces, éstas se separan mediante comas. En caso de que una clase implemente una interfaz y que herede de una clase primero se coloca `'extends'` y luego `'implements'` como por ejemplo `class Car extends Superclass implements Vehicle {}`
+
+**Importante**: como hemos dicho en una interfaz los métodos son implícitamente `'public'`. Cuando una clase implementa dicha interfaz y codifica los métodos de la interfaz, si no indica visibilidad los miembros de la clase son `'default'` de forma implícita, lo cual genera un error ya que `'default'` es más restrictivo que `'public'`. Por tanto, **tenemos que indicar explícitamente como `'public'` los métodos implementados en la clase**.
+
 ```java
 (public) interface Vehicle {
-    public static final String UNITS = "Km/h";
+  public static final String UNITS = "Km/h";
 
-    void getWheels(); // Método implícitamente 'public' que será codificado por la clase o clases que implementan la interfaz
+  // Método implícitamente 'public' que será codificado por la clase o clases que implementan la interfaz
+  void getWheels();
 
-    (public) default boolean start() { // Método con una implementación por defecto. La clase o clases podrán definir su propia implementación o usar la predeterminada
-        return true;
-    }
+  // Método con una implementación por defecto.
+  (public) default boolean start() {
+    return true;
+  }
 }
 
 // Si una clase implementa varias interfaces, estas se separan mediante comas.
-class Car extends Superclass implements Vehicle { // Clase que implementa la interfaz. Primero se coloca 'extends' y luego 'implements'.
-    public void getWheels() {} // Es necesario indicar 'public' ya que si no indicamos un modificador en un miembro de una clase este es 'default' que es más restrictivo que 'public' y eso no está permitido ya que un método de una interfaz es implícitamente 'public'
+class Car extends Superclass implements Vehicle {
+    public void getWheels() {} // Es necesario indicar 'public' o se genera un error.
 }
 
 class Sample {
@@ -769,16 +775,16 @@ Una interfaz puede heredar a otra interfaz por medio de la palabra reservada `'e
 
 ```java
 interface Vehicle {
-    int getWheels();
+  int getWheels();
 }
 
 interface Car extends Vehicle {
-    int getPassengers();
+  int getPassengers();
 }
 
 class MyCar implements Car {
-    public int getWheels() { return 4; } // se implementan los métodos de ambas interfaces
-    public int getPassengers() { return 5; }
+  public int getWheels() { return 4; } // se implementan los métodos de ambas interfaces
+  public int getPassengers() { return 5; }
 }
 ```
 
@@ -790,13 +796,13 @@ JDK 8 añade a las interfaces la capacidad de tener uno o varios métodos estát
 
 ```java
 interface Vehicle {
-    static void start() { System.out.println("Starting..."); }
+  static void start() { System.out.println("Starting..."); }
 }
 
 public class Sample {
-    public static void main (String ... args) {
-        Vehicle.start();
-    }
+  public static void main (String ... args) {
+    Vehicle.start();
+  }
 }
 ```
 
@@ -820,72 +826,70 @@ Las excepciones se tratan en un bloque `'try-catch-finally'` (`'finally'` es opc
 
 ```java
 try {
-    // bloque de código que puede lanzar la excepción
+  // bloque de código que puede lanzar la excepción
 }
 catch (TipoException exception) {
-    // controlador para TipoException
+  // controlador para TipoException
 }
 catch (Tipo2Exception exception) {
-    // controlador para Tipo2Exception
+  // controlador para Tipo2Exception
 }
-catch (Exception exception) { // Captura del resto de excepciones no capturadas anteriormente ya que se capturan en orden
-    // controlador para el resto de excepciones
+catch (Exception exception) { // Captura del resto de excepciones no capturadas anteriormente
+  // controlador para el resto de excepciones
 }
 finally {
-    // Código que se ejecutará siempre, tanto si se produce una excepción como si no se produce.
+  // Código que se ejecutará siempre, tanto si se produce una excepción como si no se produce.
 }
 ```
 
-Si un método genera una excepción que no se va a controlar, debemos declarar dicha excepción en una cláusula `'throws'`. Una vez hecho esta excepción deberá ser capturada en un bloque `'try-catch'` superior o por la JVM:
+Si un método genera una excepción que no se va a controlar, debemos declarar dicha excepción en una cláusula `'throws'`. Con esta cláusula podemos 'relanzar' tanto execpciones de Java como excepciones personalizadas. Una vez hecho esta excepción deberá ser capturada en un bloque `'try-catch'` superior o por la JVM:
 
 ```java
-int divide(int a, int b) throws ArithmeticException, MyException { // Con 'throws' relanzamos tanto excepciones de Java como excepciones propias
-    if(b == 0) {
-        throw new ArithmeticException();
-    } else {
-        throw new MyExcpetion("Message");
-    }
+int divide(int a, int b) throws ArithmeticException, MyException {
+  if(b == 0) {
+    throw new ArithmeticException();
+  } else {
+    throw new MyExcpetion("Message");
+  }
 }
 
 class MyException extends Exception { }
 ```
 
-En JDK 7 se amplió el mecanismo de excepciones al permite la **captura múltiple**. Con la captura múltiple se permite la captura de dos o más excepciones dentro de la misma cláusula catch. Cada tipo de excepción de la lista se separa con el operdor `'OR'`. Cada parámetro es final de forma implícita.
+En JDK 7 se amplió el mecanismo de excepciones al permite la **captura múltiple**. Con la captura múltiple se permite la captura de dos o más excepciones dentro de la misma cláusula `'catch'`. Cada tipo de excepción de la lista se separa con el operador `'OR'`. Cada parámetro es `'final'` de forma implícita.
 
 ```java
 try {
-    // código
+  // código
 }
 catch (final ArithmeticException | ArrayIndexOutOfBoundsException e) {
-    // Controlador
+  // Controlador
 }
 ```
 
-En JDK 7 se añadió otro mecanismo denominado *__'try-with-resources'__* o **_'try'_ con administración automática de recursos**. Es un tipo de `'try'` que evita situaciones en que un archivo (u otro recurso como bases de datos, etc..) no se libera después de ser necesario. Un *__'try-with-resources'__* de este tipo también puede incluir cláusulas `'catch'` o `'finally'`.
+En JDK 7 se añadió otro mecanismo denominado *__'try-with-resources'__* o **`'try'` con administración automática de recursos**. Es un tipo de `'try'` que evita situaciones en que un archivo (u otro recurso como bases de datos, etc..) no se libera después de ser necesario. Un *__'try-with-resources'__* de este tipo también puede incluir cláusulas `'catch'` o `'finally'`.
 
 Los recursos que se pueden emplear con este tipo de *__'try-with-resources'__* son recursos que implementen la interfaz `'AutoCloseable'` que a su vez hereda de `'Closeable'`. La interfaz `'AutoCloseable'` define el método `'close()'`. Además, el recurso declarado en la instrucción `'try'` es **'final'** de forma implícita, de forma que no puede ser asignado ni modificado una vez creado y su ámbito se limita al propio `'try'`.
 
 ```java
-// El siguiente código usa un 'try con recursos' para abrir un archivo y
-// después cerrarlo automáticamente al salir del bloque 'try' (ya no es necesario invocar a 'close()')
-try(FileInputStream fin = New FileInputStream(args[0])) { // 'try con recursos'
-    // código
+/* El siguiente código usa un 'try con recursos' para abrir un archivo y después cerrarlo automáticamente al salir del bloque 'try' (ya no es necesario invocar a 'close()') */
+try(FileInputStream fin = New FileInputStream(args[0])) {
+  // código
 }
 catch (IOException e) {
-    // Controlador
+  // Controlador
 }
 ```
 
-Se pueden gestionar más de un recurso que estarán separados por un ';':
+Se pueden gestionar más de un recurso que estarán separados por un punto y coma ';':
 
 ```java
-// El siguiente código usa un 'try-with-resources' para abrir un archivo y
-// después cerrarlo automáticamente al salir del bloque 'try' (ya no es necesario invocar a 'close()')
-try(FileInputStream fin = New FileInputStream(args[0]); FileOutputStream fout = New FileOutputStream(args[1])) { // 'try-with-resources' múltiples
-    // código
+/* El siguiente código usa un 'try-with-resources' para abrir un archivo y después cerrarlo automáticamente al salir del bloque 'try' (ya no es necesario invocar a 'close()') */
+try(FileInputStream fin = New FileInputStream(args[0]); FileOutputStream fout = New FileOutputStream(args[1])) {
+  // código
 }
 catch (IOException e) {
-    // Controlador
+  // Controlador
 }
 ```
 
@@ -893,9 +897,9 @@ catch (IOException e) {
 
 En Java el sistema E/S se define en dos sistemas completos: uno para **E/S de bytes** y otro para **E/S de caracteres**. En el nivel inferior toda la E/S sigue orientada a bytes. La E/S de caracteres es una especialización y una forma más cómoda de trabajar con caracteres.
 
-Los programas en Java realizan la E/S a través de **flujos** (_streams_).
+Los programas en Java realizan la E/S a través de **flujos** (_'streams'_).
 
-Todos los programas de Java importan automáticamente el paquete `'java.lang'` que define la clase `'System'`. Esta clase contiene, entre otros elemenos, tres variables de flujo predefinidos:
+Todos los programas de Java importan automáticamente el paquete `'java.lang'` que define la clase `'System'`. Esta clase contiene, entre otros elementos, tres variables de flujo predefinidos:
 
 * `System.in` - hace referencia al flujo estándar de entrada, que es el teclado.
 * `System.out` - hace referencia al flujo estándar de salida, que es la consola.
@@ -912,7 +916,7 @@ A partir de estas clases se crean subclases concretas con distinta funcionalidad
   * `ByteArrayInputStream` - Flujo de entrada desde una matriz de bytes
   * `DataInputStream` - Flujo de entrada que contiene métodos para leer los tipos de datos estándar de Java
   * `FileInputStream` - Flujo de entrada que lee desde un archivo
-  * `FilterInputStream` - Implementa InputStream
+  * `FilterInputStream` - Implementa 'InputStream'
   * `ObjectInputStream` - Flujo de entrada de objetos
   * `PipedInputStream` - Conducción de entrada
   * `PushbackInputStream` - Flujo de entrada que permite devolver bytes al flujo
@@ -923,7 +927,7 @@ A partir de estas clases se crean subclases concretas con distinta funcionalidad
   * `ByteArrayOutputStream` - Flujo de salida que escribe en una matriz de bytes
   * `DataOutputStream` - Flujo de salida que contiene métodos para escribir los tipos de datos estándar de Java
   * `FileOutputStream` - Flujo de salida que escribe en un archivo
-  * `FilterOutputStream` - Implementa OutputStream
+  * `FilterOutputStream` - Implementa 'OutputStream'
   * `ObjectOutputStream` - Flujo de salida para objetos
   * `PipedOutputStream` - Conducción de salida
   * `PrintStream` - Flujo de salida que contiene `'print()'` y `'println()'`
@@ -2574,3 +2578,133 @@ Como inconvenientes destacar:
   ```java
   List<Complaint> litany = Collections.list(legacyLitany);
   ```
+
+#### Item 2: Consider a builder when faced with many constructor parameters
+
+Las factorías estáticas y los constructores comparten una limitación: no se adaptan bien a un gran número de parámetros opcionales.
+
+Tradicionalmente los programadores han usado el patrón _'telescoping constructor'_ en el cual se provee a la clase de un constructor con los parámetros requeridos, otro constructor con un de los parámetros opcionales, otro con dos y así sucesivamente hasta completar la lista y tener un constructor con todos los opcionales. De esta forma cuando se desea crear una instancia, se utiliza el constructor con la lista de parámetros más corta que contiene todos los parámetros que se desean configurar. Los parámetros que no se utilizan se suele pasar como 0, 'null', etc..
+
+```java
+public class NutritionFacts {
+  private final int servingSize;  // (mL) required
+  private final int servings;     // (per container) required
+  private final int calories;     // (per serving) optional
+  private final int fat;          // (g/serving) optional
+  private final int sodium;       // (mg/serving) optional
+  private final int carbohydrate; // (g/serving) optional
+
+  public NutritionFacts(int servingSize, int servings) {
+    this(servingSize, servings, 0);
+  }
+
+  public NutritionFacts(int servingSize, int servings, int calories) {
+    this(servingSize, servings, calories, 0);
+  }
+
+  public NutritionFacts(int servingSize, int servings, int calories, int fat) {
+    this(servingSize, servings, calories, fat, 0);
+  }
+
+  public NutritionFacts(int servingSize, int servings, int calories, int fat, int sodium) {
+    this(servingSize, servings, calories, fat, sodium, 0);
+  }
+  
+  public NutritionFacts(int servingSize, int servings, int calories, int fat, int sodium, int carbohydrate) {
+    this.servingSize = servingSize;
+    this.servings = servings;
+    this.calories = calories;
+    this.fat = fat;
+    this.sodium = sodium;
+    this.carbohydrate = carbohydrate;
+  }
+}
+```
+
+En resumen, el patrón _'telescoping constructor'_ funciona, pero es difícil escribir código cliente cuando hay muchos parámetros, y aún es más difícil de leer. Además, es propenso a errores ya que cuanto más extensa es la lista de parámetros mayores probabilidades de equivocarse en el orden de los mismos al invocar un constructor. Si los parámetros son del mismo tipo, el compilador no mostrará ningún error.
+
+Otro patrón que permite trabajar con muchos parámetros opcionales en un constructor es el patrón _'JavaBean'_. En este patrón se invoca un constructor sin parámetros para crear un objeto y luego se invocan los metódos `'setters'` de cada parámetro tanto requerido como opcional que sea necesario para construir correctamente el objeto:
+
+```java
+NutritionFacts cocaCola = new NutritionFacts();
+cocaCola.setServingSize(240);
+cocaCola.setServings(8);
+cocaCola.setCalories(100);
+cocaCola.setSodium(35);
+cocaCola.setCarbohydrate(27);
+```
+
+Este patrón es más fácil de leer y mantener pero tiene el inconveniente de que debido a que la construcción se divide en múltiples llamadas, un '_JavaBean'_ puede estar en un estado inconsistente a lo largo de su construcción. La clase no tiene la opción de hacer cumplir la consistencia simplemente comprobando la validez de los parámetros del constructor. Intentar usar un objeto cuando está en un estado inconsistente puede causar fallos que están lejos del código que contiene el fallo y por lo tanto son difíciles de depurar.
+
+Afortunadamente, existe una tercera alternativa que combina la seguridad _'telescoping constructor'_ con la legibilidad del patrón _'JavaBeans'_. Es una forma del patrón *__'Builder'__* incluido en _"Design Patterns: Elements of Reusable Object-Oriented Software"_.
+
+En lugar de hacer el objeto deseado directamente, el cliente llama a un constructor (o fábrica estática) con todos los parámetros requeridos y consigue un objeto **'Builder'**. Luego el cliente llama a los métodos similares a los `'setters'` en el objeto constructor para establecer cada parámetro opcional de interés. Finalmente, el cliente llama a un método `build()` sin parámetros para generar el objeto, que es típicamente inmutable.
+
+```java
+// Builder Pattern
+public class NutritionFacts {
+  private final int servingSize;
+  private final int servings;
+  private final int calories;
+  private final int fat;
+  private final int sodium;
+  private final int carbohydrate;
+  
+  public static class Builder {
+    // Required parameters
+    private final int servingSize;
+    private final int servings;
+    // Optional parameters - initialized to default values
+    private int calories = 0;
+    private int fat = 0;
+    private int sodium = 0;
+    private int carbohydrate = 0;
+
+    public Builder(int servingSize, int servings) {
+      this.servingSize = servingSize;
+      this.servings = servings;
+    }
+
+    public Builder calories(int val) {
+      calories = val;
+      return this;
+    }
+
+    public Builder fat(int val) {
+      fat = val;
+      return this;
+    }
+
+    public Builder sodium(int val) {
+      sodium = val;
+      return this;
+    }
+
+    public Builder carbohydrate(int val) {
+      carbohydrate = val;
+      return this;
+    }
+
+    public NutritionFacts build() {
+      return new NutritionFacts(this);
+    }
+  }
+  
+  private NutritionFacts(Builder builder) {
+    servingSize = builder.servingSize;
+    servings = builder.servings;
+    calories = builder.calories;
+    fat = builder.fat;
+    sodium = builder.sodium;
+    carbohydrate = builder.carbohydrate;
+  }
+}
+```
+
+Este código de cliente es fácil de escribir y, lo que es más importante, fácil de leer. La clase es inmutable, y todos los valores por defecto de los parámetros están en un solo lugar. Los métodos `'set'` del **'Builder'** devuelven al constructor mismo (con `return this`) para que las invocaciones puedan ser encadenadas, resultando en una API fluida:
+
+```java
+NutritionFacts cocaCola = new NutritionFacts.Builder(240, 8).calories(100).sodium(35).carbohydrate(27).build();
+```
+
+El patrón *__'Builder'__* simula los parámetros opcionales con nombre que se encuentran en Python, Kotlin y Scala.
