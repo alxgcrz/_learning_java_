@@ -14,8 +14,11 @@ Para complementar los principios de la programación orientada a objetos, se apl
 
 ## Sintaxis básica
 
->Compilar código Java: `$ javac filename.java`  
->Ejecutar el código: `$ java filename`
+* Compilar código Java: `$ javac filename.java`
+* Ejecutar código: `$ java filename`
+* Start a graphical console to monitor and manage Java applications: `jconsole`
+
+[Tools and Commands Reference](https://docs.oracle.com/en/java/javase/11/tools/tools-and-command-reference.html)
 
 ---
 
@@ -265,9 +268,9 @@ for(int i = 1; i<= 5); sum += i++); // Se usa el bucle for para incrementar la v
 En JDK 5 se añadió los bucles _`for-each`_ que permiten iterar por matrices, clases del pquete 'Collections', etc...
 
 ```java
-/*  
+/*
 for(tipo var-iteración :  collection) {
-    bloque instrucciones;  
+    bloque instrucciones;
 } */
 ```
 
@@ -277,16 +280,16 @@ La estructura _`switch`_ funciona con tipos numéricos simples como `byte`, `sho
 int mes = 3;
 switch (mes){
     case 1:
-            System.out.println("Enero");
-            break;
+        System.out.println("Enero");
+        break;
     case 2:
-            System.out.println("Febrero");
-            break;
+        System.out.println("Febrero");
+        break;
     case 3:
-            System.out.println("Marzo");
-            break;
+        System.out.println("Marzo");
+        break;
     default:
-            break;
+        break;
 }
 ```
 
@@ -482,7 +485,11 @@ Notación para la definición de un método:
 
 >`<public/private/protected> <tipo_de_retorno> <nombre_funcion>(<argumentos>)`
 
-Los **parámetros** aparecen en la definición del método. Cuando un método tiene parámetros la parte de su definición que los especifica se denomina 'lista de parámetros'. La _firma_ de un método se compone del nombre del método y la lista de parámetros. En cambio hablamos de **argumentos** cuando usamos valores concretos para realizar la llamada al método. El valor concreto pasado a un método es el argumento. Dentro del método, la variable que recibe el argumento es el parámetro.
+Los **parámetros** aparecen en la definición del método. Cuando un método tiene parámetros la parte de su definición que los especifica se denomina 'lista de parámetros'.
+
+La _firma_ de un método se compone del **nombre del método y la lista de parámetros**.
+
+Hablamos de **argumentos** cuando usamos valores concretos para realizar la llamada al método. El valor concreto pasado a un método es el argumento. Dentro del método, la variable que recibe el argumento es el parámetro.
 
 ```java
 int sum(int a, int b) { // lista de parámetros del método. Junto con el nombre forman la firma
@@ -492,18 +499,18 @@ int sum(int a, int b) { // lista de parámetros del método. Junto con el nombre
 sum(10, 20); // Llamada al método usando dos argumentos o valores
 ```
 
-Para la devolución de un valor en un método se utiliza la palabra clave _`'return'`_. La sentencia `'return'`  tiene dos formas: una forma sirve para devolver un valor y la otra sirve para salir de un método cuando retorna _`'void'`_.
+Para la devolución de un valor en un método se utiliza la palabra clave _`'return'`_. La sentencia `'return'` tiene dos formas: una forma sirve para devolver un valor y la otra sirve para salir de un método cuando retorna _`'void'`_:
 
 ```java
 int sum(int a, int b) {
-    return a + b;
+  return a + b;
 }
 
 void isEven(int num) {
-    if(num % 2 == 0)
-        return;
-    else
-        System.out.println("Num is odd");
+  if(num % 2 == 0)
+    return;
+  else
+    System.out.println("Num is odd");
 }
 ```
 
@@ -512,6 +519,15 @@ En Java, cuando se pasa como argumento **un tipo primitivo se pasa por valor**, 
 ### Sobrecarga de métodos
 
 La sobrecarga de métodos es una de las técnicas de Java para implementar el **polimorfismo**. En Java, dos o más métodos de la misma clase pueden compartir el mismo nombre siempre y cuando su **_'firma'_ sea diferente**. Por tanto, para sobrecargar un método, basta con declarar métodos con distinta firma. En Java, la firma de un método es el **nombre del método más su lista de parámetros**, sin incluir el tipo devuelto. Por tanto, la sobrecarga de métodos son métodos con el mismo nombre pero distinta lista de parámetros, sin tener en cuenta el tipo de devolución.
+
+Por ejemplo, en la clase `'java.lang.Math'` se utiliza la sobrecarga de métodos para disponer de varios métodos que realizan la misma operación sobre tipos diferentes:
+
+```java
+public static double abs(double a)
+public static float abs(float a)
+public static long abs(long a)
+public static int abs(int a)
+```
 
 ### Argumentos de longitud variable: `'varargs'`
 
@@ -541,13 +557,14 @@ Cuando una clase requiere de cierta inicialización antes de que pueda crear obj
 
 ```java
 class staticBlock {
-    static int a;
-    static int b;
+  static int a;
+  static int b;
 
-    static { // Este bloque se ejecuta al cargar la clase por primera vez y antes que cualquier otro método 'static'
-        a = 5;
-        b = 10;
-    }
+  // Este bloque se ejecuta al cargar la clase por primera vez y antes que cualquier otro método 'static'
+  static {
+    a = 5;
+    b = 10;
+  }
 }
 ```
 
@@ -2466,5 +2483,94 @@ Otra característica que permite la compatibilidad con código legado es el uso 
 
 ### License
 
-[![Licencia de Creative Commons](https://i.creativecommons.org/l/by-sa/4.0/80x15.png)](http://creativecommons.org/licenses/by-sa/4.0/)  
+[![Licencia de Creative Commons](https://i.creativecommons.org/l/by-sa/4.0/80x15.png)](http://creativecommons.org/licenses/by-sa/4.0/)
 Esta obra está bajo una [licencia de Creative Commons Reconocimiento-Compartir Igual 4.0 Internacional](http://creativecommons.org/licenses/by-sa/4.0/).
+
+## ANEXO: Effective Java
+
+(todo)
+
+### Creating and Destroying Objects
+
+Este capítulo trata de la creación y destrucción de objetos: cuándo y cómo crearlos, cuándo y cómo evitar su creación, cómo asegurar que se destruyan a tiempo y cómo gestionar cualquier acción de limpieza que deba preceder a su destrucción.
+
+#### Item 1: Consider static factory methods instead of constructors
+
+La forma tradicional de que una clase permita a un cliente obtener una instancia es proporcionar un constructor público. Pero hay otra técnica y es proveer un _'static factory method'_ público que es un **simple método estático que retorna una instancia** de la clase.
+
+```java
+// Retorna una instancia de Boolean usando el parámetro de tipo boolean
+public static Boolean valueOf(boolean b) {
+    return b ? Boolean.TRUE : Boolean.FALSE;
+}
+```
+
+Hay que tener en cuenta que _'static factory method'_ no es el mismo que el patrón *__'Factory Method'__* de los patrones de diseño _"Design Patterns: Elements of Reusable Object-Oriented Software"_.
+
+No es incompatible que una clase suministre _'static factory methods'_ además de constructores públicos.
+
+El uso de estos métodos tiene ventajas:
+
+* **Una ventaja de los _'static factory methods'_ es que, a diferencia de los constructores, tienen nombres**. Podemos elegir nombres que sean mucho más descriptivos que los constructores.
+
+* **Una segunda ventaja es que, a diferencia de los constructores, no tienen que crear un nuevo objeto cada vez que se les invoca.** Esto permite clases inmutables que retornen instancias ya creadas, mejorando el rendimiento ya que podemos evitar la creación de nuevos objetos.
+
+* **Una tercera ventaja es que, a diferencia de los constructores, pueden devolver un objeto de cualquier subtipo de su tipo de devolución.** Esto da una gran flexibilidad para elegir la clase del objeto devuelto.
+
+* **Una cuarta ventaja de las fábricas estáticas es que la clase del objeto devuelto puede variar de una llamada a otra en función de los parámetros de entrada.** Se permite cualquier subtipo del tipo de retorno declarado. La clase del objeto devuelto también puede variar de una liberación a otra.
+
+* **Una quinta ventaja de las fábricas estáticas es que la clase del objeto devuelto no necesita existir cuando se escribe la clase que contiene el método.**
+
+Como inconvenientes destacar:
+
+* **La principal limitación de proporcionar sólo métodos estáticos de fábrica es que las clases sin constructores públicos o protegidos no pueden ser heredadas.**
+
+* **Otra limitación es que no es fácil detectar estas factorías en la documentación de la clase.** Esto es debido a como funciona la herramienta de Javadoc. Los constructores aparecen en un lugar destacado a diferencia de los métodos. Normalmente, estos métodos suelen seguir ciertas convenciones:
+
+  * **from**: un método _'type-conversion'_ que toma un parámetro y retorna la correspondiente instancia de ese tipo:
+
+  ```java
+  Date d = Date.from(instant);
+  ```
+
+  * **of**: un método de agregación que toma múltiples parámetros y devuelve una instancia de ese tipo que los incorpora:
+
+  ```java
+  Set<Rank> faceCards = EnumSet.of(JACK, QUEEN, KING);
+  ```
+
+  * **valueOf**: una forma más descriptiva de _'from'_ y _'of'_:
+
+  ```java
+  BigInteger prime = BigInteger.valueOf(Integer.MAX_VALUE);
+  ```
+
+  * **instance** or **getInstance**: retorna una instancia que se describe por sus parámetros (si los hay) pero que no puede decirse que tenga el mismo valor:
+
+  ```java
+  StackWalker luke = StackWalker.getInstance(options);
+  ```
+
+  * **create** or **newInstance**: como el anterior salvo que esta vez de garantiza que en cada llamada se devuelve una nueva instancia
+
+  ```java
+  Object newArray = Array.newInstance(classObject, arrayLen);
+  ```
+
+  * **getType**: como **getInstance**, pero se usa si el método de fábrica está en una clase diferente. _'Type'_ es el tipo de objeto devuelto por el método de fábrica:
+
+  ```java
+  FileStore fs = Files.getFileStore(path);
+  ```
+
+  * **newType** como **newInstance**, pero se usa si el método de fábrica está en una clase diferente. _'Type'_ es el tipo de objeto devuelto por el método de fábrica:
+
+  ```java
+  BufferedReader br = Files.newBufferedReader(path);
+  ```
+
+  * **type** una alternativa concisa a **getType** y **newType**:
+
+  ```java
+  List<Complaint> litany = Collections.list(legacyLitany);
+  ```
