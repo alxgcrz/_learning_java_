@@ -1743,7 +1743,7 @@ Básicamente **una expresión lambda es un método anónimo**. Sin embargo, este
 
 ```java
 interface Sample { // interfaz funcional
-    double getValue(); // método abstracto
+  double getValue(); // método abstracto
 }
 ```
 
@@ -1765,7 +1765,7 @@ Una expresión lambda no se ejecuta por sí misma, sino que forma la **implement
 
 ```java
 interface IFuncional { // interfaz funcional
-    double getValue(); // método abstracto
+  double getValue(); // método abstracto
 }
 
 // Referencia a una interfaz funcional
@@ -2344,7 +2344,7 @@ Otra característica que permite la compatibilidad con código legado es el uso 
 
 ---
 
-## Histórico de las versiones de Java
+## Histórico de versiones
 
 [This JEP is the index of all JDK Enhancement Proposals, known as JEPs.](http://openjdk.java.net/jeps/0)
 
@@ -2473,6 +2473,14 @@ Otra característica que permite la compatibilidad con código legado es el uso 
 * [JEP 328](http://openjdk.java.net/jeps/328): Flight Recorder
 * [JEP 335](http://openjdk.java.net/jeps/3335): Deprecate the Nashorn Javascript Engine
 * JavaFX, Java EE and CORBA modules have been removed from JDK
+
+### Java 12 (19 de Marzo de 2019)
+
+* [Lista completa de características](http://openjdk.java.net/projects/jdk/12/)
+* [JEP 189](http://openjdk.java.net/jeps/189): Shenandoah: A Low-Pause-Time Garbage Collector (Experimental)
+* [JEP 230](http://openjdk.java.net/jeps/230): Microbenchmark Suite
+* [JEP 325](http://openjdk.java.net/jeps/325): Switch Expressions (Preview)
+* [JEP 334](http://openjdk.java.net/jeps/334): JVM Constants API
 
 ## Reference
 
