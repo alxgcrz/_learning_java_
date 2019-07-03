@@ -1,6 +1,6 @@
 # Apuntes - [Java]
 
-Java se basa en la **'Programación Orientada a Objetos (POO)'**. En la década de los 60 nació la programación estructurada impulsada por lenguajes como Pascal o C. Con el aumento de la complejidad de los programas se adoptó un nuevo enfoque como es la programación orientada a objetos.
+Java se basa en la **Programación Orientada a Objetos (POO)**. En la década de los 60 nació la programación estructurada impulsada por lenguajes como Pascal o C. Con el aumento de la complejidad de los programas se adoptó un nuevo enfoque como es la programación orientada a objetos.
 
 Desde un punto de vista general, un programa se puede organizar de dos formas: sobre su código (lo que sucede) y sobre sus datos (lo que se ve afectado). En la programación estructura se organiza sobre el código pero en la programación orientada a objetos el código se estructura alrededor de los datos, definiendo estos datos y las rutinas que permiten actuar sobre los mismos.
 
@@ -23,15 +23,14 @@ Para complementar los principios de la programación orientada a objetos, se apl
 ---
 
 ```java
-// Comentarios de una sóla línea comienzan con //
+// Comentarios de una sóla línea
 
 /*
-Comentarios multilínea lucen así
+Comentarios multilínea
 */
 
 /**
-Comentarios JavaDoc lucen así. Suelen describir la clase o varios atributos
-de una clase.
+* Comentarios JavaDoc lucen así. Suelen describir la clase o varios atributos de una clase.
 */
 
 // Todos los programas importan automáticamente el paquete 'java.lang' que define la clase 'System'
@@ -49,9 +48,9 @@ public class Sample {
         // Usa 'System.out.println' para imprimir líneas
         System.out.println("¡Hola mundo!");
         System.out.println(
-            "Entero (int): " + 10 +
-            " Doble (double): " + 3.14 +
-            " Booleano (boolean): " + true);
+            " Integer (int): " + 10 +
+            " Double (double): " + 3.14 +
+            " Boolean (boolean): " + true);
 
         // Para imprimir sin el salto de línea, usa 'System.out.print'
         System.out.print("Hola ");
@@ -101,7 +100,7 @@ char fooChar = 'A';
 fooChar++; // now fooChar == 'B'
 ```
 
-En Java, un literal es un valor fijo representado en formato legible para los humanos. Por ejemplo, el número 100 es un literal. Los literales también suelen denominarse constantes. De forma predeterminada, los literales enteros son de tipo _`int`_ y los literales de coma flotante son de tipo _`double`_. Los literales de carácter se incluyen entre comillas simples. Java también admite los literales de cadena. Una cadena es un conjunto de caracteres includos entre comillas dobles.
+En Java, un literal es un valor fijo representado en formato legible para los humanos. Por ejemplo, el número 100 es un literal. Los literales también suelen denominarse constantes. De forma predeterminada, los literales enteros son de tipo `int` y los literales de coma flotante son de tipo `double`. Los literales de carácter se incluyen entre comillas simples. Java también admite los literales de cadena. Una cadena es un conjunto de caracteres includos entre comillas dobles.
 
 ```java
 int a = 100;
@@ -134,7 +133,7 @@ int x = 123_456_789;
 int z = 123_456_789.5;
 ```
 
-Se usa la palabra clave _`final`_ para hacer **inmutable** las variables. Por convención el nombre de la variable se declara en mayúsculas:
+Se usa la palabra clave `'final'` para hacer **inmutable** las variables. Por convención el nombre de la variable se declara en mayúsculas:
 
 ```java
 final int HORAS_QUE_TRABAJO_POR_SEMANA = 9001;
@@ -258,14 +257,14 @@ for(<declaración_de_inicio>; <condicional>; <paso>) {
 } */
 ```
 
-En Java, el cuerpo asociado a un bucle _`for`_ o de otro tipo puede estar vacío ya que una instrucción vacía es sintácticamente válida. Puede ser útil en algunos casos:
+En Java, el cuerpo asociado a un bucle `for` o de otro tipo puede estar vacío ya que una instrucción vacía es sintácticamente válida. Puede ser útil en algunos casos:
 
 ```java
 int sum = 0;
-for(int i = 1; i<= 5); sum += i++); // Se usa el bucle for para incrementar la variable sum
+for(int i = 1; i<= 5; sum += i++); // Se usa el bucle for para incrementar la variable sum
 ```
 
-En JDK 5 se añadió los bucles _`for-each`_ que permiten iterar por matrices, clases del pquete 'Collections', etc...
+En JDK 5 se añadió los bucles `for-each` que permiten iterar por matrices, clases del paquete 'Collections', etc...
 
 ```java
 /*
@@ -274,7 +273,7 @@ for(tipo var-iteración :  collection) {
 } */
 ```
 
-La estructura _`switch`_ funciona con tipos numéricos simples como `byte`, `short`, `char` e `int`. También funciona con tipos enumerados, la clase `String` y unas pocas clases especiales que envuelven tipos primitivos: `Character`, `Byte`, `Short` e `Integer`.
+La estructura `switch` funciona con tipos numéricos simples como `byte`, `short`, `char` e `int`. También funciona con tipos enumerados, la clase `String` y unas pocas clases especiales que envuelven tipos primitivos: `Character`, `Byte`, `Short` e `Integer`.
 
 ```java
 int mes = 3;
@@ -295,13 +294,13 @@ switch (mes){
 
 #### Break
 
-Por medio de la instrucción _`break`_ se puede forzar la salida inmediata de un bucle e ignorar el código restante del cuerpo y la prueba condicional. El control del programa se pasa a la siguiente instrucción después del bucle.
+Por medio de la instrucción `break` se puede forzar la salida inmediata de un bucle e ignorar el código restante del cuerpo y la prueba condicional. El control del programa se pasa a la siguiente instrucción después del bucle.
 
 #### Continue
 
-Con la instrucción _`continue`_ se fuerza una iteración del bucle, es decir, se ignora el código comprendido entre esta instrucción y la expresión condicional que controla el bucle.
+Con la instrucción `continue` se fuerza una iteración del bucle, es decir, se ignora el código comprendido entre esta instrucción y la expresión condicional que controla el bucle.
 
-Tanto _`break`_ como _`continue`_ pueden funcionar junto a una etiqueta permitiendo dirigir el control del programa al bloque de código indicado por la etiqueta. Un _`break`_ o _`continue`_ etiquetados se declaran con '`break etiqueta`' y '`continue etiqueta`'. El único requisito es que el bloque de código con la etiqueta debe contener la instrucción _`break`_ o _`continue`_. Es decir, no se puede utilizar un _`break`_ como si fuera una instrucción _'`goto`'_.
+Tanto `break` como `continue` pueden funcionar junto a una etiqueta permitiendo dirigir el control del programa al bloque de código indicado por la etiqueta. Un `break` o `continue` etiquetados se declaran con `'break etiqueta'` y `'continue etiqueta'`. El único requisito es que el bloque de código con la etiqueta debe contener la instrucción `break` o `continue`. Es decir, no se puede utilizar un `break` como si fuera una instrucción `'goto'`.
 
 ```java
 public class Sample{
@@ -326,7 +325,7 @@ public class Sample{
 
 Al definir una clase en un paquete, se añade el nombre de dicho paquete a cada clase, lo que evita colisiones de nombres con otras clases. El paquete debe coincidir con la jerarquía de directorios. Los nombres de paquetes se escriben en minúsculas para evitar conflictos con los nombres de clases o interfaces.
 
-Para definir un paquete se utiliza la palabra clave '`package`':
+Para definir un paquete se utiliza la palabra clave `package`:
 
 ```java
 package paquete1.paquete2....paqueteN;
@@ -369,14 +368,14 @@ Notación para la declaración e inicialización de un array:
 int[] sample = {2015, 2016, 2017};
 ```
 
-Los arrays comienzan su indexación en cero y son mutables:
+Los arrays comienzan su indexación en cero y son **mutables**:
 
 ```java
 sample[1] = 2018;
 System.out.println("Year @ 1: " + sample[1]); // => 2018
 ```
 
-Acceder un elemento dentro de un array (un intento de acceso fuera de los límites del array lanza un _`'ArrayIndexOutOfBoundsException'`_):
+Acceder un elemento dentro de un array (un intento de acceso fuera de los límites del array lanza un `'ArrayIndexOutOfBoundsException'`):
 
 ```java
 System.out.println("Year: " + sample[0]); // => 2015
@@ -446,9 +445,9 @@ class Bicicleta {
 
 Todas las clases tienen al menos un constructor predeterminado ya que Java ofrece automáticamente un constructor que inicializa todas las variables miembro en sus valores predeterminados que son **cero(0), 'null' y 'false'**. Cuando se crea un constructor el predeterminado deja de usarse.
 
-Hay otra forma de _`'this'`_ que permite que un constructor invoque a otro dentro de la misma clase. Cuando se ejecuta `'this(lista-args)'`, el constructor sobrecargado que encaja con la lista de parámetros especificada por _'list-args'_ se **ejecuta primero**. Por tanto no se puede usar `this()` y `super()` al mismo tiempo ya que ambos deben ser la primera instrucción.
+Hay otra forma de `this` que permite que un constructor invoque a otro dentro de la misma clase. Cuando se ejecuta `'this(lista-args)'`, el constructor sobrecargado que encaja con la lista de parámetros especificada por _'list-args'_ se **ejecuta primero**. Por tanto no se puede usar `this()` y `super()` al mismo tiempo ya que ambos deben ser la primera instrucción.
 
-El operador _`'new'`_ asigna dinámicamente, es decir, en tiempo de ejecución, memoria para un objeto y devuelve una referencia al mismo. Esta referencia es, ni más ni menos, que la dirección en memoria del objeto asignado por _`'new'`_, que después se almacena en una variable para poder ser utilizada posteriormente.
+El operador `'new'` asigna dinámicamente, es decir, en tiempo de ejecución, memoria para un objeto y devuelve una referencia al mismo. Esta referencia es, ni más ni menos, que la dirección en memoria del objeto asignado por `'new'`, que después se almacena en una variable para poder ser utilizada posteriormente.
 
 ```java
 Bicicleta bicicleta = new Bicicleta();
