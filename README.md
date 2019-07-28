@@ -2321,9 +2321,9 @@ module nombreMódulo {
 }
 ```
 
-Para especificar la dependencia de un módulo se utiliza la sintaxis `requires NombreMódulo`.
+Para especificar la dependencia de un módulo se utiliza la sintaxis `'requires NombreMódulo'`.
 
-Para exportar un módulo y permitir su uso en otros módulos se utiliza la sintaxis `exports NombrePaquete`. Cuando un módulo exporta un paquete, hace que todos los tipos públicos y protegidos del paquete sean accesibles para otros módulos. Además, los miembros `'public'` y `'protected'` de esos tipos también son accesibles. Cualquier paquete no exportado es sólo para uso interno de su módulo. Por tanto, la visibilidad `'public'` que es la menos restrictiva es únicamente visible dentro de su propio módulo hasta que no se _'exporte'_, lo que hace que sea visible para otros módulos.
+Para exportar un módulo y permitir su uso en otros módulos se utiliza la sintaxis `'exports NombrePaquete'`. Cuando un módulo exporta un paquete, hace que todos los tipos públicos y protegidos del paquete sean accesibles para otros módulos. Además, los miembros `'public'` y `'protected'` de esos tipos también son accesibles. Cualquier paquete no exportado es sólo para uso interno de su módulo. Por tanto, la visibilidad `'public'` que es la menos restrictiva es únicamente visible dentro de su propio módulo hasta que no se _'exporte'_, lo que hace que sea visible para otros módulos.
 
 Tanto `'requires'` como `'exports'` deben estar solo dentro de una declaración de módulo.
 
@@ -2507,7 +2507,7 @@ Este capítulo trata de la creación y destrucción de objetos: cuándo y cómo 
 
 #### Item 1: Consider static factory methods instead of constructors
 
-La forma tradicional de que una clase permita a un cliente obtener una instancia es proporcionar un constructor público. Pero hay otra técnica y es proveer un _'static factory method'_ público que es un **simple método estático que retorna una instancia** de la clase.
+La forma tradicional de que una clase permita a un cliente obtener una instancia es proporcionar un constructor público. Pero hay otra técnica y es proveer un método público _'static factory'_ que es simplemente un **método estático que retorna una instancia** de la clase.
 
 ```java
 // Retorna una instancia de Boolean usando el parámetro de tipo boolean
@@ -2516,7 +2516,7 @@ public static Boolean valueOf(boolean b) {
 }
 ```
 
-Hay que tener en cuenta que _'static factory method'_ no es el mismo que el patrón *__'Factory Method'__* de los patrones de diseño _"Design Patterns: Elements of Reusable Object-Oriented Software"_.
+Hay que tener en cuenta que _'static factory method'_ no es lo mismo que el patrón *__'Factory Method'__* de los patrones de diseño _"Design Patterns: Elements of Reusable Object-Oriented Software"_.
 
 No es incompatible que una clase suministre _'static factory methods'_ además de constructores públicos.
 
@@ -2526,7 +2526,7 @@ El uso de estos métodos tiene ventajas:
 
 * **Una segunda ventaja es que, a diferencia de los constructores, no tienen que crear un nuevo objeto cada vez que se les invoca.** Esto permite clases inmutables que retornen instancias ya creadas, mejorando el rendimiento ya que podemos evitar la creación de nuevos objetos.
 
-* **Una tercera ventaja es que, a diferencia de los constructores, pueden devolver un objeto de cualquier subtipo de su tipo de devolución.** Esto da una gran flexibilidad para elegir la clase del objeto devuelto.
+* **Una tercera ventaja es que, a diferencia de los constructores, estos métodos pueden devolver un objeto de cualquier subtipo de su tipo de devolución.** Esto da una gran flexibilidad para elegir la clase del objeto devuelto.
 
 * **Una cuarta ventaja de las fábricas estáticas es que la clase del objeto devuelto puede variar de una llamada a otra en función de los parámetros de entrada.** Se permite cualquier subtipo del tipo de retorno declarado. La clase del objeto devuelto también puede variar de una liberación a otra.
 
@@ -2590,7 +2590,7 @@ Como inconvenientes destacar:
 
 Las factorías estáticas y los constructores comparten una limitación: no se adaptan bien a un gran número de parámetros opcionales.
 
-Tradicionalmente los programadores han usado el patrón _'telescoping constructor'_ en el cual se provee a la clase de un constructor con los parámetros requeridos, otro constructor con un de los parámetros opcionales, otro con dos y así sucesivamente hasta completar la lista y tener un constructor con todos los opcionales. De esta forma cuando se desea crear una instancia, se utiliza el constructor con la lista de parámetros más corta que contiene todos los parámetros que se desean configurar. Los parámetros que no se utilizan se suele pasar como 0, 'null', etc..
+Tradicionalmente los programadores han usado el patrón _'telescoping constructor'_ en el cual se provee a la clase de un constructor con los parámetros requeridos, otro constructor con uno de los parámetros opcionales, otro con dos y así sucesivamente hasta completar la lista y tener un constructor con todos los opcionales. De esta forma cuando se desea crear una instancia, se utiliza el constructor con la lista de parámetros más corta que contiene todos los parámetros que se desean configurar. Los parámetros que no se utilizan se suele pasar como 0, 'null', etc..
 
 ```java
 public class NutritionFacts {
@@ -2628,7 +2628,7 @@ public class NutritionFacts {
 }
 ```
 
-En resumen, el patrón _'telescoping constructor'_ funciona, pero es difícil escribir código cliente cuando hay muchos parámetros, y aún es más difícil de leer. Además, es propenso a errores ya que cuanto más extensa es la lista de parámetros mayores probabilidades de equivocarse en el orden de los mismos al invocar un constructor. Si los parámetros son del mismo tipo, el compilador no mostrará ningún error.
+En resumen, el patrón _'telescoping constructor'_ funciona, pero es difícil escribir código cliente cuando hay muchos parámetros, y es más difícil de leer. Además, es propenso a errores ya que cuanto más extensa es la lista de parámetros mayores probabilidades de equivocarse en el orden de los mismos al invocar un constructor. Si los parámetros son del mismo tipo, el compilador no mostrará ningún error.
 
 Otro patrón que permite trabajar con muchos parámetros opcionales en un constructor es el patrón _'JavaBean'_. En este patrón se invoca un constructor sin parámetros para crear un objeto y luego se invocan los metódos `'setters'` de cada parámetro tanto requerido como opcional que sea necesario para construir correctamente el objeto:
 
@@ -2708,10 +2708,80 @@ public class NutritionFacts {
 }
 ```
 
-Este código de cliente es fácil de escribir y, lo que es más importante, fácil de leer. La clase es inmutable, y todos los valores por defecto de los parámetros están en un solo lugar. Los métodos `'set'` del **'Builder'** devuelven al constructor mismo (con `return this`) para que las invocaciones puedan ser encadenadas, resultando en una API fluida:
+Este código de cliente es fácil de escribir y, lo que es más importante, fácil de leer. La clase es inmutable, y todos los valores por defecto de los parámetros están en un solo lugar. Los métodos `'set'` del **'Builder'** devuelven al constructor mismo (con `return this`) para que las invocaciones puedan ser encadenadas, resultando en una API fluida. Para detectar parámetros no válidos lo antes posible, podemos verificar la validez de los parámetros en el constructor y los métodos del constructor:
 
 ```java
 NutritionFacts cocaCola = new NutritionFacts.Builder(240, 8).calories(100).sodium(35).carbohydrate(27).build();
 ```
 
-El patrón *__'Builder'__* simula los parámetros opcionales con nombre que se encuentran en Python, Kotlin y Scala.
+El patrón *__'Builder'__* simula los parámetros opcionales con nombre que se encuentran en Python, Kotlin o Scala.
+
+#### Item 3: Enforce the singleton property with a private constructor or an enum type
+
+Una clase *singleton* es simplemente una clase que se instancia exactamente una vez. Los *'singletons'* normalmente representan un objeto sin estado, como una función o un componente del sistema que es intrínsecamente único. Hacer que una clase sea un *'singleton'* puede dificultar la prueba de sus clientes porque es imposible sustituir una implementación simulada por un *'singleton'* a menos que implemente una interfaz que sirva como su tipo.
+
+Hay dos formas comunes de implementar *'singletons'*. Ambos se basan en mantener el constructor privado y exportar un miembro estático público para proporcionar acceso a la única instancia.
+
+En primer lugar, hacer que la variable miembro sea un campo final:
+
+```java
+// Singleton with public final field
+public class Elvis {
+    public static final Elvis INSTANCE = new Elvis();
+    private Elvis() { ... }
+    public void leaveTheBuilding() { ... }
+}
+```
+
+El constructor privado es llamado una única vez para inicializar el campo públic, estático y final `Elvis.instance`. En teoría sólo habrá un único `Elvis` aunque mediante reflexión, un cliente con suficientes privilegios podría invocar al método privado haciéndolo accesible. Para evitar esto, hay que modificar el constructor para que lance una excepción si se intenta crear una segunda instancia.
+
+La principal ventaja del enfoque de campo público es que la API deja claro que la clase es una clase *'singleton'*: el campo estático público es final, por lo que siempre contendrá la misma referencia de objeto. La segunda ventaja es que es más simple.
+
+Una segunda forma es hacer que el miembro público sea un método *'static factory'*:
+
+```java
+// Singleton with static factory
+public class Elvis {
+    private static final Elvis INSTANCE = new Elvis();
+    private Elvis() { ... }
+    public static Elvis getInstance() { return INSTANCE; }
+    public void leaveTheBuilding() { ... }
+}
+```
+
+Todas las llamadas a `Elvis.getInstance()` devuelven la misma referencia de objeto, y nunca se creará ninguna otra instancia de Elvis (con el mismo problema mencionado anteriormente).
+
+Una de las ventajas de este enfoque es que brinda la flexibilidad de cambiar de opinión sobre si la clase es un singleton sin cambiar su API. El método *'static factory'* devuelve la única instancia, pero podría modificarse para devolver, por ejemplo, una instancia separada para cada hilo que lo invoque. Una segunda ventaja es que puede escribir una fábrica de singleton genérica si su aplicación lo requiere.
+
+A menos que una de estas ventajas sea relevante, **el primer enfoque de campo público es preferible al segundo enfoque**.
+
+Una tercera forma de implementar una clase *'singleton'* es declarar una enumeración de un solo elemento. Ese enfoque es parecido al enfoque de campo público sin el inconveniente del problema de la reflexión. Es un enfoque más conciso y directo pero es también un enfoque poco natural. Un tipo de enumeración de un solo elemento es a menudo la mejor manera de implementar un *'singleton'*. Tenga en cuenta que no puede usar este enfoque si su *'singleton'* debe extender una superclase que no sea `Enum`.
+
+#### Item 4: Enforce noninstantiability with a private constructor
+
+Ocasionalmente, querrá escribir una clase que sea solo una agrupación de métodos estáticos y campos estáticos. Estas clases han adquirido una mala reputación debido a que algunas personas abusan de ellas para evitar pensar en términos de objetos, pero tienen usos válidos.
+
+Se pueden utilizar para agrupar métodos relacionados en valores primitivos o arrays como en `java.lang.Math` o `java.util.Arrays`. También se pueden usar para agrupar métodos estáticos, incluidas factorías estáticas, para objetos que implementan alguna interfaz como en `java.util.Collections`. Por último, estas clases se pueden usar para agrupar métodos en una clase final, ya que no se pueden colocar en una subclase.
+
+Tales clases de utilidad no fueron diseñadas para ser instanciadas: una instancia no tendría sentido. Sin embargo, en ausencia de constructores explícitos, el compilador proporciona un constructor público, sin parámetros y predeterminado. Para un usuario, este constructor es indistinguible de cualquier otro.
+
+**Intentar imponer la no instabilidad haciendo que la clase sea abstracta no funciona.** Se podría instanciar una subclase. Además, induce a error al usuario al pensar que la clase fue diseñada para herencia.
+
+Existe, sin embargo, un modismo simple para garantizar la no instanciación. Un constructor predeterminado se genera solo si una clase no contiene constructores explícitos, por lo que se puede hacer que una clase no sea instanciable al incluir un constructor privado:
+
+```java
+// Noninstantiable utility class
+public class UtilityClass {
+    // Suppress default constructor for noninstantiability
+    private UtilityClass() {
+        throw new AssertionError();
+    }
+    // ....
+}
+```
+
+Debido a que el constructor explícito es privado, es inaccesible fuera de la clase. El `AssertionError` no se requiere estrictamente, pero proporciona un mecanismo seguro en caso de que el constructor sea invocado accidentalmente desde dentro de la clase. Garantiza que la clase nunca será instanciada bajo ninguna circunstancia.
+
+Este modismo es ligeramente contrario a la intuición porque el constructor se proporciona expresamente para que no se pueda invocar. Por lo tanto, es aconsejable incluir un comentario, como se mostró en el ejemplo.
+
+Como efecto secundario, este modismo también evita que la clase sea heredada. Todos los constructores deben invocar un constructor de superclase, explícita o implícitamente, y una subclase no tendría un constructor de superclase accesible para invocar.
