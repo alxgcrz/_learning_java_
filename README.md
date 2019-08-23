@@ -2,7 +2,7 @@
 
 Java se basa en la **Programación Orientada a Objetos (POO)**. En la década de los 60 nació la programación estructurada impulsada por lenguajes como Pascal o C. Con el aumento de la complejidad de los programas se adoptó un nuevo enfoque como es la programación orientada a objetos.
 
-Desde un punto de vista general, un programa se puede organizar de dos formas: sobre su código (lo que sucede) y sobre sus datos (lo que se ve afectado). En la programación estructura se organiza sobre el código pero en la programación orientada a objetos el código se estructura alrededor de los datos, definiendo estos datos y las rutinas que permiten actuar sobre los mismos.
+Desde un punto de vista general, un programa se puede organizar de dos formas: sobre su código (lo que sucede) y sobre sus datos (lo que se ve afectado). En la programación estructura se organiza sobre el código pero en la programación orientada a objetos el programa se estructura alrededor de los datos, definiendo estos datos y las rutinas que permiten actuar sobre los mismos.
 
 Para complementar los principios de la programación orientada a objetos, se aplican los conceptos de **encapsulación, herencia y polimorfismo**.
 
@@ -149,11 +149,11 @@ int a = b = c = 100; // el símbolo '=' retorna el valor de su derecha y por tan
 
 En Java, un **identificador** es un nombre asignado a un método, variable u otro elemento definido por el usuario. Pueden tener uno o varios caracteres de longitud.
 
-Los nombres de variable pueden empezar por *__cualquier letra, guión bajo o $__*. El siguiente carácter puede ser *__cualquier letra, dígito, guión bajo o $__*. Por lo tanto no pueden empezar con un dígito ni emplear palabras clave de Java.
+Los nombres de variable pueden empezar por **cualquier letra, guión bajo o $**. El siguiente carácter puede ser **cualquier letra, dígito, guión bajo o $**. Por lo tanto no pueden empezar con un dígito ni emplear palabras clave de Java.
 
-Un bloque de código es un grupo de dos o más instrucciones definidas entre llaves {}. Tras crear un bloque de código se convierte en una unidad lógica que se puede usar como si fuera una instrucción independiente.
+Un bloque de código es un grupo de dos o más instrucciones definidas entre llaves ({}). Tras crear un bloque de código se convierte en una unidad lógica que se puede usar como si fuera una instrucción independiente.
 
-Un bloque de código define un **ámbito**. Las variables definidas en un ámbito o bloque de código no son accesibles fuera de ese ámbito. Cada vez que se accede a un bloque las variables contenidas en ese bloque se inicializan y se destruyen al finalizar el bloque. Además, si se define una variable al inicio de un bloque estará disponible para el código de ese bloque a partir de su definición. Por lo tanto si se define al final no se podrá utilizar.
+Un bloque de código define un **ámbito**. Las variables definidas en un ámbito o bloque de código no son accesibles fuera de ese ámbito. Cada vez que se accede a un bloque las variables contenidas en ese bloque se inicializan y cuando el bloque finaliza se destruyen. Una variable está disponible a partir de su definición. Por lo tanto si se define una variable al final de un bloque no se podrá utilizar (y tampoco tiene sentido).
 
 Los bloques se pueden anidar, de forma que un bloque de código es contenido por otro bloque de código. Desde el bloque interior se pueden acceder a las variables definidas en el bloque exterior pero el exterior no puede acceder a las variables definidas en el bloque interior.
 
@@ -161,21 +161,21 @@ Los bloques se pueden anidar, de forma que un bloque de código es contenido por
 
 ```java
 // La aritmética es directa
-System.out.println("1+2 = " + (1 + 2)); // => 3
-System.out.println("2-1 = " + (2 - 1)); // => 1
-System.out.println("2*1 = " + (2 * 1)); // => 2
-System.out.println("1/2 = " + (1 / 2)); // => 0 (0.5 truncado)
+System.out.println("1 + 2 = " + (1 + 2)); // => 3
+System.out.println("2 - 1 = " + (2 - 1)); // => 1
+System.out.println("2 * 1 = " + (2 * 1)); // => 2
+System.out.println("1 / 2 = " + (1 / 2)); // => 0 (0.5 truncado)
 
 // Módulo
 System.out.println("11%3 = " + (11 % 3)); // => 2
 
 // Operadores de comparación
-System.out.println("3 == 2? " + (3 == 2)); // => false
-System.out.println("3 != 2? " + (3 != 2)); // => true
-System.out.println("3 > 2? " + (3 > 2)); // => true
-System.out.println("3 < 2? " + (3 < 2)); // => false
-System.out.println("2 <= 2? " + (2 <= 2)); // => true
-System.out.println("2 >= 2? " + (2 >= 2)); // => true
+System.out.println("3 == 2 " + (3 == 2)); // => false
+System.out.println("3 != 2 " + (3 != 2)); // => true
+System.out.println("3 > 2 " + (3 > 2)); // => true
+System.out.println("3 < 2 " + (3 < 2)); // => false
+System.out.println("2 <= 2 " + (2 <= 2)); // => true
+System.out.println("2 >= 2 " + (2 >= 2)); // => true
 
 // Asignaciones abreviadas
 int x += 10; // x = x + 10;
@@ -197,14 +197,14 @@ y = --x; // y = 9. Primero se resta y luego se asigna
 
 #### Operadores lógicos
 
-|    A    |    B    |   A\|B  |   A&B   |   A^B   |    !A   |
-| :-----: | :-----: | :-----: | :-----: | :-----: | :-----: |
-|  False  |  False  |  False  |  False  |  False  |  True   |
-|  True   |  False  |  True   |  False  |  True   |  False  |
-|  False  |  True   |  True   |  False  |  True   |  True   |
-|  True   |  True   |  True   |  True   |  False  |  False  |
+|    `A`    |    `B`    |   `A|B`  |   `A&B`   |   `A^B`   |    `!A`   |
+| :-------: | :-------: | :------: | :-------: | :-------: | :-------: |
+|   False   |   False   |   False  |   False   |   False   |   True    |
+|   True    |   False   |   True   |   False   |   True    |   False   |
+|   False   |   True    |   True   |   False   |   True    |   True    |
+|   True    |   True    |   True   |   True    |   False   |   False   |
 
-Los operadores lógicos AND y OR pueden funcionar **en modo cortocircuito (&&) y (||)**. En este modo se evalúa el primer operando y el segundo operando sólo se evalúa cuando es necesario.
+Los operadores lógicos AND y OR pueden funcionar **en modo cortocircuito (&&) y (||)**. En este modo se evalúa el primer operando y si fuera necesario, se evaluaría el segundo.
 
 ### Cadenas
 
@@ -333,7 +333,7 @@ package paquete1.paquete2....paqueteN;
 
 ### Importación estática
 
-Java admite la importación estática, que tiene la forma `'import static'` y al usarla, se puede hacer referencia directamente a miembros estáticos por sus nombres, sin necesidad de calificarlos con el nombre de su clase.
+Java admite la importación de campos estáticos finales (constantes) y de métodos estáticos usando la forma `'import static'`. Al usar este tipo de importación, se puede hacer referencia directamente a miembros estáticos por sus nombres, sin necesidad de calificarlos con el nombre de su clase.
 
 ```java
 import static java.lang.Math.sqrt;
@@ -2491,6 +2491,7 @@ Otra característica que permite la compatibilidad con código legado es el uso 
 * <https://en.wikipedia.org/wiki/Java_version_history>
 * <https://www.adictosaltrabajo.com/2016/11/24/primeros-pasos-con-junit-5/>
 * <http://innovationlabs.softtek.co/testing-unitario>
+* <https://help.semmle.com/wiki/display/JAVA/Java+queries>
 
 ### License
 
