@@ -1574,7 +1574,7 @@ Gen<Integer, Integer> sample1 = new Gen<Integer, Integer>(0, 0);
 
 ### Tipos vinculados (o limitados)
 
-Java ofrece los **'tipos vinculados'** que permite, al especificar un parámetro de tipo, crear un vínculo superior que declare la superclase de la que deben derivarse todos los argumentos de tipo. Es decir permite limitar los parámetros de tipo a únicamente tipos numéricos por ejemplo, evitando que pasemos parámetros de tipo `String`.
+Java ofrece los **'tipos vinculados'** que permite, al especificar un parámetro de tipo, crear un vínculo superior que declare la superclase de la que deben derivarse todos los argumentos de tipo. Por ejemplo, podemos limitar los parámetros de tipo a únicamente tipos numéricos, evitando que pasemos parámetros de tipo `String`.
 
 Para ello usamos la cláusula `extends` al especificar los parámetros de tipo:
 
@@ -1607,7 +1607,7 @@ class Pair<T, V extends T> { // 'V' debe tener el mismo tipo que 'T' o ser una s
 
 Pair<Integer, Integer> x = new Pair<Integer, Integer>(); // Correcto
 Pair<Number, Integer> y = new Pair<Number, Integer>(); // Correcto, Integer es una subclase de Number
-Pair<Integer, String> z = new Pair<Integer, String>(); // INCORRECTO, String no es una subclase de Integer
+Pair<Integer, String> z = new Pair<Integer, String>(); // ¡¡INCORRECTO!!, String no es una subclase de Integer
 ```
 
 ### Argumentos comodín
@@ -1646,10 +1646,12 @@ Los métodos de una clase genérica pueden usar el parámetro del tipo de una cl
 Los parámetros de tipo en un método se declaran antes que el tipo devuelto del método. Los métodos genéricos puede ser estáticos o no estáticos.
 
 ```java
-static <T> void sample( /* lista-params */ ) { /* code... */ }
-<T, V> boolean sample( /* lista-params */ ) { /* code... */ }
-<T, V extends T> int sample(/* lista-params */ ) { /* code... */ }
-static <T extends Comparable<T>, V extends T> boolean sample( /* lista-params */ ) { /* code... */ }
+class Sample {
+    static <T> void sample(T x) { /* code... */ }
+    <T, V> boolean sample(T x, V y) { /* code... */ }
+    <T, V extends T> int sample(T x, V y) { /* code... */ }
+    static <T extends Comparable<T>, V extends T> boolean sample(T x, V y) { /* code... */ }
+}
 ```
 
 Un constructor puede ser genérico aunque su clase no lo sea:
@@ -1687,11 +1689,11 @@ class Sample implements ISample<Double> { // clase no necesariamente genérica q
     // code..
 }
 
-class Sample2<T extends Number> implements ISample2<T> { // Clase con parámetros de tipo vinculados
+class Sample2<T extends Number> implements ISample2<T> { // clase con parámetros de tipo vinculados
     // code...
 }
 
-// class Sample2<T extends Number> implements ISample2<T extends Number> {} // INCORRECTO. No es necesario volver a indicarla en ISample2
+// class Sample2<T extends Number> implements ISample2<T extends Number> {} // ¡¡INCORRECTO!!. No es necesario volver a indicarla en ISample2
 ```
 
 ### Genéricos y código legado
@@ -1745,13 +1747,13 @@ Una restricción importante es que los parámetros de tipo no se pueden utilizar
 ```java
 class Gen<T, V> {
     T ob;
-    static V ob; // Incorrecto, no hay variables estáticas de 'T'
+    static V ob; // ¡¡Incorrecto!!, no hay variables estáticas de 'T'
 
     void sample() {
-        ob = new T(); // Error, no se puede crear instancias de un parámetro de tipo
+        ob = new T(); // ¡¡Error!!, no se puede crear instancias de un parámetro de tipo
     }
 
-    static T sample () {} // Error, no se puede usar un tipo 'T' como tipo de devolución
+    static T sample () {} // ¡¡Error!!, no se puede usar un tipo 'T' como tipo de devolución
 
     static <T> boolean sample () // Correcto
 }
@@ -1765,19 +1767,19 @@ class Gen<T, V> {
 </p>
 <!-- markdownlint-enable MD033 -->
 
-Básicamente **una expresión lambda es un método anónimo**. Sin embargo, este método no se ejecuta por sí solo, sino que se usa para implementar un método definido por una **interfaz funcional**. Las expresiones lambda también suele denominarse clausuras (_'closure'_).
+Básicamente **una expresión lambda es un método anónimo**. Sin embargo, este método no se ejecuta por sí solo, sino que se usa para implementar un método definido por una **interfaz funcional**. Las expresiones lambda también suele denominarse _'closure'_.
 
 **Una interfaz funcional es una interfaz que únicamente contiene un método abstracto**. Por lo tanto, una interfaz funcional suele representar una única acción. Una interfaz funcional puede incluir métodos predeterminados y/o métodos estáticos pero en todos los casos solo puede haber **un solo método abstracto** para que la interfaz sea considerada interfaz funcional. Como los métodos de interfaz no predeterminados y no estáticos son implícitamente abstractos, no es necesario utilizar la palabra clave `abstract`.
 
 ```java
 interface Sample { // interfaz funcional
-  double getValue(); // método abstracto
+  double getValue(); // método ímplícitamente abstracto
 }
 ```
 
 ### Fundamentos
 
-El nuevo operador para las expresiones lambda se denomina **operador lambda** y tiene la forma `->`. Divide la expresión lambda en dos partes: la parte izquierda especifica los parámetros necesarios y la parte derecha contiene el cuerpo de la expresión. Este cuerpo puede estar compuesto por una única expresión o puede ser un bloque de código. Cuando es una única expresión se denomina **lambda de expresión** y cuando es un bloque de código se denomina **lambda de bloque**.
+El nuevo operador para las expresiones lambda se denomina **operador lambda** y tiene la forma de flecha `->`. Divide la expresión lambda en dos partes: la parte izquierda especifica los parámetros necesarios y la parte derecha contiene el cuerpo de la expresión. Este cuerpo puede estar compuesto por una única expresión o puede ser un bloque de código. Cuando es una única expresión se denomina **lambda de expresión** y cuando es un bloque de código se denomina **lambda de bloque**.
 
 ```java
 () -> 98.6;  // Expresión lambda sin parámetros que evalúa un valor constante
@@ -1834,8 +1836,9 @@ En una lambda de bloque podemos declarar variables, utilizar bucles, instruccion
 La interfaz funcional asociada a una expresión (o bloque) lambda puede ser genérica. En este caso, el tipo de destino de la expresión lambda se determina, en parte, por el tipo de argumento o argumentos especificados al declarar la interfaz funcional.
 
 ```java
+// Interfaz funcional usando genéricos
 interface IFuncional<T, V extends T> {
-    boolean areEquals(T a, V b); // Interfaz funcional usando genéricos
+    boolean areEquals(T a, V b); 
 }
 
 IFuncional iSample = (int n, int m) -> n == m; // Expresión lambda usando enteros
@@ -1850,12 +1853,13 @@ strSample.areEquals("cad", "cad");
 Una operación muy habitual es usar las expresiones lambda como argumento de una función.
 
 ```java
-interface IFuncional {
-    boolean areEquals(int a, int b); // Interfaz funcional
+// Interfaz funcional
+interface IFuncional {  
+    boolean areEquals(int a, int b);
 }
 
 class LambdaArgumentDemo {
-    // Método estático que acepta una interfaz funcional de tipo iFuncional como primer parámetro.
+    // Método estático que acepta una interfaz funcional de tipo IFuncional como primer parámetro.
     static boolean operation(IFuncional sample, int a, int b) {
         return sample.areEquals(a, b);
     }
@@ -1881,8 +1885,9 @@ Sin embargo, cuando una expresión lambda usa una variable local desde su ámbit
 **Una variable eficazmente final es aquella cuyo valor no cambia una vez asignada**. No es necesario declararla explícitamente como final.
 
 ```java
+// Interfaz funcional
 interface IFuncional {
-    int func(int a); // Interfaz funcional
+    int func(int a);
 }
 
 class VarCapture {
@@ -1927,9 +1932,9 @@ class LambdaExceptionDemo {
 
 Una referencia de método permite hacer referencia a un método sin ejecutarlo. Al evaluar una referencia de método también se crea una instancia de una interfaz funcional.
 
-El nombre de la clase se separa del método mediante un par de puntos `::`, un nuevo separador añadido a Java en JDK 8:
+El nombre de la clase se separa del método mediante un par de puntos `::`, un nuevo separador añadido a Java en la JDK 8:
 
-* Sintaxis para métodos `static`: `NombreClase::nombreMétodo`
+* Sintaxis para métodos estáticos: `NombreClase::nombreMétodo`
 * Sintaxis para métodos de instancia: `refObj::nombreMétodo`
 
 Si es un método genérico la sintaxis es `NombreClase::<T>nombreMétodo` o `refObj::<T>nombreMétodo`
@@ -2013,7 +2018,7 @@ Java proporciona una serie de **interfaces funcionales predefinidas** preparadas
 * `Predicate<T>` -- Determina si un objeto de tipo 'T' cumple una restricción. Devuelve un valor boolean que indica el resultado. Su método es `test()`.
 
 ```java
-import java.util.function.Predicate; // Importar la interfaz 'predicate'
+import java.util.function.Predicate; // Importar la interfaz 'Predicate'
 
 public class Sample {
     public static void main(String...args) {
