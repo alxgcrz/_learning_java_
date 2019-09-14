@@ -1838,7 +1838,7 @@ La interfaz funcional asociada a una expresión (o bloque) lambda puede ser gen�
 ```java
 // Interfaz funcional usando genéricos
 interface IFuncional<T, V extends T> {
-    boolean areEquals(T a, V b); 
+    boolean areEquals(T a, V b);
 }
 
 IFuncional iSample = (int n, int m) -> n == m; // Expresión lambda usando enteros
