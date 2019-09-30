@@ -2820,3 +2820,58 @@ Debido a que el constructor explícito es privado, es inaccesible fuera de la cl
 Este *'idiom'* es ligeramente contrario a la intuición porque el constructor se proporciona expresamente para que no se pueda invocar. Por lo tanto, es aconsejable incluir un comentario, como se mostró en el ejemplo.
 
 Como efecto secundario, este *'idiom'* también evita que la clase sea heredada. Todos los constructores deben invocar un constructor de superclase, explícita o implícitamente, y una subclase no tendría un constructor de superclase accesible para invocar.
+
+#### Item 5: Prefer dependency injection to hardwiring resources
+
+Muchas clases dependen de recursos subyacentes. Por ejemplo, un corrector ortográfico depende de un diccionario. No es raro ver estas clases implementadas como clases de utilidad estáticas (Item 4):
+
+```java
+// Inappropriate use of static utility - inflexible & untestable!
+public class SpellChecker {
+    private static final Lexicon dictionary = ...;
+    private SpellChecker() {} // Noninstantiable
+    public static boolean isValid(String word) { ... }
+    public static List<String> suggestions(String typo) { ... }
+}
+```
+
+Del mismo modo, no es raro verlos implementados como *singletons* (Item 3):
+
+```java
+// Inappropriate use of singleton - inflexible & untestable!
+public class SpellChecker {
+    private final Lexicon dictionary = ...;
+    private SpellChecker(...) {}
+    public static INSTANCE = new SpellChecker(...);
+    public boolean isValid(String word) { ... }
+    public List<String> suggestions(String typo) { ... }
+}
+```
+
+Ninguno de estos enfoques es satisfactorio porque suponen que sólo será útil utilizar un único diccionario. La realidad es que cada idioma tendrá su propio diccionario. Además, a efectos de pruebas puede ser necesario el uso de un diccionario especial.
+
+Puede intentar que `SpellChecker` admita varios diccionarios haciendo que el campo `dictionary` no sea final y agregando un método para cambiar el diccionario en un corrector ortográfico existente, pero esto sería incómodo, propenso a errores e inviable en una configuración concurrente. **Las clases de utilidad estática y los singletons son inapropiados para las clases cuyo comportamiento está parametrizado por un recurso subyacente**.
+
+Lo que se requiere es la capacidad de admitir varias instancias de la clase (en nuestro ejemplo, `SpellChecker`), cada una de las cuales utilice l recurso deseado por el cliente (en nuestro ejemplo, el diccionario). Un patrón simple que satisface este requisito es **pasar el recurso al constructor al crear una nueva instancia**. Esta es una forma de inyección de dependencia: el diccionario es una dependencia del corrector ortográfico y se inyecta en el corrector ortográfico cuando se crea:
+
+```java
+// Dependency injection provides flexibility and testability
+public class SpellChecker {
+    private final Lexicon dictionary;
+    public SpellChecker(Lexicon dictionary) {
+        this.dictionary = Objects.requireNonNull(dictionary);
+    }
+    public boolean isValid(String word) { ... }
+    public List<String> suggestions(String typo) { ... }
+}
+```
+
+En el ejemplo la clase `SpellChecker` sólo tiene un recurso pero la inyección de dependencias funciona con un número arbitrario de recursos. La inyección de dependencias es igualmente aplicable a constructores, factorías estáticas (Item 1) y *builders* (Item 2).
+
+Aunque la inyección de dependencias mejora en gran medida la flexibilidad y la capacidad de prueba, puede saturar grandes proyectos, que generalmente contienen miles de dependencias. Este desorden puede eliminarse utilizando un framework de inyección de dependencias  como [Dagger](https://dagger.dev/), [Guice](https://github.com/google/guice) o [Spring](https://spring.io/).
+
+En resumen, no utilice una clase de utilidad estática o un *singleton* para implementar una clase que dependa de uno o más recursos subyacentes cuyo comportamiento afecte al de la clase, y no haga que la clase cree estos recursos directamente. En cambio, pase los recursos, o las factorías para crearlos, al constructor (o fábrica estática o *builder*). Esta práctica, conocida como inyección de dependencia, mejorará en gran medida la flexibilidad, la reutilización y la capacidad de prueba de una clase.
+
+#### Item 6: Avoid creating unnecessary objects
+
+(todo)
