@@ -1,8 +1,8 @@
 # Apuntes - [Java]
 
-Java se basa en la **Programación Orientada a Objetos (POO)**. En la década de los 60 nació la programación estructurada impulsada por lenguajes como Pascal o C. Con el aumento de la complejidad de los programas se adoptó un nuevo enfoque como es la programación orientada a objetos.
+Java es un **lenguaje orientado a objetos**. En la década de los 60 nació la programación estructurada impulsada por lenguajes como Pascal o C. Con el aumento de la complejidad de los programas se adoptó un nuevo enfoque como es la programación orientada a objetos o POO.
 
-Desde un punto de vista general, un programa se puede organizar de dos formas: sobre su código (lo que sucede) y sobre sus datos (lo que se ve afectado). En la programación estructura se organiza sobre el código pero en la programación orientada a objetos el programa se estructura alrededor de los datos, definiendo estos datos y las rutinas que permiten actuar sobre los mismos.
+Desde un punto de vista general, un programa se puede organizar de dos formas: sobre su código (lo que sucede) y sobre sus datos (lo que se ve afectado). En la programación estructurada se organiza sobre el código pero en la programación orientada a objetos el programa se estructura alrededor de los datos, definiendo estos datos y las rutinas que permiten actuar sobre los mismos.
 
 Para complementar los principios de la programación orientada a objetos, se aplican los conceptos de **encapsulación, herencia y polimorfismo**.
 
@@ -598,12 +598,6 @@ class staticBlock {
 
 ## Herencia
 
-<!-- markdownlint-disable MD033 -->
-<p align="center">
-    <img style ="float: left;" align="left" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-content-man-colour.svg?sanitize=true" width="auto" height="225px">
-</p>
-<!-- markdownlint-enable MD033 -->
-
 La **herencia** es uno de los tres principios fundamentales de la programación orientada a objetos ya que permite crear clasificaciones jerárquicas.
 
 Se invoca al constructor de la superclase con `super(lista-parámetros)`. Esta instrucción debe ser **siempre la primera instrucción** ejecutada dentro del constructor de la subclase. El constructor de la superclase inicializa la parte de la superclase y el constructor de la subclase la parte de la subclase. En una jerarquía de clases, los constructores se invocan en orden de derivación, de **superclase a subclase**.
@@ -757,12 +751,6 @@ public interface Car {} //  interfaz 'public' y en un fichero con el nombre 'Car
 
 ## Interfaces
 
-<!-- markdownlint-disable MD033 -->
-<p align="center">
-    <img style ="float: left;" align="left" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-notebook-man-colour.svg?sanitize=true" width="auto" height="175px">
-</p>
-<!-- markdownlint-enable MD033 -->
-
 Las interfaces son sintácticamente similares a las clases abstractas con la diferencia que **en una interfaz todos los métodos carecen de cuerpo**. Una clase puede implementar todas las interfaces que desee pero tiene que implementar todos los métodos descritos en la interfaz. Por tanto, el código que conozca la interfaz puede usar objetos de cualquier clase que implemente dicha interfaz. Si una clase no implementa todos los métodos de una interfaz deberá declarase como `abstract`.
 
 Antes de JDK 8 una interfaz no podía definir ninguna implementación pero a partir de JDK 8 se puede añadir una implementación predeterminada a un método de interfaz. La clase o clases que implementen la interfaz podrán **definir su propia implementación o usar la predeterminada**. Un método predeterminado se precede con la palabra clave `default`. Ahora también admite métodos estáticos y, a partir de JDK 9, una interfaz puede incluir métodos `private`.
@@ -837,12 +825,6 @@ public class Sample {
 A partir de JDK 9 una interfaz puede incluir un método `private` que solo puede invocarse mediante un método predeterminado u otro método `private` definido por la misma interfaz. Dado que es `private` este código no puede usarse fuera de la interfaz en la que esté definido.
 
 ## Excepciones
-
-<!-- markdownlint-disable MD033 -->
-<p align="center">
-    <img style ="float: left;" align="left" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-developer-woman-colour.svg?sanitize=true" width="auto" height="175px">
-</p>
-<!-- markdownlint-enable MD033 -->
 
 Una excepción es **un error producido en tiempo de ejecución**. En Java, todas las excepciones se representan por medio de clases. Todas las clases de excepción se derivan de `Throwable`. Esta clase tiene dos subclases directas: `Exception` y `Error`.
 
@@ -1231,12 +1213,6 @@ class FileReaderDemo {
 
 ## Programación de subprocesamiento múltiple
 
-<!-- markdownlint-disable MD033 -->
-<p align="center">
-    <img style ="float: left;" align="left" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-folder-man-colour.svg?sanitize=true" width="auto" height="225px">
-</p>
-<!-- markdownlint-enable MD033 -->
-
 Existen dos tipos de multitarea: la basada en **procesos** y la basada en **subprocesos**.
 
 Un proceso es básicamente un programa que se ejecuta. Por tanto la multitarea basada en procesos permite al equipo ejecutar dos o más programas a la vez. En un entorno multitarea basado en subprocesos, el subproceso es la unidad de código menor que se entrega, lo que significa que un mismo programa puede realizar dos o más tareas al mismo tiempo.
@@ -1404,12 +1380,6 @@ class Sample {
 ```
 
 ## Enumeraciones
-
-<!-- markdownlint-disable MD033 -->
-<p align="center">
-    <img style ="float: left;" align="left" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-support-woman-colour.svg?sanitize=true" width="auto" height="175px">
-</p>
-<!-- markdownlint-enable MD033 -->
 
 Básicamente, una enumeración es una **lista de constantes con nombre** que definen un nuevo tipo de datos. Un objeto de un tipo de enumeración solo puede albergar los valores definidos por la lista. Por tanto, una enumeración le permite definir con precisión un nuevo tipo de datos con un número fijo de valores.
 
@@ -1761,12 +1731,6 @@ class Gen<T, V> {
 
 ## Expresiones lambda
 
-<!-- markdownlint-disable MD033 -->
-<p align="center">
-    <img style ="float: left;" align="left" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-support-man-colour.svg?sanitize=true" width="auto" height="225px">
-</p>
-<!-- markdownlint-enable MD033 -->
-
 Básicamente **una expresión lambda es un método anónimo**. Sin embargo, este método no se ejecuta por sí solo, sino que se usa para implementar un método definido por una **interfaz funcional**. Las expresiones lambda también suele denominarse _'closure'_.
 
 **Una interfaz funcional es una interfaz que únicamente contiene un método abstracto**. Por lo tanto, una interfaz funcional suele representar una única acción. Una interfaz funcional puede incluir métodos predeterminados y/o métodos estáticos pero en todos los casos solo puede haber **un solo método abstracto** para que la interfaz sea considerada interfaz funcional. Como los métodos de interfaz no predeterminados y no estáticos son implícitamente abstractos, no es necesario utilizar la palabra clave `abstract`.
@@ -2030,12 +1994,6 @@ public class Sample {
 ```
 
 ## Collections
-
-<!-- markdownlint-disable MD033 -->
-<p align="center">
-    <img style ="float: left;" align="left" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-folder-woman-colour.svg?sanitize=true" width="auto" height="175px">
-</p>
-<!-- markdownlint-enable MD033 -->
 
 Una **colección** -a veces llamada contenedor- es simplemente un objeto que agrupa múltiples elementos en una sola unidad. Las colecciones se utilizan para almacenar, recuperar, manipular y comunicar datos agregados.
 
@@ -2333,17 +2291,7 @@ class AssertionsTest {
 }
 ```
 
-<!-- markdownlint-disable MD033 -->
-<div class="page"/>
-<!-- markdownlint-enable MD033 -->
-
 ## Módulos
-
-<!-- markdownlint-disable MD033 -->
-<p align="center">
-    <img style ="float: left;" align="left" src="https://raw.githubusercontent.com/alxgcrz/apuntes-java/master/media/drawkit-business-woman-colour.svg?sanitize=true" width="auto" height="175px">
-</p>
-<!-- markdownlint-enable MD033 -->
 
 Con la aparición de JDK 9 se incorporó a Java la característica de los **módulos**. Un módulo es una agrupación de paquetes y recursos a los que se puede hacer referencia conjuntamente a través del nombre del módulo.
 
