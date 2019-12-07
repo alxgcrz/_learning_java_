@@ -1648,19 +1648,19 @@ interface ISample<T> { // interfaz genérica
 }
 
 interface ISample2<T extends Number> { // interfaz genérica con tipos vinculados (limitados) por la superclase 'Number'
-    // code..
+    // ...
 }
 
 class Sample<T> implements ISample<T> { // clase genérica obligada que implementa una interfaz genérica
-    // code..
+    // ...
 }
 
 class Sample implements ISample<Double> { // clase no necesariamente genérica que implementa una interfaz con un tipo concreto
-    // code..
+    // ...
 }
 
 class Sample2<T extends Number> implements ISample2<T> { // clase con parámetros de tipo vinculados
-    // code...
+    // ....
 }
 
 // class Sample2<T extends Number> implements ISample2<T extends Number> {} // ¡¡INCORRECTO!!. No es necesario volver a indicarla en ISample2
@@ -1668,11 +1668,11 @@ class Sample2<T extends Number> implements ISample2<T> { // clase con parámetro
 
 ### Genéricos y código legado
 
-Antes de JDK 5 no existían los genéricos. Por tanto, para asegurar la compatibilidad con código legado Java permite usar una clase génerica sin argumetos de tipo. En estos casos se convierte en un tipo sin procesar.
+Antes de la JDK 5 no existían los genéricos. Por tanto, para asegurar la compatibilidad con código legado Java permite usar una clase génerica sin argumetos de tipo. En estos casos se convierte en un tipo sin procesar.
 
 ```java
 class Gen<T> {
-    // code...
+    // ...
 }
 
 Gen<Integer> iOb = new Gen<Integer>(0); // Objeto 'Gen' para enteros
@@ -1686,7 +1686,7 @@ strOb = legacyOb; // Asignación que no produce error de compilación pero inseg
 
 ### Inferencia de tipos
 
-A partir de JDK 7 es posible reducir la sintaxis a la hora de crear una instancia de un tipo genérico. La creación de instancias solo usa '<>', una lista vacía de argumentos que indica al compilador que infiera los argumentos de tipo que necesita el constructor. Para código compatible con versiones anteriores a JDK 7 se usa la forma completa:
+A partir de la JDK 7 es posible reducir la sintaxis a la hora de crear una instancia de un tipo genérico. Para la creación de una instancia se emplea una lista vacía de argumentos (`<>`) que indica al compilador que infiera los argumentos de tipo que necesita el constructor. En caso de que sea necesario mantener la compatibilidad con código legado se puede emplear la forma completa:
 
 ```java
 class Gent<T, V> {
@@ -1694,7 +1694,7 @@ class Gent<T, V> {
 }
 
 Gen<Integer, Integer> iOb = new Gen<Integer, Integer>(); // Forma completa
-Gen<Integer, Integer> iOb = new Gent<>(); // Sintaxis reducida para JDK 7 y posteriores
+Gen<Integer, Integer> iOb = new Gent<>(); // Sintaxis reducida para la JDK 7 y posteriores
 ```
 
 ### Restricciones y ambigüedad
@@ -1703,27 +1703,25 @@ El uso de genéricos puede crear situaciones de ambigüedad, sobretodo en casos 
 
 ```java
 class Gen<T, V> {
-    // variables de instancia
-
-    // Estos dos métodos se sobrecargan pero dado que T y V pueden ser del mismo tipo, esto generaria dos métodos iguales por lo que el compilador genera un error y este código no compila.
+    // Estos dos métodos se sobrecargan pero dado que T y V pueden ser del mismo tipo, se generarían dos métodos iguales por lo que el compilador genera un error y este código no compila.
     void get(T ob) {}
 
     void get(V ob) {}
 }
 ```
 
-Una restricción importante es que los parámetros de tipo no se pueden utilizar como si fueran tipos normales ni declarar variables estáticas de parámetros de tipo:
+Una restricción importante es que los parámetros de tipo no se pueden utilizar como si fueran tipos normales ni tampoco declarar variables estáticas de parámetros de tipo:
 
 ```java
 class Gen<T, V> {
     T ob;
-    static V ob; // ¡¡Incorrecto!!, no hay variables estáticas de 'T'
+    static V ob; // ¡¡INCORRECTO!!, no hay variables estáticas de 'T'
 
     void sample() {
-        ob = new T(); // ¡¡Error!!, no se puede crear instancias de un parámetro de tipo
+        ob = new T(); // ¡¡INCORRECTO!!, no se puede crear instancias de un parámetro de tipo
     }
 
-    static T sample () {} // ¡¡Error!!, no se puede usar un tipo 'T' como tipo de devolución
+    static T sample () {} // ¡¡INCORRECTO!!, no se puede usar un tipo 'T' como tipo de devolución
 
     static <T> boolean sample () // Correcto
 }
