@@ -1,5 +1,9 @@
 # Apuntes - [Java]
 
+**Proyecto archivado.** Nueva localización en [apuntes-general](https://github.com/alxgcrz/apuntes-general).
+
+----
+
 Java es un **lenguaje orientado a objetos**. En la década de los 60 nació la programación estructurada impulsada por lenguajes como Pascal o C. Con el aumento de la complejidad de los programas se adoptó un nuevo enfoque como es la programación orientada a objetos o POO.
 
 Desde un punto de vista general, un programa se puede organizar de dos formas: sobre su código (lo que sucede) y sobre sus datos (lo que se ve afectado). En la programación estructurada se organiza sobre el código pero en la programación orientada a objetos el programa se estructura alrededor de los datos, definiendo estos datos y las rutinas que permiten actuar sobre los mismos.
@@ -20,7 +24,7 @@ Para complementar los principios de la programación orientada a objetos, se apl
 
 [Tools and Commands Reference](https://docs.oracle.com/en/java/javase/11/tools/tools-and-command-reference.html)
 
----
+----
 
 ```java
 // Comentarios de una sóla línea
@@ -2321,7 +2325,7 @@ Cuando se usa código legado que no forma parte de un módulo nombrado, pasa aut
 
 Otra característica que permite la compatibilidad con código legado es el uso automático de la ruta de clase en vez de la ruta de módulo.
 
----
+----
 
 ## Histórico de versiones
 
