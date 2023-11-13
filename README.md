@@ -1,8 +1,4 @@
-# Apuntes - [Java]
-
-**Proyecto archivado.** Nueva localización en [apuntes-general](https://github.com/alxgcrz/apuntes-general).
-
-----
+# Java
 
 Java es un **lenguaje orientado a objetos**. En la década de los 60 nació la programación estructurada impulsada por lenguajes como Pascal o C. Con el aumento de la complejidad de los programas se adoptó un nuevo enfoque como es la programación orientada a objetos o POO.
 
@@ -16,15 +12,19 @@ Para complementar los principios de la programación orientada a objetos, se apl
 
 * La **herencia** es el proceso mediante el cual un objeto puede adquirir las propiedades de otro. Gracias a la herencia un objeto solo tiene que definir los atributos que lo hacen único dentro de la clase y heredar los atributos generales.
 
+[Java Platform, Standard Edition Documentation](https://docs.oracle.com/en/java/javase/index.html)
+
 ## Sintaxis básica
 
-* Compilar código Java: `$ javac filename.java`
-* Ejecutar código: `$ java filename`
-* Start a graphical console to monitor and manage Java applications: `jconsole`
+```sh
+# Compilar código Java 
+$ javac filename.java
 
-[Tools and Commands Reference](https://docs.oracle.com/en/java/javase/11/tools/tools-and-command-reference.html)
+# Ejecutar código
+$  java filename
+```
 
-----
+---
 
 ```java
 // Comentarios de una sóla línea
@@ -34,17 +34,28 @@ Comentarios multilínea
 */
 
 /**
-* Comentarios JavaDoc lucen así. Suelen describir la clase o varios atributos de una clase.
-*/
+ * Los comentarios JavaDoc suelen describir la clase o varios atributos de una clase.
+ */ 
+public class Sample {
+    // ...
+}
+```
 
-// Todos los programas importan automáticamente el paquete 'java.lang' que define la clase 'System'
+```java
+/* 
+Todos los programas importan automáticamente el paquete 'java.lang' 
+que define la clase 'System'
+*/
 // Importa la clase 'ArrayList' dentro del paquete 'java.util'
 import java.util.ArrayList;
 // Importa todas las clases dentro del paquete 'java.security'
 import java.security.*;
 
-// Para Java un archivo es una unidad de compilación. Pueden contener una o varias clases.
-// Por convención, el nombre de la clase principal (declarada como public) debe coincidir con el nombre del archivo que contiene el programa.
+/* Para Java un archivo es una unidad de compilación. 
+Pueden contener una o varias clases.
+Por convención, el nombre de la clase principal (declarada como public) 
+debe coincidir con el nombre del archivo que contiene el programa.
+*/
 public class Sample {
 
     // Un programa debe tener un método 'main' como punto de entrada
@@ -63,33 +74,41 @@ public class Sample {
 }
 ```
 
-### Tipos & Variables
+### Tipos y variables
 
 Java es _"case sensitive"_ lo que significa que Java distingue entre mayúsculas y minúsculas.
 
-En Java se declara una variable usando `<tipo> <nombre>`. Es necesario declarar la variable antes de poder hacer referencia a ella. A partir de que se declaran se pueden utilizar, y no antes. Por lo general, debe asignar un valor a una variable antes de poder usarla aunque en determinados casos Java puede inicializar el valor de las variables, como por ejemplo en variables de instancia.
+En Java se declara una variable usando `<tipo> <nombre>`. Es necesario declarar la variable antes de poder hacer referencia a ella. Una vez se ha declarado ya se puede utilizar, nunca antes.
+
+Por lo general, debe asignar un valor a una variable antes de poder usarla aunque en determinados casos Java puede inicializar el valor de las variables, como por ejemplo en variables de instancia.
 
 ```java
 // [Tipos primitivos]
 // ------------------
-// [Byte] - Entero complemento a dos con signo de 8-bit (-128 <= byte <= 127)
+// [Byte] - Entero complemento a dos con signo de 8-bit 
+// (-128 <= byte <= 127)
 byte fooByte = 100;
 
-// [Short] - Entero complemento a dos con signo de 16-bit (-32,768 <= short <= 32,767)
+// [Short] - Entero complemento a dos con signo de 16-bit 
+// (-32,768 <= short <= 32,767)
 short fooShort = 10000;
 
-// [Integer] - Entero complemento a dos con signo de 32-bit (-2,147,483,648 <= int <= 2,147,483,647)
+// [Integer] - Entero complemento a dos con signo de 32-bit 
+// (-2,147,483,648 <= int <= 2,147,483,647)
 int fooInt = 1;
 
-// [Long] - Entero complemento a dos con signo de 64-bit (-9,223,372,036,854,775,808 <= long <= 9,223,372,036,854,775,807)
+// [Long] - Entero complemento a dos con signo de 64-bit 
+// (-9,223,372,036,854,775,808 <= long <= 9,223,372,036,854,775,807)
 long fooLong = 100000L;
-// 'L' es usado para denotar que el valor de esta variable es del tipo Long; cualquier cosa sin ella es tratado como un entero por defecto.
+// 'L' es usado para denotar que el valor de esta variable es del tipo Long; 
+// Cualquier literal sin ella es tratado como un entero por defecto.
 
 // Nota: Java no tiene tipos sin signo
 
 // [Float] - Número de coma flotante IEEE 754 de precisión simple de 32-bit
 float fooFloat = 234.5f;
-// 'f 'es usado para denotar que el valor de esta variable es del tipo float; de otra manera es tratado como un double.
+// 'f 'es usado para denotar que el valor de esta variable es del tipo float; 
+// De otra manera es tratado como un double.
 
 // [Double] - Número de coma flotante IEEE 754 de precisión doble de 64-bit
 double fooDouble = 123.4;
@@ -99,18 +118,24 @@ boolean fooBoolean = true;
 boolean barBoolean = false;
 
 // [Char] - Un simple carácter unicode de 16-bit.
-/* Como char es un tipo sin signo de 16 bits, se pueden realizar operaciones aritméticas. Las constantes de carácter se incluyen entre comillas simples. */
+/* Como char es un tipo sin signo de 16 bits, se pueden realizar operaciones 
+aritméticas. Las constantes de carácter se incluyen entre comillas simples. */
 char fooChar = 'A';
 fooChar++; // now fooChar == 'B'
 ```
 
-En Java, un literal es un valor fijo representado en formato legible para los humanos. Por ejemplo, el número 100 es un literal. Los literales también suelen denominarse constantes. De forma predeterminada, los literales enteros son de tipo `int` y los literales de coma flotante son de tipo `double`. Los literales de carácter se incluyen entre comillas simples. Java también admite los literales de cadena. Una cadena es un conjunto de caracteres includos entre comillas dobles.
+En Java, un literal es un valor fijo representado en formato legible para los humanos. Por ejemplo, el número 100 es un literal. Los literales también suelen denominarse constantes.
+
+De forma predeterminada, los literales enteros son de tipo `int` y los literales de coma flotante son de tipo `double`.
+
+Los literales de carácter se incluyen entre comillas simples. Java también admite los literales de cadena. Una cadena es un conjunto de caracteres includos entre comillas dobles.
 
 ```java
 int a = 100;
 long b = 100L;
 double c = 100.5;
 float d = 100.5f;
+char f = 'f';
 String str = "Literal de cadena";
 
 int hexadecimal = 0xFF; // Formato hexadecimal que corresponde a 255 en decimal
@@ -160,6 +185,23 @@ Un bloque de código es un grupo de dos o más instrucciones definidas entre lla
 Un bloque de código define un **ámbito**. Las variables definidas en un ámbito o bloque de código no son accesibles fuera de ese ámbito. Cada vez que se accede a un bloque las variables contenidas en ese bloque se inicializan y cuando el bloque finaliza se destruyen. Una variable está disponible a partir de su definición. Por lo tanto si se define una variable al final de un bloque no se podrá utilizar (y tampoco tiene sentido).
 
 Los bloques se pueden anidar, de forma que un bloque de código es contenido por otro bloque de código. Desde el bloque interior se pueden acceder a las variables definidas en el bloque exterior pero el exterior no puede acceder a las variables definidas en el bloque interior.
+
+```java
+public class Bloques {
+    public static void main(String ... args) {
+        String exterior = "Bloque exterior";
+
+        {
+            String interior = "Bloque interior";
+            System.out.println(interior); // Correcto
+            System.out.println(exterior); // Correcto
+        }
+
+        System.out.println(exterior); // Correcto
+        System.out.printf(interior); // Error ya que 'interior' no es accesible
+    }
+}
+```
 
 ### Operadores
 
@@ -265,10 +307,11 @@ En Java, el cuerpo asociado a un bucle `for` o de otro tipo puede estar vacío y
 
 ```java
 int sum = 0;
-for(int i = 1; i<= 5; sum += i++); // Se usa el bucle for para incrementar la variable sum
+for(int i = 1; i<= 5; sum += i++); 
+// Se usa el bucle for para incrementar la variable sum
 ```
 
-En JDK 5 se añadió los bucles `for-each` que permiten iterar por matrices, clases del paquete 'Collections', etc...
+En la JDK 5 se añadió los bucles `for-each` que permiten iterar por matrices, clases del paquete 'Collections', etc...
 
 ```java
 /*
@@ -304,7 +347,7 @@ Por medio de la instrucción `break` se puede forzar la salida inmediata de un b
 
 Con la instrucción `continue` se fuerza una iteración del bucle, es decir, se ignora el código comprendido entre esta instrucción y la expresión condicional que controla el bucle.
 
-Tanto `break` como `continue` pueden funcionar junto a una etiqueta permitiendo dirigir el control del programa al bloque de código indicado por la etiqueta. Un `break` o `continue` etiquetados se declaran con `break etiqueta` y `continue etiqueta`. El único requisito es que el bloque de código con la etiqueta debe contener la instrucción `break` o `continue`. Es decir, no se puede utilizar un `break` como si fuera una instrucción `goto`.
+Tanto `break` como `continue` pueden funcionar junto a una etiqueta permitiendo dirigir el control del programa al bloque de código indicado por la etiqueta. Un `break` o `continue` etiquetados se declaran con `break {etiqueta}` y `continue {etiqueta}`. El único requisito es que el bloque de código con la etiqueta debe contener la instrucción `break` o `continue`. Es decir, no se puede utilizar un `break` como si fuera una instrucción `goto`.
 
 ```java
 public class Sample{
@@ -381,10 +424,6 @@ System.out.println("Year: " + sample[1]); // => 2018
 
 Acceder un elemento dentro de un array (un intento de acceso fuera de los límites del array lanza un `ArrayIndexOutOfBoundsException`):
 
-```java
-System.out.println("Year: " + sample[0]); // => 2015
-```
-
 Al asignar una referencia de una matriz a otra referencia no se crea una copia de la matriz ni se copian los contenidos. Sólo se crea una referencia a la misma matriz, al igual que sucede con cualquier otro objeto. Por lo tanto, a partir de ambas referencias se accede al **mismo array**:
 
 ```java
@@ -400,38 +439,46 @@ Una definición de clase crea un **nuevo tipo de datos**:
 class Bicicleta {
 
     // Campos o variables de instancia
-    public int ritmo; // Public: Puede ser accedido desde cualquier parte
-    private int velocidad;  // Private: Accesible sólo desde esta clase
-    protected int engranaje; // Protected: Accesible desde esta clases y sus subclases o desde el mismo paquete
-    String nombre; // default: Sólo accesible desde este paquete
+    public String nombre; // Puede ser accedido desde cualquier parte
+    private double precio;  // Accesible sólo desde esta clase
+    protected int velocidad; // Accesible desde esta clase, sus subclases o el mismo paquete
+    int numMarchas; // default: Sólo accesible desde este paquete
 
     // Constructores son la manera de crear clases
     // Este es un constructor por defecto
     public Bicicleta() {
-        engranaje = 1;
-        ritmo = 50;
-        velocidad = 5;
+        numMarchas = 18;
+        precio = 2495.99;
+        velocidad = 45;
         nombre = "Bontrager";
     }
 
     // Este es un constructor específico (contiene argumentos)
-    public Bicicleta(int ritmoInicial, int velocidadInicial, int engranajeInicial, String nombre) {
-        this(); // llamada al constructor sin parámetros 'Bicicleta()';
-        this.engranaje = engranajeInicial;
-        this.ritmo = ritmoInicial;
-        this.velocidad = velocidadInicial;
+    public Bicicleta(String nombre) {
+        super(); // llamada al constructor sin parámetros 'Bicicleta()';
         this.nombre = nombre;
+    }
+
+    // Este es un constructor específico (contiene argumentos)
+    public Bicicleta(String nombre, double precio) {
+        this(nombre); // llamada al constructor 'Bicicleta(String nombre)';
+        this.precio = precio;
     }
 
     // Sintaxis de método:
     // <public/private/protected> <tipo_de_retorno> <nombre_funcion>(<argumentos>)
 
-    // Las clases de Java usualmente implementan métodos 'get' (obtener) y 'set' (establecer) para sus campos
+    // Las clases de Java usualmente implementan métodos 'get' (obtener) 
+    // y 'set' (establecer) para sus campos
 
     // Sintaxis de declaración de métodos
     // <alcance> <tipo_de_retorno> <nombre_metodo>(<argumentos>)
-    public int getRitmo() {
-        return ritmo;
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 
     // ....
@@ -439,10 +486,12 @@ class Bicicleta {
     //Método para mostrar los valores de los atributos de este objeto.
     @Override
     public String toString() {
-        return "engranaje: " + engranaje +
-                " ritmo: " + ritmo +
-                " velocidad: " + velocidad +
-                " nombre: " + nombre;
+        return "Bicicleta{" +
+                "nombre='" + nombre + '\'' +
+                ", precio=" + precio +
+                ", velocidad=" + velocidad +
+                ", numMarchas=" + numMarchas +
+                '}';
     }
 }
 ```
@@ -455,14 +504,12 @@ El operador `new` asigna dinámicamente, es decir, en tiempo de ejecución, memo
 
 ```java
 Bicicleta bicicleta = new Bicicleta();
-Bicicleta bicicleta2 = bicicleta; // Ahora ambas variables hacen referencia al mismo objeto.
+Bicicleta bicicleta2 = bicicleta; // Ambas variables hacen referencia al mismo objeto
 ```
 
 ### Clases anidadas
 
-<https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html>
-
-La clases anidadas no estáticas también se denominan **clases internas**. Una clase interna no existe independientemente de su clase contenedora, ya que el ámbito de una clase interna lo define la clase externa. También se pueden definir clases que sean locales de un bloque.
+La clases anidadas no estáticas también se denominan [**clases internas**](https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html). Una clase interna no existe independientemente de su clase contenedora, ya que el ámbito de una clase interna lo define la clase externa. También se pueden definir clases que sean locales de un bloque.
 
 Una clase interna tiene acceso a todas las variables y métodos de su clase externa y puede hacer referencia a los mismos directamente como hacen otros miembros no estáticos de la clase externa.
 
@@ -543,7 +590,7 @@ class Main {
 
   public static Bicycle incrementSpeed(final Bicycle bicycle) {
     bicycle.speed = 125;  // Podemos asignar nuevos valores a los atributos del objeto
-    // bicycle = new Bicycle(125); // ERROR! No podemos asignar una referencia de un nuevo objeto a la variable final 'bicycle'
+    // bicycle = new Bicycle(125); // ERROR! La variable 'bicycle es una variable final
     return bicycle;
   }
 }
@@ -592,7 +639,8 @@ class staticBlock {
   static int a;
   static int b;
 
-  // Este bloque se ejecuta al cargar la clase por primera vez y antes que cualquier otro método 'static'
+  // Este bloque se ejecuta al cargar la clase por primera vez 
+  // y antes que cualquier otro método 'static'
   static {
     a = 5;
     b = 10;
@@ -621,9 +669,11 @@ class Car extends Vehicle {
     void gamma(){}
 
     void sample() {
-        Vehicle vehicle = new Car(); // Un variable de tipo 'Vehicle' hace referencia a un objeto de tipo 'Car', que es una subclase de 'Vehicle'
+        // El tipo 'Car' es una subclase de 'Vehicle'
+        Vehicle vehicle = new Car();
         vehicle.echo(); // Correcto
-        // vehicle.gamma(); // Incorrecto. Sólo tenemos acceso a las partes que definen la superclase.
+        // vehicle.gamma(); // Incorrecto. 
+        // Sólo tenemos acceso a las partes que definen la superclase.
     }
 }
 ```
@@ -719,7 +769,7 @@ class Car extends SuperCar {
 
 Visibilidad permitidas para las clases:
 
-* `default` (sin modificador) -> Una clase sin modificador sólo será visible por otras clases **dentro del mismo paquete**.
+* `default` (sin modificador) -> Sólo será visible por otras clases **dentro del mismo paquete**.
 * `public` -> Una clase pública es **visible desde cualquier lugar**.
 
 **NOTA**: Una clase declarada como `public` debe encontrarse en un archivo con el mismo nombre.
@@ -785,8 +835,13 @@ class Car extends Superclass implements Vehicle {
 
 class Sample {
     public static void main (String ... args) {
-        Vehicle car = new Car(); // Al igual que con la herencia, podemos declarar una variable de referencia de un tipo de interfaz.
-        car.getWheels(); // Se ejecutará la versión implementada por el objeto. Sólo se tiene acceso a los métodos definidos en la interfaz y no a otros métodos que puedan estar definidos en la clase.
+        //Al igual que con la herencia, podemos declarar una variable de referencia de un tipo de interfaz.
+        Vehicle car = new Car();
+        
+        // Se ejecutará la versión implementada por el objeto. 
+        // Sólo se tiene acceso a los métodos definidos en la interfaz y 
+        // no a otros métodos que puedan estar definidos en la clase.
+        car.getWheels(); 
     }
 }
 ```
@@ -838,71 +893,68 @@ Mediante la palabra reservada `throw` se pueden lanzar manualmente una excepció
 
 Las excepciones se tratan en un bloque `try-catch-finally` (`finally` es opcional):
 
-```java
+```java {.numberLines}
 try {
   // bloque de código que puede lanzar la excepción
-}
-catch (TipoException exception) {
-  // controlador para TipoException
-}
-catch (Tipo2Exception exception) {
-  // controlador para Tipo2Exception
-}
-catch (Exception exception) { // Captura del resto de excepciones no capturadas anteriormente
-  // controlador para el resto de excepciones
-}
-finally {
-  // Código que se ejecutará siempre, tanto si se produce una excepción como si no se produce.
+} catch (TipoException exception) {
+  // bloque de código para TipoException
+} catch (Tipo2Exception exception) {
+  // bloque de código para Tipo2Exception
+} catch (Exception exception) { 
+  // Captura del resto de excepciones no capturadas anteriormente
+} finally {
+  // Código que se ejecutará siempre, tanto si 
+  // se produce una excepción como si no se produce.
 }
 ```
 
 Si un método genera una excepción que no se va a controlar, debemos declarar dicha excepción en una cláusula `throws`. Con esta cláusula podemos 'relanzar' tanto excepciones de Java como excepciones personalizadas. Una vez lanzada esta excepción deberá ser capturada en un bloque `try-catch` superior o por la JVM:
 
-```java
+```java {.numberLines}
 int divide(int a, int b) throws ArithmeticException, MyException {
-  if(b == 0) {
+  if (b == 0) {
     throw new ArithmeticException();
   } else {
-    throw new MyExcpetion("Message");
+    throw new MyException("Message");
   }
 }
 
 class MyException extends Exception { }
 ```
 
-En JDK 7 se amplió el mecanismo de excepciones al permite la **captura múltiple**. Con la captura múltiple se permite la captura de dos o más excepciones dentro de la misma cláusula `catch`. Cada tipo de excepción de la lista se separa con el operador `OR`. Cada parámetro es `final` de forma implícita.
+En **JDK 7** se amplió el mecanismo de excepciones al permite la **captura múltiple**. Con la captura múltiple se permite la captura de dos o más excepciones dentro de la misma cláusula `catch`. Cada tipo de excepción de la lista se separa con el operador `| ('OR')`. Cada parámetro es `final` de forma implícita.
 
-```java
+```java {.numberLines}
 try {
   // código
-}
-catch (final ArithmeticException | ArrayIndexOutOfBoundsException e) {
+} catch (final ArithmeticException | ArrayIndexOutOfBoundsException e) {
   // Controlador
 }
 ```
 
-En JDK 7 se añadió otro mecanismo denominado *__'try-with-resources'__* o **`try` con administración automática de recursos**. Es un tipo de `try` que evita situaciones en que un archivo (u otro recurso como bases de datos, etc..) no se libera después de ser utilizado. Un *__'try-with-resources'__* de este tipo también puede incluir cláusulas `catch` o `finally`.
+En **JDK 7** se añadió otro mecanismo denominado `try-with-resources` o **_try con administración automática de recursos_**. Es un tipo de `try` que evita situaciones en que un archivo (u otro recurso como bases de datos, etc..) no se libera después de ser utilizado. Un `try-with-resources` de este tipo también puede incluir cláusulas `catch` o `finally`.
 
-Los recursos que se pueden emplear con este tipo de *__'try-with-resources'__* son recursos que implementen la interfaz `AutoCloseable` que a su vez hereda de `Closeable`. La interfaz `AutoCloseable` define el método `close()`. Además, el recurso declarado en la instrucción `try` es **'final'** de forma implícita, de forma que no puede ser asignado ni modificado una vez creado y su ámbito se limita al propio `try`.
+Los recursos que se pueden emplear con este tipo de `try-with-resources` son recursos que implementen la interfaz `AutoCloseable` que a su vez hereda de `Closeable`. La interfaz `AutoCloseable` define el método `close()`. Además, el recurso declarado en la instrucción `try` es **'final'** de forma implícita, de forma que no puede ser asignado ni modificado una vez creado y su ámbito se limita al propio `try`.
 
-```java
-/* El siguiente código usa un 'try con recursos' para abrir un archivo y después cerrarlo automáticamente al salir del bloque 'try' (ya no es necesario invocar a 'close()') */
-try(FileInputStream fin = New FileInputStream(args[0])) {
-  // código
-}
-catch (IOException e) {
+```java {.numberLines}
+/* 
+ * El siguiente código usa un 'try con recursos' para abrir un archivo
+ * y después cerrarlo automáticamente al salir del bloque 'try'.
+ * Por tanto ya no es necesario invocar a 'close()' 
+ */
+try (FileInputStream fin = New FileInputStream(args[0])) {
+  // bloque de código
+} catch (IOException e) {
   // Controlador
 }
 ```
 
 Se pueden gestionar más de un recurso que estarán separados por un punto y coma ';':
 
-```java
-/* El siguiente código usa un 'try-with-resources' para abrir un archivo y después cerrarlo automáticamente al salir del bloque 'try' (ya no es necesario invocar a 'close()') */
-try(FileInputStream fin = New FileInputStream(args[0]); FileOutputStream fout = New FileOutputStream(args[1])) {
-  // código
-}
-catch (IOException e) {
+```java {.numberLines}
+try (FileInputStream fin = New FileInputStream(args[0]); FileOutputStream fout = New FileOutputStream(args[1])) {
+  // bloque de código
+} catch (IOException e) {
   // Controlador
 }
 ```
@@ -1221,7 +1273,7 @@ Existen dos tipos de multitarea: la basada en **procesos** y la basada en **subp
 
 Un proceso es básicamente un programa que se ejecuta. Por tanto la multitarea basada en procesos permite al equipo ejecutar dos o más programas a la vez. En un entorno multitarea basado en subprocesos, el subproceso es la unidad de código menor que se entrega, lo que significa que un mismo programa puede realizar dos o más tareas al mismo tiempo.
 
-Java no controla la multitarea basada en procesos pero *sí controla la basada en subprocesos*.
+Java no controla la multitarea basada en procesos pero **sí controla la basada en subprocesos**.
 
 Una ventaja del subprocesamiento múltiple es que permite programas más eficaces ya que se utiliza el tiempo de inactividad en la mayoría de programas. En sistemas de un sólo núcleo, los subprocesos de ejecución simultánea comparten la CPU y cada subproceso recibe una porción de tiempo de CPU. En sistemas multinúcleo, dos o más subprocesos se pueden ejecutar simultáneamente.
 
@@ -1314,7 +1366,11 @@ Al invocar un método sincronizado, el subproceso invocador accede al monitor de
 class SumArray {
     private int sum;
 
-    synchronized int sumArray(int nums[]) { // este método está sincronizado. Cuando sea invocado por un subproceso quedará bloqueado al resto de subprocesos, que deberán esperar a que sea desbloqueado. No podrán acceder ni a éste ni a ningún otro método sincronizado de esta clase
+    /* Este método está sincronizado.
+    Cuando sea invocado por un subproceso quedará bloqueado al resto de subprocesos,
+    que deberán esperar a que sea desbloqueado.
+    No podrán acceder ni a éste ni a ningún otro método sincronizado de esta clase */
+    synchronized int sumArray(int nums[]) {
         // code....
     }
 }
@@ -1387,7 +1443,7 @@ class Sample {
 
 Básicamente, una enumeración es una **lista de constantes con nombre** que definen un nuevo tipo de datos. Un objeto de un tipo de enumeración solo puede albergar los valores definidos por la lista. Por tanto, una enumeración le permite definir con precisión un nuevo tipo de datos con un número fijo de valores.
 
-Desde una perspectiva de programación, las enumeraciones son muy útiles cuando hay que definir un grupo de valores que representan una colección de elementos. Es importante entender que una constante de enumeración es un objeto de su tipo de enumeración. Una enumeración se crea con la palabra clave `enum`.
+Desde una perspectiva de programación, las enumeraciones son muy útiles cuando hay que definir un grupo de valores que representan una colección de elementos. Es importante entender que una **constante de enumeración es un objeto de su tipo de enumeración**. Una enumeración se crea con la palabra clave `enum`.
 
 Las constantes de la enumeración son `public` y `static` de forma implícita.
 
@@ -1405,17 +1461,20 @@ Sin embargo **Java implementa las enumeraciones como si fueran clases**, permiti
 * Ni puede actuar como superclase de otra clase.
 
 ```java
-Transport transport = Transport.TRUCK; // las constantes, al ser 'static' se invocan de esta forma: 'Enumeration.constante'
+// Las constantes, al ser 'static' se invocan de esta forma: 'Enumeration.constante'
+Transport transport = Transport.TRUCK; 
 
-if(transport == Transport.TRUCK) { // Comparar la igualdad de dos constantes de enumeración
+if (transport == Transport.TRUCK) { // Comparar la igualdad de dos constantes de enumeración
     System.out.println(transport) // => TRUCK
 }
 
-switch(transport) { //Podemos usar una enumeración para controlar una instrucción 'switch'
+//Podemos usar una enumeración para controlar una instrucción 'switch'
+switch (transport) { 
+    // No es necesario usar 'Transport.CAR' ya que implícitamente ya se especifica
     case CAR:
     // code ....
     break;
-    case TRUCK: // No es necesario usar Transport.TRUCK cuando usamos una enumeración ya que implícitamente ya se especifica
+    case TRUCK: 
     // code ....
     break;
     default:
@@ -1432,7 +1491,7 @@ Las enumeraciones cuentan con dos métodos predefinidos `values()` y `valueOf()`
 
 ```java
 // Uso de values() en un for-each
-for(Transport transport : Transport.values()) {
+for (Transport transport : Transport.values()) {
     System.out.println(transport);
 }
 ```
@@ -1441,7 +1500,9 @@ Al definir un constructor en una enumeración, el constructor se invoca al crear
 
 ```java
 enum Transport {
-    CAR(66), TRUCK(12), AIRPLANE(600), BOAT(12); // valores de inicialización. A destacar el ';' necesario cuando se definen variables, constructores, etc..
+    /* Valores de inicialización. 
+    A destacar el ';' necesario cuando se definen variables, constructores, etc.. */
+    CAR(66), TRUCK(12), AIRPLANE(600), BOAT(12); 
 
     private int speed; // variable de instancia. Cada constante dispone de su propia copia
 
@@ -1465,9 +1526,11 @@ enum Transport {
 System.out.println(Transport.TRUCK.ordinal()); // => 3
 ```
 
-### Autoboxing y unboxing
+## Autoboxing y unboxing
 
-En Java los tipos primitivos no forman parte de la jerarquía de objetos por motivos de eficiencia. Sin embargo existen clases que actuan como envoltorios (_'wrapper'_) para tipos primitivos como `Float`, `Double`, `Byte`, `Short`, `Integer`, `Long`, `Character` y `Boolean`. Todos los envoltorios de tipos numéricos heredan de la clase abstracta `Number`.
+En Java los tipos primitivos no forman parte de la jerarquía de objetos por motivos de eficiencia. Sin embargo existen clases que actuan como envoltorios (_'wrapper'_) para tipos primitivos como `Float`, `Double`, `Byte`, `Short`, `Integer`, `Long`, `Character` y `Boolean`.
+
+Todos los envoltorios de tipos numéricos heredan de la clase abstracta `Number`.
 
 Encapsular un tipo primitivo en su envoltorio se denomina **'boxing'**. Por tanto **'autoboxing'** es el proceso de encapsular automáticamente un tipo primitivo en su clase envoltorio y **'auto-unboxing'** es el proceso inverso.
 
@@ -1484,7 +1547,8 @@ int i = iOb; // unbox
 El término **"genérico"** significa tipo con parámetros. Los tipos con parámetros permiten crear clases, interfaces y métodos en los que los tipos de datos se especifican como parámetros. Cuando una clase utiliza genéricos se denomina **"clase genérica"**.
 
 ```java
-// Uso de genéricos en una clase. 'T' es un parámetro de tipo que se sustituye por un tipo real al crear un objeto de la clase
+/* Uso de genéricos en una clase. 
+'T' es un parámetro de tipo que se sustituye por un tipo real al crear un objeto de la clase */
 class Gen<T> {
     T ob; // Declarar un objeto de tipo 'T'.
 
@@ -1510,7 +1574,9 @@ class GenDemo {
         iOb = new Gen<Integer>(80);
         iOb.showType();
 
-        // iOB = new Gen<Double>(88.0) // Esta asignación generaría un error en tiempo de compilación. Es una de la ventajas del uso de genéricos
+        /* Esta asignación generaría un error en tiempo de compilación. 
+        Es una de la ventajas del uso de genéricos */
+        // iOB = new Gen<Double>(88.0) // Error
 
         Gen<String> strOb = new Gen<String>("Generic");
         strOb.showType();
@@ -1525,7 +1591,9 @@ Al declarar una instancia de un tipo genérico, el argumento de tipo pasado al p
 Destacar sobre los tipos genéricos es que una referencia a una versión concreta de un tipo genérico no es compatible en cuanto a tipo se refiere con otra versión del mismo tipo genérico.
 
 ```java
-iOb = strOb; // Error, no se puede asignar una referencia de Gen<String> a una referencia Gen<Integer> aunque ambas usen la misma clase genérica Get<T>
+/* No se puede asignar una referencia de Gen<String> a una referencia Gen<Integer> 
+aunque ambas usen la misma clase genérica Get<T> */
+iOb = strOb; // Error
 ```
 
 Se puede declarar más de un parámetro de tipo en un tipo genérico. Basta con usar una lista separada por comas:
@@ -1556,7 +1624,7 @@ Para ello usamos la cláusula `extends` al especificar los parámetros de tipo:
 
 Esto especifica que 'T' solo se puede reemplazar por _'superclass'_ o subclases de _'superclass'_. Por tanto _'superclass'_ define un **límite superior e inclusivo**.
 
-Nota: todos los tipos numéricos heredan de la clase abstracta `Number`.
+:exclamation: **Nota**: todos los tipos numéricos heredan de la clase abstracta `Number`.
 
 ```java
 class GenNumeric<T extends Number> { // De esta forma limitamos 'T' a tipos numéricos
@@ -1567,7 +1635,8 @@ class GenNumeric<T extends Number> { // De esta forma limitamos 'T' a tipos num�
     }
 
     double fraction() {
-        return num.doubleValue() - num.intValue(); // Como hemos limitado el tipo a tipos numéricos podemos emplear métodos de la clase 'Number'
+        // Como hemos limitado el tipo a tipos numéricos podemos emplear métodos de la clase 'Number'
+        return num.doubleValue() - num.intValue(); 
     }
 }
 ```
@@ -1647,27 +1716,33 @@ Las interfaces genéricas se especifican como una clase genérica. Cualquier cla
 Los parámetros de tipo especificado en una interfaz también se pueden vincular (limitar) con los tipos vinculados. Las clases que implementen dicha interfaz deberán pasarle un argumento de tipo que tenga la misma vinculación.
 
 ```java
-interface ISample<T> { // interfaz genérica
+// Interfaz genérica
+interface ISample<T> { 
     boolean contains(T arg);
 }
 
-interface ISample2<T extends Number> { // interfaz genérica con tipos vinculados (limitados) por la superclase 'Number'
+// Interfaz genérica con tipos vinculados (limitados) por la superclase 'Number'
+interface ISample2<T extends Number> { 
     // ...
 }
 
-class Sample<T> implements ISample<T> { // clase genérica obligada que implementa una interfaz genérica
+// Clase genérica obligada que implementa una interfaz genérica
+class Sample<T> implements ISample<T> { 
     // ...
 }
 
-class Sample implements ISample<Double> { // clase no necesariamente genérica que implementa una interfaz con un tipo concreto
+// Clase no necesariamente genérica que implementa una interfaz con un tipo concreto
+class Sample implements ISample<Double> { 
     // ...
 }
 
-class Sample2<T extends Number> implements ISample2<T> { // clase con parámetros de tipo vinculados
+// Clase con parámetros de tipo vinculados
+class Sample2<T extends Number> implements ISample2<T> { 
     // ....
 }
 
-// class Sample2<T extends Number> implements ISample2<T extends Number> {} // ¡¡INCORRECTO!!. No es necesario volver a indicarla en ISample2
+/* No es necesario volver a indicarla en ISample2 */
+// class Sample2<T extends Number> implements ISample2<T extends Number> {} // ¡¡INCORRECTO!!. 
 ```
 
 ### Genéricos y código legado
@@ -1707,7 +1782,8 @@ El uso de genéricos puede crear situaciones de ambigüedad, sobretodo en casos 
 
 ```java
 class Gen<T, V> {
-    // Estos dos métodos se sobrecargan pero dado que T y V pueden ser del mismo tipo, se generarían dos métodos iguales por lo que el compilador genera un error y este código no compila.
+    /* Estos dos métodos se sobrecargan pero dado que T y V pueden ser del mismo tipo, se generarían 
+    dos métodos iguales por lo que el compilador genera un error y este código no compila. */
     void get(T ob) {}
 
     void get(V ob) {}
@@ -1735,7 +1811,9 @@ class Gen<T, V> {
 
 Básicamente **una expresión lambda es un método anónimo**. Sin embargo, este método no se ejecuta por sí solo, sino que se usa para implementar un método definido por una **interfaz funcional**. Las expresiones lambda también suele denominarse _'closure'_.
 
-**Una interfaz funcional es una interfaz que únicamente contiene un método abstracto**. Por lo tanto, una interfaz funcional suele representar una única acción. Una interfaz funcional puede incluir métodos predeterminados y/o métodos estáticos pero en todos los casos solo puede haber **un solo método abstracto** para que la interfaz sea considerada interfaz funcional. Como los métodos de interfaz no predeterminados y no estáticos son implícitamente abstractos, no es necesario utilizar la palabra clave `abstract`.
+**Una interfaz funcional es una interfaz que únicamente contiene un método abstracto**. Por lo tanto, una interfaz funcional suele representar una única acción.
+
+Una interfaz funcional puede incluir métodos predeterminados y/o métodos estáticos pero en todos los casos solo puede haber **un solo método abstracto** para que la interfaz sea considerada interfaz funcional. Como los métodos de interfaz no predeterminados y no estáticos son implícitamente abstractos, no es necesario utilizar la palabra clave `abstract`.
 
 ```java
 interface Sample { // interfaz funcional
@@ -1745,7 +1823,9 @@ interface Sample { // interfaz funcional
 
 ### Fundamentos
 
-El nuevo operador para las expresiones lambda se denomina **operador lambda** y tiene la forma de flecha `->`. Divide la expresión lambda en dos partes: la parte izquierda especifica los parámetros necesarios y la parte derecha contiene el cuerpo de la expresión. Este cuerpo puede estar compuesto por una única expresión o puede ser un bloque de código. Cuando es una única expresión se denomina **lambda de expresión** y cuando es un bloque de código se denomina **lambda de bloque**.
+El nuevo operador para las expresiones lambda se denomina **operador lambda** y tiene la forma de flecha `->`. Divide la expresión lambda en dos partes: la parte izquierda especifica los parámetros necesarios y la parte derecha contiene el cuerpo de la expresión.
+
+Este cuerpo puede estar compuesto por una única expresión o puede ser un bloque de código. Cuando es una única expresión se denomina **lambda de expresión** y cuando es un bloque de código se denomina **lambda de bloque**.
 
 ```java
 () -> 98.6;  // Expresión lambda sin parámetros que evalúa un valor constante
@@ -1774,7 +1854,8 @@ sample = () -> 98.6;
 Al invocar el método de la interfaz funcional se ejecuta la implementación de la expresión lambda.
 
 ```java
-sample.getValue();  // Usamos la referencia para invocar el método de la interfaz y que ha sido implementado por la expresión lambda.
+// Usamos la referencia para invocar el método de la interfaz y que ha sido implementado por la expresión lambda.
+sample.getValue();  
 ```
 
 Por lo general, el tipo del método abstracto definido por la interfaz funcional y el tipo de la expresión lambda deben ser compatibles. Esto es, **el tipo de devolución y la firma del método de la interfaz funcional deben ser iguales o compatibles con la expresión lambda**
@@ -1863,7 +1944,9 @@ class VarCapture {
         IFuncional sample = (n) -> {
             int v = n + num; // Uso correcto. La variable 'num' no se modifica
 
-            // num++ // Uso incorrecto ya que la variable 'num' se modifica dentro de la expresión y por tanto ya no es una variable eficazmente final
+            /* Uso incorrecto ya que la variable 'num' se modifica dentro de la expresión 
+            y por tanto ya no es una variable eficazmente final */
+            // num++ 
 
             return v;
         };
@@ -1885,7 +1968,8 @@ interface IFuncional {
 class LambdaExceptionDemo {
     public static void main(String...args){
         IFuncional sample = (rdr) -> {
-            // Como la invocación a 'read()' generaría una IOException, el método 'ioAction()' de la interfaz funcional debe incluir IOException en una cláusula 'throws'
+            // Como la invocación a 'read()' generaría una IOException, el método 'ioAction()' 
+            // de la interfaz funcional debe incluir IOException en una cláusula 'throws'
             int ch = rdr.read();
 
             return true;
@@ -1995,7 +2079,7 @@ public class Sample {
 }
 ```
 
-## Collections
+## Colecciones
 
 Una **colección** -a veces llamada contenedor- es simplemente un objeto que agrupa múltiples elementos en una sola unidad. Las colecciones se utilizan para almacenar, recuperar, manipular y comunicar datos agregados.
 
@@ -2005,13 +2089,26 @@ Un [framework de colecciones](https://docs.oracle.com/javase/tutorial/collection
 * **Implementaciones**: Estas son las implementaciones concretas de las interfaces de colecciones. En esencia, son estructuras de datos reutilizables.
 * **Algoritmos**: Estos son los métodos que realizan cálculos útiles, como la búsqueda y clasificación, en objetos que implementan interfaces de colección. Se dice que los algoritmos son polimórficos: es decir, que se puede utilizar el mismo método en muchas implementaciones diferentes de la interfaz de colección apropiada. En esencia, los algoritmos son funciones reutilizables.
 
-### The 'Collection' Interface
+### La interfaz 'Collection'
 
 Una [colección](https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html) representa un grupo de objetos conocidos como sus elementos. La interfaz `Collection` se utiliza para transmitir colecciones de objetos en las que se desea la máxima generalidad.
 
-La interfaz `Collection` contiene métodos que realizan operaciones básicas como `int size()`, `boolean isEmpty()`, `boolean contains(Object element)`, `boolean add(E element)`, `boolean remove(Object element)`, y `Iterator<E> iterator()`.
+La interfaz `Collection` contiene métodos que realizan operaciones básicas como:
 
-También contiene métodos que operan en colecciones enteras como `boolean containsAll(Collection<?> c)`, `boolean addAll(Collection<? extends E> c)`, `boolean removeAll(Collection<?> c)`, `boolean retainAll(Collection<?> c)`, y `void clear()`.
+* `int size()`
+* `boolean isEmpty()`
+* `boolean contains(Object element)`
+* `boolean add(E element)`
+* `boolean remove(Object element)`
+* `Iterator<E> iterator()`.
+
+También contiene métodos que operan en colecciones enteras como:
+
+* `boolean containsAll(Collection<?> c)`
+* `boolean addAll(Collection<? extends E> c)`
+* `boolean removeAll(Collection<?> c)`
+* `boolean retainAll(Collection<?> c)`
+* `void clear()`.
 
 La interfaz `Collection` hace lo que cabría esperar, dado que una colección representa un grupo de objetos. Tiene métodos que le dicen cuántos elementos hay en la colección ('size', 'isEmpty'), métodos que comprueban si un objeto dado está en la colección ('contains'), métodos que añaden y eliminan un elemento de la colección ('add', 'remove'), y métodos que proporcionan un iterador sobre la colección ('iterator').
 
@@ -2045,8 +2142,9 @@ String joined = elements.stream()
 La construcción `for-each` permite recorrer de forma concisa, es decir, de uno en uno, una colección o array utilizando un bucle `for`:
 
 ```java
-for (Object o : collection)
+for (Object o : collection) {
     System.out.println(o);
+}
 ```
 
 Un `Iterator` es un objeto que permite recorrer una colección y eliminar elementos de la colección de forma selectiva, si se desea. Se obtiene un `iterator` para una colección llamando a su método `iterator()`.
@@ -2075,7 +2173,7 @@ static void filter(Collection<?> c) {
 }
 ```
 
-### The 'Set' Interface
+### La interfaz 'Set'
 
 Un [`Set`](https://docs.oracle.com/javase/8/docs/api/java/util/Set.html) o conjunto es una colección que **no puede contener elementos duplicados**. Modela la abstracción del conjunto matemático. La interfaz `Set` sólo contiene métodos heredados de `Collection` y añade la restricción de que los elementos duplicados están prohibidos.
 
@@ -2089,7 +2187,7 @@ La plataforma Java contiene tres implementaciones de `Set` de propósito general
 
 La interfaz `Set` tiene una subinterface [`SortedSet`](https://docs.oracle.com/javase/8/docs/api/java/util/SortedSet.html), que es un `Set` que mantiene sus elementos en orden ascendente, ordenados de acuerdo al orden natural de los elementos o de acuerdo a un `Comparator` proporcionado a la hora de creación del `SortedSet`.
 
-### The 'List' Interface
+### La interfaz 'List'
 
 Una [`List`](https://docs.oracle.com/javase/8/docs/api/java/util/List.html) es una **colección ordenada que pueden contener elementos duplicados** (a veces llamada secuencia). Además de las operaciones heredadas de `Collection`, la interfaz `List` incluye operaciones para lo siguiente:
 
@@ -2103,11 +2201,13 @@ La plataforma Java contiene dos implementaciones de `List` de propósito general
 * **ArrayList**, que suele ser la implementación con mejor rendimiento.
 * **LinkedList**, que ofrece un mejor rendimiento en determinadas circunstancias.
 
-### The 'Queue' Interface
+### La interfaz 'Queue'
 
 Una [`Queue`](https://docs.oracle.com/javase/8/docs/api/java/util/Queue.html) o cola es una colección que contiene elementos antes de ser procesados. Además de las operaciones básicas de una `Collection`, las colas proporcionan operaciones adicionales de inserción, extracción e inspección.
 
-Una **LinkedList** implementa la interfaz `Queue`. La clase ['PriorityQueue'](https://docs.oracle.com/javase/8/docs/api/java/util/PriorityQueue.html) es una cola de prioridad basada en la estructura de pila de datos. Esta cola ordena los elementos según el orden especificado en el momento de la construcción, que puede ser el orden natural de los elementos o el orden impuesto por un comparador explícito.
+Una ['LinkedList'](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html) implementa la interfaz `Queue` y a su vez la interfaz `List`.
+
+La clase ['PriorityQueue'](https://docs.oracle.com/javase/8/docs/api/java/util/PriorityQueue.html) es una cola de prioridad basada en la estructura de pila de datos. Esta cola ordena los elementos según el orden especificado en el momento de la construcción, que puede ser el orden natural de los elementos o el orden impuesto por un comparador explícito.
 
 ```java
 public interface Queue<E> extends Collection<E> {
@@ -2131,7 +2231,7 @@ Las colas ordenan típicamente, aunque no necesariamente, los elementos de una m
 
 Cualquiera que sea el orden que se utilice, la cabeza de la `Queue` es el elemento que sería eliminado por una llamada a `remove()` o `poll()`. En una cola FIFO, todos los elementos nuevos se insertan en la cola de la cola. Otros tipos de colas pueden utilizar reglas de colocación diferentes. Cada implementación de cola debe especificar sus propiedades de ordenación.
 
-Es posible que una implementación de `Queue` restrinja el número de elementos que contiene; tales colas se conocen como *__bounded__*.
+Es posible que una implementación de `Queue` restrinja el número de elementos que contiene; tales colas se conocen como **_bounded_**.
 
 El método `add()`, que `Queue` hereda de `Collection`, inserta un elemento a menos que viole las restricciones de capacidad de la cola, en cuyo caso lanza `IllegalStateException`. El método `offer()`, que se utiliza únicamente en colas limitadas (_'bounded'_), difiere de `add()` solo en que devuelve `false` si no se inserta el elemento.
 
@@ -2139,7 +2239,7 @@ Los métodos `remove()` y `poll()` eliminan y devuelven la cabecera o _'head'_ d
 
 Los métodos `element()` y `peek()` devuelven, pero no eliminan, la cabecera de la cola.
 
-### The 'Deque' Interface
+### La interfaz 'Deque'
 
 Una [`Deque`](https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html) es una cola de dos extremos. Este tipo de cola es una colección lineal de elementos que soporta la inserción y extracción de elementos en **ambos extremos**.
 
@@ -2156,7 +2256,7 @@ La interfaz `Deque` define métodos para acceder a los elementos en ambos extrem
 | Examine (Exception) | `getFirst()`    | `getLast()`    |
 | Examine (null)      | `peekFirst()`   | `peekLast()`   |
 
-### The 'Map' Interface
+### La interfaz 'Map'
 
 Un [`Map`](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html) es un objeto que asigna claves a valores. Un mapa **no puede contener claves duplicadas**. Cada clave puede asignarse a un valor como máximo. Modela la abstracción de la función matemática.
 
@@ -2177,7 +2277,7 @@ Un sistema con test unitarios será más fácil modificarlo ya que tendremos la 
 * **Test unitarios**: prueban una funcionalidad única y se basan en el principio de responsabilidad única (la S de los principios de diseño SOLID)
 * **Integración**: prueban la conexión entre componentes, sería el siguiente paso a los test unitarios.
 * **Funcionales (o Sistema)**: prueban la integración de todos los componentes que desarrollan una funcionalidad concreta (por ejemplo, la automatización de pruebas con Selenium serían test funcionales).
-* **Aceptación de Usuarios**: Pruebas definidas por el *Product Owner* basadas en ejemplos (BDD con Cucumber).
+* **Aceptación de Usuarios**: Pruebas definidas por el _Product Owner_ basadas en ejemplos (BDD con Cucumber).
 * **Regresión**: Prueban que los test unitarios y funcionales siguen funcionando a lo largo del tiempo (se pueden lanzar tanto de forma manual como en sistemas de Integración Continua).
 * **Carga**: Prueban la eficiencia del código.
 
@@ -2325,11 +2425,11 @@ Cuando se usa código legado que no forma parte de un módulo nombrado, pasa aut
 
 Otra característica que permite la compatibilidad con código legado es el uso automático de la ruta de clase en vez de la ruta de módulo.
 
-----
+---
 
 ## Histórico de versiones
 
-[This JEP is the index of all JDK Enhancement Proposals, known as JEPs.](http://openjdk.java.net/jeps/0)
+[This JEP is the index of all JDK Enhancement Proposals, known as JEPs.](https://openjdk.org/jeps/0)
 
 ### JDK 1.0 (23 de Enero de 1996)
 
@@ -2407,421 +2507,137 @@ Otra característica que permite la compatibilidad con código legado es el uso 
 
 ### Java SE 8 (18 de Marzo de 2014)
 
-* [Lista completa de características](http://openjdk.java.net/projects/jdk8/milestones#General_Availability)
-* [JEP 126](http://openjdk.java.net/jeps/126): Lambda Expressions & Virtual Extension Methods
-* [JEP 153](http://openjdk.java.net/jeps/153): Launch JavaFX Applications
-* [JEP 178](http://openjdk.java.net/jeps/178): Statically-Linked JNI Libraries
-* [JEP 155](http://openjdk.java.net/jeps/155): Concurrency Updates
-* [JEP 174](http://openjdk.java.net/jeps/174): Nashorn Javascript Engine
-* [JEP 104](http://openjdk.java.net/jeps/104): Annotations on Java Types
-* [JEP 150](http://openjdk.java.net/jeps/150): Date & Time API
+* [Lista completa de características](https://openjdk.org/projects/jdk8/)
+* [JEP 126](https://openjdk.org/jeps/126): Lambda Expressions & Virtual Extension Methods
+* [JEP 153](https://openjdk.org/jeps/153): Launch JavaFX Applications
+* [JEP 178](https://openjdk.org/jeps/178): Statically-Linked JNI Libraries
+* [JEP 155](https://openjdk.org/jeps/155): Concurrency Updates
+* [JEP 174](https://openjdk.org/jeps/174): Nashorn Javascript Engine
+* [JEP 104](https://openjdk.org/jeps/104): Annotations on Java Types
+* [JEP 150](https://openjdk.org/jeps/150): Date & Time API
 
 ### Java 9 (21 de Septiembre de 2017)
 
-* [Lista completa de características](http://openjdk.java.net/projects/jdk9/)
-* [JEP 200](http://openjdk.java.net/jeps/200): The Modular JDK
-* [JEP 222](http://openjdk.java.net/jeps/222): 'jshell': The Java Shell (Read-Eval-Print Loop)
-* [JEP 295](http://openjdk.java.net/jeps/295): Compilación _Ahead-of-Time_
-* [JEP 282](http://openjdk.java.net/jeps/282): Herramienta _jlink_ que puede ensamblar y optimizar un conjunto de módulos y sus dependencias en una imagen personalizada en tiempo de ejecución. De manera efectiva, permite producir un ejecutable totalmente utilizable que incluye la JVM para ejecutarlo.
-* [JEP 266](http://openjdk.java.net/jeps/266): More Concurrency Updates. Interfaces supporting the Reactive Streams publish-subscribe framework.
-* [JEP 263](http://openjdk.java.net/jeps/263): Gráficos HiDPI
-* [JEP 224](http://openjdk.java.net/jeps/224): HTML5 Javadoc
-* [JEP 275](http://openjdk.java.net/jeps/275): Modular Java Application Packaging
+* [Lista completa de características](https://openjdk.org/projects/jdk9/)
+* [JEP 200](https://openjdk.org/jeps/200): The Modular JDK
+* [JEP 222](https://openjdk.org/jeps/222): 'jshell': The Java Shell (Read-Eval-Print Loop)
+* [JEP 295](https://openjdk.org/jeps/295): Compilación _Ahead-of-Time_
+* [JEP 282](https://openjdk.org/jeps/282): jlink: The Java Linker
+* [JEP 266](https://openjdk.org/jeps/266): More Concurrency Updates
+* [JEP 263](https://openjdk.org/jeps/263): Gráficos HiDPI
+* [JEP 224](https://openjdk.org/jeps/224): HTML5 Javadoc
+* [JEP 275](https://openjdk.org/jeps/275): Modular Java Application Packaging
+* [JEP 261](https://openjdk.org/jeps/261): Module System
 
 ### Java 10 (20 de Marzo de 2018)
 
-* [Lista completa de características](http://openjdk.java.net/projects/jdk/10/)
-* [JEP 286](http://openjdk.java.net/jeps/286): Local-Variable Type Inference
-* [JEP 317](http://openjdk.java.net/jeps/317): Experimental Java-Based JIT Compiler. This is the integration of the Graal dynamic compiler for the Linux x64 platform
-* [JEP 310](http://openjdk.java.net/jeps/310): Application Class-Data Sharing. This allows application classes to be placed in the shared archive to reduce startup and footprint for Java applications
-* [JEP 322](http://openjdk.java.net/jeps/322): Time-Based Release Versioning
-* [JEP 307](http://openjdk.java.net/jeps/307): Parallel Full GC for G1
-* [JEP 304](http://openjdk.java.net/jeps/304): Garbage-Collector Interface
-* [JEP 314](http://openjdk.java.net/jeps/314): Additional Unicode Language-Tag Extensions
-* [JEP 319](http://openjdk.java.net/jeps/319): Root Certificates
-* [JEP 312](http://openjdk.java.net/jeps/312): Thread-Local Handshakes
-* [JEP 316](http://openjdk.java.net/jeps/316): Heap Allocation on Alternative Memory Devices
-* [JEP 313](http://openjdk.java.net/jeps/313): Remove the Native-Header Generation Tool – javah
-* [JEP 296](http://openjdk.java.net/jeps/296): Consolidate the JDK Forest into a Single Repository
+* [Lista completa de características](https://openjdk.org/projects/jdk/10/)
+* [JEP 286](https://openjdk.org/jeps/286): Local-Variable Type Inference
+* [JEP 317](https://openjdk.org/jeps/317): Experimental Java-Based JIT Compiler
+* [JEP 310](https://openjdk.org/jeps/310): Application Class-Data Sharing
+* [JEP 322](https://openjdk.org/jeps/322): Time-Based Release Versioning
+* [JEP 307](https://openjdk.org/jeps/307): Parallel Full GC for G1
+* [JEP 304](https://openjdk.org/jeps/304): Garbage-Collector Interface
+* [JEP 314](https://openjdk.org/jeps/314): Additional Unicode Language-Tag Extensions
+* [JEP 319](https://openjdk.org/jeps/319): Root Certificates
+* [JEP 312](https://openjdk.org/jeps/312): Thread-Local Handshakes
+* [JEP 316](https://openjdk.org/jeps/316): Heap Allocation on Alternative Memory Devices
+* [JEP 313](https://openjdk.org/jeps/313): Remove the Native-Header Generation Tool – javah
+* [JEP 296](https://openjdk.org/jeps/296): Consolidate the JDK Forest into a Single Repository
 
 ### Java 11 (25 de Septiembre de 2018)
 
-* [Lista completa de características](http://openjdk.java.net/projects/jdk/11/)
-* [JEP 309](http://openjdk.java.net/jeps/309): Dynamic Class-File Constants
-* [JEP 318](http://openjdk.java.net/jeps/318): Epsilon: A No-Op Garbage Collector
-* [JEP 323](http://openjdk.java.net/jeps/323): Local-Variable Syntax for Lambda Parameters
-* [JEP 331](http://openjdk.java.net/jeps/331): Low-Overhead Heap Profiling
-* [JEP 321](http://openjdk.java.net/jeps/321): HTTP Client (Standard)
-* [JEP 332](http://openjdk.java.net/jeps/332): Transport Layer Security (TLS) 1.3
-* [JEP 328](http://openjdk.java.net/jeps/328): Flight Recorder
-* [JEP 335](http://openjdk.java.net/jeps/3335): Deprecate the Nashorn Javascript Engine
+* [Lista completa de características](https://openjdk.org/projects/jdk/11/)
+* [JEP 309](https://openjdk.org/jeps/309): Dynamic Class-File Constants
+* [JEP 318](https://openjdk.org/jeps/318): Epsilon: A No-Op Garbage Collector
+* [JEP 323](https://openjdk.org/jeps/3323): Local-Variable Syntax for Lambda Parameters
+* [JEP 331](https://openjdk.org/jeps/331): Low-Overhead Heap Profiling
+* [JEP 321](https://openjdk.org/jeps/321): HTTP Client (Standard)
+* [JEP 332](https://openjdk.org/jeps/323): Transport Layer Security (TLS) 1.3
+* [JEP 328](https://openjdk.org/jeps/328): Flight Recorder
+* [JEP 335](https://openjdk.org/jeps/335): Deprecate the Nashorn Javascript Engine
 * JavaFX, Java EE and CORBA modules have been removed from JDK
 
 ### Java 12 (19 de Marzo de 2019)
 
-* [Lista completa de características](http://openjdk.java.net/projects/jdk/12/)
-* [JEP 189](http://openjdk.java.net/jeps/189): Shenandoah: A Low-Pause-Time Garbage Collector (Experimental)
-* [JEP 230](http://openjdk.java.net/jeps/230): Microbenchmark Suite
-* [JEP 325](http://openjdk.java.net/jeps/325): Switch Expressions (Preview)
-* [JEP 334](http://openjdk.java.net/jeps/334): JVM Constants API
+* [Lista completa de características](https://openjdk.org/projects/jdk/12/)
+* [JEP 230](https://openjdk.org/jeps/230): Microbenchmark Suite
+* [JEP 334](https://openjdk.org/jeps/334): JVM Constants API
 
-## Reference
+### Java 13 (17 de Septiembre 2019)
+
+* [Lista completa de características](https://openjdk.org/projects/jdk/13/)
+* [JEP 353](https://openjdk.org/jeps/353): Reimplement the Legacy Socket API
+
+### Java 14 (17 de Marzo 2020)
+
+* [Lista completa de características](https://openjdk.org/projects/jdk/14/)
+* [JEP 358](https://openjdk.org/jeps/358): Helpful NullPointerExceptions
+* [JEP 361](https://openjdk.org/jeps/361): Switch Expressions
+* [JEP 349](https://openjdk.org/jeps/349): JFR Event Streaming
+
+### Java 15 (15 de Septiembre 2020)
+
+* [Lista completa de características](https://openjdk.org/projects/jdk/15/)
+* [JEP 371](https://openjdk.org/jeps/371): Hidden Classes
+* [JEP 372](https://openjdk.org/jeps/372): Remove the Nashorn JavaScript Engine
+* [JEP 373](https://openjdk.org/jeps/373): Reimplement the Legacy DatagramSocket API
+* [JEP 378](https://openjdk.org/jeps/378): Text Blocks
+
+### Java 16 (16 de Marzo 2021)
+
+* [Lista completa de características](https://openjdk.org/projects/jdk/16/)
+* [JEP 347](https://openjdk.org/jeps/347): Enable C++14 Language Features
+* [JEP 369](https://openjdk.org/jeps/369): Migrate to GitHub
+* [JEP 392](https://openjdk.org/jeps/392): Packaging Tool
+* [JEP 394](https://openjdk.org/jeps/394): Pattern Matching for instanceof
+* [JEP 395](https://openjdk.org/jeps/395): Records
+* [JEP 396](https://openjdk.org/jeps/396): Strongly Encapsulate JDK Internals by Default
+
+### Java 17 (13 de Septiempbre 2021)
+
+* [Lista completa de características](https://openjdk.org/projects/jdk/17/)
+* [JEP 356](https://openjdk.org/jeps/356): Enhanced Pseudo-Random Number Generators
+* [JEP 409](https://openjdk.org/jeps/409): Sealed Classes
+* [JEP 403](https://openjdk.org/jeps/403): Strongly Encapsulate JDK Internals
+
+### Java 18 (22 de Marzo 2022)
+
+* [Lista completa de características](https://openjdk.org/projects/jdk/18/)
+* [JEP 400](https://openjdk.org/jeps/400): UTF-8 by Default
+* [JEP 408](https://openjdk.org/jeps/408): Simple Web Server
+* [JEP 413](https://openjdk.org/jeps/413): Code Snippets in Java API Documentation
+
+### Java 19 (20 de Septiembre 2022)
+
+* [Lista completa de características](https://openjdk.org/projects/jdk/19/)
+
+### Java 20 (21 de Marzo 2023)
+
+* [Lista completa de características](https://openjdk.org/projects/jdk/20/)
+
+### :new: Java 21 (21 de Septiembre 2023)
+
+* [Lista completa de características](https://openjdk.org/projects/jdk/21/)
+* [JEP 431](https://openjdk.org/jeps/431): Sequenced Collections
+* [JEP 440](https://openjdk.org/jeps/440): Record Patterns
+* [JEP 441](https://openjdk.org/jeps/441): Pattern Matching for switch
+* [JEP 444](https://openjdk.org/jeps/444): Virtual Threads
+
+## Enlaces
 
 * <https://docs.oracle.com/javase/tutorial/index.html>
 * <https://docs.oracle.com/javase/tutorial/java/TOC.html>
 * <https://docs.oracle.com/javase/tutorial/tutorialLearningPaths.html>
 * <https://docs.oracle.com/en/java/javase/11/>
-* <http://openjdk.java.net/>
+* <https://openjdk.org/>
+* <https://github.com/openjdk/>
 * <https://en.wikipedia.org/wiki/Java_version_history>
 * <https://www.adictosaltrabajo.com/2016/11/24/primeros-pasos-con-junit-5/>
 * <http://innovationlabs.softtek.co/testing-unitario>
 * <https://help.semmle.com/wiki/display/JAVA/Java+queries>
 
-### License
+## Licencia
 
 [![Licencia de Creative Commons](https://i.creativecommons.org/l/by-sa/4.0/80x15.png)](http://creativecommons.org/licenses/by-sa/4.0/)
 Esta obra está bajo una [licencia de Creative Commons Reconocimiento-Compartir Igual 4.0 Internacional](http://creativecommons.org/licenses/by-sa/4.0/).
-
-## ANEXO: Effective Java
-
-(todo)
-
-### Creating and Destroying Objects
-
-Este capítulo trata de la creación y destrucción de objetos: cuándo y cómo crearlos, cuándo y cómo evitar su creación, cómo asegurar que se destruyan a tiempo y cómo gestionar cualquier acción de limpieza que deba preceder a su destrucción.
-
-#### Item 1: Consider static factory methods instead of constructors
-
-La forma tradicional de que una clase permita a un cliente obtener una instancia es proporcionar un constructor público. Pero hay otra técnica y es proveer un método público _'static factory'_ que es simplemente un **método estático que retorna una instancia** de la clase.
-
-```java
-// Retorna una instancia de Boolean usando el parámetro de tipo boolean
-public static Boolean valueOf(boolean b) {
-    return b ? Boolean.TRUE : Boolean.FALSE;
-}
-```
-
-Hay que tener en cuenta que _'static factory method'_ no es lo mismo que el patrón *__'Factory Method'__* de los patrones de diseño _"Design Patterns: Elements of Reusable Object-Oriented Software"_.
-
-No es incompatible que una clase suministre _'static factory methods'_ además de constructores públicos.
-
-El uso de estos métodos tiene ventajas:
-
-* **Una ventaja de los _'static factory methods'_ es que, a diferencia de los constructores, tienen nombres**. Podemos elegir nombres que sean mucho más descriptivos que los constructores.
-
-* **Una segunda ventaja es que, a diferencia de los constructores, no tienen que crear un nuevo objeto cada vez que se les invoca.** Esto permite clases inmutables que retornen instancias ya creadas, mejorando el rendimiento ya que podemos evitar la creación de nuevos objetos.
-
-* **Una tercera ventaja es que, a diferencia de los constructores, estos métodos pueden devolver un objeto de cualquier subtipo de su tipo de devolución.** Esto da una gran flexibilidad para elegir la clase del objeto devuelto.
-
-* **Una cuarta ventaja de las fábricas estáticas es que la clase del objeto devuelto puede variar de una llamada a otra en función de los parámetros de entrada.** Se permite cualquier subtipo del tipo de retorno declarado. La clase del objeto devuelto también puede variar de una liberación a otra.
-
-* **Una quinta ventaja de las fábricas estáticas es que la clase del objeto devuelto no necesita existir cuando se escribe la clase que contiene el método.**
-
-Como inconvenientes destacar:
-
-* **La principal limitación de proporcionar sólo métodos estáticos de fábrica es que las clases sin constructores públicos o protegidos no pueden ser heredadas.**
-
-* **Otra limitación es que no es fácil detectar estas factorías en la documentación de la clase.** Esto es debido a como funciona la herramienta de Javadoc. Los constructores aparecen en un lugar destacado a diferencia de los métodos. Normalmente, estos métodos suelen seguir ciertas convenciones:
-
-  * **from**: un método _'type-conversion'_ que toma un parámetro y retorna la correspondiente instancia de ese tipo:
-
-  ```java
-  Date d = Date.from(instant);
-  ```
-
-  * **of**: un método de agregación que toma múltiples parámetros y devuelve una instancia de ese tipo que los incorpora:
-
-  ```java
-  Set<Rank> faceCards = EnumSet.of(JACK, QUEEN, KING);
-  ```
-
-  * **valueOf**: una forma más descriptiva de _'from'_ y _'of'_:
-
-  ```java
-  BigInteger prime = BigInteger.valueOf(Integer.MAX_VALUE);
-  ```
-
-  * **instance** or **getInstance**: retorna una instancia que se describe por sus parámetros (si los hay) pero que no puede decirse que tenga el mismo valor:
-
-  ```java
-  StackWalker luke = StackWalker.getInstance(options);
-  ```
-
-  * **create** or **newInstance**: como el anterior salvo que esta vez de garantiza que en cada llamada se devuelve una nueva instancia
-
-  ```java
-  Object newArray = Array.newInstance(classObject, arrayLen);
-  ```
-
-  * **getType**: como **getInstance**, pero se usa si el método de fábrica está en una clase diferente. _'Type'_ es el tipo de objeto devuelto por el método de fábrica:
-
-  ```java
-  FileStore fs = Files.getFileStore(path);
-  ```
-
-  * **newType** como **newInstance**, pero se usa si el método de fábrica está en una clase diferente. _'Type'_ es el tipo de objeto devuelto por el método de fábrica:
-
-  ```java
-  BufferedReader br = Files.newBufferedReader(path);
-  ```
-
-  * **type** una alternativa concisa a **getType** y **newType**:
-
-  ```java
-  List<Complaint> litany = Collections.list(legacyLitany);
-  ```
-
-#### Item 2: Consider a builder when faced with many constructor parameters
-
-Las factorías estáticas y los constructores comparten una limitación: no se adaptan bien a un gran número de parámetros opcionales.
-
-Tradicionalmente los programadores han usado el patrón _'telescoping constructor'_ en el cual se provee a la clase de un constructor con los parámetros requeridos, otro constructor con uno de los parámetros opcionales, otro con dos y así sucesivamente hasta completar la lista y tener un constructor con todos los opcionales. De esta forma cuando se desea crear una instancia, se utiliza el constructor con la lista de parámetros más corta que contiene todos los parámetros que se desean configurar. Los parámetros que no se utilizan se suele pasar como 0, 'null', etc..
-
-```java
-public class NutritionFacts {
-  private final int servingSize;  // (mL) required
-  private final int servings;     // (per container) required
-  private final int calories;     // (per serving) optional
-  private final int fat;          // (g/serving) optional
-  private final int sodium;       // (mg/serving) optional
-  private final int carbohydrate; // (g/serving) optional
-
-  public NutritionFacts(int servingSize, int servings) {
-    this(servingSize, servings, 0);
-  }
-
-  public NutritionFacts(int servingSize, int servings, int calories) {
-    this(servingSize, servings, calories, 0);
-  }
-
-  public NutritionFacts(int servingSize, int servings, int calories, int fat) {
-    this(servingSize, servings, calories, fat, 0);
-  }
-
-  public NutritionFacts(int servingSize, int servings, int calories, int fat, int sodium) {
-    this(servingSize, servings, calories, fat, sodium, 0);
-  }
-  
-  public NutritionFacts(int servingSize, int servings, int calories, int fat, int sodium, int carbohydrate) {
-    this.servingSize = servingSize;
-    this.servings = servings;
-    this.calories = calories;
-    this.fat = fat;
-    this.sodium = sodium;
-    this.carbohydrate = carbohydrate;
-  }
-}
-```
-
-En resumen, el patrón _'telescoping constructor'_ funciona, pero es difícil escribir código cliente cuando hay muchos parámetros, y es más difícil de leer. Además, es propenso a errores ya que cuanto más extensa es la lista de parámetros mayores probabilidades de equivocarse en el orden de los mismos al invocar un constructor. Si los parámetros son del mismo tipo, el compilador no mostrará ningún error.
-
-Otro patrón que permite trabajar con muchos parámetros opcionales en un constructor es el patrón _'JavaBean'_. En este patrón se invoca un constructor sin parámetros para crear un objeto y luego se invocan los metódos `setters` de cada parámetro tanto requerido como opcional que sea necesario para construir correctamente el objeto:
-
-```java
-NutritionFacts cocaCola = new NutritionFacts();
-cocaCola.setServingSize(240);
-cocaCola.setServings(8);
-cocaCola.setCalories(100);
-cocaCola.setSodium(35);
-cocaCola.setCarbohydrate(27);
-```
-
-Este patrón es más fácil de leer y mantener pero tiene el inconveniente de que debido a que la construcción se divide en múltiples llamadas, un '_JavaBean'_ puede estar en un estado inconsistente a lo largo de su construcción. La clase no tiene la opción de hacer cumplir la consistencia simplemente comprobando la validez de los parámetros del constructor. Intentar usar un objeto cuando está en un estado inconsistente puede causar fallos que están lejos del código que contiene el fallo y por lo tanto son difíciles de depurar.
-
-Afortunadamente, existe una tercera alternativa que combina la seguridad _'telescoping constructor'_ con la legibilidad del patrón _'JavaBeans'_. Es una forma del patrón *__'Builder'__* incluido en _"Design Patterns: Elements of Reusable Object-Oriented Software"_.
-
-En lugar de hacer el objeto deseado directamente, el cliente llama a un constructor (o fábrica estática) con todos los parámetros requeridos y consigue un objeto **'Builder'**. Luego el cliente llama a los métodos similares a los `setters` en el objeto constructor para establecer cada parámetro opcional de interés. Finalmente, el cliente llama a un método `build()` sin parámetros para generar el objeto, que es típicamente inmutable.
-
-```java
-// Builder Pattern
-public class NutritionFacts {
-  private final int servingSize;
-  private final int servings;
-  private final int calories;
-  private final int fat;
-  private final int sodium;
-  private final int carbohydrate;
-  
-  public static class Builder {
-    // Required parameters
-    private final int servingSize;
-    private final int servings;
-    // Optional parameters - initialized to default values
-    private int calories = 0;
-    private int fat = 0;
-    private int sodium = 0;
-    private int carbohydrate = 0;
-
-    public Builder(int servingSize, int servings) {
-      this.servingSize = servingSize;
-      this.servings = servings;
-    }
-
-    public Builder calories(int val) {
-      calories = val;
-      return this;
-    }
-
-    public Builder fat(int val) {
-      fat = val;
-      return this;
-    }
-
-    public Builder sodium(int val) {
-      sodium = val;
-      return this;
-    }
-
-    public Builder carbohydrate(int val) {
-      carbohydrate = val;
-      return this;
-    }
-
-    public NutritionFacts build() {
-      return new NutritionFacts(this);
-    }
-  }
-  
-  private NutritionFacts(Builder builder) {
-    servingSize = builder.servingSize;
-    servings = builder.servings;
-    calories = builder.calories;
-    fat = builder.fat;
-    sodium = builder.sodium;
-    carbohydrate = builder.carbohydrate;
-  }
-}
-```
-
-Este código de cliente es fácil de escribir y, lo que es más importante, fácil de leer. La clase es inmutable, y todos los valores por defecto de los parámetros están en un solo lugar. Los métodos `set` del **'Builder'** devuelven al constructor mismo (con `return this`) para que las invocaciones puedan ser encadenadas, resultando en una API fluida. Para detectar parámetros no válidos lo antes posible, podemos verificar la validez de los parámetros en el constructor y los métodos del constructor:
-
-```java
-NutritionFacts cocaCola = new NutritionFacts.Builder(240, 8).calories(100).sodium(35).carbohydrate(27).build();
-```
-
-El patrón *__'Builder'__* simula los parámetros opcionales con nombre que se encuentran en Python, Kotlin o Scala.
-
-#### Item 3: Enforce the singleton property with a private constructor or an enum type
-
-Una clase *singleton* es simplemente una clase que se instancia exactamente una vez. Los *'singletons'* normalmente representan un objeto sin estado, como una función o un componente del sistema que es intrínsecamente único. Hacer que una clase sea un *'singleton'* puede dificultar la prueba de sus clientes porque es imposible sustituir una implementación simulada por un *'singleton'* a menos que implemente una interfaz que sirva como su tipo.
-
-Hay dos formas comunes de implementar *'singletons'*. Ambos se basan en mantener el constructor privado y exportar un miembro estático público para proporcionar acceso a la única instancia.
-
-En primer lugar, hacer que la variable miembro sea un campo final:
-
-```java
-// Singleton with public final field
-public class Elvis {
-    public static final Elvis INSTANCE = new Elvis();
-    private Elvis() { ... }
-    public void leaveTheBuilding() { ... }
-}
-```
-
-El constructor privado es llamado una única vez para inicializar el campo públic, estático y final `Elvis.instance`. En teoría sólo habrá un único `Elvis` aunque mediante reflexión, un cliente con suficientes privilegios podría invocar al método privado haciéndolo accesible. Para evitar esto, hay que modificar el constructor para que lance una excepción si se intenta crear una segunda instancia.
-
-La principal ventaja del enfoque de campo público es que la API deja claro que la clase es una clase *'singleton'*: el campo estático público es final, por lo que siempre contendrá la misma referencia de objeto. La segunda ventaja es que es más simple.
-
-Una segunda forma es hacer que el miembro público sea un método *'static factory'*:
-
-```java
-// Singleton with static factory
-public class Elvis {
-    private static final Elvis INSTANCE = new Elvis();
-    private Elvis() { ... }
-    public static Elvis getInstance() { return INSTANCE; }
-    public void leaveTheBuilding() { ... }
-}
-```
-
-Todas las llamadas a `Elvis.getInstance()` devuelven la misma referencia de objeto, y nunca se creará ninguna otra instancia de Elvis (con el mismo problema mencionado anteriormente).
-
-Una de las ventajas de este enfoque es que brinda la flexibilidad de cambiar de opinión sobre si la clase es un singleton sin cambiar su API. El método *'static factory'* devuelve la única instancia, pero podría modificarse para devolver, por ejemplo, una instancia separada para cada hilo que lo invoque. Una segunda ventaja es que puede escribir una fábrica de singleton genérica si su aplicación lo requiere.
-
-A menos que una de estas ventajas sea relevante, **el primer enfoque de campo público es preferible al segundo enfoque**.
-
-Una tercera forma de implementar una clase *'singleton'* es declarar una enumeración de un solo elemento. Ese enfoque es parecido al enfoque de campo público sin el inconveniente del problema de la reflexión. Es un enfoque más conciso y directo pero es también un enfoque poco natural. Un tipo de enumeración de un solo elemento es a menudo la mejor manera de implementar un *'singleton'*. Tenga en cuenta que no puede usar este enfoque si su *'singleton'* debe extender una superclase que no sea `Enum`.
-
-#### Item 4: Enforce noninstantiability with a private constructor
-
-Ocasionalmente, querrá escribir una clase que sea solo una agrupación de métodos estáticos y campos estáticos. Estas clases han adquirido una mala reputación debido a que algunas personas abusan de ellas para evitar pensar en términos de objetos, pero tienen usos válidos.
-
-Se pueden utilizar para agrupar métodos relacionados en valores primitivos o arrays como en `java.lang.Math` o `java.util.Arrays`. También se pueden usar para agrupar métodos estáticos, incluidas factorías estáticas, para objetos que implementan alguna interfaz como en `java.util.Collections`. Por último, estas clases se pueden usar para agrupar métodos en una clase final, ya que no se pueden colocar en una subclase.
-
-Tales clases de utilidad no fueron diseñadas para ser instanciadas: una instancia no tendría sentido. Sin embargo, en ausencia de constructores explícitos, el compilador proporciona un constructor público, sin parámetros y predeterminado. Para un usuario, este constructor es indistinguible de cualquier otro.
-
-**Intentar imponer la no instanciabilidad haciendo que la clase sea abstracta no funciona.** Se podría instanciar una subclase. Además, induce a error al usuario al pensar que la clase fue diseñada para herencia.
-
-Existe, sin embargo, un *'idiom'* simple para garantizar la no instanciación. Un constructor predeterminado se genera solo si una clase no contiene constructores explícitos, por lo que se puede hacer que una clase no sea instanciable al incluir un constructor privado:
-
-```java
-// Noninstantiable utility class
-public class UtilityClass {
-    // Suppress default constructor for noninstantiability
-    private UtilityClass() {
-        throw new AssertionError();
-    }
-    // ....
-}
-```
-
-Debido a que el constructor explícito es privado, es inaccesible fuera de la clase. El `AssertionError` no se requiere estrictamente, pero proporciona un mecanismo seguro en caso de que el constructor sea invocado accidentalmente desde dentro de la clase. Garantiza que la clase nunca será instanciada bajo ninguna circunstancia.
-
-Este *'idiom'* es ligeramente contrario a la intuición porque el constructor se proporciona expresamente para que no se pueda invocar. Por lo tanto, es aconsejable incluir un comentario, como se mostró en el ejemplo.
-
-Como efecto secundario, este *'idiom'* también evita que la clase sea heredada. Todos los constructores deben invocar un constructor de superclase, explícita o implícitamente, y una subclase no tendría un constructor de superclase accesible para invocar.
-
-#### Item 5: Prefer dependency injection to hardwiring resources
-
-Muchas clases dependen de recursos subyacentes. Por ejemplo, un corrector ortográfico depende de un diccionario. No es raro ver estas clases implementadas como clases de utilidad estáticas (Item 4):
-
-```java
-// Inappropriate use of static utility - inflexible & untestable!
-public class SpellChecker {
-    private static final Lexicon dictionary = ...;
-    private SpellChecker() {} // Noninstantiable
-    public static boolean isValid(String word) { ... }
-    public static List<String> suggestions(String typo) { ... }
-}
-```
-
-Del mismo modo, no es raro verlos implementados como *singletons* (Item 3):
-
-```java
-// Inappropriate use of singleton - inflexible & untestable!
-public class SpellChecker {
-    private final Lexicon dictionary = ...;
-    private SpellChecker(...) {}
-    public static INSTANCE = new SpellChecker(...);
-    public boolean isValid(String word) { ... }
-    public List<String> suggestions(String typo) { ... }
-}
-```
-
-Ninguno de estos enfoques es satisfactorio porque suponen que sólo será útil utilizar un único diccionario. La realidad es que cada idioma tendrá su propio diccionario. Además, a efectos de pruebas puede ser necesario el uso de un diccionario especial.
-
-Puede intentar que `SpellChecker` admita varios diccionarios haciendo que el campo `dictionary` no sea final y agregando un método para cambiar el diccionario en un corrector ortográfico existente, pero esto sería incómodo, propenso a errores e inviable en una configuración concurrente. **Las clases de utilidad estática y los singletons son inapropiados para las clases cuyo comportamiento está parametrizado por un recurso subyacente**.
-
-Lo que se requiere es la capacidad de admitir varias instancias de la clase (en nuestro ejemplo, `SpellChecker`), cada una de las cuales utilice l recurso deseado por el cliente (en nuestro ejemplo, el diccionario). Un patrón simple que satisface este requisito es **pasar el recurso al constructor al crear una nueva instancia**. Esta es una forma de inyección de dependencia: el diccionario es una dependencia del corrector ortográfico y se inyecta en el corrector ortográfico cuando se crea:
-
-```java
-// Dependency injection provides flexibility and testability
-public class SpellChecker {
-    private final Lexicon dictionary;
-    public SpellChecker(Lexicon dictionary) {
-        this.dictionary = Objects.requireNonNull(dictionary);
-    }
-    public boolean isValid(String word) { ... }
-    public List<String> suggestions(String typo) { ... }
-}
-```
-
-En el ejemplo la clase `SpellChecker` sólo tiene un recurso pero la inyección de dependencias funciona con un número arbitrario de recursos. La inyección de dependencias es igualmente aplicable a constructores, factorías estáticas (Item 1) y *builders* (Item 2).
-
-Aunque la inyección de dependencias mejora en gran medida la flexibilidad y la capacidad de prueba, puede saturar grandes proyectos, que generalmente contienen miles de dependencias. Este desorden puede eliminarse utilizando un framework de inyección de dependencias  como [Dagger](https://dagger.dev/), [Guice](https://github.com/google/guice) o [Spring](https://spring.io/).
-
-En resumen, no utilice una clase de utilidad estática o un *singleton* para implementar una clase que dependa de uno o más recursos subyacentes cuyo comportamiento afecte al de la clase, y no haga que la clase cree estos recursos directamente. En cambio, pase los recursos, o las factorías para crearlos, al constructor (o fábrica estática o *builder*). Esta práctica, conocida como inyección de dependencia, mejorará en gran medida la flexibilidad, la reutilización y la capacidad de prueba de una clase.
-
-#### Item 6: Avoid creating unnecessary objects
-
-(todo)
