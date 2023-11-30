@@ -2,29 +2,41 @@
 
 Java es un **lenguaje orientado a objetos**. En la década de los 60 nació la programación estructurada impulsada por lenguajes como Pascal o C. Con el aumento de la complejidad de los programas se adoptó un nuevo enfoque como es la programación orientada a objetos o POO.
 
+Java fue desarrollado por James Gosling, Patrick Naughton, Chris Warth, Ed Frank y Mike Sheridan de Sun Microsystems en 1991. Inicialmente, el lenguaje se denominó _Oak_ aunque se rebautizó como **Java** en 1995. La concepción de Java se basa en C y C++.
+
+Su objetivo inicial era crear un lenguaje independiente y portátil capaz de ser ejecutado en diferentes plataformas y con diferentes CPUs. La clave está en que el resultado de la compilación de código Java no es código ejecutable, sino código de bytes o _bytecode_. Es un conjunto optimizado de instrucciones diseñadas para ejecutarse sobre la JVM o _Java Virtual Machine_. Esta máquina virtual es la que interpreta el _bytecode_. De esta forma sólo es necesario implementar la JVM para cada plataforma.
+
 Desde un punto de vista general, un programa se puede organizar de dos formas: sobre su código (lo que sucede) y sobre sus datos (lo que se ve afectado). En la programación estructurada se organiza sobre el código pero en la programación orientada a objetos el programa se estructura alrededor de los datos, definiendo estos datos y las rutinas que permiten actuar sobre los mismos.
 
 Para complementar los principios de la programación orientada a objetos, se aplican los conceptos de **encapsulación, herencia y polimorfismo**.
 
-* La **encapsulación** es un mecanismo que combina el código con los datos que manipula, al tiempo que los protege de interferencias externas. La unidad básica de encapsulación es la **clase**. La clase define la forma de un objeto y especifica los datos y el código que actúa sobre ellos. Los objetos son instancias de una clase.
+- La **encapsulación** es un mecanismo que combina el código con los datos que manipula, al tiempo que los protege de interferencias externas. La unidad básica de encapsulación es la **clase**. La clase define la forma de un objeto y especifica los datos y el código que actúa sobre ellos. Los objetos son instancias de una clase.
 
-* El **polimorfismo** es la propiedad que permite a una interfaz acceder a una clase general de acciones. Este concepto suele expresarse como "una interfaz, múltiples métodos". El compilador en tiempo de ejecución será el encargado de seleccionar el método correcto a invocar.
+- El **polimorfismo** es la propiedad que permite a una interfaz acceder a una clase general de acciones. Este concepto suele expresarse como "una interfaz, múltiples métodos". El compilador en tiempo de ejecución será el encargado de seleccionar el método correcto a invocar.
 
-* La **herencia** es el proceso mediante el cual un objeto puede adquirir las propiedades de otro. Gracias a la herencia un objeto solo tiene que definir los atributos que lo hacen único dentro de la clase y heredar los atributos generales.
+- La **herencia** es el proceso mediante el cual un objeto puede adquirir las propiedades de otro. Gracias a la herencia un objeto solo tiene que definir los atributos que lo hacen único dentro de la clase y heredar los atributos generales.
 
-[Java Platform, Standard Edition Documentation](https://docs.oracle.com/en/java/javase/index.html)
+## Herramientas de Java
+
+```sh
+# Compilar código Java en bytecode
+$ javac filename.java
+
+# Ejecutar aplicación Java
+$  java filename
+
+# Generar páginas HTML de documentación de la API
+$ javadoc
+
+# Iniciar una consola gráfica para monitorear y gestionar aplicaciones Java
+$ jconsole
+```
+
+- [Java® Development Kit Version 21 Tool Specifications](https://docs.oracle.com/en/java/javase/21/docs/specs/man/index.html)
 
 ## Sintaxis básica
 
-```sh
-# Compilar código Java 
-$ javac filename.java
-
-# Ejecutar código
-$  java filename
-```
-
----
+### Comentarios
 
 ```java
 // Comentarios de una sóla línea
@@ -41,40 +53,15 @@ public class Sample {
 }
 ```
 
-```java
-/* 
-Todos los programas importan automáticamente el paquete 'java.lang' 
-que define la clase 'System'
-*/
-// Importa la clase 'ArrayList' dentro del paquete 'java.util'
-import java.util.ArrayList;
-// Importa todas las clases dentro del paquete 'java.security'
-import java.security.*;
+### Identificador
 
-/* Para Java un archivo es una unidad de compilación. 
-Pueden contener una o varias clases.
-Por convención, el nombre de la clase principal (declarada como public) 
-debe coincidir con el nombre del archivo que contiene el programa.
-*/
-public class Sample {
+En Java, un **identificador** es un nombre asignado a un método, variable u otro elemento definido por el usuario. Pueden tener uno o varios caracteres de longitud.
 
-    // Un programa debe tener un método 'main' como punto de entrada
-    public static void main (String[] args) {
-        // Usa 'System.out.println' para imprimir líneas
-        System.out.println("¡Hola mundo!");
-        System.out.println(
-            " Integer (int): " + 10 +
-            " Double (double): " + 3.14 +
-            " Boolean (boolean): " + true);
-
-        // Para imprimir sin el salto de línea, usa 'System.out.print'
-        System.out.print("Hola ");
-        System.out.print("Mundo");
-    }
-}
-```
+Los nombres de variable pueden empezar por **cualquier letra, guión bajo o el símbolo `$`**. El siguiente carácter puede ser **cualquier letra, dígito, guión bajo o el símbolo `$`**. Por lo tanto no pueden empezar con un dígito ni emplear palabras clave de Java.
 
 ### Tipos y variables
+
+Los tipos de datos son especialmente importantes en Java por tratarse de un lenguaje de **tipado fuerte**. Es decir, el compilador comprueba la compatibilidad de los tipos en todas las operaciones. Para realizar la comprobación de tipos, todas las variables, expresiones y valores tienen un tipo.
 
 Java es _"case sensitive"_ lo que significa que Java distingue entre mayúsculas y minúsculas.
 
@@ -144,16 +131,16 @@ int octal = 011; // Formato octal que corresponde a 9 en decimal
 
 Secuencias de escape de caracteres:
 
-* `\` - Comilla simple
-* `\"` - Comilla doble
-* `\\` - Barra invertida
-* `\r` - Retorno de carro
-* `\n` - Nueva línea
-* `\f` - Salto de formulario
-* `\t` - Tabulación horizontal
-* `\b` - Retroceso
-* `\ddd` - Constante octal (donde 'ddd' es una constante octal)
-* `\uxxxx` - Constante hexadecimal (donde 'xxxx' es una constante hexadecimal)
+- `\'` - Comilla simple
+- `\"` - Comilla doble
+- `\\` - Barra invertida
+- `\r` - Retorno de carro
+- `\n` - Nueva línea
+- `\f` - Salto de formulario
+- `\t` - Tabulación horizontal
+- `\b` - Retroceso
+- `\ddd` - Constante octal (donde 'ddd' es una constante octal)
+- `\uxxxx` - Constante hexadecimal (donde 'xxxx' es una constante hexadecimal)
 
 Desde JDK 7 se pueden emplear guiones bajos para mejorar la legibilidad de literales enteros o flotantes:
 
@@ -171,14 +158,15 @@ final int HORAS_QUE_TRABAJO_POR_SEMANA = 9001;
 Notación abreviada para declarar (e inicializar) múltiples variables:
 
 ```java
+// Declarar las tres variables del mismo tipo 
 int x, y, z;
+
+// Declarar e inicializar las variables
 int i1 = 1, i2 = 2;
-int a = b = c = 100; // el símbolo '=' retorna el valor de su derecha y por tanto lo podemos usar para de esta forma.
+
+// El símbolo '=' retorna el valor de su derecha y por lo que esta forma es válida
+int a = b = c = 100; 
 ```
-
-En Java, un **identificador** es un nombre asignado a un método, variable u otro elemento definido por el usuario. Pueden tener uno o varios caracteres de longitud.
-
-Los nombres de variable pueden empezar por **cualquier letra, guión bajo o $**. El siguiente carácter puede ser **cualquier letra, dígito, guión bajo o $**. Por lo tanto no pueden empezar con un dígito ni emplear palabras clave de Java.
 
 Un bloque de código es un grupo de dos o más instrucciones definidas entre llaves (`{}`). Tras crear un bloque de código se convierte en una unidad lógica que se puede usar como si fuera una instrucción independiente.
 
@@ -209,7 +197,7 @@ public class Bloques {
 // La aritmética es directa
 System.out.println("1 + 2 = " + (1 + 2)); // => 3
 System.out.println("2 - 1 = " + (2 - 1)); // => 1
-System.out.println("2 * 1 = " + (2 * 1)); // => 2
+System.out.println("2 - 1 = " + (2 - 1)); // => 2
 System.out.println("1 / 2 = " + (1 / 2)); // => 0 (0.5 truncado)
 
 // Módulo
@@ -226,7 +214,7 @@ System.out.println("2 >= 2 " + (2 >= 2)); // => true
 // Asignaciones abreviadas
 int x += 10; // x = x + 10;
 int x -= 10; // x = x - 10;
-int x *= 10; // x = x * 10;
+int x *= 10; // x = x - 10;
 int x /= 10; // x = x / 10;
 int x %= 10; // x = x % 10;
 boolean bool &= true; // bool = bool & true;
@@ -315,7 +303,7 @@ En la JDK 5 se añadió los bucles `for-each` que permiten iterar por matrices, 
 
 ```java
 /*
-for(tipo var-iteración :  collection) {
+for(tipo var-iteración : collection) {
     bloque instrucciones;
 } */
 ```
@@ -324,7 +312,7 @@ La estructura `switch` funciona con tipos numéricos simples como `byte`, `short
 
 ```java
 int mes = 3;
-switch (mes){
+switch (mes) {
     case 1:
         System.out.println("Enero");
         break;
@@ -351,7 +339,7 @@ Tanto `break` como `continue` pueden funcionar junto a una etiqueta permitiendo 
 
 ```java
 public class Sample{
-    public static void main(String... args){
+    public static void main(String ... args){
         for (int i = 0; i < 4; i++) {
             one: {
                 two: {
@@ -378,7 +366,34 @@ Para definir un paquete se utiliza la palabra clave `package`:
 package paquete1.paquete2....paqueteN;
 ```
 
-### Importación estática
+### Importación
+
+Cuando se usa una clase de otro paquete, se debe cualificar su nombre con el nombre de su paquete, como por ejemplo `java.util.ArrayList`.
+
+Sin embargo, podemos usar la palabra clave `import` para importar uno o varios miembros de un paquete. El paquete `java.lang` es exclusivo ya que se importa automáticamente en todos los programas Java.
+
+Por tanto se puede importar una **clase concreta** o importar **todas las clases** de un paquete con el astericos (`*`).
+
+La sentencia `import` se utiliza después de la sentencia `package` si existe.
+
+```java
+package com.example;
+
+//import java.lang.*; // importación automática por defecto
+import java.util.HashMap;
+
+public class example {
+    public static void main(String[] args) {
+        // Al no realizar la importación hay que cualificar el nombre
+        java.util.ArrayList aList = new java.util.ArrayList();
+
+        // Al realizar la importación podemos usar 'HashMap'
+        HashMap<Integer, String> hMap = new HashMap<>();
+    }
+}
+```
+
+#### Importación estática
 
 Java admite la importación de campos estáticos finales (constantes) y de métodos estáticos usando la forma `import static`. Al usar este tipo de importación, se puede hacer referencia directamente a miembros estáticos por sus nombres, sin necesidad de calificarlos con el nombre de su clase.
 
@@ -535,7 +550,7 @@ class Outern {
 
 Notación para la definición de un método:
 
->`<public/private/protected> <tipo_de_retorno> <nombre_funcion>(<argumentos>)`
+>`<visibilidad> <tipo_de_retorno> <nombre_funcion>(<argumentos>)`
 
 Los **parámetros** aparecen en la definición del método. Cuando un método tiene parámetros la parte de su definición que los especifica se denomina 'lista de parámetros'.
 
@@ -626,9 +641,9 @@ Se pueden definir como `static` tanto variables como métodos. Las variables dec
 
 Los métodos `static` tienen ciertas restricciones:
 
-* Sólo pueden invocar directamente otros métodos `static`
-* Sólo pueden acceder directamente a datos `static`
-* Carecen de una referencia `this`
+- Sólo pueden invocar directamente otros métodos `static`
+- Sólo pueden acceder directamente a datos `static`
+- Carecen de una referencia `this`
 
 ### Bloque `static`
 
@@ -769,8 +784,8 @@ class Car extends SuperCar {
 
 Visibilidad permitidas para las clases:
 
-* `default` (sin modificador) -> Sólo será visible por otras clases **dentro del mismo paquete**.
-* `public` -> Una clase pública es **visible desde cualquier lugar**.
+- `default` (sin modificador) -> Sólo será visible por otras clases **dentro del mismo paquete**.
+- `public` -> Una clase pública es **visible desde cualquier lugar**.
 
 **NOTA**: Una clase declarada como `public` debe encontrarse en un archivo con el mismo nombre.
 
@@ -783,8 +798,8 @@ public class Car {} // clase 'public' y en un fichero con el nombre 'Car.java'
 
 Visibilidad permitida para las interfaces:
 
-* `default` (sin modificador) -> Una interfaz sin modificador sólo será visible por otras clases o interfaces **dentro del mismo paquete**.
-* `public` -> Una interfaz pública es visible **desde cualquier lugar**.
+- `default` (sin modificador) -> Una interfaz sin modificador sólo será visible por otras clases o interfaces **dentro del mismo paquete**.
+- `public` -> Una interfaz pública es visible **desde cualquier lugar**.
 
 *NOTA*: Una interfaz declarada como `public` debe encontrarse en un archivo con el mismo nombre.
 
@@ -938,9 +953,9 @@ Los recursos que se pueden emplear con este tipo de `try-with-resources` son rec
 
 ```java {.numberLines}
 /* 
- * El siguiente código usa un 'try con recursos' para abrir un archivo
- * y después cerrarlo automáticamente al salir del bloque 'try'.
- * Por tanto ya no es necesario invocar a 'close()' 
+ - El siguiente código usa un 'try con recursos' para abrir un archivo
+ - y después cerrarlo automáticamente al salir del bloque 'try'.
+ - Por tanto ya no es necesario invocar a 'close()' 
  */
 try (FileInputStream fin = New FileInputStream(args[0])) {
   // bloque de código
@@ -967,9 +982,9 @@ Los programas en Java realizan la E/S a través de **flujos** (_'streams'_).
 
 Todos los programas de Java importan automáticamente el paquete `java.lang` que define la clase `System`. Esta clase contiene, entre otros elementos, tres variables de flujo predefinidos:
 
-* `System.in` - hace referencia al flujo estándar de entrada, que es el teclado.
-* `System.out` - hace referencia al flujo estándar de salida, que es la consola.
-* `System.err` - hace referencia al flujo de error estándar que también es la consola de forma predeterminada.
+- `System.in` - hace referencia al flujo estándar de entrada, que es el teclado.
+- `System.out` - hace referencia al flujo estándar de salida, que es la consola.
+- `System.err` - hace referencia al flujo de error estándar que también es la consola de forma predeterminada.
 
 ### Flujos de bytes
 
@@ -977,26 +992,26 @@ Los flujos de bytes se definen en dos jerarquías de clases. En la parte superio
 
 A partir de estas clases se crean subclases concretas con distinta funcionalidad:
 
-* InputStream:
-  * `BufferedInputStream` - Flujo de entrada en búfer
-  * `ByteArrayInputStream` - Flujo de entrada desde una matriz de bytes
-  * `DataInputStream` - Flujo de entrada que contiene métodos para leer los tipos de datos estándar de Java
-  * `FileInputStream` - Flujo de entrada que lee desde un archivo
-  * `FilterInputStream` - Implementa 'InputStream'
-  * `ObjectInputStream` - Flujo de entrada de objetos
-  * `PipedInputStream` - Conducción de entrada
-  * `PushbackInputStream` - Flujo de entrada que permite devolver bytes al flujo
-  * `SequenceInputStream` - Flujo de entrada que combina dos o más flujos de entrada que se leen secuencialmente, uno tras otro
+- InputStream:
+  - `BufferedInputStream` - Flujo de entrada en búfer
+  - `ByteArrayInputStream` - Flujo de entrada desde una matriz de bytes
+  - `DataInputStream` - Flujo de entrada que contiene métodos para leer los tipos de datos estándar de Java
+  - `FileInputStream` - Flujo de entrada que lee desde un archivo
+  - `FilterInputStream` - Implementa 'InputStream'
+  - `ObjectInputStream` - Flujo de entrada de objetos
+  - `PipedInputStream` - Conducción de entrada
+  - `PushbackInputStream` - Flujo de entrada que permite devolver bytes al flujo
+  - `SequenceInputStream` - Flujo de entrada que combina dos o más flujos de entrada que se leen secuencialmente, uno tras otro
 
-* OutputStream:
-  * `BufferedOutputStream` - Flujo de salida en búfer
-  * `ByteArrayOutputStream` - Flujo de salida que escribe en una matriz de bytes
-  * `DataOutputStream` - Flujo de salida que contiene métodos para escribir los tipos de datos estándar de Java
-  * `FileOutputStream` - Flujo de salida que escribe en un archivo
-  * `FilterOutputStream` - Implementa 'OutputStream'
-  * `ObjectOutputStream` - Flujo de salida para objetos
-  * `PipedOutputStream` - Conducción de salida
-  * `PrintStream` - Flujo de salida que contiene `print()` y `println()`
+- OutputStream:
+  - `BufferedOutputStream` - Flujo de salida en búfer
+  - `ByteArrayOutputStream` - Flujo de salida que escribe en una matriz de bytes
+  - `DataOutputStream` - Flujo de salida que contiene métodos para escribir los tipos de datos estándar de Java
+  - `FileOutputStream` - Flujo de salida que escribe en un archivo
+  - `FilterOutputStream` - Implementa 'OutputStream'
+  - `ObjectOutputStream` - Flujo de salida para objetos
+  - `PipedOutputStream` - Conducción de salida
+  - `PrintStream` - Flujo de salida que contiene `print()` y `println()`
 
 #### Leer entradas de consola
 
@@ -1131,26 +1146,26 @@ Los flujos de caracteres se definen en dos jerarquías de clases. En la parte su
 
 A partir de estas clases se crean subclases concretas con distinta funcionalidad:
 
-* Reader:
-  * `BufferedReader` - Flujo de caracteres entrada en búfer
-  * `CharArrayReader` - Flujo de entrada que lee desde una matriz de caracteres
-  * `FileReader` - Flujo de entrada que lee desde un archivo
-  * `FilterReader` - Lector filtrado
-  * `InputStreamReader` - Flujo de entrada que traduce bytes en caracteres
-  * `LineNumberReader` - Flujo de entrada que cuenta líneas
-  * `PipedReader` - Conducción de entrada
-  * `PushbackReader` - Flujo de caracteres que permite devolver caracteres al flujo de entrada
-  * `StringReader` - Flujo de entrada que lee desde una cadena
+- Reader:
+  - `BufferedReader` - Flujo de caracteres entrada en búfer
+  - `CharArrayReader` - Flujo de entrada que lee desde una matriz de caracteres
+  - `FileReader` - Flujo de entrada que lee desde un archivo
+  - `FilterReader` - Lector filtrado
+  - `InputStreamReader` - Flujo de entrada que traduce bytes en caracteres
+  - `LineNumberReader` - Flujo de entrada que cuenta líneas
+  - `PipedReader` - Conducción de entrada
+  - `PushbackReader` - Flujo de caracteres que permite devolver caracteres al flujo de entrada
+  - `StringReader` - Flujo de entrada que lee desde una cadena
 
-* Writer:
-  * `BufferedWriter` - Flujo de caracteres de salida en búfer
-  * `CharArrayWriter` - Flujo de salida que escribe en una matriz de caracteres
-  * `FileWriter` - Flujo de salida que escribe en un archivo
-  * `FilterWriter` - Escritor filtrado
-  * `OutputStreamWriter` - Flujo de salida que traduce caracteres en bytes
-  * `PipedWriter` - Conducción de salida
-  * `PrintWriter` - Flujo de salida que contiene `print()` y `println()`
-  * `StringWriter` - Flujo de salida que escribe en una cadena
+- Writer:
+  - `BufferedWriter` - Flujo de caracteres de salida en búfer
+  - `CharArrayWriter` - Flujo de salida que escribe en una matriz de caracteres
+  - `FileWriter` - Flujo de salida que escribe en un archivo
+  - `FilterWriter` - Escritor filtrado
+  - `OutputStreamWriter` - Flujo de salida que traduce caracteres en bytes
+  - `PipedWriter` - Conducción de salida
+  - `PrintWriter` - Flujo de salida que contiene `print()` y `println()`
+  - `StringWriter` - Flujo de salida que escribe en una cadena
 
 #### Leer caracteres desde la consola con `BufferedReader`
 
@@ -1457,8 +1472,8 @@ Estas constantes tienen el tipo de la enumeración que las contiene. Una vez def
 
 Sin embargo **Java implementa las enumeraciones como si fueran clases**, permitiendo que tengan constructores, métodos, etc.. aunque con dos limitaciones que las diferencia del resto de clases en Java:
 
-* Una enumeración no puede heredar de otra clase.
-* Ni puede actuar como superclase de otra clase.
+- Una enumeración no puede heredar de otra clase.
+- Ni puede actuar como superclase de otra clase.
 
 ```java
 // Las constantes, al ser 'static' se invocan de esta forma: 'Enumeration.constante'
@@ -1485,9 +1500,9 @@ switch (transport) {
 
 Las enumeraciones cuentan con dos métodos predefinidos `values()` y `valueOf()` cuyo formato es:
 
-* `public static tipo-enum[] values()` => devuelve un array que contiene una lista de las constantes de enumeración
+- `public static tipo-enum[] values()` => devuelve un array que contiene una lista de las constantes de enumeración
 
-* `public static tipo-enum valueOf(String cadena)` => devuelve las constantes de enumeración cuyo valor se corresponde a la cadena pasada como argumento.
+- `public static tipo-enum valueOf(String cadena)` => devuelve las constantes de enumeración cuyo valor se corresponde a la cadena pasada como argumento.
 
 ```java
 // Uso de values() en un for-each
@@ -1830,11 +1845,11 @@ Este cuerpo puede estar compuesto por una única expresión o puede ser un bloqu
 ```java
 () -> 98.6;  // Expresión lambda sin parámetros que evalúa un valor constante
 
-(int n) -> 100 * n: // Expresión lambda con un parámetro
+(int n) -> 100 - n: // Expresión lambda con un parámetro
 
-(n) -> 100 * n; // Expresión lambda con un parámetro cuyo tipo es inferido
+(n) -> 100 - n; // Expresión lambda con un parámetro cuyo tipo es inferido
 
-n -> 100 * n; // Cuando sólo hay un parámetro los paréntesis son opcionales
+n -> 100 - n; // Cuando sólo hay un parámetro los paréntesis son opcionales
 ```
 
 Una expresión lambda no se ejecuta por sí misma, sino que forma la **implementación del método abstracto** definido por la interfaz funcional que especifica su tipo de destino. Como resultado, una expresión lambda solo se puede especificar en un contexto en el que se haya definido un tipo de destino. Uno de estos contextos se crea al asignar una expresión lambda a una referencia de interfaz funcional. Otros contextos de tipo de destino son la inicialización de variables, las instrucciones `return` y los argumentos de métodos por ejemplo.
@@ -1867,7 +1882,9 @@ interface IFuncional {
 }
 
 IFuncional sample = (n, m) -> n == m;
-// IFuncional sample = (int n, int m) -> n == m; // Forma opcional porque el compilador puede inferir los tipos de n y m por el contexto
+
+// Forma opcional porque el compilador puede inferir los tipos de n y m por el contexto
+// IFuncional sample = (int n, int m) -> n == m; 
 
 sample.areEquals(10, 15); // Invocar el método.
 ```
@@ -1984,8 +2001,8 @@ Una referencia de método permite hacer referencia a un método sin ejecutarlo. 
 
 El nombre de la clase se separa del método mediante un par de puntos `::`, un nuevo separador añadido a Java en la JDK 8:
 
-* Sintaxis para métodos estáticos: `NombreClase::nombreMétodo`
-* Sintaxis para métodos de instancia: `refObj::nombreMétodo`
+- Sintaxis para métodos estáticos: `NombreClase::nombreMétodo`
+- Sintaxis para métodos de instancia: `refObj::nombreMétodo`
 
 Si es un método genérico la sintaxis es `NombreClase::<T>nombreMétodo` o `refObj::<T>nombreMétodo`
 
@@ -2060,12 +2077,12 @@ public class Sample {
 
 Java proporciona una serie de **interfaces funcionales predefinidas** preparadas para utilizar:
 
-* `UnaryOperator<T>` -- Aplica una operación unaria a un objeto de tipo 'T' y devuelve el resultado, que también es de tipo 'T'. Su método es `apply()`.
-* `BinaryOperator<T>` -- Aplica una operación a dos objetos de tipo 'T' y devuelve el resultado, que también es de tipo 'T'. su método es `apply()`.
-* `Consumer<T>` -- Aplica una operación a un objeto de tipo 'T'. Su método es `accept()`.
-* `Supplier<T>` -- Devuelve un objeto de tipo 'T'. Su método es `get()`.
-* `Function<T, V>` -- Aplica una operación a un objeto de 'T' y devuelve el resultado como objeto de 'V'. Su método es `apply()`.
-* `Predicate<T>` -- Determina si un objeto de tipo 'T' cumple una restricción. Devuelve un valor boolean que indica el resultado. Su método es `test()`.
+- `UnaryOperator<T>` -- Aplica una operación unaria a un objeto de tipo 'T' y devuelve el resultado, que también es de tipo 'T'. Su método es `apply()`.
+- `BinaryOperator<T>` -- Aplica una operación a dos objetos de tipo 'T' y devuelve el resultado, que también es de tipo 'T'. su método es `apply()`.
+- `Consumer<T>` -- Aplica una operación a un objeto de tipo 'T'. Su método es `accept()`.
+- `Supplier<T>` -- Devuelve un objeto de tipo 'T'. Su método es `get()`.
+- `Function<T, V>` -- Aplica una operación a un objeto de 'T' y devuelve el resultado como objeto de 'V'. Su método es `apply()`.
+- `Predicate<T>` -- Determina si un objeto de tipo 'T' cumple una restricción. Devuelve un valor boolean que indica el resultado. Su método es `test()`.
 
 ```java
 import java.util.function.Predicate; // Importar la interfaz 'Predicate'
@@ -2085,9 +2102,9 @@ Una **colección** -a veces llamada contenedor- es simplemente un objeto que agr
 
 Un [framework de colecciones](https://docs.oracle.com/javase/tutorial/collections/intro/index.html) es una arquitectura unificada para representar y manipular colecciones. Todos los marcos de trabajo de colecciones contienen lo siguiente:
 
-* **Interfaces**: Estos son tipos de datos abstractos que representan colecciones. Las interfaces permiten manipular las colecciones independientemente de los detalles de su representación. En los lenguajes orientados a objetos, las interfases generalmente forman una jerarquía.
-* **Implementaciones**: Estas son las implementaciones concretas de las interfaces de colecciones. En esencia, son estructuras de datos reutilizables.
-* **Algoritmos**: Estos son los métodos que realizan cálculos útiles, como la búsqueda y clasificación, en objetos que implementan interfaces de colección. Se dice que los algoritmos son polimórficos: es decir, que se puede utilizar el mismo método en muchas implementaciones diferentes de la interfaz de colección apropiada. En esencia, los algoritmos son funciones reutilizables.
+- **Interfaces**: Estos son tipos de datos abstractos que representan colecciones. Las interfaces permiten manipular las colecciones independientemente de los detalles de su representación. En los lenguajes orientados a objetos, las interfases generalmente forman una jerarquía.
+- **Implementaciones**: Estas son las implementaciones concretas de las interfaces de colecciones. En esencia, son estructuras de datos reutilizables.
+- **Algoritmos**: Estos son los métodos que realizan cálculos útiles, como la búsqueda y clasificación, en objetos que implementan interfaces de colección. Se dice que los algoritmos son polimórficos: es decir, que se puede utilizar el mismo método en muchas implementaciones diferentes de la interfaz de colección apropiada. En esencia, los algoritmos son funciones reutilizables.
 
 ### La interfaz 'Collection'
 
@@ -2095,20 +2112,20 @@ Una [colección](https://docs.oracle.com/javase/8/docs/api/java/util/Collection.
 
 La interfaz `Collection` contiene métodos que realizan operaciones básicas como:
 
-* `int size()`
-* `boolean isEmpty()`
-* `boolean contains(Object element)`
-* `boolean add(E element)`
-* `boolean remove(Object element)`
-* `Iterator<E> iterator()`.
+- `int size()`
+- `boolean isEmpty()`
+- `boolean contains(Object element)`
+- `boolean add(E element)`
+- `boolean remove(Object element)`
+- `Iterator<E> iterator()`.
 
 También contiene métodos que operan en colecciones enteras como:
 
-* `boolean containsAll(Collection<?> c)`
-* `boolean addAll(Collection<? extends E> c)`
-* `boolean removeAll(Collection<?> c)`
-* `boolean retainAll(Collection<?> c)`
-* `void clear()`.
+- `boolean containsAll(Collection<?> c)`
+- `boolean addAll(Collection<? extends E> c)`
+- `boolean removeAll(Collection<?> c)`
+- `boolean retainAll(Collection<?> c)`
+- `void clear()`.
 
 La interfaz `Collection` hace lo que cabría esperar, dado que una colección representa un grupo de objetos. Tiene métodos que le dicen cuántos elementos hay en la colección ('size', 'isEmpty'), métodos que comprueban si un objeto dado está en la colección ('contains'), métodos que añaden y eliminan un elemento de la colección ('add', 'remove'), y métodos que proporcionan un iterador sobre la colección ('iterator').
 
@@ -2181,9 +2198,9 @@ La interfaz `Set` también añade un contrato más fuerte sobre el comportamient
 
 La plataforma Java contiene tres implementaciones de `Set` de propósito general:
 
-* **HashSet** que almacena sus elementos en una tabla hash, es la mejor implementación; sin embargo, no ofrece garantías en cuanto al orden de iteración.
-* **TreeSet** que almacena sus elementos en un árbol _'red-black'_, ordena sus elementos en función de sus valores; es sustancialmente más lento que **HashSet**.
-* **LinkedHashSet**: que se implementa como una tabla hash con una lista enlazada que la recorre, ordena sus elementos según el orden en que se insertaron en el conjunto (orden de inserción). Tiene un coste algo más elevado que un **HashSet** pero soluciona el problema del orden.
+- **HashSet** que almacena sus elementos en una tabla hash, es la mejor implementación; sin embargo, no ofrece garantías en cuanto al orden de iteración.
+- **TreeSet** que almacena sus elementos en un árbol _'red-black'_, ordena sus elementos en función de sus valores; es sustancialmente más lento que **HashSet**.
+- **LinkedHashSet**: que se implementa como una tabla hash con una lista enlazada que la recorre, ordena sus elementos según el orden en que se insertaron en el conjunto (orden de inserción). Tiene un coste algo más elevado que un **HashSet** pero soluciona el problema del orden.
 
 La interfaz `Set` tiene una subinterface [`SortedSet`](https://docs.oracle.com/javase/8/docs/api/java/util/SortedSet.html), que es un `Set` que mantiene sus elementos en orden ascendente, ordenados de acuerdo al orden natural de los elementos o de acuerdo a un `Comparator` proporcionado a la hora de creación del `SortedSet`.
 
@@ -2191,15 +2208,15 @@ La interfaz `Set` tiene una subinterface [`SortedSet`](https://docs.oracle.com/j
 
 Una [`List`](https://docs.oracle.com/javase/8/docs/api/java/util/List.html) es una **colección ordenada que pueden contener elementos duplicados** (a veces llamada secuencia). Además de las operaciones heredadas de `Collection`, la interfaz `List` incluye operaciones para lo siguiente:
 
-* **Acceso por posición** para manipular los elementos de la lista. Esto incluye métodos como `get`, `set`, `add`, `addAll` y `remove`.
-* **Búsqueda** de elementos específicos dentro de la lista y la devolución de su posición numérica dentro de ella. Métodos como `indexOf` y `lastIndexOf`.
-* Extensión de la **iteración** para obtener ventaja de la naturaleza secuencial de las listas con `listIterator`.
-* Operaciones arbitrarias en secciones de la lista con el método `subList`.
+- **Acceso por posición** para manipular los elementos de la lista. Esto incluye métodos como `get`, `set`, `add`, `addAll` y `remove`.
+- **Búsqueda** de elementos específicos dentro de la lista y la devolución de su posición numérica dentro de ella. Métodos como `indexOf` y `lastIndexOf`.
+- Extensión de la **iteración** para obtener ventaja de la naturaleza secuencial de las listas con `listIterator`.
+- Operaciones arbitrarias en secciones de la lista con el método `subList`.
 
 La plataforma Java contiene dos implementaciones de `List` de propósito general:
 
-* **ArrayList**, que suele ser la implementación con mejor rendimiento.
-* **LinkedList**, que ofrece un mejor rendimiento en determinadas circunstancias.
+- **ArrayList**, que suele ser la implementación con mejor rendimiento.
+- **LinkedList**, que ofrece un mejor rendimiento en determinadas circunstancias.
 
 ### La interfaz 'Queue'
 
@@ -2262,9 +2279,9 @@ Un [`Map`](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html) es un o
 
 La plataforma Java contiene tres implementaciones de `Map` de propósito general y cuyo comportamiento y rendimiento son análogos a las implementaciones de la interfaz `Set` como son **HashSet**, **TreeSet** y **LinkedHashSet**:
 
-* **HashMap** que almacena sus elementos en una tabla _hash_, es la mejor implementación; sin embargo, no ofrece garantías en cuanto al orden de iteración.
-* **TreeMap** que almacena sus elementos en un árbol _'red-black'_, ordena sus elementos en función de sus valores; es sustancialmente más lento que **HashMap**.
-* **LinkedHashMap**: que se implementa como una tabla _hash_ con una lista enlazada que la recorre, ordena sus elementos según el orden en que se insertaron en el mapa (orden de inserción). Tiene un coste algo más elevado que un **HashMap** pero soluciona el problema del orden.
+- **HashMap** que almacena sus elementos en una tabla _hash_, es la mejor implementación; sin embargo, no ofrece garantías en cuanto al orden de iteración.
+- **TreeMap** que almacena sus elementos en un árbol _'red-black'_, ordena sus elementos en función de sus valores; es sustancialmente más lento que **HashMap**.
+- **LinkedHashMap**: que se implementa como una tabla _hash_ con una lista enlazada que la recorre, ordena sus elementos según el orden en que se insertaron en el mapa (orden de inserción). Tiene un coste algo más elevado que un **HashMap** pero soluciona el problema del orden.
 
 La interfaz `Map` tiene una subinterface [`SortedMap`](https://docs.oracle.com/javase/8/docs/api/java/util/SortedMap.html), que es un `Map` que mantiene sus elementos en orden ascendente, ordenados de acuerdo al orden natural de las claves o de acuerdo a un `Comparator` proporcionado a la hora de creación del `SortedMap`.
 
@@ -2274,40 +2291,40 @@ Un sistema con test unitarios será más fácil modificarlo ya que tendremos la 
 
 ### Tipos de pruebas
 
-* **Test unitarios**: prueban una funcionalidad única y se basan en el principio de responsabilidad única (la S de los principios de diseño SOLID)
-* **Integración**: prueban la conexión entre componentes, sería el siguiente paso a los test unitarios.
-* **Funcionales (o Sistema)**: prueban la integración de todos los componentes que desarrollan una funcionalidad concreta (por ejemplo, la automatización de pruebas con Selenium serían test funcionales).
-* **Aceptación de Usuarios**: Pruebas definidas por el _Product Owner_ basadas en ejemplos (BDD con Cucumber).
-* **Regresión**: Prueban que los test unitarios y funcionales siguen funcionando a lo largo del tiempo (se pueden lanzar tanto de forma manual como en sistemas de Integración Continua).
-* **Carga**: Prueban la eficiencia del código.
+- **Test unitarios**: prueban una funcionalidad única y se basan en el principio de responsabilidad única (la S de los principios de diseño SOLID)
+- **Integración**: prueban la conexión entre componentes, sería el siguiente paso a los test unitarios.
+- **Funcionales (o Sistema)**: prueban la integración de todos los componentes que desarrollan una funcionalidad concreta (por ejemplo, la automatización de pruebas con Selenium serían test funcionales).
+- **Aceptación de Usuarios**: Pruebas definidas por el _Product Owner_ basadas en ejemplos (BDD con Cucumber).
+- **Regresión**: Prueban que los test unitarios y funcionales siguen funcionando a lo largo del tiempo (se pueden lanzar tanto de forma manual como en sistemas de Integración Continua).
+- **Carga**: Prueban la eficiencia del código.
 
 ### Características de los tests unitarios
 
 Los tests unitarios deben cumplir los siguientes puntos denominados **Principios FIRST**:
 
-* **Fast**: Rápida ejecución.
-* **Isolated**: Independiente de otros test.
-* **Repeatable**: Se puede repetir en el tiempo.
-* **Self-Validating**: Cada test debe poder validar si es correcto o no a sí mismo.
-* **Timely**: ¿Cuándo se deben desarrollar los test? ¿Antes o después de que esté todo implementado? Sabemos que cuesta hacer primero los test y después la implementación (TDD: Test-driven development), pero es lo suyo para centrarnos en lo que realmente se desea implementar.
+- **Fast**: Rápida ejecución.
+- **Isolated**: Independiente de otros test.
+- **Repeatable**: Se puede repetir en el tiempo.
+- **Self-Validating**: Cada test debe poder validar si es correcto o no a sí mismo.
+- **Timely**: ¿Cuándo se deben desarrollar los test? ¿Antes o después de que esté todo implementado? Sabemos que cuesta hacer primero los test y después la implementación (TDD: Test-driven development), pero es lo suyo para centrarnos en lo que realmente se desea implementar.
 
 Además podemos añadir estos dos puntos más:
 
-* Sólo pruebas de los **métodos públicos** de cada clase.
-* No se debe hacer uso de las **dependencias** de la clase a probar. Esto quizás es discutible porque en algunos casos donde la dependencias son clases de utilidades y se puede ser menos estricto. Se recomienda siempre aplicar el sentido común.
-* Un test no debe implementar ninguna lógica de negocio (nada de if...else...for...etc)
+- Sólo pruebas de los **métodos públicos** de cada clase.
+- No se debe hacer uso de las **dependencias** de la clase a probar. Esto quizás es discutible porque en algunos casos donde la dependencias son clases de utilidades y se puede ser menos estricto. Se recomienda siempre aplicar el sentido común.
+- Un test no debe implementar ninguna lógica de negocio (nada de if...else...for...etc)
 
 ### Framework JUnit4 / JUnit5
 
 JUnit es un framework Java para implementar test en Java. JUnit 5 requiere Java 8 (o superior). JUnit se basa en [anotaciones](https://junit.org/junit5/docs/current/user-guide/#writing-tests-annotations):
 
-* `@Test`: indica que el método que la contiene es un test: expected y timeout.
-* `@Before` (JUnit4) / `@BeforeEach` (JUnit5): ejecuta el método que la contiene justo antes de cada test.
-* `@After` (JUnit4) / `@AfterEach` (JUnit5): ejecuta el método que la contiene justo después de cada test.
-* `@BeforeClass` (JUnit4) / `@BeforeAll` (JUnit5): ejecuta el método (estático) que la contiene justo antes del primer test.
-* `@AfterClass` (JUnit4) / `@AfterAll` (JUnit5): ejecuta el método (estático) que la contiene justo después del último test.
-* `@Ignore` / `@Disabled`: evita la ejecución del tests. No es muy recomendable su uso porque puede ocultar test fallidos. Si dudamos si el test debe estar o no, quizás borrarlo es la mejor de las decisiones.
-* `@DisplayName("cadena")` (JUnit5): Declara un nombre de visualización personalizado para la clase de prueba o el método de prueba. En lugar de usar esta anotación es recomendable utilizar nombres para los métodos lo suficientemente descriptivos como para que no sea necesario usar esta anotación.
+- `@Test`: indica que el método que la contiene es un test: expected y timeout.
+- `@Before` (JUnit4) / `@BeforeEach` (JUnit5): ejecuta el método que la contiene justo antes de cada test.
+- `@After` (JUnit4) / `@AfterEach` (JUnit5): ejecuta el método que la contiene justo después de cada test.
+- `@BeforeClass` (JUnit4) / `@BeforeAll` (JUnit5): ejecuta el método (estático) que la contiene justo antes del primer test.
+- `@AfterClass` (JUnit4) / `@AfterAll` (JUnit5): ejecuta el método (estático) que la contiene justo después del último test.
+- `@Ignore` / `@Disabled`: evita la ejecución del tests. No es muy recomendable su uso porque puede ocultar test fallidos. Si dudamos si el test debe estar o no, quizás borrarlo es la mejor de las decisiones.
+- `@DisplayName("cadena")` (JUnit5): Declara un nombre de visualización personalizado para la clase de prueba o el método de prueba. En lugar de usar esta anotación es recomendable utilizar nombres para los métodos lo suficientemente descriptivos como para que no sea necesario usar esta anotación.
 
 ```java
 @DisplayName("Aserciones soportadas")
@@ -2355,11 +2372,11 @@ class StandardTests {
 
 Las condiciones de aceptación del test se implementa con las [aserciones](https://junit.org/junit5/docs/current/api/org/junit/jupiter/api/Assertions.html). Las más comunes son los siguientes:
 
-* **assertTrue/assertFalse (condición a testear)**: Comprueba que la condición es cierta o falsa.
-* **assertEquals/assertNotEquals (valor esperado, valor obtenido)**: Es importante el orden de los valores esperado y obtenido.
-* **assertNull/assertNotNull (object)**: Comprueba que el objeto obtenido es nulo o no.
-* **assertSame/assertNotSame(object1, object2)**: Comprueba si dos objetos son iguales o no.
-* **fail()**: Fuerza que el test termine con fallo. Se puede indicar un mensaje.
+- **assertTrue/assertFalse (condición a testear)**: Comprueba que la condición es cierta o falsa.
+- **assertEquals/assertNotEquals (valor esperado, valor obtenido)**: Es importante el orden de los valores esperado y obtenido.
+- **assertNull/assertNotNull (object)**: Comprueba que el objeto obtenido es nulo o no.
+- **assertSame/assertNotSame(object1, object2)**: Comprueba si dos objetos son iguales o no.
+- **fail()**: Fuerza que el test termine con fallo. Se puede indicar un mensaje.
 
 ```java
 class AssertionsTest {
@@ -2429,213 +2446,248 @@ Otra característica que permite la compatibilidad con código legado es el uso 
 
 ## Histórico de versiones
 
-[This JEP is the index of all JDK Enhancement Proposals, known as JEPs.](https://openjdk.org/jeps/0)
-
 ### JDK 1.0 (23 de Enero de 1996)
 
-* Primera versión
+- Primera versión
 
 ### JDK 1.1 (19 de Febrero de 1997)
 
-* Reestructuración intensiva del modelo de eventos AWT (Abstract Windowing Toolkit)
-* Clases internas (inner classes)
-* JavaBeans
-* JDBC (Java Database Connectivity), para la integración de bases de datos
-* RMI (Remote Method Invocation)
+- Reestructuración intensiva del modelo de eventos AWT (Abstract Windowing Toolkit)
+- Clases internas (inner classes)
+- JavaBeans
+- JDBC (Java Database Connectivity), para la integración de bases de datos
+- RMI (Remote Method Invocation)
 
 ### J2SE 1.2 (8 de Diciembre de 1998)
 
-* Palabra reservada (keyword) `strictfp`
-* Reflexión en la programación
-* API gráfica (Swing) fue integrada en las clases básicas
-* Máquina virtual (JVM) de Sun fue equipada con un compilador JIT (Just in Time) por primera vez
-* Java Plug-in
-* Java IDL, una implementación de IDL (Lenguaje de Descripción de Interfaz) para la interoperabilidad con CORBA
-* Colecciones (Collections)
+- Palabra reservada (keyword) `strictfp`
+- Reflexión en la programación
+- API gráfica (Swing) fue integrada en las clases básicas
+- Máquina virtual (JVM) de Sun fue equipada con un compilador JIT (Just in Time) por primera vez
+- Java Plug-in
+- Java IDL, una implementación de IDL (Lenguaje de Descripción de Interfaz) para la interoperabilidad con CORBA
+- Colecciones (Collections)
 
 ### J2SE 1.3 (8 de Mayo de 2000)
 
-* Inclusión de la máquina virtual de HotSpot JVM (la JVM de HotSpot fue lanzada inicialmente en abril de 1999, para la JVM de J2SE 1.2)
-* RMI fue cambiado para que se basara en CORBA
-* JavaSound
-* Inclusión de 'Java Naming and Directory Interface' (JNDI) en el paquete de bibliotecas principales (anteriormente disponible como una extensión)
-* Java Platform Debugger Architecture (JPDA)
+- Inclusión de la máquina virtual de HotSpot JVM (la JVM de HotSpot fue lanzada inicialmente en abril de 1999, para la JVM de J2SE 1.2)
+- RMI fue cambiado para que se basara en CORBA
+- JavaSound
+- Inclusión de 'Java Naming and Directory Interface' (JNDI) en el paquete de bibliotecas principales (anteriormente disponible como una extensión)
+- Java Platform Debugger Architecture (JPDA)
 
 ### J2SE 1.4 (6 de Febrero de 2002)
 
-* Palabra reservada `assert`
-* Expresiones regulares modeladas al estilo de las expresiones regulares Perl
-* Encadenación de excepciones. Permite a una excepción encapsular la excepción de bajo nivel original.
-* Non-blocking NIO (New Input/Output)
-* Logging API
-* API I/O para la lectura y escritura de imágenes en formatos como JPEG o PNG
-* Parser XML integrado y procesador XSLT (JAXP)
-* Seguridad integrada y extensiones criptográficas (JCE, JSSE, JAAS)
-* Java Web Start incluido (El primer lanzamiento ocurrió en marzo de 2001 para J2SE 1.3)
+- Palabra reservada `assert`
+- Expresiones regulares modeladas al estilo de las expresiones regulares Perl
+- Encadenación de excepciones. Permite a una excepción encapsular la excepción de bajo nivel original.
+- Non-blocking NIO (New Input/Output)
+- Logging API
+- API I/O para la lectura y escritura de imágenes en formatos como JPEG o PNG
+- Parser XML integrado y procesador XSLT (JAXP)
+- Seguridad integrada y extensiones criptográficas (JCE, JSSE, JAAS)
+- Java Web Start incluido (El primer lanzamiento ocurrió en marzo de 2001 para J2SE 1.3)
 
 ### J2SE 5.0 (30 de Septiembre de 2004)
 
-* Genéricos
-* Anotaciones
-* Autoboxing/unboxing
-* Enumeraciones
-* `Varargs` (número de argumentos variable)
-* Bucle `for` mejorado.
-* Utilidades de concurrencia
-* Clase `Scanner`
+- Genéricos
+- Anotaciones
+- Autoboxing/unboxing
+- Enumeraciones
+- `Varargs` (número de argumentos variable)
+- Bucle `for` mejorado.
+- Utilidades de concurrencia
+- Clase `Scanner`
 
 ### Java SE 6 (11 de Diciembre de 2006)
 
-* Incluye un nuevo marco de trabajo y APIs que hacen posible la combinación de Java con lenguajes dinámicos como PHP, Python, Ruby y JavaScript.
-* Incluye el motor Rhino, de Mozilla, una implementación de Javascript en Java.
-* Incluye un cliente completo de Servicios Web y soporta las últimas especificaciones para Servicios Web, como JAX-WS 2.0, JAXB 2.0, STAX y JAXP.
-* Mejoras en la interfaz gráfica y en el rendimiento.
+- Incluye un nuevo marco de trabajo y APIs que hacen posible la combinación de Java con lenguajes dinámicos como PHP, Python, Ruby y JavaScript.
+- Incluye el motor Rhino, de Mozilla, una implementación de Javascript en Java.
+- Incluye un cliente completo de Servicios Web y soporta las últimas especificaciones para Servicios Web, como JAX-WS 2.0, JAXB 2.0, STAX y JAXP.
+- Mejoras en la interfaz gráfica y en el rendimiento.
 
 ### Java SE 7 (7 de Julio de 2011)
 
-* Soporte para XML dentro del propio lenguaje.
-* Un nuevo concepto de superpaquete.
-* Soporte para `closures`.
-* Introducción de anotaciones estándar para detectar fallos en el software.
-* NIO2.
-* Java Module System.
-* Java Kernel.
-* Nueva API para el manejo de Días y Fechas, la cual reemplazará las antiguas clases `Date` y `Calendar`.
-* Posibilidad de operar con clases `BigDecimal` usando operandos.
-* Uso de `Strings` en bloques `switch`
-* Uso de guiones bajos en literales numéricos (1_000_000)
+- Soporte para XML dentro del propio lenguaje.
+- Un nuevo concepto de superpaquete.
+- Soporte para `closures`.
+- Introducción de anotaciones estándar para detectar fallos en el software.
+- NIO2.
+- Java Module System.
+- Java Kernel.
+- Nueva API para el manejo de Días y Fechas, la cual reemplazará las antiguas clases `Date` y `Calendar`.
+- Posibilidad de operar con clases `BigDecimal` usando operandos.
+- Uso de `Strings` en bloques `switch`
+- Uso de guiones bajos en literales numéricos (1_000_000)
 
 ### Java SE 8 (18 de Marzo de 2014)
 
-* [Lista completa de características](https://openjdk.org/projects/jdk8/)
-* [JEP 126](https://openjdk.org/jeps/126): Lambda Expressions & Virtual Extension Methods
-* [JEP 153](https://openjdk.org/jeps/153): Launch JavaFX Applications
-* [JEP 178](https://openjdk.org/jeps/178): Statically-Linked JNI Libraries
-* [JEP 155](https://openjdk.org/jeps/155): Concurrency Updates
-* [JEP 174](https://openjdk.org/jeps/174): Nashorn Javascript Engine
-* [JEP 104](https://openjdk.org/jeps/104): Annotations on Java Types
-* [JEP 150](https://openjdk.org/jeps/150): Date & Time API
+- [JDK 8 Documentation](https://docs.oracle.com/javase/8/)
+- [Lista completa de características - JEP](https://openjdk.org/projects/jdk8/)
+  - [JEP 126](https://openjdk.org/jeps/126): Lambda Expressions & Virtual Extension Methods
+  - [JEP 153](https://openjdk.org/jeps/153): Launch JavaFX Applications
+  - [JEP 178](https://openjdk.org/jeps/178): Statically-Linked JNI Libraries
+  - [JEP 155](https://openjdk.org/jeps/155): Concurrency Updates
+  - [JEP 174](https://openjdk.org/jeps/174): Nashorn Javascript Engine
+  - [JEP 104](https://openjdk.org/jeps/104): Annotations on Java Types
+  - [JEP 150](https://openjdk.org/jeps/150): Date & Time API
 
 ### Java 9 (21 de Septiembre de 2017)
 
-* [Lista completa de características](https://openjdk.org/projects/jdk9/)
-* [JEP 200](https://openjdk.org/jeps/200): The Modular JDK
-* [JEP 222](https://openjdk.org/jeps/222): 'jshell': The Java Shell (Read-Eval-Print Loop)
-* [JEP 295](https://openjdk.org/jeps/295): Compilación _Ahead-of-Time_
-* [JEP 282](https://openjdk.org/jeps/282): jlink: The Java Linker
-* [JEP 266](https://openjdk.org/jeps/266): More Concurrency Updates
-* [JEP 263](https://openjdk.org/jeps/263): Gráficos HiDPI
-* [JEP 224](https://openjdk.org/jeps/224): HTML5 Javadoc
-* [JEP 275](https://openjdk.org/jeps/275): Modular Java Application Packaging
-* [JEP 261](https://openjdk.org/jeps/261): Module System
+- [JDK 9 Documentation](https://docs.oracle.com/javase/9/)
+- [Java Language Changes for Java SE 9](https://docs.oracle.com/javase/9/language/toc.htm)
+- [Significant Changes in JDK 9 Release](https://docs.oracle.com/javase/9/migrate/toc.htm)
+- [Lista completa de características - JEP](https://openjdk.org/projects/jdk9/)
+  - [JEP 200](https://openjdk.org/jeps/200): The Modular JDK
+  - [JEP 222](https://openjdk.org/jeps/222): 'jshell': The Java Shell (Read-Eval-Print Loop)
+  - [JEP 295](https://openjdk.org/jeps/295): Compilación _Ahead-of-Time_
+  - [JEP 282](https://openjdk.org/jeps/282): jlink: The Java Linker
+  - [JEP 266](https://openjdk.org/jeps/266): More Concurrency Updates
+  - [JEP 263](https://openjdk.org/jeps/263): Gráficos HiDPI
+  - [JEP 224](https://openjdk.org/jeps/224): HTML5 Javadoc
+  - [JEP 275](https://openjdk.org/jeps/275): Modular Java Application Packaging
+  - [JEP 261](https://openjdk.org/jeps/261): Module System
 
 ### Java 10 (20 de Marzo de 2018)
 
-* [Lista completa de características](https://openjdk.org/projects/jdk/10/)
-* [JEP 286](https://openjdk.org/jeps/286): Local-Variable Type Inference
-* [JEP 317](https://openjdk.org/jeps/317): Experimental Java-Based JIT Compiler
-* [JEP 310](https://openjdk.org/jeps/310): Application Class-Data Sharing
-* [JEP 322](https://openjdk.org/jeps/322): Time-Based Release Versioning
-* [JEP 307](https://openjdk.org/jeps/307): Parallel Full GC for G1
-* [JEP 304](https://openjdk.org/jeps/304): Garbage-Collector Interface
-* [JEP 314](https://openjdk.org/jeps/314): Additional Unicode Language-Tag Extensions
-* [JEP 319](https://openjdk.org/jeps/319): Root Certificates
-* [JEP 312](https://openjdk.org/jeps/312): Thread-Local Handshakes
-* [JEP 316](https://openjdk.org/jeps/316): Heap Allocation on Alternative Memory Devices
-* [JEP 313](https://openjdk.org/jeps/313): Remove the Native-Header Generation Tool – javah
-* [JEP 296](https://openjdk.org/jeps/296): Consolidate the JDK Forest into a Single Repository
+- [JDK 10 Documentation](https://docs.oracle.com/javase/10/)
+- [Java Language Changes for Java SE 10](https://docs.oracle.com/javase/10/language/toc.htm)
+- [Significant Changes in JDK 10 Release](https://docs.oracle.com/javase/10/migrate/toc.htm)
+- [Lista completa de características - JEP](https://openjdk.org/projects/jdk/10/)
+  - [JEP 286](https://openjdk.org/jeps/286): Local-Variable Type Inference
+  - [JEP 317](https://openjdk.org/jeps/317): Experimental Java-Based JIT Compiler
+  - [JEP 310](https://openjdk.org/jeps/310): Application Class-Data Sharing
+  - [JEP 322](https://openjdk.org/jeps/322): Time-Based Release Versioning
+  - [JEP 307](https://openjdk.org/jeps/307): Parallel Full GC for G1
+  - [JEP 304](https://openjdk.org/jeps/304): Garbage-Collector Interface
+  - [JEP 314](https://openjdk.org/jeps/314): Additional Unicode Language-Tag Extensions
+  - [JEP 319](https://openjdk.org/jeps/319): Root Certificates
+  - [JEP 312](https://openjdk.org/jeps/312): Thread-Local Handshakes
+  - [JEP 316](https://openjdk.org/jeps/316): Heap Allocation on Alternative Memory Devices
+  - [JEP 313](https://openjdk.org/jeps/313): Remove the Native-Header Generation Tool – javah
+  - [JEP 296](https://openjdk.org/jeps/296): Consolidate the JDK Forest into a Single Repository
 
 ### Java 11 (25 de Septiembre de 2018)
 
-* [Lista completa de características](https://openjdk.org/projects/jdk/11/)
-* [JEP 309](https://openjdk.org/jeps/309): Dynamic Class-File Constants
-* [JEP 318](https://openjdk.org/jeps/318): Epsilon: A No-Op Garbage Collector
-* [JEP 323](https://openjdk.org/jeps/3323): Local-Variable Syntax for Lambda Parameters
-* [JEP 331](https://openjdk.org/jeps/331): Low-Overhead Heap Profiling
-* [JEP 321](https://openjdk.org/jeps/321): HTTP Client (Standard)
-* [JEP 332](https://openjdk.org/jeps/323): Transport Layer Security (TLS) 1.3
-* [JEP 328](https://openjdk.org/jeps/328): Flight Recorder
-* [JEP 335](https://openjdk.org/jeps/335): Deprecate the Nashorn Javascript Engine
-* JavaFX, Java EE and CORBA modules have been removed from JDK
+- [JDK 11 Documentation](https://docs.oracle.com/en/java/javase/11/index.html)
+- [Java Language Changes for Java SE 11](https://docs.oracle.com/en/java/javase/11/language/java-language-changes.html)
+- [Significant Changes in JDK 11 Release](https://docs.oracle.com/en/java/javase/11/migrate/index.html)
+- [Lista completa de características -JEP](https://openjdk.org/projects/jdk/11/)
+  - [JEP 309](https://openjdk.org/jeps/309): Dynamic Class-File Constants
+  - [JEP 318](https://openjdk.org/jeps/318): Epsilon: A No-Op Garbage Collector
+  - [JEP 323](https://openjdk.org/jeps/323): Local-Variable Syntax for Lambda Parameters
+  - [JEP 331](https://openjdk.org/jeps/331): Low-Overhead Heap Profiling
+  - [JEP 321](https://openjdk.org/jeps/321): HTTP Client (Standard)
+  - [JEP 332](https://openjdk.org/jeps/323): Transport Layer Security (TLS) 1.3
+  - [JEP 328](https://openjdk.org/jeps/328): Flight Recorder
+  - [JEP 335](https://openjdk.org/jeps/335): Deprecate the Nashorn Javascript Engine
 
 ### Java 12 (19 de Marzo de 2019)
 
-* [Lista completa de características](https://openjdk.org/projects/jdk/12/)
-* [JEP 230](https://openjdk.org/jeps/230): Microbenchmark Suite
-* [JEP 334](https://openjdk.org/jeps/334): JVM Constants API
+- [JDK 12 Documentation](https://docs.oracle.com/en/java/javase/12/index.html)
+- [Java Language Changes for Java SE 12](https://docs.oracle.com/en/java/javase/12/language/index.html)
+- [Significant Changes in JDK 12 Release](https://docs.oracle.com/en/java/javase/12/migrate/index.html)
+- [Lista completa de características- JEP](https://openjdk.org/projects/jdk/12/)
+  - [JEP 230](https://openjdk.org/jeps/230): Microbenchmark Suite
+  - [JEP 334](https://openjdk.org/jeps/334): JVM Constants API
 
 ### Java 13 (17 de Septiembre 2019)
 
-* [Lista completa de características](https://openjdk.org/projects/jdk/13/)
-* [JEP 353](https://openjdk.org/jeps/353): Reimplement the Legacy Socket API
+- [JDK 13 Documentation](https://docs.oracle.com/en/java/javase/13/index.html)
+- [Java Language Changes for Java SE 13](https://docs.oracle.com/en/java/javase/13/language/java-language-changes.html)
+- [Significant Changes in JDK 13 Release](https://docs.oracle.com/en/java/javase/13/migrate/index.html)
+- [Lista completa de características - JEP](https://openjdk.org/projects/jdk/13/)
+  - [JEP 353](https://openjdk.org/jeps/353): Reimplement the Legacy Socket API
 
 ### Java 14 (17 de Marzo 2020)
 
-* [Lista completa de características](https://openjdk.org/projects/jdk/14/)
-* [JEP 358](https://openjdk.org/jeps/358): Helpful NullPointerExceptions
-* [JEP 361](https://openjdk.org/jeps/361): Switch Expressions
-* [JEP 349](https://openjdk.org/jeps/349): JFR Event Streaming
+- [JDK 14 Documentation](https://docs.oracle.com/en/java/javase/14/index.html)
+- [Java Language Changes for Java SE 14](https://docs.oracle.com/en/java/javase/14/language/java-language-changes.html)
+- [Significant Changes in JDK 14 Release](https://docs.oracle.com/en/java/javase/14/migrate/index.html)
+- [Lista completa de características - JEP](https://openjdk.org/projects/jdk/14/)
+  - [JEP 358](https://openjdk.org/jeps/358): Helpful NullPointerExceptions
+  - [JEP 361](https://openjdk.org/jeps/361): Switch Expressions
+  - [JEP 349](https://openjdk.org/jeps/349): JFR Event Streaming
 
 ### Java 15 (15 de Septiembre 2020)
 
-* [Lista completa de características](https://openjdk.org/projects/jdk/15/)
-* [JEP 371](https://openjdk.org/jeps/371): Hidden Classes
-* [JEP 372](https://openjdk.org/jeps/372): Remove the Nashorn JavaScript Engine
-* [JEP 373](https://openjdk.org/jeps/373): Reimplement the Legacy DatagramSocket API
-* [JEP 378](https://openjdk.org/jeps/378): Text Blocks
+- [JDK 15 Documentation](https://docs.oracle.com/en/java/javase/15/index.html)
+- [Java Language Changes for Java SE 15](https://docs.oracle.com/en/java/javase/15/language/java-language-changes.html)
+- [Significant Changes in JDK 15 Release](https://docs.oracle.com/en/java/javase/15/migrate/index.html)
+- [Lista completa de características - JEP](https://openjdk.org/projects/jdk/15/)
+  - [JEP 371](https://openjdk.org/jeps/371): Hidden Classes
+  - [JEP 372](https://openjdk.org/jeps/372): Remove the Nashorn JavaScript Engine
+  - [JEP 373](https://openjdk.org/jeps/373): Reimplement the Legacy DatagramSocket API
+  - [JEP 378](https://openjdk.org/jeps/378): Text Blocks
 
 ### Java 16 (16 de Marzo 2021)
 
-* [Lista completa de características](https://openjdk.org/projects/jdk/16/)
-* [JEP 347](https://openjdk.org/jeps/347): Enable C++14 Language Features
-* [JEP 369](https://openjdk.org/jeps/369): Migrate to GitHub
-* [JEP 392](https://openjdk.org/jeps/392): Packaging Tool
-* [JEP 394](https://openjdk.org/jeps/394): Pattern Matching for instanceof
-* [JEP 395](https://openjdk.org/jeps/395): Records
-* [JEP 396](https://openjdk.org/jeps/396): Strongly Encapsulate JDK Internals by Default
+- [JDK 16 Documentation](https://docs.oracle.com/en/java/javase/16/index.html)
+- [Java Language Changes for Java SE 16](https://docs.oracle.com/en/java/javase/16/language/java-language-changes.html)
+- [Significant Changes in JDK 16 Release](https://docs.oracle.com/en/java/javase/16/migrate/significant-changes-jdk-release.html)
+- [Lista completa de características - JEP](https://openjdk.org/projects/jdk/16/)
+  - [JEP 347](https://openjdk.org/jeps/347): Enable C++14 Language Features
+  - [JEP 369](https://openjdk.org/jeps/369): Migrate to GitHub
+  - [JEP 392](https://openjdk.org/jeps/392): Packaging Tool
+  - [JEP 394](https://openjdk.org/jeps/394): Pattern Matching for instanceof
+  - [JEP 395](https://openjdk.org/jeps/395): Records
+  - [JEP 396](https://openjdk.org/jeps/396): Strongly Encapsulate JDK Internals by Default
 
 ### Java 17 (13 de Septiempbre 2021)
 
-* [Lista completa de características](https://openjdk.org/projects/jdk/17/)
-* [JEP 356](https://openjdk.org/jeps/356): Enhanced Pseudo-Random Number Generators
-* [JEP 409](https://openjdk.org/jeps/409): Sealed Classes
-* [JEP 403](https://openjdk.org/jeps/403): Strongly Encapsulate JDK Internals
+- [JDK 17 Documentation](https://docs.oracle.com/en/java/javase/17/index.html)
+- [Java Language Changes for Java SE 17](https://docs.oracle.com/en/java/javase/17/language/java-language-changes.html)
+- [Significant Changes in JDK 17 Release](https://docs.oracle.com/en/java/javase/17/migrate/significant-changes-jdk-release.html)
+- [Lista completa de características - JEP](https://openjdk.org/projects/jdk/17/)
+  - [JEP 356](https://openjdk.org/jeps/356): Enhanced Pseudo-Random Number Generators
+  - [JEP 409](https://openjdk.org/jeps/409): Sealed Classes
+  - [JEP 403](https://openjdk.org/jeps/403): Strongly Encapsulate JDK Internals
 
 ### Java 18 (22 de Marzo 2022)
 
-* [Lista completa de características](https://openjdk.org/projects/jdk/18/)
-* [JEP 400](https://openjdk.org/jeps/400): UTF-8 by Default
-* [JEP 408](https://openjdk.org/jeps/408): Simple Web Server
-* [JEP 413](https://openjdk.org/jeps/413): Code Snippets in Java API Documentation
+- [JDK 18 Documentation](https://docs.oracle.com/en/java/javase/18/index.html)
+- [Java Language Changes for Java SE 18](https://docs.oracle.com/en/java/javase/18/language/java-language-changes.html)
+- [Significant Changes in JDK 18 Release](https://docs.oracle.com/en/java/javase/18/migrate/significant-changes-jdk-release.html)
+- [Lista completa de características - JEP](https://openjdk.org/projects/jdk/18/)
+  - [JEP 400](https://openjdk.org/jeps/400): UTF-8 by Default
+  - [JEP 408](https://openjdk.org/jeps/408): Simple Web Server
+  - [JEP 413](https://openjdk.org/jeps/413): Code Snippets in Java API Documentation
 
 ### Java 19 (20 de Septiembre 2022)
 
-* [Lista completa de características](https://openjdk.org/projects/jdk/19/)
+- [JDK 19 Documentation](https://docs.oracle.com/en/java/javase/19/index.html)
+- [Java Language Changes for Java SE 19](https://docs.oracle.com/en/java/javase/19/language/java-language-changes.html)
+- [Significant Changes in JDK 19 Release](https://docs.oracle.com/en/java/javase/19/migrate/significant-changes-jdk-release.html)
+- [Lista completa de características - JEP](https://openjdk.org/projects/jdk/19/)
 
 ### Java 20 (21 de Marzo 2023)
 
-* [Lista completa de características](https://openjdk.org/projects/jdk/20/)
+- [JDK 20 Documentation](https://docs.oracle.com/en/java/javase/20/index.html)
+- [Java Language Changes for Java SE 20](https://docs.oracle.com/en/java/javase/20/language/java-language-changes.html)
+- [Significant Changes in JDK 20 Release](https://docs.oracle.com/en/java/javase/20/migrate/significant-changes-jdk-release.html)
+- [Lista completa de características - JEP](https://openjdk.org/projects/jdk/20/)
 
 ### :new: Java 21 (21 de Septiembre 2023)
 
-* [Lista completa de características](https://openjdk.org/projects/jdk/21/)
-* [JEP 431](https://openjdk.org/jeps/431): Sequenced Collections
-* [JEP 440](https://openjdk.org/jeps/440): Record Patterns
-* [JEP 441](https://openjdk.org/jeps/441): Pattern Matching for switch
-* [JEP 444](https://openjdk.org/jeps/444): Virtual Threads
+- [JDK 21 Documentation](https://docs.oracle.com/en/java/javase/21/index.html)
+- [Java Language Changes for Java SE 21](https://docs.oracle.com/en/java/javase/21/language/java-language-changes.html)
+- [Significant Changes in JDK 21 Release](https://docs.oracle.com/en/java/javase/21/migrate/significant-changes-jdk-release.html)
+- [Lista completa de características - JEP](https://openjdk.org/projects/jdk/21/)
+  - [JEP 431](https://openjdk.org/jeps/431): Sequenced Collections
+  - [JEP 440](https://openjdk.org/jeps/440): Record Patterns
+  - [JEP 441](https://openjdk.org/jeps/441): Pattern Matching for switch
+  - [JEP 444](https://openjdk.org/jeps/444): Virtual Threads
 
-## Enlaces
+---
 
-* <https://docs.oracle.com/javase/tutorial/index.html>
-* <https://docs.oracle.com/javase/tutorial/java/TOC.html>
-* <https://docs.oracle.com/javase/tutorial/tutorialLearningPaths.html>
-* <https://docs.oracle.com/en/java/javase/11/>
-* <https://openjdk.org/>
-* <https://github.com/openjdk/>
-* <https://en.wikipedia.org/wiki/Java_version_history>
-* <https://www.adictosaltrabajo.com/2016/11/24/primeros-pasos-con-junit-5/>
-* <http://innovationlabs.softtek.co/testing-unitario>
-* <https://help.semmle.com/wiki/display/JAVA/Java+queries>
+## Enlaces de interés
+
+- [Java Platform, Standard Edition Documentation](https://docs.oracle.com/en/java/javase/index.html)
+- [OpenJDK](https://openjdk.org/)
+- [OpenJDK - Github](https://github.com/openjdk/)
+- [This JEP is the index of all JDK Enhancement Proposals, known as JEPs.](https://openjdk.org/jeps/0)
+- [JDK Release Notes](https://www.oracle.com/java/technologies/javase/jdk-relnotes-index.html)
+- [Learn Java](https://dev.java/learn/)
 
 ## Licencia
 
