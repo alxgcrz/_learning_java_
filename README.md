@@ -1,8 +1,10 @@
 # Java
 
+## Introducción
+
 Java es un **lenguaje orientado a objetos**. En la década de los 60 nació la programación estructurada impulsada por lenguajes como Pascal o C. Con el aumento de la complejidad de los programas se adoptó un nuevo enfoque como es la programación orientada a objetos o POO.
 
-Java fue desarrollado por James Gosling, Patrick Naughton, Chris Warth, Ed Frank y Mike Sheridan de Sun Microsystems en 1991. Inicialmente, el lenguaje se denominó _Oak_ aunque se rebautizó como **Java** en 1995. La concepción de Java se basa en C y C++.
+Java fue desarrollado por James Gosling, Patrick Naughton, Chris Warth, Ed Frank y Mike Sheridan en Sun Microsystems en 1991. Inicialmente, el lenguaje se denominó _Oak_ aunque se rebautizó como **Java** en 1995. La concepción de Java se basa en C y C++.
 
 Su objetivo inicial era crear un lenguaje independiente y portátil capaz de ser ejecutado en diferentes plataformas y con diferentes CPUs. La clave está en que el resultado de la compilación de código Java no es código ejecutable, sino código de bytes o _bytecode_. Es un conjunto optimizado de instrucciones diseñadas para ejecutarse sobre la JVM o _Java Virtual Machine_. Esta máquina virtual es la que interpreta el _bytecode_. De esta forma sólo es necesario implementar la JVM para cada plataforma.
 
@@ -16,7 +18,7 @@ Para complementar los principios de la programación orientada a objetos, se apl
 
 - La **herencia** es el proceso mediante el cual un objeto puede adquirir las propiedades de otro. Gracias a la herencia un objeto solo tiene que definir los atributos que lo hacen único dentro de la clase y heredar los atributos generales.
 
-## Herramientas de Java
+## Comandos de Java
 
 ```sh
 # Compilar código Java en bytecode
@@ -27,6 +29,9 @@ $  java filename
 
 # Generar páginas HTML de documentación de la API
 $ javadoc
+
+# Inicia el intérprete de comandos
+$ jshell
 
 # Iniciar una consola gráfica para monitorear y gestionar aplicaciones Java
 $ jconsole
@@ -53,7 +58,7 @@ public class Sample {
 }
 ```
 
-### Identificador
+### Identificadores
 
 En Java, un **identificador** es un nombre asignado a un método, variable u otro elemento definido por el usuario. Pueden tener uno o varios caracteres de longitud.
 
@@ -63,7 +68,7 @@ Los nombres de variable pueden empezar por **cualquier letra, guión bajo o el s
 
 Los tipos de datos son especialmente importantes en Java por tratarse de un lenguaje de **tipado fuerte**. Es decir, el compilador comprueba la compatibilidad de los tipos en todas las operaciones. Para realizar la comprobación de tipos, todas las variables, expresiones y valores tienen un tipo.
 
-Java es _"case sensitive"_ lo que significa que Java distingue entre mayúsculas y minúsculas.
+Java es **_"case sensitive"_** lo que significa que Java distingue entre mayúsculas y minúsculas.
 
 En Java se declara una variable usando `<tipo> <nombre>`. Es necesario declarar la variable antes de poder hacer referencia a ella. Una vez se ha declarado ya se puede utilizar, nunca antes.
 
@@ -229,7 +234,9 @@ y = x--; // y = 10. Primero se asigna el valor y luego se resta
 y = --x; // y = 9. Primero se resta y luego se asigna
 ```
 
-#### Operadores lógicos
+Los operadores lógicos son herramientas fundamentales para realizar evaluaciones condicionales y tomar decisiones en el flujo de un programa.
+
+Estos operadores permiten combinar o modificar expresiones booleanas, que son aquellas que pueden evaluarse como verdaderas o falsas:
 
 |    `A`    |    `B`    |   `A|B`  |   `A&B`   |   `A^B`   |    `!A`   |
 | :-------: | :-------: | :------: | :-------: | :-------: | :-------: |
@@ -834,7 +841,7 @@ Cuando una clase implementa varias interfaces, éstas se separan mediante comas.
 (public) interface Vehicle {
   public static final String UNITS = "Km/h";
 
-  // Método implícitamente 'public' que será codificado por la clase o clases que implementan la interfaz
+  // Método implícitamente 'public' que será codificado por la clase/s que implementan la interfaz
   void getWheels();
 
   // Método con una implementación por defecto.
@@ -850,7 +857,7 @@ class Car extends Superclass implements Vehicle {
 
 class Sample {
     public static void main (String ... args) {
-        //Al igual que con la herencia, podemos declarar una variable de referencia de un tipo de interfaz.
+        //Se declara una variable de referencia de un tipo de interfaz.
         Vehicle car = new Car();
         
         // Se ejecutará la versión implementada por el objeto. 
@@ -1824,7 +1831,9 @@ class Gen<T, V> {
 
 ## Expresiones lambda
 
-Básicamente **una expresión lambda es un método anónimo**. Sin embargo, este método no se ejecuta por sí solo, sino que se usa para implementar un método definido por una **interfaz funcional**. Las expresiones lambda también suele denominarse _'closure'_.
+Básicamente **una expresión lambda es un método anónimo**. Sin embargo, este método no se ejecuta por sí solo, sino que se usa para implementar un método definido por una **interfaz funcional**. Estas interfaces funcionales anteriormente se conocian por SAM (_Single Abstract Method_).
+
+Las expresiones lambda también suele denominarse _'closure'_.
 
 **Una interfaz funcional es una interfaz que únicamente contiene un método abstracto**. Por lo tanto, una interfaz funcional suele representar una única acción.
 
@@ -2075,14 +2084,16 @@ public class Sample {
 
 ### Interfaces funcionales predefinidas
 
-Java proporciona una serie de **interfaces funcionales predefinidas** preparadas para utilizar:
+En Java 8 apareció el paquete `java.util.function` que proporciona una serie de **interfaces funcionales predefinidas** preparadas para utilizar:
 
-- `UnaryOperator<T>` -- Aplica una operación unaria a un objeto de tipo 'T' y devuelve el resultado, que también es de tipo 'T'. Su método es `apply()`.
-- `BinaryOperator<T>` -- Aplica una operación a dos objetos de tipo 'T' y devuelve el resultado, que también es de tipo 'T'. su método es `apply()`.
-- `Consumer<T>` -- Aplica una operación a un objeto de tipo 'T'. Su método es `accept()`.
-- `Supplier<T>` -- Devuelve un objeto de tipo 'T'. Su método es `get()`.
-- `Function<T, V>` -- Aplica una operación a un objeto de 'T' y devuelve el resultado como objeto de 'V'. Su método es `apply()`.
-- `Predicate<T>` -- Determina si un objeto de tipo 'T' cumple una restricción. Devuelve un valor boolean que indica el resultado. Su método es `test()`.
+- **`Consumer<T>`**: Representa una operación que acepta un solo argumento de entrada y no devuelve ningún resultado.
+- **`BiConsumer<T, U>`**: Representa una operación que acepta dos argumentos de entrada y no devuelve ningún resultado.
+- **`Function<T, R>`**: Representa una función que acepta un argumento y produce un resultado.
+- **`BiFunction<T, U, R>`**: Representa una función que acepta dos argumentos y produce un resultado.
+- **`UnaryOperator<T>`**: Representa una operación en un solo operando que produce el mismo tipo que su operando.
+- **`BinaryOperator<T>`**: Representa una operación sobre dos operandos del mismo tipo, produciendo un resultado del mismo tipo que los operandos.
+- **`Supplier<T>`**: Representa una función que no acepta argumentos y devuelve un resultado.
+- **`Predicate<T>`**: Representa un predicado (función que se evalua de forma booleana) de un argumento.
 
 ```java
 import java.util.function.Predicate; // Importar la interfaz 'Predicate'
@@ -2094,6 +2105,133 @@ public class Sample {
         System.out.println("4 es par? " + isEven.test(4));
     }
 }
+```
+
+[Más información](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/package-summary.html)
+
+## Stream API
+
+La API _Stream_ es un juego de utilidades para la manipulación de grandes agrupaciones de objetos en memoria.
+
+Este mecanismo explota las capacidades de las expresiones lambda. La API _Stream_ no es un nuevo tipo de colección sino más bien un envoltorio que facilita su manipulación.
+
+Esta API ofrece dos tipos de operaciones:
+
+- **Operaciones intermedias**: son aquellas que producen o retornan un nuevo _stream_, pudiéndose concatenar unas con otras como por ejemplo:
+  - **distinct**: retorna un nuevo _stream_ con los elementos diferentes entre sí
+  - **filter**: retorna un nuevo _stream_ de acuerdo con la expresión pasada como parámetro
+  - **limit**: retorna un nuevo _stream_ con el número máximo de elementos pasado como parámetro
+  - **of**: retorna un _stream_ a partir de un array
+  - **sorted**: retorna un nuevo _stream_ ordenado
+- **Operaciones finales**: son aquellas que no producen un _stream_, como por ejemplo:
+  - **count**: retorna el número de elementos
+  - **findFirst**: retorna el primer elemento
+  - **forEach**: realiza una acción sobre cada uno de los elementos
+  - **max/min**: retorna el máximo/mínimo elemento
+
+[Más información](https://dev.java/learn/api/streams/)
+
+### Crear un stream
+
+Todas las clases de tipo `Stream` tienen un método `of()` que recibe como parámetro un **array de objetos**. La clase `java.util.Arrays` también dispone del método `stream()` con el mismo objetivo:
+
+```java
+int[] enteros = new int[]{1, 2, 3, 4, 5};
+
+IntStream strEnt = IntStream.of(enteros);
+IntStream strEnt3 = IntStream.of(4, 5, 6);
+IntStream strEnt2 = Arrays.stream(enteros);
+```
+
+La mayoría de las clases del **framework de colecciones** disponen de un método `stream()` para crear un _stream_:
+
+```java
+List<Empleado> empleados = getListaEmpleados();
+
+Stream strEmp = Stream.of(empleados);
+Stream strEmp2 = empleados.stream();
+Stream strEmp3 = empleados.parallelStream();
+```
+
+### Recorrer un stream
+
+Recorrer un _stream_ se considera una **operación final**.
+
+Para recorrer o ejecutar una acción sobre cada uno de los elementos de un _stream_ se utiliza el método `forEach()` junto con una expresión lambda que representará la implementación de una interfaz funcional de tipo `java.util.function.Consumer`:
+
+```java
+IntStream.of(1, 2, 3, 4, 5, 6).forEach(e -> System.out.println("Entero: " + e));
+
+empleados.stream().forEach(emp -> System.out.println("Nombre: " + emp.getNombre()));
+```
+
+### Operaciones de filtrado
+
+Filtrar un _stream_ se considera una **operación intermedia**.
+
+Las operaciones de filtrado se realizarán a través del método `filter()` empleando una expresión lambda que representará la implementación de una interfaz funcional de tipo `java.util.function.Predicate` y establecerá las condiciones de filtrado:
+
+```java
+IntStream.of(5, 20, 32, 8, 14, 24) // se crea el stream
+    .filter(e -> e > 10) // retorna un nuevo stream filtrado
+    .forEach(e -> System.out.println( e + " es mayor que 10")); // recorrer el stream
+```
+
+### Operaciones de ordenación
+
+Ordenar un _stream_ se considera una **operación intermedia**.
+
+Las operaciones de ordenación de tipos primitivos serán automáticas con el método `sorted()` mientras que para la ordenación de objetos se realiza con la implementación de la interfaz `java.util.Comparator`:
+
+```java
+IntStream.of(5, 20, 32, 8, 14, 24)
+    .sorted()   // ordena el stream
+    .forEach(e -> System.out.println(e)); // imprime el stream ordenado
+
+empleados.stream()
+    .sorted((emp1, emp2) -> emp1.getAge() - emp2.getAge())
+    .forEach(emp -> System.out.println("Empleado: " + emp.getName()));
+```
+
+### Operaciones de mapeo
+
+Mapear un _stream_ se considera una **operación intermedia**.
+
+Las operaciones de mapeo permiten aplicar una función a un _stream_ para producir otro _stream_ de tipo diferente como por ejemplo `mapToInt()` o `mapToLong().` La expresión lambda es una implementación de la interfaz funcional `java.util.function.Function`.
+
+El hecho de construir un _stream_ de tipos primitivos puede servir para realizar algún tipo de operación como por ejemplo una suma o una media.
+
+```java
+empleados.stream()
+    .sorted((emp1, emp2) -> emp1.getAge() - emp2.getAge()) // ordena el stream
+    .mapToInt(emp -> emp.getAge()) // mapea la edad en un nuevo stream
+    .forEach(emp -> System.out.println("Edad del empleado: " + emp)); // recorre el stream
+```
+
+### Operaciones aritméticas
+
+Este tipo de operaciones se consideran una **operación final**.
+
+Las clases _stream_ que envuelven tipos primitivos como las subclases `IntStream`, `DoubleStream` o `LongStream` incorporan métodos que permiten realizar algunas operaciones aritméticas como por ejemplo `sum()`, `average()`, `max()`, `min()` o `count()`:
+
+```java
+empleados.stream()
+    .mapToInt(emp -> emp.getAge()) // mapea la edad en un nuevo stream
+    .average()  // calcula la media de los enteros del stream
+    .getAsDouble(); // imprime la media de edad
+```
+
+### Operaciones de colección
+
+Este tipo de operaciones se consideran una **operación final**.
+
+Permiten generar un nuevo objeto o una lista de ellos a partir de un _stream_:
+
+```java
+List<String> nombres = empleados.stream()
+    .map(emp -> emp.getName()) // mapea el nombre en un nuevo stream
+    .sorted()   // ordena alfabéticamente los nombres
+    .collect(Collectors.toList()); // retorna una lista a partir del stream
 ```
 
 ## Colecciones
@@ -2441,6 +2579,39 @@ Para permitir la compatibilidad con código anterior a JDK 9, Java introduce dos
 Cuando se usa código legado que no forma parte de un módulo nombrado, pasa automáticamente a formar parte del **"módulo sin nombre"**. Este módulo tiene dos atributos importantes. En primer lugar, todos los paquetes que contiene se exportan de forma automática. En segundo lugar, este módulo puede acceder a todos los demás. Por tanto, cuando un programa no usa módulos, todos los módulos de la API de la plataforma Java se vuelven accesibles automáticamente a través del **"módulo sin nombre"**.
 
 Otra característica que permite la compatibilidad con código legado es el uso automático de la ruta de clase en vez de la ruta de módulo.
+
+## Introducción a JShell
+
+A partir del JDK 9 se incluye una herramienta llamada **JShell** que proporciona un entorno interactivo para experimentar de manera rápida y fácil código Java.
+
+JShell implementa lo que se conoce como ejecución **REPL _(read-evaluate-print loop)_**. Con este mecanismo, se introduce un fragmento de código que se lee y evalúa. A continuación, JShell muestra el resultado del código y queda a la espera del siguiente fragmento o expresión.
+
+Cada secuencia de código introducida se llama _snippet_.
+
+JShell puede evaluar fragmentos de código y expresiones ya que entre bastidores proporciona una clase y un método sintéticos. Es decir, proporciona todo lo necesario para poder ejecutar por ejemplo una instrucción como `System.out.println()`.
+
+En JShell se puede utilizar variables, expresiones, métodos, clases, interfaces, enumeraciones, etcétera...
+
+Además, en JShell se importan por defecto varios paquetes por lo que no es necesario realizar importaciones de los paquetes más comunes. Pueden listarse con `/imports`.
+
+Para iniciar JShell escribimos `jshell` desde la línea de comandos.
+
+Podemos cargar un fichero de cualquier extensión con fragmentos de código o con una sesión previa con `jshell nombrearchivo`.
+
+Una vez iniciada la consola, JShell dispone de una serie de comandos que empiezan por `/`:
+
+- **/help**: muestra la ayuda
+- **/exit**: salir de JShell
+- **/list**: muestra todos los _snippets_ introducidos
+- **/edit o /edit n**: permite editar todos los snipets o uno en concreto
+- **/save nombrearchivo**: permite guardar la sesión actual de _snippets_
+- **/open nombrearchivo**: permite cargar una sesión de _snippets_
+- **/types**: muestra clases, interfaces y enumeraciones
+- **/imports**: muestra las importaciones
+- **/methods**: muestra los métodos
+- **/vars**: muestra las variables
+
+Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https://docs.oracle.com/en/java/javase/21/jshell/introduction-jshell.html)
 
 ---
 
