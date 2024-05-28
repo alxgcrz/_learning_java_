@@ -453,7 +453,7 @@ int[] nums = {1, 2, 3};
 int[] other = nums; // Ahora 'other' apunta a la misma matriz que 'nums'.
 ```
 
-## Clases
+## Clases y objetos
 
 Una definición de clase crea un **nuevo tipo de datos**:
 
@@ -642,7 +642,7 @@ La firma de un método con argumentos de longitud variable es:
 
 Dentro del método esta variable se utiliza como una array. Por lo tanto, para acceder a los parámetros se emplea la misma notación que se emplea en un array. Un método puede tener parámetros normales además de parámetros de longitud variable. En ese caso, **los parámetros normales van delante y por último el parámetro de longitud variable**.
 
-## `Static`
+## Modificador `Static`
 
 Se pueden definir como `static` tanto variables como métodos. Las variables declarados como `static` son básicamente **variables globales**. Todas las instancias de la clase comparten la misma variable.
 
@@ -808,7 +808,7 @@ Visibilidad permitida para las interfaces:
 - `default` (sin modificador) -> Una interfaz sin modificador sólo será visible por otras clases o interfaces **dentro del mismo paquete**.
 - `public` -> Una interfaz pública es visible **desde cualquier lugar**.
 
-*NOTA*: Una interfaz declarada como `public` debe encontrarse en un archivo con el mismo nombre.
+_NOTA_: Una interfaz declarada como `public` debe encontrarse en un archivo con el mismo nombre.
 
 ```java
 interface Vehicle {} // interfaz 'default' (sin modificador)
@@ -915,7 +915,7 @@ Mediante la palabra reservada `throw` se pueden lanzar manualmente una excepció
 
 Las excepciones se tratan en un bloque `try-catch-finally` (`finally` es opcional):
 
-```java {.numberLines}
+```java
 try {
   // bloque de código que puede lanzar la excepción
 } catch (TipoException exception) {
@@ -932,7 +932,7 @@ try {
 
 Si un método genera una excepción que no se va a controlar, debemos declarar dicha excepción en una cláusula `throws`. Con esta cláusula podemos 'relanzar' tanto excepciones de Java como excepciones personalizadas. Una vez lanzada esta excepción deberá ser capturada en un bloque `try-catch` superior o por la JVM:
 
-```java {.numberLines}
+```java
 int divide(int a, int b) throws ArithmeticException, MyException {
   if (b == 0) {
     throw new ArithmeticException();
@@ -946,7 +946,7 @@ class MyException extends Exception { }
 
 En **JDK 7** se amplió el mecanismo de excepciones al permite la **captura múltiple**. Con la captura múltiple se permite la captura de dos o más excepciones dentro de la misma cláusula `catch`. Cada tipo de excepción de la lista se separa con el operador `| ('OR')`. Cada parámetro es `final` de forma implícita.
 
-```java {.numberLines}
+```java
 try {
   // código
 } catch (final ArithmeticException | ArrayIndexOutOfBoundsException e) {
@@ -958,7 +958,7 @@ En **JDK 7** se añadió otro mecanismo denominado `try-with-resources` o **_try
 
 Los recursos que se pueden emplear con este tipo de `try-with-resources` son recursos que implementen la interfaz `AutoCloseable` que a su vez hereda de `Closeable`. La interfaz `AutoCloseable` define el método `close()`. Además, el recurso declarado en la instrucción `try` es **'final'** de forma implícita, de forma que no puede ser asignado ni modificado una vez creado y su ámbito se limita al propio `try`.
 
-```java {.numberLines}
+```java
 /* 
  - El siguiente código usa un 'try con recursos' para abrir un archivo
  - y después cerrarlo automáticamente al salir del bloque 'try'.
@@ -973,7 +973,7 @@ try (FileInputStream fin = New FileInputStream(args[0])) {
 
 Se pueden gestionar más de un recurso que estarán separados por un punto y coma ';':
 
-```java {.numberLines}
+```java
 try (FileInputStream fin = New FileInputStream(args[0]); FileOutputStream fout = New FileOutputStream(args[1])) {
   // bloque de código
 } catch (IOException e) {
@@ -1287,6 +1287,58 @@ class FileReaderDemo {
         }
     }
 }
+```
+
+## Manipular ficheros y directorios
+
+Con el paquete `java.io` se trabaja con _streams_, leyendo y escribiendo ficheros a bajo nivel.
+
+Existe otra forma de manipular ficheros a más alto nivel gracias a las utilidades del paquete `java.nio`.
+
+El primer paso es obtener una referencia al fichero o directorio mediante la clase `Path`:
+
+```java
+// Obtener una referencia mediante la clase de ayuda 'java.nio.file.Paths'
+Path path = Paths.get("/home/test.txt"); // Sistemas UNIX
+
+Path path2 = Paths.get("c:\\home\\test.txt"); // Sistemas Windows
+```
+
+Para operar con ficheros o directorios es necesario utilizar la clase `Files`:
+
+```java
+// Verificar si existe el fichero
+Path path = Paths.get("/home/test.txt");
+
+Files.exists(path); // Devuelve 'true' si existe
+
+// Verificar su accesibilidad
+Files.isReadable(path);
+Files.isWritable(path);
+Files.isExecutable(path);
+
+// Copiar ficheros (o directorios)
+Files.copy(path, Paths.get("copy.txt"));
+
+// Borrar fichero (o directorio, que deberán estar VACÍOS)
+Files.delete(Paths.get("copy.txt"));
+```
+
+## Trabajar con fechas
+
+Hasta Java 8, para trabajar con fechas se utilizaban las clases `Date` y `GregorianCalendar`.
+
+Las nuevas herramientas para trabajar con fechas a partir de Java 8 se encuentran en el paquete `java.time`:
+
+```java
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+LocalDate fechaActual = LocalDate.now();
+System.out.println(fechaActual);  // Imprime '2024-01-19'
+
+DateTimeFormatter dtF1 = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+System.out.println(dtF1.format(fechaActual)); // Imprime '19-01-2024'
 ```
 
 ## Programación de subprocesamiento múltiple
@@ -2838,7 +2890,7 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
 - [Significant Changes in JDK 20 Release](https://docs.oracle.com/en/java/javase/20/migrate/significant-changes-jdk-release.html)
 - [Lista completa de características - JEP](https://openjdk.org/projects/jdk/20/)
 
-### :new: Java 21 (21 de Septiembre 2023)
+### Java 21 (21 de Septiembre 2023)
 
 - [JDK 21 Documentation](https://docs.oracle.com/en/java/javase/21/index.html)
 - [Java Language Changes for Java SE 21](https://docs.oracle.com/en/java/javase/21/language/java-language-changes.html)
@@ -2848,6 +2900,15 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
   - [JEP 440](https://openjdk.org/jeps/440): Record Patterns
   - [JEP 441](https://openjdk.org/jeps/441): Pattern Matching for switch
   - [JEP 444](https://openjdk.org/jeps/444): Virtual Threads
+
+### :new: Java 22 (19 de Marzo 2024)
+
+- [JDK 22 Documentation](https://docs.oracle.com/en/java/javase/22/index.html)
+- [Java Language Changes for Java SE 22](https://docs.oracle.com/en/java/javase/22/language/java-language-changes.html)
+- [Significant Changes in JDK 21 Release](https://docs.oracle.com/en/java/javase/22/migrate/significant-changes-jdk-release.html)
+- [Lista completa de características - JEP](https://openjdk.org/projects/jdk/22/)
+  - [JEP 454](https://openjdk.org/jeps/454): Foreign Function & Memory API
+  - [JEP 456](https://openjdk.org/jeps/456): Unnamed Variables & Patterns
 
 ---
 
@@ -2859,6 +2920,22 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
 - [This JEP is the index of all JDK Enhancement Proposals, known as JEPs.](https://openjdk.org/jeps/0)
 - [JDK Release Notes](https://www.oracle.com/java/technologies/javase/jdk-relnotes-index.html)
 - [Learn Java](https://dev.java/learn/)
+- [The Java Version Almanac](https://javaalmanac.io/)
+- <https://developer.oracle.com/languages/java.html>
+- <https://roadmap.sh/java>
+- <https://goalkicker.com/JavaBook/>
+- <https://www.baeldung.com/>
+
+### OpenJDK Builds
+
+- <https://www.oracle.com/java/technologies/downloads/>
+- <https://jdk.java.net/>
+- <https://aws.amazon.com/es/corretto/>
+- <https://adoptium.net/es/>
+- <https://www.microsoft.com/openjdk>
+- <https://developer.ibm.com/languages/java/semeru-runtimes/downloads>
+- <https://www.azul.com/downloads>
+- <https://developers.redhat.com/products/openjdk/overview>
 
 ## Licencia
 
