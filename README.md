@@ -37,7 +37,7 @@ $ jshell
 $ jconsole
 ```
 
-- [Java® Development Kit Version 21 Tool Specifications](https://docs.oracle.com/en/java/javase/21/docs/specs/man/index.html)
+- [Java® Development Kit Version 22 Tool Specifications](https://docs.oracle.com/en/java/javase/22/docs/specs/man/index.html)
 
 ## Sintaxis básica
 
@@ -160,7 +160,7 @@ Se usa la palabra clave `final` para hacer **inmutable** las variables. Por conv
 final int HORAS_QUE_TRABAJO_POR_SEMANA = 9001;
 ```
 
-Notación abreviada para declarar (e inicializar) múltiples variables:
+Existe un notación abreviada para declarar (e inicializar) múltiples variables. Sin embargo no se aconseja su uso por motivos de legibilidad:
 
 ```java
 // Declarar las tres variables del mismo tipo 
@@ -2163,7 +2163,7 @@ public class Sample {
 
 ## Stream API
 
-La API _Stream_ es un juego de utilidades para la manipulación de grandes agrupaciones de objetos en memoria.
+La API _Stream_, introducida en la [versión 1.8](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/util/stream/package-summary.html), es un juego de utilidades para la manipulación de grandes agrupaciones de objetos en memoria.
 
 Este mecanismo explota las capacidades de las expresiones lambda. La API _Stream_ no es un nuevo tipo de colección sino más bien un envoltorio que facilita su manipulación.
 
@@ -2905,7 +2905,7 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
 
 - [JDK 22 Documentation](https://docs.oracle.com/en/java/javase/22/index.html)
 - [Java Language Changes for Java SE 22](https://docs.oracle.com/en/java/javase/22/language/java-language-changes.html)
-- [Significant Changes in JDK 21 Release](https://docs.oracle.com/en/java/javase/22/migrate/significant-changes-jdk-release.html)
+- [Significant Changes in JDK 22 Release](https://docs.oracle.com/en/java/javase/22/migrate/significant-changes-jdk-release.html)
 - [Lista completa de características - JEP](https://openjdk.org/projects/jdk/22/)
   - [JEP 454](https://openjdk.org/jeps/454): Foreign Function & Memory API
   - [JEP 456](https://openjdk.org/jeps/456): Unnamed Variables & Patterns
@@ -2915,16 +2915,17 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
 ## Enlaces de interés
 
 - [Java Platform, Standard Edition Documentation](https://docs.oracle.com/en/java/javase/index.html)
+- [Last API Documentation](https://docs.oracle.com/en/java/javase/22/docs/api/index.html)
 - [OpenJDK](https://openjdk.org/)
 - [OpenJDK - Github](https://github.com/openjdk/)
 - [This JEP is the index of all JDK Enhancement Proposals, known as JEPs.](https://openjdk.org/jeps/0)
 - [JDK Release Notes](https://www.oracle.com/java/technologies/javase/jdk-relnotes-index.html)
-- [Learn Java](https://dev.java/learn/)
 - [The Java Version Almanac](https://javaalmanac.io/)
+- <https://dev.java>
 - <https://developer.oracle.com/languages/java.html>
 - <https://roadmap.sh/java>
-- <https://goalkicker.com/JavaBook/>
-- <https://www.baeldung.com/>
+- 📕 <https://goalkicker.com/JavaBook>
+- <https://www.baeldung.com>
 
 ### OpenJDK Builds
 
