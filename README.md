@@ -642,7 +642,7 @@ La firma de un método con argumentos de longitud variable es:
 
 Dentro del método esta variable se utiliza como una array. Por lo tanto, para acceder a los parámetros se emplea la misma notación que se emplea en un array. Un método puede tener parámetros normales además de parámetros de longitud variable. En ese caso, **los parámetros normales van delante y por último el parámetro de longitud variable**.
 
-## Modificador `Static`
+## Modificador `static`
 
 Se pueden definir como `static` tanto variables como métodos. Las variables declarados como `static` son básicamente **variables globales**. Todas las instancias de la clase comparten la misma variable.
 
@@ -716,8 +716,8 @@ class Vehicle {
 }
 
 class Car extends Vehicle {
-    @Override
-    void show() {}
+  @Override
+  void show() {}
 }
 
 class Motocycle extends Vehicle {
@@ -907,7 +907,7 @@ A partir de JDK 9 una interfaz puede incluir un método `private` que solo puede
 
 ## Excepciones
 
-Una excepción es **un error producido en tiempo de ejecución**. En Java, todas las excepciones se representan por medio de clases. Todas las clases de excepción se derivan de `Throwable`. Esta clase tiene dos subclases directas: `Exception` y `Error`.
+Una excepción es **un error producido en tiempo de ejecución**. En Java, todas las excepciones se representan por medio de clases. Todas las clases de excepción se derivan de [`Throwable`](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/lang/Throwable.html). Esta clase tiene dos subclases directas: [`Exception`](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/lang/Exception.html) y [`Error`](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/lang/Error.html).
 
 Las excepciones tipo `Error` son errores producidos en la propia máquina virtual y no se deben controlar. Los programas sólo deben controlar aquellas excepciones de tipo `Exception`.
 
@@ -944,7 +944,7 @@ int divide(int a, int b) throws ArithmeticException, MyException {
 class MyException extends Exception { }
 ```
 
-En **JDK 7** se amplió el mecanismo de excepciones al permite la **captura múltiple**. Con la captura múltiple se permite la captura de dos o más excepciones dentro de la misma cláusula `catch`. Cada tipo de excepción de la lista se separa con el operador `| ('OR')`. Cada parámetro es `final` de forma implícita.
+En **JDK 7** se amplió el mecanismo de excepciones al permitir la **captura múltiple**. Con la captura múltiple se permite la captura de dos o más excepciones dentro de la misma cláusula `catch`. Cada tipo de excepción de la lista se separa con el operador `| ('OR')`. Cada parámetro es `final` de forma implícita.
 
 ```java
 try {
@@ -956,7 +956,7 @@ try {
 
 En **JDK 7** se añadió otro mecanismo denominado `try-with-resources` o **_try con administración automática de recursos_**. Es un tipo de `try` que evita situaciones en que un archivo (u otro recurso como bases de datos, etc..) no se libera después de ser utilizado. Un `try-with-resources` de este tipo también puede incluir cláusulas `catch` o `finally`.
 
-Los recursos que se pueden emplear con este tipo de `try-with-resources` son recursos que implementen la interfaz `AutoCloseable` que a su vez hereda de `Closeable`. La interfaz `AutoCloseable` define el método `close()`. Además, el recurso declarado en la instrucción `try` es **'final'** de forma implícita, de forma que no puede ser asignado ni modificado una vez creado y su ámbito se limita al propio `try`.
+Los recursos que se pueden emplear con este tipo de `try-with-resources` son recursos que implementen la interfaz [`AutoCloseable`](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/lang/AutoCloseable.html) que a su vez hereda de `Closeable`. La interfaz `AutoCloseable` define el método `close()`. Además, el recurso declarado en la instrucción `try` es **'final'** de forma implícita, de forma que no puede ser asignado ni modificado una vez creado y su ámbito se limita al propio `try`.
 
 ```java
 /* 
@@ -1328,7 +1328,7 @@ Files.delete(Paths.get("copy.txt"));
 
 Hasta Java 8, para trabajar con fechas se utilizaban las clases `Date` y `GregorianCalendar`.
 
-Las nuevas herramientas para trabajar con fechas a partir de Java 8 se encuentran en el paquete `java.time`:
+Las nuevas herramientas para trabajar con fechas a partir de Java 8 se encuentran en el paquete [`java.time`](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/time/package-summary.html):
 
 ```java
 import java.time.LocalDate;
@@ -1532,7 +1532,7 @@ Estas constantes tienen el tipo de la enumeración que las contiene. Una vez def
 Sin embargo **Java implementa las enumeraciones como si fueran clases**, permitiendo que tengan constructores, métodos, etc.. aunque con dos limitaciones que las diferencia del resto de clases en Java:
 
 - Una enumeración no puede heredar de otra clase.
-- Ni puede actuar como superclase de otra clase.
+- Una enumeración no puede actuar como superclase de otra clase.
 
 ```java
 // Las constantes, al ser 'static' se invocan de esta forma: 'Enumeration.constante'
@@ -1604,14 +1604,14 @@ System.out.println(Transport.TRUCK.ordinal()); // => 3
 
 En Java los tipos primitivos no forman parte de la jerarquía de objetos por motivos de eficiencia. Sin embargo existen clases que actuan como envoltorios (_'wrapper'_) para tipos primitivos como `Float`, `Double`, `Byte`, `Short`, `Integer`, `Long`, `Character` y `Boolean`.
 
-Todos los envoltorios de tipos numéricos heredan de la clase abstracta `Number`.
+Todos los envoltorios de tipos numéricos heredan de la clase abstracta [`Number`](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/lang/Number.html).
 
 Encapsular un tipo primitivo en su envoltorio se denomina **'boxing'**. Por tanto **'autoboxing'** es el proceso de encapsular automáticamente un tipo primitivo en su clase envoltorio y **'auto-unboxing'** es el proceso inverso.
 
 ```java
 Integer num = Integer.valueOf(100) // sin 'autoboxing'
 
-Integer iOb = 100; // 'autobox' de int
+Integer iOb = 100; // 'autobox' de int a Integer
 
 int i = iOb; // unbox
 ```
@@ -1624,37 +1624,37 @@ El término **"genérico"** significa tipo con parámetros. Los tipos con parám
 /* Uso de genéricos en una clase. 
 'T' es un parámetro de tipo que se sustituye por un tipo real al crear un objeto de la clase */
 class Gen<T> {
-    T ob; // Declarar un objeto de tipo 'T'.
+  T ob; // Declarar un objeto de tipo 'T'.
 
-    Gen(T o) { // Pasar al constructor una referencia a un objeto de tipo 'T'
-        ob = o;
-    }
+  Gen(T o) { // Pasar al constructor una referencia a un objeto de tipo 'T'
+    ob = o;
+  }
 
-    T getOb() { // retorna 'ob' de tipo 'T'
-        return ob;
-    }
+  T getOb() { // retorna 'ob' de tipo 'T'
+    return ob;
+  }
 
-    void showType() {
-        System.out.println("Type of T is " + ob.getClass().getName());
-    }
+  void showType() {
+    System.out.println("Type of T is " + ob.getClass().getName());
+  }
 }
 
 class GenDemo {
-    public static void main(String ... args) {
-        Gen<Integer> iOb; // Crear una referencia
+  public static void main(String ... args) {
+    Gen<Integer> iOb; // Crear una referencia
 
-        // Crear un objeto Gen<Integer> y asignar la referencia a 'iOb'.
-        // Uso de autoboxing para encapsular el valor entero en un objeto 'Integer'
-        iOb = new Gen<Integer>(80);
-        iOb.showType();
+    // Crear un objeto Gen<Integer> y asignar la referencia a 'iOb'.
+    // Uso de autoboxing para encapsular el valor entero en un objeto 'Integer'
+    iOb = new Gen<Integer>(80);
+    iOb.showType();
 
-        /* Esta asignación generaría un error en tiempo de compilación. 
-        Es una de la ventajas del uso de genéricos */
-        // iOB = new Gen<Double>(88.0) // Error
+    /* Esta asignación generaría un error en tiempo de compilación. 
+    Es una de la ventajas del uso de genéricos */
+    // iOB = new Gen<Double>(88.0) // Error
 
-        Gen<String> strOb = new Gen<String>("Generic");
-        strOb.showType();
-    }
+    Gen<String> strOb = new Gen<String>("Generic");
+    strOb.showType();
+  }
 }
 ```
 

@@ -4,6 +4,7 @@
 *.html
 *.css
 .npmrc
+.prettierrc
 practice/
 ## --------------------
 
