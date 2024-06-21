@@ -2921,22 +2921,8 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
 - [This JEP is the index of all JDK Enhancement Proposals, known as JEPs.](https://openjdk.org/jeps/0)
 - [JDK Release Notes](https://www.oracle.com/java/technologies/javase/jdk-relnotes-index.html)
 - [The Java Version Almanac](https://javaalmanac.io/)
-- <https://dev.java>
 - <https://developer.oracle.com/languages/java.html>
 - <https://roadmap.sh/java>
-- 📕 <https://goalkicker.com/JavaBook>
-- <https://www.baeldung.com>
-
-### OpenJDK Builds
-
-- <https://www.oracle.com/java/technologies/downloads/>
-- <https://jdk.java.net/>
-- <https://aws.amazon.com/es/corretto/>
-- <https://adoptium.net/es/>
-- <https://www.microsoft.com/openjdk>
-- <https://developer.ibm.com/languages/java/semeru-runtimes/downloads>
-- <https://www.azul.com/downloads>
-- <https://developers.redhat.com/products/openjdk/overview>
 
 ## Licencia
 
