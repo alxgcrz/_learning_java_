@@ -1,11 +1,7 @@
 ## Custom files
-*.bat
 *.yaml
 *.html
-*.css
 .npmrc
-.prettierrc
-practice/
 ## --------------------
 
 # Created by https://www.gitignore.io/api/java,gradle,windows,intellij+all,visualstudiocode
