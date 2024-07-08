@@ -1883,7 +1883,7 @@ class Gen<T, V> {
 
 ## Expresiones lambda
 
-Básicamente **una expresión lambda es un método anónimo**. Sin embargo, este método no se ejecuta por sí solo, sino que se usa para implementar un método definido por una **interfaz funcional**. Estas interfaces funcionales anteriormente se conocian por SAM (_Single Abstract Method_).
+Básicamente **una expresión lambda es un método anónimo**. Sin embargo, este método no se ejecuta por sí solo, sino que se usa para implementar un método definido por una **interfaz funcional**. Estas interfaces funcionales anteriormente se conocían por SAM (_Single Abstract Method_).
 
 Las expresiones lambda también suele denominarse _'closure'_.
 
@@ -2787,7 +2787,7 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
 
 ---
 
-## Enlaces de interés
+## Referencias
 
 - [Java Platform, Standard Edition Documentation](https://docs.oracle.com/en/java/javase/index.html)
 - [Last API Documentation](https://docs.oracle.com/en/java/javase/22/docs/api/index.html)
