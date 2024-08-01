@@ -419,7 +419,7 @@ void operation () {
 
 Notación para la declaración de un array (el tamaño del array debe decidirse en la declaración):
 
->`<tipo_de_dato> [] <nombre_variable> = new <tipo_de_dato>[<tamaño>];`
+- `<tipo_de_dato> [] <nombre_variable> = new <tipo_de_dato>[<tamaño>];`
 
 ```java
 int[] sample = new int[10];
@@ -431,7 +431,7 @@ int[] sample1, sample2, sample3;
 
 Notación para la declaración e inicialización de un array:
 
->`<tipo_de_dato> [] <nombre_variable> = {value, value, ...};`
+- `<tipo_de_dato> [] <nombre_variable> = {value, value, ...};`
 
 ```java
 int[] sample = {2015, 2016, 2017};
@@ -557,7 +557,7 @@ class Outern {
 
 Notación para la definición de un método:
 
->`<visibilidad> <tipo_de_retorno> <nombre_funcion>(<argumentos>)`
+- `<visibilidad> <tipo_de_retorno> <nombre_funcion>(<argumentos>)`
 
 Los **parámetros** aparecen en la definición del método. Cuando un método tiene parámetros la parte de su definición que los especifica se denomina 'lista de parámetros'.
 
@@ -638,7 +638,7 @@ En ocasiones será necesario métodos que acepten una número variable de argume
 
 La firma de un método con argumentos de longitud variable es:
 
->`tipo método(tipo ... var) {}`
+- `tipo método(tipo ... var) {}`
 
 Dentro del método esta variable se utiliza como una array. Por lo tanto, para acceder a los parámetros se emplea la misma notación que se emplea en un array. Un método puede tener parámetros normales además de parámetros de longitud variable. En ese caso, **los parámetros normales van delante y por último el parámetro de longitud variable**.
 
@@ -794,7 +794,7 @@ Visibilidad permitidas para las clases:
 - `default` (sin modificador) -> Sólo será visible por otras clases **dentro del mismo paquete**.
 - `public` -> Una clase pública es **visible desde cualquier lugar**.
 
-**NOTA**: Una clase declarada como `public` debe encontrarse en un archivo con el mismo nombre.
+> :warning: Una clase declarada como `public` debe encontrarse en **un archivo con el mismo nombre**.
 
 ```java
 class Vehicle {} // clase 'default' (sin modificador)
@@ -808,7 +808,7 @@ Visibilidad permitida para las interfaces:
 - `default` (sin modificador) -> Una interfaz sin modificador sólo será visible por otras clases o interfaces **dentro del mismo paquete**.
 - `public` -> Una interfaz pública es visible **desde cualquier lugar**.
 
-_NOTA_: Una interfaz declarada como `public` debe encontrarse en un archivo con el mismo nombre.
+> :warning: Una interfaz declarada como `public` debe encontrarse en **un archivo con el mismo nombre**.
 
 ```java
 interface Vehicle {} // interfaz 'default' (sin modificador)
@@ -835,7 +835,7 @@ Una interfaz puede ser `public` (y en un fichero del mismo nombre) o `default` (
 
 Cuando una clase implementa varias interfaces, éstas se separan mediante comas. En caso de que una clase implemente una interfaz y que herede de una clase primero se coloca `extends` y luego `implements`.
 
-**Importante**: como hemos dicho en una interfaz los métodos son implícitamente `public`. Cuando una clase implementa dicha interfaz y codifica los métodos de la interfaz, si no indica visibilidad los miembros de la clase son `default` de forma implícita, lo cual genera un error ya que `default` es más restrictivo que `public`. Por tanto, **tenemos que indicar explícitamente como `public` los métodos implementados en la clase**.
+> :exclamation: Como hemos dicho en una interfaz los métodos son implícitamente `public`. Cuando una clase implementa dicha interfaz y codifica los métodos de la interfaz, si no indica visibilidad los miembros de la clase son `default` de forma implícita, lo cual genera un error ya que `default` es más restrictivo que `public`. Por tanto, **tenemos que indicar explícitamente como `public` los métodos implementados en la clase**.
 
 ```java
 (public) interface Vehicle {
@@ -1559,9 +1559,9 @@ switch (transport) {
 
 Las enumeraciones cuentan con dos métodos predefinidos `values()` y `valueOf()` cuyo formato es:
 
-- `public static tipo-enum[] values()` => devuelve un array que contiene una lista de las constantes de enumeración
+- `public static tipo-enum[] values()` ➜ devuelve un array que contiene una lista de las constantes de enumeración
 
-- `public static tipo-enum valueOf(String cadena)` => devuelve las constantes de enumeración cuyo valor se corresponde a la cadena pasada como argumento.
+- `public static tipo-enum valueOf(String cadena)` ➜ devuelve las constantes de enumeración cuyo valor se corresponde a la cadena pasada como argumento.
 
 ```java
 // Uso de values() en un for-each
@@ -1597,7 +1597,7 @@ enum Transport {
     CAR, AIRPLANE, TRUCK, BOAT
 }
 
-System.out.println(Transport.TRUCK.ordinal()); // => 3
+System.out.println(Transport.TRUCK.ordinal()); // Print 3
 ```
 
 ## Autoboxing y unboxing
@@ -1694,11 +1694,11 @@ Java ofrece los **'tipos vinculados'** que permite, al especificar un parámetro
 
 Para ello usamos la cláusula `extends` al especificar los parámetros de tipo:
 
->`<T extends superclass>`
+- `<T extends superclass>`
 
 Esto especifica que 'T' solo se puede reemplazar por _'superclass'_ o subclases de _'superclass'_. Por tanto _'superclass'_ define un **límite superior e inclusivo**.
 
-:exclamation: **Nota**: todos los tipos numéricos heredan de la clase abstracta `Number`.
+> :warning: Todos los tipos numéricos heredan de la clase abstracta `Number`.
 
 ```java
 class GenNumeric<T extends Number> { // De esta forma limitamos 'T' a tipos numéricos
@@ -1746,7 +1746,7 @@ class Sample {
 
 Los argumentos comodín se pueden vincular con cualquier parámetro de tipo. Un comodín vinculado es especialmente importante para crear un método que solo deba operar en objetos que sean subclases de una superclase concreta. Se especifica con la forma:
 
-> `<? extends superclase>`
+- `<? extends superclase>`
 
 ```java
 void sample(Gen<? extends Number> a) {  // Tipos que sean 'Number' o subclases de 'Number'
