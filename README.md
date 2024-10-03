@@ -2290,11 +2290,13 @@ List<String> nombres = empleados.stream()
 
 Una **colección** -a veces llamada contenedor- es simplemente un objeto que agrupa múltiples elementos en una sola unidad. Las colecciones se utilizan para almacenar, recuperar, manipular y comunicar datos agregados.
 
-Un [framework de colecciones](https://docs.oracle.com/javase/tutorial/collections/intro/index.html) es una arquitectura unificada para representar y manipular colecciones. Todos los marcos de trabajo de colecciones contienen lo siguiente:
+Un [framework de colecciones](https://docs.oracle.com/javase/8/docs/technotes/guides/collections/index.html) es una arquitectura unificada para representar y manipular colecciones. Todos los _frameworks_ de colecciones contienen lo siguiente:
 
 - **Interfaces**: Estos son tipos de datos abstractos que representan colecciones. Las interfaces permiten manipular las colecciones independientemente de los detalles de su representación. En los lenguajes orientados a objetos, las interfases generalmente forman una jerarquía.
+
 - **Implementaciones**: Estas son las implementaciones concretas de las interfaces de colecciones. En esencia, son estructuras de datos reutilizables.
-- **Algoritmos**: Estos son los métodos que realizan cálculos útiles, como la búsqueda y clasificación, en objetos que implementan interfaces de colección. Se dice que los algoritmos son polimórficos: es decir, que se puede utilizar el mismo método en muchas implementaciones diferentes de la interfaz de colección apropiada. En esencia, los algoritmos son funciones reutilizables.
+
+- **Algoritmos**: Estos son métodos que realizan cálculos útiles, como la búsqueda y clasificación, en objetos que implementan las interfaces de colección. Se dice que los algoritmos son **polimórficos**, es decir, que se puede utilizar el mismo método en muchas implementaciones diferentes de la interfaz de colección correspondiente. En esencia, los algoritmos son funciones reutilizables.
 
 ### La interfaz 'Collection'
 
@@ -2317,7 +2319,17 @@ También contiene métodos que operan en colecciones enteras como:
 - `boolean retainAll(Collection<?> c)`
 - `void clear()`.
 
-La interfaz `Collection` hace lo que cabría esperar, dado que una colección representa un grupo de objetos. Tiene métodos que le dicen cuántos elementos hay en la colección ('size', 'isEmpty'), métodos que comprueban si un objeto dado está en la colección ('contains'), métodos que añaden y eliminan un elemento de la colección ('add', 'remove'), y métodos que proporcionan un iterador sobre la colección ('iterator').
+La interfaz `Collection` hace lo que cabría esperar, dado que una colección representa un grupo de objetos. Tiene métodos que le dicen cuántos elementos hay en la colección (`size()`, `isEmpty()`), métodos que comprueban si un objeto dado está en la colección (`contains(Object element)`), métodos que añaden y eliminan un elemento de la colección (`add(E element)`, `remove(Object element)`), y métodos que proporcionan un iterador sobre la colección (`iterator()`).
+
+`Collection` es la superinterfaz de otras interfaces fundamentales en Java, como:
+
+- [**`List`**](https://docs.oracle.com/javase/8/docs/api/java/util/List.html): representa una secuencia ordenada de elementos que permite duplicados y acceso por posición.
+
+- [**`Set`**](https://docs.oracle.com/javase/8/docs/api/java/util/Set.html): estructura donde no se permiten elementos duplicados y modela un conjunto matemático.
+
+- [**`Queue`**](https://docs.oracle.com/javase/8/docs/api/java/util/Queue.html): ordena sus elementos generalmente de acuerdo con el principio FIFO (_first-in-first-out_), aunque existen excepciones, como las colas de prioridad.
+
+Cada una de estas subinterfaces especializa `Collection` para diferentes estructuras de datos, añadiendo métodos y restricciones adicionales.
 
 Los métodos `toArray()` y `toArray(T[] a)` se proporcionan como un puente entre colecciones y APIs antiguas que esperan matrices en la entrada. Las operaciones de array permiten traducir el contenido de una colección a un array. La forma sencilla sin argumentos crea una nueva matriz de `Object`. La forma más compleja permite al invocador proporcionar un array o elegir el tipo del array de salida en tiempo de ejecución.
 
@@ -2329,7 +2341,7 @@ String[] a = c.toArray(new String[0]);
 
 Hay tres formas de recorrer las colecciones: utilizando operaciones agregadas, con la construcción `for-each` y utilizando iteradores.
 
-En JDK 8 y versiones posteriores, el método preferido para iterar sobre una colección es obtener un flujo y realizar [operaciones agregadas](https://docs.oracle.com/javase/tutorial/collections/streams/index.html) en él. Las operaciones agregadas a menudo se usan junto con las expresiones lambda para hacer que la programación sea más expresiva, utilizando menos líneas de código.
+En JDK 8 y versiones posteriores, el método preferido para iterar sobre una colección es obtener un flujo y realizar [operaciones agregadas](https://docs.oracle.com/javase/tutorial/collections/streams/index.html) en él. Las operaciones agregadas a menudo se usan junto con las **expresiones lambda** para hacer que la programación sea más expresiva, utilizando menos líneas de código.
 
 ```java
 myShapesCollection.stream()
@@ -2354,7 +2366,7 @@ for (Object o : collection) {
 }
 ```
 
-Un `Iterator` es un objeto que permite recorrer una colección y eliminar elementos de la colección de forma selectiva, si se desea. Se obtiene un `iterator` para una colección llamando a su método `iterator()`.
+Un [`Iterator`](https://docs.oracle.com/javase/8/docs/api/java/util/Iterator.html) es un objeto que permite recorrer una colección y eliminar elementos de la colección de forma selectiva, si se desea. Se obtiene un `iterator` para una colección llamando a su método `iterator()`.
 
 La interfaz `Iterator` tiene esta forma:
 
@@ -2368,7 +2380,7 @@ public interface Iterator<E> {
 
 El método `hasNext()` devuelve `true` si hay más elementos y el método `next()` devuelve el siguiente elemento. El método `remove()` elimina el último elemento devuelto por el método `next()`. Por tanto sólo puede ser invocado **una vez** por cada llamada a `next()`. Incumplir la regla lanza una excepción.
 
-Por tanto es recomendable usar iteradores en vez de una construcción `for-each` cuando tengamos que eliminar el elemento actual.
+Es recomendable usar iteradores en vez de una construcción `for-each` cuando se necesita eliminar el elemento actual.
 
 ```java
 static void filter(Collection<?> c) {
@@ -2380,41 +2392,63 @@ static void filter(Collection<?> c) {
 }
 ```
 
+Java permite la creación de **colecciones inmutables**, que no se pueden modificar después de su creación. Estas colecciones son útiles en entornos donde se necesita evitar modificaciones accidentales o garantizar la seguridad en entornos multihilo. Las colecciones inmutables pueden crearse mediante métodos como `Collections.unmodifiableCollection(Collection<? extends T> c)` o con las fábricas de colecciones inmutables introducidas en Java 9, como `List.of()`, `Set.of()`, y `Map.of()`.
+
+La clase [`Collections`](https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html) es una clase utilitaria en Java que proporciona métodos estáticos para operar en y devolver colecciones. Esta clase no puede ser instanciada, ya que su constructor es privado.
+
+Java ofrece implementaciones específicas para trabajar con colecciones en entornos multihilo, donde múltiples hilos acceden a la colección simultáneamente. Algunas de las implementaciones más comunes son:
+
+- [**`ConcurrentHashMap`**](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentHashMap.html): un mapa concurrente eficiente que permite acceso seguro en entornos multihilo sin necesidad de sincronización explícita.
+
+- [**`CopyOnWriteArrayList`**](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CopyOnWriteArrayList.html): una lista que crea una copia de la estructura subyacente en cada modificación, asegurando la seguridad en concurrencia pero a costa de un mayor uso de memoria.
+
+Estas colecciones concurrentes proporcionan un manejo más eficiente y seguro en situaciones donde las colecciones estándar no son adecuadas.
+
 ### La interfaz 'Set'
 
-Un [`Set`](https://docs.oracle.com/javase/8/docs/api/java/util/Set.html) o conjunto es una colección que **no puede contener elementos duplicados**. Modela la abstracción del conjunto matemático. La interfaz `Set` sólo contiene métodos heredados de `Collection` y añade la restricción de que los elementos duplicados están prohibidos.
+Un [`Set`](https://docs.oracle.com/javase/8/docs/api/java/util/Set.html) (conjunto) es una colección que **no puede contener elementos duplicados**. Modela la abstracción del conjunto matemático. La interfaz `Set` hereda métodos de `Collection` pero añade la restricción de que los elementos duplicados están prohibidos.
 
-La interfaz `Set` también añade un contrato más fuerte sobre el comportamiento de las operaciones `equals` y `hashCode`, permitiendo que las instancias de `Set` sean comparadas de forma significativa incluso si sus tipos de implementación difieren. Dos instancias de `Set` son iguales si contienen los mismos elementos.
+Para garantizar la unicidad de los elementos, ya que no se permiten los duplicados, `Set` depende de las implementaciones correctas de los métodos `equals(Object o)` y `hashCode()`. Estos métodos se utilizan para comparar los elementos dentro del conjunto, asegurando que dos elementos sean considerados iguales si tienen el mismo valor, incluso si provienen de diferentes implementaciones de `Set`.
 
-La plataforma Java contiene tres implementaciones de `Set` de propósito general:
+Dos instancias de `Set` son consideradas iguales si contienen los mismos elementos, sin importar el orden o la implementación subyacente, siempre que se respete el contrato de `equals(Object o)`.
 
-- **HashSet** que almacena sus elementos en una tabla hash, es la mejor implementación; sin embargo, no ofrece garantías en cuanto al orden de iteración.
-- **TreeSet** que almacena sus elementos en un árbol _'red-black'_, ordena sus elementos en función de sus valores; es sustancialmente más lento que **HashSet**.
-- **LinkedHashSet**: que se implementa como una tabla hash con una lista enlazada que la recorre, ordena sus elementos según el orden en que se insertaron en el conjunto (orden de inserción). Tiene un coste algo más elevado que un **HashSet** pero soluciona el problema del orden.
+Algunas de las implementaciones más conocidas de la interfaz `Set` son:
 
-La interfaz `Set` tiene una subinterface [`SortedSet`](https://docs.oracle.com/javase/8/docs/api/java/util/SortedSet.html), que es un `Set` que mantiene sus elementos en orden ascendente, ordenados de acuerdo al orden natural de los elementos o de acuerdo a un `Comparator` proporcionado a la hora de creación del `SortedSet`.
+- [**`HashSet`**](https://docs.oracle.com/javase/8/docs/api/java/util/HashSet.html), que almacena los elementos en una tabla _hash_. Es la implementación más eficiente en términos de rendimiento, pero no garantiza ningún orden de iteración.
+
+- [**`TreeSet`**](https://docs.oracle.com/javase/8/docs/api/java/util/TreeSet.html) que almacena los elementos en un árbol _'red-black'_ (rojo-negro), ordenando los elementos en función de sus valores. Aunque es más lenta que `HashSet`, garantiza el orden natural de los elementos.
+
+- [**`LinkedHashSet`**](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedHashSet.html), que implementa una tabla _hash_ vinculada a una lista enlazada. Mantiene el orden de inserción de los elementos, aunque tiene un coste ligeramente superior al de `HashSet`.
+
+La interfaz `Set` cuenta con una subinterface [`SortedSet`](https://docs.oracle.com/javase/8/docs/api/java/util/SortedSet.html), que asegura que los elementos se mantengan en orden ascendente, ya sea según el orden natural o de acuerdo con un `Comparator` proporcionado al momento de la creación del `SortedSet`.
 
 ### La interfaz 'List'
 
-Una [`List`](https://docs.oracle.com/javase/8/docs/api/java/util/List.html) es una **colección ordenada que pueden contener elementos duplicados** (a veces llamada secuencia). Además de las operaciones heredadas de `Collection`, la interfaz `List` incluye operaciones para lo siguiente:
+Una [`List`](https://docs.oracle.com/javase/8/docs/api/java/util/List.html) es una **colección ordenada que pueden contener elementos duplicados** (también llamada secuencia). Además de las operaciones heredadas de `Collection`, la interfaz `List` incluye funcionalidades adicionales:
 
-- **Acceso por posición** para manipular los elementos de la lista. Esto incluye métodos como `get`, `set`, `add`, `addAll` y `remove`.
-- **Búsqueda** de elementos específicos dentro de la lista y la devolución de su posición numérica dentro de ella. Métodos como `indexOf` y `lastIndexOf`.
-- Extensión de la **iteración** para obtener ventaja de la naturaleza secuencial de las listas con `listIterator`.
-- Operaciones arbitrarias en secciones de la lista con el método `subList`.
+- **Acceso por posición**: permite manipular los elementos de la lista por su índice. Los métodos incluyen `get(int index)`, `set(int index, E element)`, `add(E e)` y `remove()`.
 
-La plataforma Java contiene dos implementaciones de `List` de propósito general:
+- **Búsqueda**: se pueden buscar elementos específicos dentro de la lista y devolver su posición numérica mediante métodos como `indexOf(Object o)` y `lastIndexOf(Object o)`.
 
-- **ArrayList**, que suele ser la implementación con mejor rendimiento.
-- **LinkedList**, que ofrece un mejor rendimiento en determinadas circunstancias.
+- **Iteración avanzada**: extiende las capacidades de iteración, aprovechando la naturaleza secuencial de las listas, con el uso de `listIterator()`, que permite recorrer la lista en ambas direcciones.
+
+- **Operaciones sobre sublistas**: proporciona la posibilidad de realizar operaciones arbitrarias sobre secciones específicas de la lista con el método `subList(int fromIndex, int toIndex)`.
+
+Algunas de las implementaciones más conocidas de la interfaz `List` son:
+
+- [**`ArrayList`**](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html), que suele ser la implementación de mejor rendimiento en la mayoría de los casos.
+
+- [**`LinkedList`**](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html), que puede ofrecer un mejor rendimiento en ciertas situaciones, como inserciones o eliminaciones frecuentes en el medio de la lista.
 
 ### La interfaz 'Queue'
 
-Una [`Queue`](https://docs.oracle.com/javase/8/docs/api/java/util/Queue.html) o cola es una colección que contiene elementos antes de ser procesados. Además de las operaciones básicas de una `Collection`, las colas proporcionan operaciones adicionales de inserción, extracción e inspección.
+Una [`Queue`](https://docs.oracle.com/javase/8/docs/api/java/util/Queue.html) (cola) es una colección que contiene elementos antes de ser procesados. Además de las operaciones básicas de una `Collection`, las colas proporcionan operaciones adicionales para insertar, extraer e inspeccionar elementos.
 
-Una ['LinkedList'](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html) implementa la interfaz `Queue` y a su vez la interfaz `List`.
+Algunas de las implementaciones más conocidas de la interfaz `Queue` son:
 
-La clase ['PriorityQueue'](https://docs.oracle.com/javase/8/docs/api/java/util/PriorityQueue.html) es una cola de prioridad basada en la estructura de pila de datos. Esta cola ordena los elementos según el orden especificado en el momento de la construcción, que puede ser el orden natural de los elementos o el orden impuesto por un comparador explícito.
+- [**`LinkedList`**](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html) implementa tanto la interfaz `Queue` como la interfaz `List`, lo que le permite actuar como una lista enlazada y una cola al mismo tiempo.
+
+- [**`PriorityQueue`**](https://docs.oracle.com/javase/8/docs/api/java/util/PriorityQueue.html) es una cola de prioridad basada en la estructura de pila de datos. Esta cola ordena los elementos según el orden especificado en el momento de la construcción, que puede ser el orden natural de los elementos o el orden impuesto por un comparador explícito.
 
 ```java
 public interface Queue<E> extends Collection<E> {
@@ -2428,52 +2462,89 @@ public interface Queue<E> extends Collection<E> {
 
 Cada método de `Queue` existe en dos formas: una forma lanza una **excepción** si la operación falla, y la otra forma devuelve un valor **especial** si la operación falla (ya sea nulo o falso, dependiendo de la operación):
 
-| Operación | Lanza excepción | Nulo o false |
-|-----------|:---------------:|:------------:|
-| Insert    | `add(e)`        | `offer(e)`   |
-| Remove    | `remove()`      | `poll()`     |
-| Examine   | `element()`     | `peek()`     |
+| Operación    | Lanza excepción | Nulo o false |
+|--------------|:---------------:|:------------:|
+| Insertar     | `add(e)`        | `offer(e)`   |
+| Eliminar     | `remove()`      | `poll()`     |
+| Inspeccionar | `element()`     | `peek()`     |
 
-Las colas ordenan típicamente, aunque no necesariamente, los elementos de una manera **FIFO** (first-in-first-out). Entre las excepciones se encuentran las colas de prioridad, que ordenan los elementos según sus valores.
+Las colas generalmente siguen un **orden FIFO** (_first-in-first-out_), aunque no siempre. Las excepciones incluyen las colas de prioridad, que ordenan los elementos según sus valores o prioridades.
 
-Cualquiera que sea el orden que se utilice, la cabeza de la `Queue` es el elemento que sería eliminado por una llamada a `remove()` o `poll()`. En una cola FIFO, todos los elementos nuevos se insertan en la cola de la cola. Otros tipos de colas pueden utilizar reglas de colocación diferentes. Cada implementación de cola debe especificar sus propiedades de ordenación.
+Independientemente del orden, la cabeza de la `Queue` es el elemento que sería eliminado por una llamada a `remove()` o `poll()`. En una cola FIFO, los nuevos elementos se insertan al final. Otros tipos de colas pueden utilizar diferentes reglas para la colocación de elementos. Cada implementación de cola debe especificar sus propias reglas de orden.
 
-Es posible que una implementación de `Queue` restrinja el número de elementos que contiene; tales colas se conocen como **_bounded_**.
+Algunas implementaciones de `Queue` pueden tener una capacidad limitada, conocidas como **colas acotadas** (_bounded_).
 
-El método `add()`, que `Queue` hereda de `Collection`, inserta un elemento a menos que viole las restricciones de capacidad de la cola, en cuyo caso lanza `IllegalStateException`. El método `offer()`, que se utiliza únicamente en colas limitadas (_'bounded'_), difiere de `add()` solo en que devuelve `false` si no se inserta el elemento.
+El método `add()`, heredado de `Collection`, inserta un elemento a menos que viole las restricciones de capacidad de la cola, en cuyo caso lanza una `IllegalStateException`. Por otro lado, el método `offer()`, comúnmente usado en colas acotadas, devuelve `false` si el elemento no puede ser insertado.
 
-Los métodos `remove()` y `poll()` eliminan y devuelven la cabecera o _'head'_ de la cola. Los métodos `remove()` y `poll()` difieren en su comportamiento sólo cuando la cola está vacía. En estas circunstancias, `remove()` lanza `NoSuchElementException`, mientras que `poll()` devuelve nulo.
+Los métodos `remove()` y `poll()` eliminan y devuelven la cabeza de la cola. Si la cola está vacía, `remove()` lanza una `NoSuchElementException`, mientras que `poll()` simplemente devuelve nulo.
 
-Los métodos `element()` y `peek()` devuelven, pero no eliminan, la cabecera de la cola.
+Finalmente, los métodos `element()` y `peek()` devuelven, pero no eliminan, la cabeza de la cola. La diferencia es que `element()` lanza una excepción si la cola está vacía, mientras que `peek()` devuelve nulo.
 
 ### La interfaz 'Deque'
 
-Una [`Deque`](https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html) es una cola de dos extremos. Este tipo de cola es una colección lineal de elementos que soporta la inserción y extracción de elementos en **ambos extremos**.
+Una [`Deque`](https://docs.oracle.com/javase/8/docs/api/java/util/Deque.html) (_Double-Ended Queue_ o cola de dos extremos) es una estructura de datos que permite **la inserción y extracción de elementos en ambos extremos**. A diferencia de una `Queue` convencional, que solo permite operaciones en un extremo (**FIFO**), una `Deque` admite operaciones en ambos extremos, lo que la hace más flexible.
 
-La interfaz `Deque` es un tipo de datos abstractos más rico que `Stack` y `Queue` porque implementa tanto stacks como colas al mismo tiempo. Clases predefinidas como ['ArrayDeque'](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayDeque.html) y ['LinkedList'](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html) implementan la interfaz `Deque`.
+La interfaz `Deque` es más versátil que `Stack` y `Queue`, ya que puede implementarse tanto como una pila (**LIFO**) como una cola (**FIFO**). Algunas de las implementaciones más conocidas de la interfaz `Deque` son:
 
-La interfaz `Deque` define métodos para acceder a los elementos en ambos extremos de la instancia. Se proporcionan métodos para insertar, quitar y examinar los elementos. Tendremos métodos que lancen una excepción o devuelvan el valor nulo.
+- [**`ArrayDeque`**](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayDeque.html): una implementación basada en un _array_ redimensionable, eficiente para la mayoría de las operaciones.
 
-| Operación           |  First Element  |  Last Element  |
-|---------------------|:---------------:|:--------------:|
-| Insert (Exception)  | `addFirst(e)`   | `addLast(e)`   |
-| Insert (boolean)    | `offerFirst(e)` | `offerLast(e)` |
-| Remove (Exception)  | `removeFirst()` | `removeLast()` |
-| Remove (null)       | `pollFirst()`   | `pollLast()`   |
-| Examine (Exception) | `getFirst()`    | `getLast()`    |
-| Examine (null)      | `peekFirst()`   | `peekLast()`   |
+- [**`LinkedList`**](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html): una implementación basada en una lista doblemente enlazada, que ofrece un rendimiento consistente para inserciones y eliminaciones en ambos extremos.
+
+La interfaz `Deque` define métodos específicos para acceder, insertar, eliminar y examinar elementos en ambos extremos de la colección. Existen versiones de métodos que pueden lanzar excepciones o devolver un valor nulo en caso de fallos.
+
+| Operación             |  First Element  |  Last Element  |
+|-----------------------|:---------------:|:--------------:|
+| Insertar (Exception)  | `addFirst(e)`   | `addLast(e)`   |
+| Insertar (boolean)    | `offerFirst(e)` | `offerLast(e)` |
+| Eliminar (Exception)  | `removeFirst()` | `removeLast()` |
+| Eliminar (null)       | `pollFirst()`   | `pollLast()`   |
+| Examinar (Exception)  | `getFirst()`    | `getLast()`    |
+| Examinar (null)       | `peekFirst()`   | `peekLast()`   |
 
 ### La interfaz 'Map'
 
-Un [`Map`](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html) es un objeto que asigna claves a valores. Un mapa **no puede contener claves duplicadas**. Cada clave puede asignarse a un valor como máximo. Modela la abstracción de la función matemática.
+Un [`Map`](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html) es un objeto que asigna claves a valores. Un mapa **no puede contener claves duplicadas**; cada clave puede estar asociada a un valor como máximo. Este comportamiento modela la abstracción de una función matemática.
 
-La plataforma Java contiene tres implementaciones de `Map` de propósito general y cuyo comportamiento y rendimiento son análogos a las implementaciones de la interfaz `Set` como son **HashSet**, **TreeSet** y **LinkedHashSet**:
+Es importante notar que, a diferencia de otras interfaces en el marco de colecciones de Java como `List` o `Set`, la interfaz `Map` no hereda de `Collection`. Esto se debe a que trabaja con pares clave-valor, mientras que `Collection` opera sobre elementos individuales. Debido a esta diferencia conceptual, `Map` no incluye métodos como `add()` o `iterator()`, que son característicos de las colecciones.
 
-- **HashMap** que almacena sus elementos en una tabla _hash_, es la mejor implementación; sin embargo, no ofrece garantías en cuanto al orden de iteración.
-- **TreeMap** que almacena sus elementos en un árbol _'red-black'_, ordena sus elementos en función de sus valores; es sustancialmente más lento que **HashMap**.
-- **LinkedHashMap**: que se implementa como una tabla _hash_ con una lista enlazada que la recorre, ordena sus elementos según el orden en que se insertaron en el mapa (orden de inserción). Tiene un coste algo más elevado que un **HashMap** pero soluciona el problema del orden.
+Algunas de las implementaciones más conocidas de la interfaz `Map` son:
 
-La interfaz `Map` tiene una subinterface [`SortedMap`](https://docs.oracle.com/javase/8/docs/api/java/util/SortedMap.html), que es un `Map` que mantiene sus elementos en orden ascendente, ordenados de acuerdo al orden natural de las claves o de acuerdo a un `Comparator` proporcionado a la hora de creación del `SortedMap`.
+- [**`HashMap`**](https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html) almacena sus elementos en una **tabla _hash_** y es generalmente la implementación más rápida. Sin embargo, no garantiza el orden de iteración de los elementos.
+
+- [**`TreeMap`**](https://docs.oracle.com/javase/8/docs/api/java/util/TreeMap.html) almacena sus elementos en un **árbol _'red-black'_** (árbol rojo-negro) lo que le permite ordenar los elementos en función de sus claves. Esta implementación es más lenta en comparación con `HashMap`.
+
+- [**`LinkedHashMap`**](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedHashMap.html) combina una **tabla _hash_ con una lista enlazada** que mantiene el orden de inserción de los elementos. Aunque tiene un costo ligeramente mayor que `HashMap`, conserva el orden de inserción de los elementos durante la iteración.
+
+La interfaz `Map` tiene una subinterfaz, [`SortedMap`](https://docs.oracle.com/javase/8/docs/api/java/util/SortedMap.html), que garantiza que sus elementos se mantengan en orden ascendente, ya sea según el orden natural de las claves o de acuerdo a un `Comparator` proporcionado al crear el `SortedMap`.
+
+### Análisis de complejidad en Java Collections
+
+En la **Java Collections Framework**, se utilizan varias estructuras de datos que proporcionan diferentes niveles de eficiencia en términos de tiempo para las operaciones comunes, como acceso, búsqueda, inserción y eliminación. La elección de una estructura de datos adecuada puede tener un impacto significativo en el rendimiento de una aplicación, dependiendo de los patrones de uso que se requieran.
+
+A continuación, se presenta una tabla con la **complejidad temporal**, expresada en notación O grande, de las operaciones más comunes en las estructuras de datos más utilizadas en Java. Esta notación ayuda a estimar el tiempo de ejecución en función del tamaño de la colección:
+
+| Estructura de Datos     | Acceso | Búsqueda | Inserción | Eliminación |
+|-------------------------|:------:|:--------:|:---------:|:-----------:|
+| **ArrayList**            | O(1)   | O(n)     | O(1)      | O(n)        |
+| **LinkedList**           | O(n)   | O(n)     | O(1)      | O(1)        |
+| **HashMap**              | -      | O(1)     | O(1)      | O(1)        |
+| **TreeMap**              | O(log n)| O(log n) | O(log n)  | O(log n)    |
+| **HashSet**              | -      | O(1)     | O(1)      | O(1)        |
+| **TreeSet**              | O(log n)| O(log n) | O(log n)  | O(log n)    |
+| **PriorityQueue**        | O(n)   | O(n)     | O(log n)  | O(log n)    |
+| **LinkedHashMap**        | -      | O(1)     | O(1)      | O(1)        |
+| **Stack** (basado en **Vector**) | O(1) | O(n) | O(1)      | O(1)        |
+| **Deque** (como **ArrayDeque**)| O(1) | O(n) | O(1)     | O(1)        |
+
+- `ArrayList` tiene tiempo constante para el acceso a elementos, pero las operaciones de búsqueda, inserción o eliminación pueden requerir mover varios elementos.
+
+- `LinkedList` tiene tiempos más costosos de acceso y búsqueda debido a su naturaleza lineal.
+
+- Las estructuras basadas en tablas de _hash_ (`HashMap`, `HashSet`, `LinkedHashMap`) ofrecen tiempos de búsqueda, inserción y eliminación constantes promedio.
+
+- Las estructuras ordenadas como `TreeMap` y `TreeSet` tienen operaciones logarítmicas debido a su implementación basada en árboles (generalmente árboles rojos-negros).
+
+- `PriorityQueue` está diseñada para obtener el elemento de mayor prioridad de manera eficiente, pero las búsquedas dentro de la cola son lineales.
 
 ## Módulos
 
@@ -2544,11 +2615,11 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
 
 ## Histórico de versiones
 
-### JDK 1.0 (23 de Enero de 1996)
+### JDK 1.0 (23/01/1996)
 
 - Primera versión
 
-### JDK 1.1 (19 de Febrero de 1997)
+### JDK 1.1 (19/02/1997)
 
 - Reestructuración intensiva del modelo de eventos AWT (Abstract Windowing Toolkit)
 - Clases internas (inner classes)
@@ -2556,7 +2627,7 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
 - JDBC (Java Database Connectivity), para la integración de bases de datos
 - RMI (Remote Method Invocation)
 
-### J2SE 1.2 (8 de Diciembre de 1998)
+### J2SE 1.2 (08/12/1998)
 
 - Palabra reservada (keyword) `strictfp`
 - Reflexión en la programación
@@ -2566,7 +2637,7 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
 - Java IDL, una implementación de IDL (Lenguaje de Descripción de Interfaz) para la interoperabilidad con CORBA
 - Colecciones (Collections)
 
-### J2SE 1.3 (8 de Mayo de 2000)
+### J2SE 1.3 (08/05/2000)
 
 - Inclusión de la máquina virtual de HotSpot JVM (la JVM de HotSpot fue lanzada inicialmente en abril de 1999, para la JVM de J2SE 1.2)
 - RMI fue cambiado para que se basara en CORBA
@@ -2574,7 +2645,7 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
 - Inclusión de 'Java Naming and Directory Interface' (JNDI) en el paquete de bibliotecas principales (anteriormente disponible como una extensión)
 - Java Platform Debugger Architecture (JPDA)
 
-### J2SE 1.4 (6 de Febrero de 2002)
+### J2SE 1.4 (06/02/2002)
 
 - Palabra reservada `assert`
 - Expresiones regulares modeladas al estilo de las expresiones regulares Perl
@@ -2586,7 +2657,7 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
 - Seguridad integrada y extensiones criptográficas (JCE, JSSE, JAAS)
 - Java Web Start incluido (El primer lanzamiento ocurrió en marzo de 2001 para J2SE 1.3)
 
-### J2SE 5.0 (30 de Septiembre de 2004)
+### J2SE 5.0 (30/09/2004)
 
 - Genéricos
 - Anotaciones
@@ -2597,14 +2668,14 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
 - Utilidades de concurrencia
 - Clase `Scanner`
 
-### Java SE 6 (11 de Diciembre de 2006)
+### Java SE 6 (11/12/2006)
 
 - Incluye un nuevo marco de trabajo y APIs que hacen posible la combinación de Java con lenguajes dinámicos como PHP, Python, Ruby y JavaScript.
 - Incluye el motor Rhino, de Mozilla, una implementación de Javascript en Java.
 - Incluye un cliente completo de Servicios Web y soporta las últimas especificaciones para Servicios Web, como JAX-WS 2.0, JAXB 2.0, STAX y JAXP.
 - Mejoras en la interfaz gráfica y en el rendimiento.
 
-### Java SE 7 (7 de Julio de 2011)
+### Java SE 7 (07/07/2011)
 
 - Soporte para XML dentro del propio lenguaje.
 - Un nuevo concepto de superpaquete.
@@ -2618,7 +2689,7 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
 - Uso de `Strings` en bloques `switch`
 - Uso de guiones bajos en literales numéricos (1_000_000)
 
-### Java SE 8 (18 de Marzo de 2014)
+### Java SE 8 LTS (18/03/2014)
 
 - [JDK 8 Documentation](https://docs.oracle.com/javase/8/)
 - [Lista completa de características - JEP](https://openjdk.org/projects/jdk8/)
@@ -2630,7 +2701,7 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
   - [JEP 104](https://openjdk.org/jeps/104): Annotations on Java Types
   - [JEP 150](https://openjdk.org/jeps/150): Date & Time API
 
-### Java 9 (21 de Septiembre de 2017)
+### Java 9 (21/09/2017)
 
 - [JDK 9 Documentation](https://docs.oracle.com/javase/9/)
 - [Java Language Changes for Java SE 9](https://docs.oracle.com/javase/9/language/toc.htm)
@@ -2646,7 +2717,7 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
   - [JEP 275](https://openjdk.org/jeps/275): Modular Java Application Packaging
   - [JEP 261](https://openjdk.org/jeps/261): Module System
 
-### Java 10 (20 de Marzo de 2018)
+### Java 10 (20/03/2018)
 
 - [JDK 10 Documentation](https://docs.oracle.com/javase/10/)
 - [Java Language Changes for Java SE 10](https://docs.oracle.com/javase/10/language/toc.htm)
@@ -2665,7 +2736,7 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
   - [JEP 313](https://openjdk.org/jeps/313): Remove the Native-Header Generation Tool – javah
   - [JEP 296](https://openjdk.org/jeps/296): Consolidate the JDK Forest into a Single Repository
 
-### Java 11 (25 de Septiembre de 2018)
+### Java 11 LTS (25/09/2018)
 
 - [JDK 11 Documentation](https://docs.oracle.com/en/java/javase/11/index.html)
 - [Java Language Changes for Java SE 11](https://docs.oracle.com/en/java/javase/11/language/java-language-changes.html)
@@ -2680,7 +2751,7 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
   - [JEP 328](https://openjdk.org/jeps/328): Flight Recorder
   - [JEP 335](https://openjdk.org/jeps/335): Deprecate the Nashorn Javascript Engine
 
-### Java 12 (19 de Marzo de 2019)
+### Java 12 (19/03/2019)
 
 - [JDK 12 Documentation](https://docs.oracle.com/en/java/javase/12/index.html)
 - [Java Language Changes for Java SE 12](https://docs.oracle.com/en/java/javase/12/language/index.html)
@@ -2689,7 +2760,7 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
   - [JEP 230](https://openjdk.org/jeps/230): Microbenchmark Suite
   - [JEP 334](https://openjdk.org/jeps/334): JVM Constants API
 
-### Java 13 (17 de Septiembre 2019)
+### Java 13 (17/09/2019)
 
 - [JDK 13 Documentation](https://docs.oracle.com/en/java/javase/13/index.html)
 - [Java Language Changes for Java SE 13](https://docs.oracle.com/en/java/javase/13/language/java-language-changes.html)
@@ -2697,7 +2768,7 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
 - [Lista completa de características - JEP](https://openjdk.org/projects/jdk/13/)
   - [JEP 353](https://openjdk.org/jeps/353): Reimplement the Legacy Socket API
 
-### Java 14 (17 de Marzo 2020)
+### Java 14 (17/03/2020)
 
 - [JDK 14 Documentation](https://docs.oracle.com/en/java/javase/14/index.html)
 - [Java Language Changes for Java SE 14](https://docs.oracle.com/en/java/javase/14/language/java-language-changes.html)
@@ -2707,7 +2778,7 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
   - [JEP 361](https://openjdk.org/jeps/361): Switch Expressions
   - [JEP 349](https://openjdk.org/jeps/349): JFR Event Streaming
 
-### Java 15 (15 de Septiembre 2020)
+### Java 15 (15/09/2020)
 
 - [JDK 15 Documentation](https://docs.oracle.com/en/java/javase/15/index.html)
 - [Java Language Changes for Java SE 15](https://docs.oracle.com/en/java/javase/15/language/java-language-changes.html)
@@ -2718,7 +2789,7 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
   - [JEP 373](https://openjdk.org/jeps/373): Reimplement the Legacy DatagramSocket API
   - [JEP 378](https://openjdk.org/jeps/378): Text Blocks
 
-### Java 16 (16 de Marzo 2021)
+### Java 16 (16/03/2021)
 
 - [JDK 16 Documentation](https://docs.oracle.com/en/java/javase/16/index.html)
 - [Java Language Changes for Java SE 16](https://docs.oracle.com/en/java/javase/16/language/java-language-changes.html)
@@ -2731,7 +2802,7 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
   - [JEP 395](https://openjdk.org/jeps/395): Records
   - [JEP 396](https://openjdk.org/jeps/396): Strongly Encapsulate JDK Internals by Default
 
-### Java 17 (13 de Septiempbre 2021)
+### Java 17 LTS (13/09/2021)
 
 - [JDK 17 Documentation](https://docs.oracle.com/en/java/javase/17/index.html)
 - [Java Language Changes for Java SE 17](https://docs.oracle.com/en/java/javase/17/language/java-language-changes.html)
@@ -2741,7 +2812,7 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
   - [JEP 409](https://openjdk.org/jeps/409): Sealed Classes
   - [JEP 403](https://openjdk.org/jeps/403): Strongly Encapsulate JDK Internals
 
-### Java 18 (22 de Marzo 2022)
+### Java 18 (22/03/2022)
 
 - [JDK 18 Documentation](https://docs.oracle.com/en/java/javase/18/index.html)
 - [Java Language Changes for Java SE 18](https://docs.oracle.com/en/java/javase/18/language/java-language-changes.html)
@@ -2751,21 +2822,21 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
   - [JEP 408](https://openjdk.org/jeps/408): Simple Web Server
   - [JEP 413](https://openjdk.org/jeps/413): Code Snippets in Java API Documentation
 
-### Java 19 (20 de Septiembre 2022)
+### Java 19 (20/09/2022)
 
 - [JDK 19 Documentation](https://docs.oracle.com/en/java/javase/19/index.html)
 - [Java Language Changes for Java SE 19](https://docs.oracle.com/en/java/javase/19/language/java-language-changes.html)
 - [Significant Changes in JDK 19 Release](https://docs.oracle.com/en/java/javase/19/migrate/significant-changes-jdk-release.html)
 - [Lista completa de características - JEP](https://openjdk.org/projects/jdk/19/)
 
-### Java 20 (21 de Marzo 2023)
+### Java 20 LTS (21/03/2023)
 
 - [JDK 20 Documentation](https://docs.oracle.com/en/java/javase/20/index.html)
 - [Java Language Changes for Java SE 20](https://docs.oracle.com/en/java/javase/20/language/java-language-changes.html)
 - [Significant Changes in JDK 20 Release](https://docs.oracle.com/en/java/javase/20/migrate/significant-changes-jdk-release.html)
 - [Lista completa de características - JEP](https://openjdk.org/projects/jdk/20/)
 
-### Java 21 (21 de Septiembre 2023)
+### Java 21 (21/09/2023)
 
 - [JDK 21 Documentation](https://docs.oracle.com/en/java/javase/21/index.html)
 - [Java Language Changes for Java SE 21](https://docs.oracle.com/en/java/javase/21/language/java-language-changes.html)
@@ -2776,7 +2847,7 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
   - [JEP 441](https://openjdk.org/jeps/441): Pattern Matching for switch
   - [JEP 444](https://openjdk.org/jeps/444): Virtual Threads
 
-### :new: Java 22 (19 de Marzo 2024)
+### Java 22 (19/03/2024)
 
 - [JDK 22 Documentation](https://docs.oracle.com/en/java/javase/22/index.html)
 - [Java Language Changes for Java SE 22](https://docs.oracle.com/en/java/javase/22/language/java-language-changes.html)
@@ -2785,12 +2856,20 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
   - [JEP 454](https://openjdk.org/jeps/454): Foreign Function & Memory API
   - [JEP 456](https://openjdk.org/jeps/456): Unnamed Variables & Patterns
 
+### :new: Java 23 (17/09/2024)
+
+- [JDK 23 Documentation](https://docs.oracle.com/en/java/javase/23/index.html)
+- [Java Language Changes for Java SE 23](https://docs.oracle.com/en/java/javase/23/language/java-language-changes.html)
+- [Significant Changes in JDK 23 Release](https://docs.oracle.com/en/java/javase/23/migrate/significant-changes-jdk-release.html)
+- [Lista completa de características - JEP](https://openjdk.org/projects/jdk/23/)
+
 ---
 
 ## Referencias
 
 - [Java Platform, Standard Edition Documentation](https://docs.oracle.com/en/java/javase/index.html)
 - [Last API Documentation](https://docs.oracle.com/en/java/javase/22/docs/api/index.html)
+- [The Java™ Tutorials](https://docs.oracle.com/javase/tutorial/index.html)
 - [OpenJDK](https://openjdk.org/)
 - [OpenJDK - Github](https://github.com/openjdk/)
 - [This JEP is the index of all JDK Enhancement Proposals, known as JEPs.](https://openjdk.org/jeps/0)
