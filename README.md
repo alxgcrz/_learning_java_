@@ -62,65 +62,199 @@ public class Sample {
 
 En Java, un **identificador** es un nombre asignado a un método, variable u otro elemento definido por el usuario. Pueden tener uno o varios caracteres de longitud.
 
-Los nombres de variable pueden empezar por **cualquier letra, guión bajo o el símbolo `$`**. El siguiente carácter puede ser **cualquier letra, dígito, guión bajo o el símbolo `$`**. Por lo tanto no pueden empezar con un dígito ni emplear palabras clave de Java.
+Los nombres de variable deben cumplir ciertas restricciones:
+
+- Pueden empezar por **cualquier letra, guión bajo(`_`) o el símbolo `$`**.
+
+- El siguiente carácter puede ser **cualquier letra, dígito, guión bajo(`_`) o el símbolo `$`**.
+
+- Por lo tanto no pueden empezar con un dígito ni emplear palabras clave de Java.
+
+- No pueden incluir espacios ni caracteres especiales distintos de `_` y `$`.
+
+> **No es recomendable usar el símbolo `$` en nombres de variables comunes**, ya que generalmente está reservado para usos internos o generados automáticamente por el compilador.
+
+Java es **_"case sensitive"_** lo que significa que Java distingue entre mayúsculas y minúsculas.
+
+En Java, las convenciones de nombres más comunes incluyen:
+
+- **camelCase**: se utiliza para nombres de variables y métodos, como `edadDelCapitan`, `nombreUsuario`, `calcularTotal()`.
+
+- **PascalCase**: similar a la anterior, pero la primera letra también es mayúscula. Se usa para nombres de clases y interfaces, como `Persona`, `CuentaBancaria`.
+
+- **UPPER_SNAKE_CASE**: se utiliza para las constantes, es decir, variables que son `static final`. En esta convención todas las letras son mayúsculas y se separan con guiones bajos, como `MAX_VALUE`, `PI` o `DAYS_OF_WEEK`.
 
 ### Tipos y variables
 
 Los tipos de datos son especialmente importantes en Java por tratarse de un lenguaje de **tipado fuerte**. Es decir, el compilador comprueba la compatibilidad de los tipos en todas las operaciones. Para realizar la comprobación de tipos, todas las variables, expresiones y valores tienen un tipo.
 
-Java es **_"case sensitive"_** lo que significa que Java distingue entre mayúsculas y minúsculas.
+Al determinar el tipo para una variable, estamos indicando cuál es la información que vamos a poder almacenar en esta variable y las operaciones que podremos efectuar con ella.
 
 En Java se declara una variable usando `<tipo> <nombre>`. Es necesario declarar la variable antes de poder hacer referencia a ella. Una vez se ha declarado ya se puede utilizar, nunca antes.
 
-Por lo general, debe asignar un valor a una variable antes de poder usarla aunque en determinados casos Java puede inicializar el valor de las variables, como por ejemplo en variables de instancia.
+Por lo general, debe asignar un valor a una variable antes de poder usarla aunque en determinados casos Java puede inicializar el valor de las variables, como por ejemplo en **variables de instancia**.
+
+- **Variables locales**: se declaran dentro de un método, constructor o bloque, y solo están accesibles dentro de ese contexto. No tienen un valor por defecto, por lo que deben ser inicializadas antes de usarse.
+
+- **Variables de instancia**: se declaran dentro de una clase pero fuera de cualquier método, constructor o bloque. Cada objeto de la clase tiene su propia copia de estas variables. Si no se inicializan explícitamente, las variables de instancia reciben un [valor por defecto](#valores-por-defecto) basado en su tipo.
+
+- **Variables de clase (o estáticas)**: se declaran con la palabra clave `static`. Solo hay una copia de estas variables que es compartida por todas las instancias de la clase. Se almacenan en memoria cuando la clase es cargada por el ClassLoader.
+
+#### Valores por defecto
+
+En el caso de las **variables de instancia**, si no se inicializan de forma explícita, el compilador establecerá un valor basado en su tipo:
+
+- Tipos primitivos:
+
+  - `int`, `short`, `byte`, `long`: 0
+
+  - `float`: 0.0f
+
+  - `double`: 0.0d
+
+  - `char`: `'\u0000'` (carácter nulo)
+
+  - `boolean`: false
+
+- Objetos y referencias (como `String` o cualquier objeto): `null`
+
+> Sin embargo, confiar en estos valores predeterminados generalmente se considera una **práctica poco recomendable**. Aunque estos valores por defecto evitan errores de compilación, la inicialización explícita mejora la legibilidad y evita posibles errores sobre el estado inicial de una variable.
+
+### Tipos primitivos
+
+Los [tipos primitivos](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html) en Java tienen **rangos definidos**, y al intentar asignar directamente un valor fuera del rango, el compilador **generará un error**. Sin embargo, para los tipos primitivos numéricos, si una operación aritmética excede el rango permitido, se producirá un **desbordamiento**, resultando en un valor inesperado, pero sin generar un error de compilación.
+
+> El desbordamiento ocurre en **tiempo de ejecución** y puede llevar a resultados incorrectos sin advertencias del compilador.
+
+Java no tiene tipos sin signo (excepto `int` y `long` con métodos específicos introducidos en Java SE 8), por lo que todos los tipos numéricos tienen signo.
+
+#### byte
+
+El tipo primitivo `byte` es un entero de complemento de dos con signo de 8 bits. Es una opción eficiente para ahorrar memoria en grandes colecciones de datos numéricos pequeños. También se utiliza frecuentemente en la manipulación de datos binarios y en aplicaciones que requieren optimización de memoria.
 
 ```java
-// [Tipos primitivos]
-// ------------------
-// [Byte] - Entero complemento a dos con signo de 8-bit 
 // (-128 <= byte <= 127)
-byte fooByte = 100;
+byte foo = 100;
+```
 
-// [Short] - Entero complemento a dos con signo de 16-bit 
+> El rango de valores permitidos para `byte` es de **-128** a **127** (ambos inclusive). Si se intenta asignar un valor fuera de este rango, el compilador generará un error.
+
+#### short
+
+El tipo primitivo `short` es un entero de complemento de dos con signo de 16 bits. Es una opción intermedia entre `byte` e `int` para almacenar números pequeños en aplicaciones que requieren optimización de memoria.
+
+java
+
+```java
 // (-32,768 <= short <= 32,767)
-short fooShort = 10000;
+short foo = 10000;
+```
 
-// [Integer] - Entero complemento a dos con signo de 32-bit 
+> El rango de valores permitidos para `short` es de **-32,768** a **32,767** (ambos inclusive). Si se intenta asignar un valor fuera de este rango, el compilador generará un error.
+
+#### int
+
+El tipo primitivo `int` es un entero de complemento de dos con signo de 32 bits. Es el tipo predeterminado para los literales enteros.
+
+A partir de Java SE 8 y versiones posteriores, se puede utilizar este tipo para representar un entero de 32 bits sin signo, que tiene un valor mínimo de 0 y un valor máximo de 2^32-1.
+
+```java
 // (-2,147,483,648 <= int <= 2,147,483,647)
-int fooInt = 1;
+int foo = 1;
+```
 
-// [Long] - Entero complemento a dos con signo de 64-bit 
+> El rango de valores permitidos para `int` es de **-2^31** a **2^31-1** (ambos inclusive). Si se intenta asignar un valor fuera de este rango, el compilador generará un error.
+
+#### long
+
+El tipo primitivo `long` es un entero de complemento de dos con signo de 64 bits.
+
+A partir de Java SE 8 y versiones posteriores, se puede utilizar este tipo para representar un entero de 64 bits sin signo, que tiene un valor mínimo de 0 y un valor máximo de 2^64-1.
+
+```java
 // (-9,223,372,036,854,775,808 <= long <= 9,223,372,036,854,775,807)
-long fooLong = 100000L;
-// 'L' es usado para denotar que el valor de esta variable es del tipo Long; 
-// Cualquier literal sin ella es tratado como un entero por defecto.
+long foo = 100000L;
+```
 
-// Nota: Java no tiene tipos sin signo
+El sufijo 'L' o 'l' (recomendable en mayúsculas por claridad) se utiliza para indicar que el valor literal asignado a la variable es de tipo `long`. Cualquier literal sin este sufijo se considera un entero por defecto (tipo `int`).
 
-// [Float] - Número de coma flotante IEEE 754 de precisión simple de 32-bit
-float fooFloat = 234.5f;
-// 'f 'es usado para denotar que el valor de esta variable es del tipo float; 
-// De otra manera es tratado como un double.
+> El rango de valores permitidos para `long` es de **-2^63** a **2^63-1** (ambos inclusive). Si se intenta asignar un valor fuera de este rango, el compilador generará un error.
 
-// [Double] - Número de coma flotante IEEE 754 de precisión doble de 64-bit
-double fooDouble = 123.4;
+#### float
 
-// [Boolean] - true & false
-boolean fooBoolean = true;
-boolean barBoolean = false;
+El tipo primitivo `float` es un número de coma flotante IEEE 754 de precisión simple de 32 bits.  Puede consultarse el rango de valores en la [documentación oficial](https://docs.oracle.com/javase/specs/jls/se7/html/jls-4.html#jls-4.2.3).
 
-// [Char] - Un simple carácter unicode de 16-bit.
-/* Como char es un tipo sin signo de 16 bits, se pueden realizar operaciones 
-aritméticas. Las constantes de carácter se incluyen entre comillas simples. */
+```java
+float foo = 234.5f;
+```
+
+El sufijo 'f' o 'F' se utiliza para indicar que el valor literal asignado a la variable es de tipo `float`. Cualquier literal sin este sufijo se considerará como un `double` por defecto.
+
+> Este tipo de dato nunca debe utilizarse para valores que requieran alta precisión, como la moneda. Para estos casos, es recomendable utilizar el tipo `java.math.BigDecimal` en su lugar.
+
+#### double
+
+El tipo primitivo `double` es un número de coma flotante IEEE 754 de precisión doble de 64 bits. Para los valores decimales, este tipo de datos es la opción predeterminada.
+
+Puede consultarse el rango de valores en la [documentación oficial](https://docs.oracle.com/javase/specs/jls/se7/html/jls-4.html#jls-4.2.3).
+
+```java
+double foo = 123.4;
+```
+
+El sufijo 'd' o 'D' es opcional ya que cualquier literal sin este sufijo se considerará como un `double` por defecto.
+
+#### boolean
+
+Este tipo de dato sólo admite dos valores posibles: `true` o `false`.
+
+El tipo de dato `boolean` en Java sólo admite dos valores posibles: `true` o `false`. Los valores booleanos se utilizan comúnmente en condiciones y estructuras de control.
+
+```java
+boolean foo = true;
+boolean bar = false;
+
+boolean baz = !foo; // baz será false
+```
+
+Además, se pueden combinar expresiones booleanas utilizando operadores lógicos:
+
+```java
+boolean condition1 = (foo && bar); // AND: será false
+boolean condition2 = (foo || bar); // OR: será true
+```
+
+#### char
+
+El tipo primitivo `char` representa un **único carácter sin signo de 16 bits**. Esto permite realizar operaciones aritméticas sobre valores de tipo `char`. Este tipo está basado en la codificación UTF-16, lo que le permite representar una amplia variedad de caracteres, incluyendo caracteres especiales mediante secuencias de escape.
+
+```java
 char fooChar = 'A';
 fooChar++; // now fooChar == 'B'
 ```
 
-En Java, un literal es un valor fijo representado en formato legible para los humanos. Por ejemplo, el número 100 es un literal. Los literales también suelen denominarse constantes.
+Las constantes de carácter se incluyen entre comillas simples.
 
-De forma predeterminada, los literales enteros son de tipo `int` y los literales de coma flotante son de tipo `double`.
+A continuación, se presentan algunas de las secuencias de escape más comunes:
 
-Los literales de carácter se incluyen entre comillas simples. Java también admite los literales de cadena. Una cadena es un conjunto de caracteres includos entre comillas dobles.
+- `\'` - Comilla simple
+- `\"` - Comilla doble
+- `\\` - Barra invertida
+- `\r` - Retorno de carro
+- `\n` - Nueva línea
+- `\f` - Salto de formulario
+- `\t` - Tabulación horizontal
+- `\b` - Retroceso
+- `\ddd` - Constante octal (donde 'ddd' es una constante octal)
+- `\uxxxx` - Constante hexadecimal (donde 'xxxx' es una constante hexadecimal)
+
+### Valores literales
+
+En Java, un literal es un valor fijo representado en un formato legible para los humanos. Por ejemplo, el número 100 es un literal. Los literales también suelen denominarse constantes.
+
+Por defecto, los literales enteros son de tipo `int` y los literales de coma flotante son de tipo `double`.
+
+Los literales de carácter se incluyen entre comillas simples, mientras que los literales de cadena son conjuntos de caracteres que se encierran entre comillas dobles.
 
 ```java
 int a = 100;
@@ -134,33 +268,20 @@ int hexadecimal = 0xFF; // Formato hexadecimal que corresponde a 255 en decimal
 int octal = 011; // Formato octal que corresponde a 9 en decimal
 ```
 
-Secuencias de escape de caracteres:
-
-- `\'` - Comilla simple
-- `\"` - Comilla doble
-- `\\` - Barra invertida
-- `\r` - Retorno de carro
-- `\n` - Nueva línea
-- `\f` - Salto de formulario
-- `\t` - Tabulación horizontal
-- `\b` - Retroceso
-- `\ddd` - Constante octal (donde 'ddd' es una constante octal)
-- `\uxxxx` - Constante hexadecimal (donde 'xxxx' es una constante hexadecimal)
-
-Desde JDK 7 se pueden emplear guiones bajos para mejorar la legibilidad de literales enteros o flotantes:
+A partir de JDK 7, se pueden emplear guiones bajos para mejorar la legibilidad de literales enteros o flotantes:
 
 ```java
 int x = 123_456_789;
-int z = 123_456_789.5;
+double z = 123_456_789.5;
 ```
 
-Se usa la palabra clave `final` para hacer **inmutable** las variables. Por convención el nombre de la variable se declara en mayúsculas:
+La palabra clave `final` se utiliza para hacer que las variables sean **inmutable**. Por convención, el nombre de la variable se declara en mayúsculas:
 
 ```java
 final int HORAS_QUE_TRABAJO_POR_SEMANA = 9001;
 ```
 
-Existe un notación abreviada para declarar (e inicializar) múltiples variables. Sin embargo no se aconseja su uso por motivos de legibilidad:
+También existe una notación abreviada para declarar (e inicializar) múltiples variables del mismo tipo, aunque no se aconseja su uso por motivos de legibilidad:
 
 ```java
 // Declarar las tres variables del mismo tipo 
@@ -169,15 +290,19 @@ int x, y, z;
 // Declarar e inicializar las variables
 int i1 = 1, i2 = 2;
 
-// El símbolo '=' retorna el valor de su derecha y por lo que esta forma es válida
+// El símbolo '=' retorna el valor de su derecha, por lo que esta forma es válida
 int a = b = c = 100; 
 ```
 
-Un bloque de código es un grupo de dos o más instrucciones definidas entre llaves (`{}`). Tras crear un bloque de código se convierte en una unidad lógica que se puede usar como si fuera una instrucción independiente.
+### Bloques
 
-Un bloque de código define un **ámbito**. Las variables definidas en un ámbito o bloque de código no son accesibles fuera de ese ámbito. Cada vez que se accede a un bloque las variables contenidas en ese bloque se inicializan y cuando el bloque finaliza se destruyen. Una variable está disponible a partir de su definición. Por lo tanto si se define una variable al final de un bloque no se podrá utilizar (y tampoco tiene sentido).
+Un **bloque de código es un grupo de dos o más instrucciones definidas entre llaves (`{}`)**. Al crear un bloque de código, se convierte en una unidad lógica que se puede usar como si fuera una instrucción independiente.
 
-Los bloques se pueden anidar, de forma que un bloque de código es contenido por otro bloque de código. Desde el bloque interior se pueden acceder a las variables definidas en el bloque exterior pero el exterior no puede acceder a las variables definidas en el bloque interior.
+Un bloque de código define un **ámbito**. Las variables definidas dentro de un ámbito o bloque de código no son accesibles fuera de ese ámbito. Cada vez que se accede a un bloque, las variables contenidas en ese bloque se inicializan, y cuando el bloque finaliza, se destruyen.
+
+Una variable está disponible a partir de su definición. Por lo tanto, si se define una variable al final de un bloque, no se podrá utilizar (y tampoco tiene sentido).
+
+Los **bloques se pueden anidar**, lo que significa que un bloque de código puede contener a otro bloque de código. Desde un bloque interior se puede acceder a las variables definidas en el bloque exterior, pero el bloque exterior no puede acceder a las variables definidas en el bloque interior.
 
 ```java
 public class Bloques {
@@ -191,7 +316,7 @@ public class Bloques {
         }
 
         System.out.println(exterior); // Correcto
-        System.out.printf(interior); // Error ya que 'interior' no es accesible
+        // System.out.printf(interior); // Error ya que 'interior' no es accesible
     }
 }
 ```
