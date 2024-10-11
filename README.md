@@ -92,13 +92,32 @@ Al determinar el tipo para una variable, estamos indicando cuál es la informaci
 
 En Java se declara una variable usando `<tipo> <nombre>`. Es necesario declarar la variable antes de poder hacer referencia a ella. Una vez se ha declarado ya se puede utilizar, nunca antes.
 
+```java
+int contador;
+double precio;
+String nombre;
+```
+
 Por lo general, debe asignar un valor a una variable antes de poder usarla aunque en determinados casos Java puede inicializar el valor de las variables, como por ejemplo en **variables de instancia**.
 
 - **Variables locales**: se declaran dentro de un método, constructor o bloque, y solo están accesibles dentro de ese contexto. No tienen un valor por defecto, por lo que deben ser inicializadas antes de usarse.
 
 - **Variables de instancia**: se declaran dentro de una clase pero fuera de cualquier método, constructor o bloque. Cada objeto de la clase tiene su propia copia de estas variables. Si no se inicializan explícitamente, las variables de instancia reciben un [valor por defecto](#valores-por-defecto) basado en su tipo.
 
-- **Variables de clase (o estáticas)**: se declaran con la palabra clave `static`. Solo hay una copia de estas variables que es compartida por todas las instancias de la clase. Se almacenan en memoria cuando la clase es cargada por el ClassLoader.
+- **Variables de clase (o estáticas)**: se declaran con la palabra clave `static`. Solo hay una copia de estas variables que es compartida por todas las instancias de la clase. Se almacenan en memoria cuando la clase es cargada por el `ClassLoader`.
+
+Existe una **notación abreviada** para declarar (e inicializar) múltiples variables del mismo tipo, aunque no se aconseja su uso por motivos de legibilidad:
+
+```java
+// Declarar las tres variables del mismo tipo 
+int x, y, z;
+
+// Declarar e inicializar las variables
+int i1 = 1, i2 = 2;
+
+// El símbolo '=' retorna el valor de su derecha, por lo que esta forma es válida
+int a = b = c = 100; 
+```
 
 #### Valores por defecto
 
@@ -122,11 +141,13 @@ En el caso de las **variables de instancia**, si no se inicializan de forma expl
 
 ### Tipos primitivos
 
-Los [tipos primitivos](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html) en Java tienen **rangos definidos**, y al intentar asignar directamente un valor fuera del rango, el compilador **generará un error**. Sin embargo, para los tipos primitivos numéricos, si una operación aritmética excede el rango permitido, se producirá un **desbordamiento**, resultando en un valor inesperado, pero sin generar un error de compilación.
+Los tipos primitivos en Java tienen **rangos definidos**, y al intentar asignar directamente un valor fuera del rango, el compilador **generará un error**. Sin embargo, para los tipos primitivos numéricos, si una operación aritmética excede el rango permitido, se producirá un **desbordamiento**, resultando en un valor inesperado, pero sin generar un error de compilación.
 
 > El desbordamiento ocurre en **tiempo de ejecución** y puede llevar a resultados incorrectos sin advertencias del compilador.
 
 Java no tiene tipos sin signo (excepto `int` y `long` con métodos específicos introducidos en Java SE 8), por lo que todos los tipos numéricos tienen signo.
+
+- ["Primitive Data Types - The Java Tutorials"](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html)
 
 #### byte
 
@@ -156,11 +177,19 @@ short foo = 10000;
 
 El tipo primitivo `int` es un entero de complemento de dos con signo de 32 bits. Es el tipo predeterminado para los literales enteros.
 
-A partir de Java SE 8 y versiones posteriores, se puede utilizar este tipo para representar un entero de 32 bits sin signo, que tiene un valor mínimo de 0 y un valor máximo de 2^32-1.
-
 ```java
 // (-2,147,483,648 <= int <= 2,147,483,647)
 int foo = 1;
+```
+
+A partir de Java SE 8, es posible trabajar con enteros sin signo utilizando métodos especiales, aunque el tipo subyacente sigue siendo `int`. Un entero sin signo de 32 bits tiene un valor mínimo de 0 y un valor máximo de 2^32-1.
+
+Para trabajar con enteros sin signo usamos el método estático `Integer.parseUnsignedInt(String s)` y el método `Integer.toUnsignedString(int i)`:
+
+```java
+int distancia = Integer.parseUnsignedInt("3000000000");
+System.out.println(distancia); // Imprime un número negativo debido a la representación interna del int
+System.out.println(Integer.toUnsignedString(distancia)); // Imprime 3000000000
 ```
 
 > El rango de valores permitidos para `int` es de **-2^31** a **2^31-1** (ambos inclusive). Si se intenta asignar un valor fuera de este rango, el compilador generará un error.
@@ -169,7 +198,7 @@ int foo = 1;
 
 El tipo primitivo `long` es un entero de complemento de dos con signo de 64 bits.
 
-A partir de Java SE 8 y versiones posteriores, se puede utilizar este tipo para representar un entero de 64 bits sin signo, que tiene un valor mínimo de 0 y un valor máximo de 2^64-1.
+A partir de Java SE 8, se puede utilizar este tipo para representar un entero de 64 bits sin signo, que tiene un valor mínimo de 0 y un valor máximo de 2^64-1.
 
 ```java
 // (-9,223,372,036,854,775,808 <= long <= 9,223,372,036,854,775,807)
@@ -275,23 +304,146 @@ int x = 123_456_789;
 double z = 123_456_789.5;
 ```
 
+### Constantes
+
 La palabra clave `final` se utiliza para hacer que las variables sean **inmutable**. Por convención, el nombre de la variable se declara en mayúsculas:
 
 ```java
-final int HORAS_QUE_TRABAJO_POR_SEMANA = 9001;
+final int HORAS_QUE_TRABAJO_POR_SEMANA = 40;
 ```
 
-También existe una notación abreviada para declarar (e inicializar) múltiples variables del mismo tipo, aunque no se aconseja su uso por motivos de legibilidad:
+> Es obligatorio inicializar la constante en el momento de su declaración.
+
+El valor de una constante se puede calcular a partir del valor de otra constante:
 
 ```java
-// Declarar las tres variables del mismo tipo 
-int x, y, z;
+final int HORAS_POR_DIA = HORAS_QUE_TRABAJO_POR_SEMANA / 5; 
+```
 
-// Declarar e inicializar las variables
-int i1 = 1, i2 = 2;
+### Autoboxing y unboxing
 
-// El símbolo '=' retorna el valor de su derecha, por lo que esta forma es válida
-int a = b = c = 100; 
+En Java, los tipos primitivos no forman parte de la jerarquía de objetos por motivos de eficiencia. Sin embargo, existen **_clases envoltorio_** (_'wrapper classes'_) que encapsulan estos tipos primitivos, permitiendo tratarlos como objetos. Estas clases envoltorio son `Float`, `Double`, `Byte`, `Short`, `Integer`, `Long`, `Character` y `Boolean`.
+
+Todos los envoltorios de tipos numéricos heredan de la clase abstracta [`Number`](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/lang/Number.html), lo que les otorga métodos útiles para convertir entre tipos o realizar operaciones.
+
+El proceso de encapsular un tipo primitivo en su clase envoltorio se denomina **_'boxing'_**, mientras que **_'autoboxing'_** es cuando el compilador realiza esta conversión automáticamente. El proceso inverso, llamado **_'auto-unboxing'_**, convierte automáticamente un objeto envoltorio a su tipo primitivo.
+
+```java
+// Boxing explícito (sin autoboxing)
+Integer num = Integer.valueOf(100);
+
+// Autoboxing (el compilador convierte automáticamente 'int' a 'Integer')
+Integer iOb = 100;
+
+// Auto-unboxing (el compilador convierte automáticamente 'Integer' a 'int')
+int i = iOb;
+```
+
+La clase abstracta [`Number`](https://docs.oracle.com/javase/8/docs/api/java/lang/Number.html) también proporciona métodos como `intValue()` o `floatValue()` para realizar la conversión, teniendo en cuenta que puede haber **redondeo** o **truncamiento** si se cambia de tipo:
+
+```java
+Float foo = 123.56F;
+// Conversión de 'Float' a 'float'
+float bar = foo.floatValue();
+```
+
+Aunque el **_'autoboxing'_** simplifica el código, puede generar una sobrecarga de trabajo extra innecesaria en determinadas situaciones, donde se podría trabajar perfectamente con un tipo primitivo:
+
+```java
+Integer sum = 0;
+for (int i = 0; i < 1000000; i++) {
+    sum += i; // Se produce autoboxing y unboxing en cada iteración, afectando el rendimiento
+}
+```
+
+Al realizar **_'auto-unboxing'_**, si el objeto envoltorio no se ha inicializado y es `null`, se lanzará una excepción `NullPointerException`:
+
+```java
+Integer iOb = null;
+int i = iOb; // NullPointerException, ya que iOb es null
+```
+
+Los objetos envoltorio no deben compararse usando `==`, ya que esto comparará las referencias de los objetos y no sus valores. Se recomienda usar el método `.equals()` para comparar objetos:
+
+```java
+Integer a = 1000;
+Integer b = 1000;
+
+System.out.println(a == b); // false, ya que compara las referencias
+System.out.println(a.equals(b)); // true, ya que compara los valores
+```
+
+- ["Autoboxing and Unboxing - The Java Tutorials"](https://docs.oracle.com/javase/tutorial/java/data/autoboxing.html)
+
+### Conversión de tipos
+
+En Java, es posible realizar conversiones entre tipos primitivos de manera explícita o implícita.
+
+La **conversión implícita** ocurre cuando el tipo de destino tiene un rango mayor que el tipo de origen y, por tanto, no habrá pérdida de precisión.
+
+```java
+int a = 10;
+double b = a; // Conversión implícita de int a double
+```
+
+La **conversión explícita** (también llamada _'casting'_) es necesaria cuando se desea convertir un tipo más grande a un tipo más pequeño, con el posible riesgo de pérdida de datos.
+
+```java
+double x = 10.5;
+int y = (int) x; // Conversión explícita de double a int (truncado)
+System.out.println(y); // Imprime 10
+```
+
+La clase abstracta [`Number`](https://docs.oracle.com/javase/8/docs/api/java/lang/Number.html) también proporciona métodos como `intValue()` o `floatValue()` para realizar la conversión, teniendo en cuenta que puede haber **redondeo** o **truncamiento** si se cambia de tipo:
+
+```java
+Float foo = 123.56F;
+// Conversión de 'Float' a 'float'
+float bar = foo.floatValue();
+// Cambio de tipo de 'Float' a 'int'
+int baz = foo.intValue();// Truncamiento de decimales
+```
+
+- ["Converting Between Numbers and Strings - The Java Tutorials"](https://docs.oracle.com/javase/tutorial/java/data/converting.html)
+
+#### Conversión de Strings a Numbers
+
+Las clases envoltorio (`Integer`, `Double`, etc.) que son subclases de `Number`, disponen de métodos `valueOf()`, que permiten convertir una cadena en un objeto de ese tipo. Si no se puede realizar la conversión de lanza un `NumberFormatException`:
+
+```java
+String foo = "12345";
+// Conversión de 'String' a 'Integer' 
+Integer bar = Integer.valueOf(foo);
+```
+
+Además, estas clases que son subclases de `Number` proveen métodos `parseXXXXX()` como `parseInt()` para convertir cadenas en tipos primitivos numéricos:
+
+```java
+String foo = "12345";
+// Conversión de 'String' a 'Integer' 
+int bar = Integer.parseInt(foo);
+```
+
+#### Conversión de Numbers a Strings
+
+Para convertir tipos primitivos numéricos a cadenas de caracteres, la clase [`String`](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html) de Java ofrece el método sobrecargado `valueOf()`:
+
+```java
+// Conversión explícita mediante 'valueOf()'
+String foo = String.valueOf(100);
+```
+
+También puedes utilizar la concatenación automática para realizar una conversión implícita:
+
+```java
+String bar = "El importe del pedido es " + 56.75; // Convierte 'double' a 'String'
+```
+
+Las clases envoltorio (`Integer`, `Double`, etc.) que son subclases de `Number`, también disponen de métodos `toString()`, que permiten convertir un valor numérico a su representación en cadena:
+
+```java
+Integer foo = 12345;
+String bar = foo.toString(); // Convierte 'Integer' a 'String'
 ```
 
 ### Bloques
@@ -1723,22 +1875,6 @@ enum Transport {
 }
 
 System.out.println(Transport.TRUCK.ordinal()); // Print 3
-```
-
-## Autoboxing y unboxing
-
-En Java los tipos primitivos no forman parte de la jerarquía de objetos por motivos de eficiencia. Sin embargo existen clases que actuan como envoltorios (_'wrapper'_) para tipos primitivos como `Float`, `Double`, `Byte`, `Short`, `Integer`, `Long`, `Character` y `Boolean`.
-
-Todos los envoltorios de tipos numéricos heredan de la clase abstracta [`Number`](https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/lang/Number.html).
-
-Encapsular un tipo primitivo en su envoltorio se denomina **'boxing'**. Por tanto **'autoboxing'** es el proceso de encapsular automáticamente un tipo primitivo en su clase envoltorio y **'auto-unboxing'** es el proceso inverso.
-
-```java
-Integer num = Integer.valueOf(100) // sin 'autoboxing'
-
-Integer iOb = 100; // 'autobox' de int a Integer
-
-int i = iOb; // unbox
 ```
 
 ## Genéricos
