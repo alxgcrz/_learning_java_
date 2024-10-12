@@ -51,7 +51,8 @@ Comentarios multilínea
 */
 
 /**
- * Los comentarios JavaDoc suelen describir la clase o varios atributos de una clase.
+ * Los comentarios JavaDoc suelen describir la clase,
+ * y información sobre el autor, fecha de creación, ...
  */ 
 public class Sample {
     // ...
@@ -68,7 +69,9 @@ Los nombres de variable deben cumplir ciertas restricciones:
 
 - El siguiente carácter puede ser **cualquier letra, dígito, guión bajo(`_`) o el símbolo `$`**.
 
-- Por lo tanto no pueden empezar con un dígito ni emplear palabras clave de Java.
+- Por lo tanto no pueden empezar con un dígito.
+
+- Tampoco se pueden utilizar [palabras clave de Java](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html).
 
 - No pueden incluir espacios ni caracteres especiales distintos de `_` y `$`.
 
@@ -84,7 +87,7 @@ En Java, las convenciones de nombres más comunes incluyen:
 
 - **UPPER_SNAKE_CASE**: se utiliza para las constantes, es decir, variables que son `static final`. En esta convención todas las letras son mayúsculas y se separan con guiones bajos, como `MAX_VALUE`, `PI` o `DAYS_OF_WEEK`.
 
-### Tipos y variables
+### Variables y tipos
 
 Los tipos de datos son especialmente importantes en Java por tratarse de un lenguaje de **tipado fuerte**. Es decir, el compilador comprueba la compatibilidad de los tipos en todas las operaciones. Para realizar la comprobación de tipos, todas las variables, expresiones y valores tienen un tipo.
 
@@ -115,7 +118,7 @@ int x, y, z;
 // Declarar e inicializar las variables
 int i1 = 1, i2 = 2;
 
-// El símbolo '=' retorna el valor de su derecha, por lo que esta forma es válida
+// El símbolo '=' retorna el valor de su derecha
 int a = b = c = 100; 
 ```
 
@@ -352,7 +355,7 @@ Aunque el **_'autoboxing'_** simplifica el código, puede generar una sobrecarga
 ```java
 Integer sum = 0;
 for (int i = 0; i < 1000000; i++) {
-    sum += i; // Se produce autoboxing y unboxing en cada iteración, afectando el rendimiento
+    sum += i; // Se produce autoboxing y unboxing en cada iteración
 }
 ```
 
@@ -526,22 +529,64 @@ Los operadores lógicos AND y OR pueden funcionar **en modo cortocircuito (&&) y
 
 ### Cadenas
 
+En Java, una cadena de caracteres se representa con el tipo `String`, que es una clase **inmutable**, lo que significa que una vez creada, no se puede modificar. Si se realiza alguna operación que parece modificar la cadena, en realidad se está creando una nueva instancia de `String`.
+
 ```java
-String fooString = "¡Mi String está aquí!";
+String foo = "¡Mi String está aquí!";
 
 // \n es un carácter escapado que inicia una nueva línea
-String barString = "¿Imprimiendo en una nueva linea?\n¡Ningun problema!";
+String bar = "¿Imprimiendo en una nueva linea?\n¡Ningun problema!";
 
 // \t es un carácter escapado que añade un carácter tab
-String bazString = "¿Quieres añadir un 'tab'?\t¡Ningun problema!";
+String baz = "¿Quieres añadir un 'tab'?\t¡Ningun problema!";
+
+// Escapar las comillas dobles
+String quoteString = "Alguien dijo: \"Java es genial\".";
 ```
 
-Conversión de tipos numéricos primitivos en cadenas y viceversa:
+Las cadenas se pueden concatenar utilizando el operador `+`, lo que también crea una nueva cadena:
 
 ```java
-Integer.parseInt("123"); // retorna una versión entera de "123"
-String.valueOf(123); // retorna una version string de 123
+String name = "Juan";
+String greeting = "Hola, " + name + "!";
+System.out.println(greeting); // Imprime: Hola, Juan!
 ```
+
+La clase `String` proporciona varios métodos útiles para manipular y trabajar con cadenas, como:
+
+- `length()` – Devuelve la longitud de la cadena.
+
+- `charAt(int index)` – Devuelve el carácter en la posición especificada.
+
+- `substring(int beginIndex, int endIndex)` – Devuelve una subcadena de la cadena original.
+
+- `toUpperCase()` y `toLowerCase()` – Devuelven la cadena en mayúsculas o minúsculas, respectivamente.
+
+- `indexOf(String str)` – Devuelve la posición de la primera aparición de la subcadena especificada.
+
+La clase `String` también permite la comparación de cadenas mediante el método `equals()` y `equalsIgnoreCase()` para comparaciones sin distinción entre mayúsculas y minúsculas:
+
+```java
+String str1 = "Java";
+String str2 = "java";
+System.out.println(str1.equals(str2)); // false
+System.out.println(str1.equalsIgnoreCase(str2)); // true
+```
+
+La clase `StringBuilder` se utiliza para crear y manipular cadenas de caracteres de manera más eficiente que la clase `String`, especialmente cuando se realizan múltiples operaciones de concatenación o modificación. A diferencia de `String`, los objetos de `StringBuilder` son **mutables**, lo que significa que se puede modificar su contenido sin crear nuevas instancias.
+
+```java
+StringBuilder sbWithContent = new StringBuilder("¡Hola, mundo!"); // Crea un StringBuilder con contenido inicial
+
+StringBuilder sb = new StringBuilder(); // Crea un StringBuilder vacío
+sb.append("Hola");
+sb.append(", ");
+sb.append("mundo!");
+String result = sb.toString(); // result es "Hola, mundo!"
+System.out.println(result);
+```
+
+- ["Strings - The Java Tutorials"](https://docs.oracle.com/javase/tutorial/java/data/strings.html)
 
 ### Control de flujo
 
@@ -694,6 +739,8 @@ void operation () {
 
 ## Arrays
 
+Un array en Java es una **estructura de datos** que almacena múltiples elementos del mismo tipo.
+
 Notación para la declaración de un array (el tamaño del array debe decidirse en la declaración):
 
 - `<tipo_de_dato> [] <nombre_variable> = new <tipo_de_dato>[<tamaño>];`
@@ -706,7 +753,7 @@ boolean[] sample = new boolean[100];
 int[] sample1, sample2, sample3;
 ```
 
-Notación para la declaración e inicialización de un array:
+Notación para la declaración e inicialización de un array en una sola línea:
 
 - `<tipo_de_dato> [] <nombre_variable> = {value, value, ...};`
 
@@ -714,7 +761,7 @@ Notación para la declaración e inicialización de un array:
 int[] sample = {2015, 2016, 2017};
 ```
 
-Los arrays comienzan su indexación en cero y son **mutables**:
+Los arrays **comienzan su indexación en cero** y son **mutables**, lo que significa que se pueden cambiar los valores de sus elementos:
 
 ```java
 sample[1] = 2018;
@@ -723,12 +770,72 @@ System.out.println("Year: " + sample[1]); // => 2018
 
 Acceder un elemento dentro de un array (un intento de acceso fuera de los límites del array lanza un `ArrayIndexOutOfBoundsException`):
 
-Al asignar una referencia de una matriz a otra referencia no se crea una copia de la matriz ni se copian los contenidos. Sólo se crea una referencia a la misma matriz, al igual que sucede con cualquier otro objeto. Por lo tanto, a partir de ambas referencias se accede al **mismo array**:
+```java
+int[] arr = {1, 2, 3};
+System.out.println(arr[3]); // Lanza ArrayIndexOutOfBoundsException
+```
+
+Al asignar una referencia de una matriz a otra referencia no se crea una copia de la matriz ni se copian los contenidos. Sólo se crea una referencia a la misma matriz, al igual que sucede con cualquier otro objeto. Por lo tanto, a partir de ambas referencias se accede a la **misma instancia de array**:
 
 ```java
 int[] nums = {1, 2, 3};
 int[] other = nums; // Ahora 'other' apunta a la misma matriz que 'nums'.
 ```
+
+Java también soporta **arrays multidimensionales**, que son arrays cuyos elementos son a su vez arrays. El tipo más común es el array bidimensional, que puede visualizarse como una tabla con filas y columnas.
+
+```java
+int[][] matrix = new int[3][3]; // Array bidimensional de 3x3
+
+// Declaración e inicialización en una sola línea
+int[][] matrix = {
+    {1, 2, 3},
+    {4, 5, 6},
+    {7, 8, 9}
+};
+```
+
+La **complejidad temporal** de un algoritmo mide cuánto tiempo tarda en ejecutarse en función del tamaño de la entrada. En el caso de los arrays, el tamaño de la entrada suele ser el número de elementos que contiene. Esta complejidad se denota como **notación O grande** o **_("Big O")_**.
+
+**Acceder a un elemento** en un array utilizando su índice es una operación de complejidad `O(1)`, también conocida como tiempo constante. Esto significa que el tiempo necesario para acceder a un elemento no depende del tamaño del array.
+
+```java
+int element = myArray[5]; // O(1)
+```
+
+La **búsqueda de un elemento** en un array sin un orden específico (búsqueda lineal), la complejidad es `O(n)`, donde n es el número de elementos en el array. En el peor de los casos, podrías necesitar revisar todos los elementos.
+
+```java
+for (int i = 0; i < myArray.length; i++) {
+    if (myArray[i] == target) {
+        // Elemento encontrado
+    }
+} // O(n)
+```
+
+La **inserción de un elemento** al final de un array (suponiendo que ya existe espacio), es una operación de complejidad `O(1)`. Sin embargo, si necesitas insertar en una posición específica, tendrás que mover los elementos, lo que resulta en una complejidad de `O(n)`.
+
+```java
+// Inserción al final
+myArray[myArray.length - 1] = newElement; // O(1)
+
+// Inserción en una posición específica
+for (int i = myArray.length - 1; i > index; i--) {
+    myArray[i] = myArray[i - 1]; // O(n)
+}
+```
+
+La **eliminación de un elemento** de un array, también debes mover los elementos restantes para llenar el hueco, lo que resulta en una complejidad de `O(n)`.
+
+```java
+for (int i = index; i < myArray.length - 1; i++) {
+    myArray[i] = myArray[i + 1]; // O(n)
+}
+```
+
+La clase [`Arrays`](https://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html) de Java es una clase de utilidad que proporciona varios métodos estáticos para trabajar con arrays. Esta clase es parte del paquete `java.util` y no se puede instanciar, ya que todos sus métodos son estáticos. Tiene métodos para la ordenación (`Arrays.sort()`), búsqueda (`Arrays.binarySearch()`), comparación (`Arrays.equals()`) o copiado (`Arrays.copyOf()`).
+
+- [Arrays - The Java Tutorials](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/arrays.html)
 
 ## Clases y objetos
 
@@ -1792,9 +1899,9 @@ class Sample {
 
 ## Enumeraciones
 
-Básicamente, una enumeración es una **lista de constantes con nombre** que definen un nuevo tipo de datos. Un objeto de un tipo de enumeración solo puede albergar los valores definidos por la lista. Por tanto, una enumeración le permite definir con precisión un nuevo tipo de datos con un número fijo de valores.
+Básicamente, una enumeración es una **lista de constantes con nombre** que define un nuevo tipo de datos. Un objeto de un tipo de enumeración solo puede albergar los valores definidos por esta lista. De este modo, las enumeraciones permiten definir con precisión un nuevo tipo de datos con un número fijo de valores.
 
-Desde una perspectiva de programación, las enumeraciones son muy útiles cuando hay que definir un grupo de valores que representan una colección de elementos. Es importante entender que una **constante de enumeración es un objeto de su tipo de enumeración**. Una enumeración se crea con la palabra clave `enum`.
+Desde una perspectiva de programación, las enumeraciones son muy útiles cuando se necesita definir un grupo de valores que representan una colección de elementos. Es importante entender que una **constante de enumeración es un objeto de su tipo de enumeración**. Una enumeración se crea con la palabra clave `enum`.
 
 Las constantes de la enumeración son `public` y `static` de forma implícita.
 
@@ -1804,11 +1911,12 @@ enum Transport {
 }
 ```
 
-Estas constantes tienen el tipo de la enumeración que las contiene. Una vez definida la enumeración para crear una variable de este tipo no usamos `new` como una clase sino que se declaran y usan las enumeraciones como si fueran tipos primitivos.
+Estas constantes tienen el tipo de la enumeración que las contiene. Una vez definida la enumeración, para crear una variable de este tipo no es necesario usar `new` como con una clase. Las enumeraciones se declaran y usan como si fueran tipos primitivos.
 
-Sin embargo **Java implementa las enumeraciones como si fueran clases**, permitiendo que tengan constructores, métodos, etc.. aunque con dos limitaciones que las diferencia del resto de clases en Java:
+Java implementa **las enumeraciones como si fueran clases**, permitiendo que tengan constructores, métodos y variables de instancia. Incluso pueden **implementar interfaces**. Sin embargo, presentan dos limitaciones clave que las diferencian de las clases tradicionales de Java:
 
 - Una enumeración no puede heredar de otra clase.
+
 - Una enumeración no puede actuar como superclase de otra clase.
 
 ```java
@@ -1834,7 +1942,7 @@ switch (transport) {
 }
 ```
 
-Las enumeraciones cuentan con dos métodos predefinidos `values()` y `valueOf()` cuyo formato es:
+Las enumeraciones heredan de la clase [`java.lang.Enum`](https://docs.oracle.com/javase/8/docs/api/java/lang/Enum.html). Cuentan con dos métodos predefinidos importantes:
 
 - `public static tipo-enum[] values()` ➜ devuelve un array que contiene una lista de las constantes de enumeración
 
@@ -1847,10 +1955,11 @@ for (Transport transport : Transport.values()) {
 }
 ```
 
-Al definir un constructor en una enumeración, el constructor se invoca al crear cada una de las constantes de enumeración. Cada constante puede invocar todos los métodos definidos por la enumeración. Cada constante dispone de su propia copia de las variables de instancia definidas por la enumeración.
+Al definir un constructor en una enumeración, éste se invoca al crear cada una de las constantes de enumeración. Además, cada constante puede invocar todos los métodos definidos por la enumeración. Cada constante dispone de su propia copia de las variables de instancia definidas por la enumeración.
 
 ```java
-enum Transport {
+// Transport.java
+public enum Transport {
     /* Valores de inicialización. 
     A destacar el ';' necesario cuando se definen variables, constructores, etc.. */
     CAR(66), TRUCK(12), AIRPLANE(600), BOAT(12); 
@@ -1876,6 +1985,10 @@ enum Transport {
 
 System.out.println(Transport.TRUCK.ordinal()); // Print 3
 ```
+
+La declaración de una enumeración se puede hace en una clase pero habrá que prefijar el nombre de la clase al nombre de la enumeración. Para que la enumeración sea autónoma, basta con declararla en su propio fichero.
+
+- ["Enum Types - The Java Tutorials"](https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html)
 
 ## Genéricos
 
