@@ -478,43 +478,65 @@ public class Bloques {
 
 ### Operadores
 
+Java ofrece una variedad de [operadores](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/operators.html) que permiten realizar diferentes tipos de operaciones.
+
+El operador más básico es el **operador de asignación (`=`)**, que permite asignar un valor a una variable:
+
 ```java
-// La aritmética es directa
-System.out.println("1 + 2 = " + (1 + 2)); // => 3
-System.out.println("2 - 1 = " + (2 - 1)); // => 1
-System.out.println("2 - 1 = " + (2 - 1)); // => 2
-System.out.println("1 / 2 = " + (1 / 2)); // => 0 (0.5 truncado)
+int cadence = 0;
+int speed = 0;
+int gear = 1;
+```
 
-// Módulo
-System.out.println("11%3 = " + (11 % 3)); // => 2
+Los **operadores aritméticos** realizan operaciones matemáticas básicas:
 
-// Operadores de comparación
-System.out.println("3 == 2 " + (3 == 2)); // => false
-System.out.println("3 != 2 " + (3 != 2)); // => true
-System.out.println("3 > 2 " + (3 > 2)); // => true
-System.out.println("3 < 2 " + (3 < 2)); // => false
-System.out.println("2 <= 2 " + (2 <= 2)); // => true
-System.out.println("2 >= 2 " + (2 >= 2)); // => true
+```java
+int suma = 4 + 5; // => 9
+int resta = 8 - 5; // => 3
+int multiplicacion = 4 * 3; // => 12
+int division = 11 / 3; // => 3
+int modulo = 11 % 3; // => 2
+```
 
-// Asignaciones abreviadas
-int x += 10; // x = x + 10;
-int x -= 10; // x = x - 10;
-int x *= 10; // x = x - 10;
-int x /= 10; // x = x / 10;
-int x %= 10; // x = x % 10;
-boolean bool &= true; // bool = bool & true;
-boolean bool |= true; // bool = bool | true;
-boolean bool ^= true; // bool = bool ^ true;
+Los **operadores de comparación** comparan dos valores y devuelven un resultado booleano:
 
-// Incrementos y decrementos
+```java
+boolean igualdad = 3 == 2; // => false
+boolean desiguladad = 3 != 2; // => true
+boolean superior = 3 > 2; // => true
+boolean inferior = 3 < 2; // => false
+boolean superiorIgual = 2 <= 2; // => true
+boolean inferiorIgual = 2 >= 2; // => true
+```
+
+Los **operadores de asignación abreviada** combinan la operación de asignación con otros operadores:
+
+```java
+int x = 10;
+x += 10; // x = x + 10;
+x -= 10; // x = x - 10;
+x *= 10; // x = x - 10;
+x /= 10; // x = x / 10;
+x %= 10; // x = x % 10;
+
+boolean bool = true;
+bool &= true; // bool = bool & true;
+bool |= true; // bool = bool | true;
+bool ^= true; // bool = bool ^ true;
+```
+
+Los **operadores de incremento y decremento** permiten aumentar o disminuir el valor de una variable:
+
+```java
 int y, x = 10;
+
 y = x++; // y = 10. Primero se asigna el valor y luego se aumenta
 y = ++x; // y = 11. Primero se aumenta y luego se asigna
 y = x--; // y = 10. Primero se asigna el valor y luego se resta
 y = --x; // y = 9. Primero se resta y luego se asigna
 ```
 
-Los operadores lógicos son herramientas fundamentales para realizar evaluaciones condicionales y tomar decisiones en el flujo de un programa.
+Los **operadores lógicos** son fundamentales para realizar evaluaciones condicionales y tomar decisiones en el flujo de un programa.
 
 Estos operadores permiten combinar o modificar expresiones booleanas, que son aquellas que pueden evaluarse como verdaderas o falsas:
 
@@ -525,7 +547,7 @@ Estos operadores permiten combinar o modificar expresiones booleanas, que son aq
 |   False   |   True    |   True   |   False   |   True    |   True    |
 |   True    |   True    |   True   |   True    |   False   |   False   |
 
-Los operadores lógicos AND y OR pueden funcionar **en modo cortocircuito (&&) y (||)**. En este modo se evalúa el primer operando y si fuera necesario, se evaluaría el segundo.
+Los operadores lógicos _'AND'_ (`&&`) y _'OR'_ (`||`) pueden funcionar **en modo cortocircuito**. En este modo se evalúa el primer operando y si fuera necesario, se evaluaría el segundo.
 
 ### Cadenas
 
@@ -590,34 +612,42 @@ System.out.println(result);
 
 ### Control de flujo
 
+El **control de flujo** en Java permite alterar el orden en que se ejecutan las instrucciones de un programa basándose en condiciones lógicas.
+
+Las **estructuras condicionales** mediante instrucciones `if-else` evalúa una condición booleana para decidir qué bloque de código ejecutar:
+
 ```java
-/*
-if (expr booleana) {
-    bloque de intrucciones;
-} else if (expr booleana) {
-    bloque instrucciones;
+if (condición) {
+    // Bloque de instrucciones si la condición es verdadera
+} else if (otraCondición) {
+    // Bloque si se cumple otra condición
 } else {
-    intrucciones en caso de que ninguna condición anterior se cumpla;
-} */
+    // Bloque si no se cumplen las condiciones anteriores
+}
+```
 
+Los **bucles** permiten ejecutar repetidamente un bloque de código mientras una condición sea verdadera:
 
-/*
-while(expr booleana) {
-    bloque de instrucciones;
-    contador++;  // actualizar la variable usada para evaluar la condición
-} */
+```java
+while (condición) {
+    // Bloque de instrucciones que se repiten mientras la condición sea verdadera
+}
+```
 
-/*
+En el bucle `do-while`, el bloque de código se ejecuta al menos una vez, ya que la condición se evalúa después:
+
+```java
 do {
-    bloque de intrucciones
-    contador++; // actualizar la variable usada para evaluar la condición
-}while(expr booleana);
-*/
+    // Bloque de instrucciones
+} while (condición);
+```
 
-/*
-for(<declaración_de_inicio>; <condicional>; <paso>) {
-    bloque de instrucciones;
-} */
+El bucle `for` proporciona una forma compacta de iterar:
+
+```java
+for(int i=1; i<11; i++){
+    System.out.println("Count is: " + i);
+}
 ```
 
 En Java, el cuerpo asociado a un bucle `for` o de otro tipo puede estar vacío ya que una instrucción vacía es sintácticamente válida. Puede ser útil en algunos casos:
@@ -628,13 +658,22 @@ for(int i = 1; i<= 5; sum += i++);
 // Se usa el bucle for para incrementar la variable sum
 ```
 
-En la JDK 5 se añadió los bucles `for-each` que permiten iterar por matrices, clases del paquete 'Collections', etc...
+Las tres expresiones de un bucle `for` son opcionales, de forma que se puede crear un bucle infinito:
 
 ```java
-/*
-for(tipo var-iteración : collection) {
-    bloque instrucciones;
-} */
+// infinite loop
+for ( ; ; ) {
+    // your code goes here
+}
+```
+
+En la versión de Java JDK 5 se añadió los bucles `for-each` que permiten iterar por matrices, clases del paquete 'Collections', etc...
+
+```java
+int[] numbers = {1,2,3,4,5,6,7,8,9,10};
+for (int item : numbers) {
+  System.out.println("Count is: " + item);
+}
 ```
 
 La estructura `switch` funciona con tipos numéricos simples como `byte`, `short`, `char` e `int`. También funciona con tipos enumerados, la clase `String` y unas pocas clases especiales que envuelven tipos primitivos: `Character`, `Byte`, `Short` e `Integer`.
@@ -655,6 +694,8 @@ switch (mes) {
         break;
 }
 ```
+
+- ["Control Flow Statements - The Java Tutorials"](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/flow.html)
 
 #### Break
 
@@ -972,9 +1013,11 @@ void isEven(int num) {
 }
 ```
 
-En Java, cuando se pasa como argumento **un tipo primitivo se pasa por valor**, esto es, se crea una copia del argumento y los cambios que suceden dentro del método no afecta al exterior. En cambio, cuando se pasa un **objeto se pasa implícitamente por referencia**, ya que cuando se crea una variable de un tipo de clase se crea una referencia a un objeto y es la referencia y no el objeto lo que se pasa al método. Los cambios realizados en el objeto dentro del método afectan al objeto.
+En Java, cuando se pasa como argumento un tipo primitivo se pasa **por valor**, lo que significa que se crea una copia del valor original y los cambios realizados dentro del método no afectan a la variable original fuera del método.
 
-Podemos indicar un parámetro como `final` lo que impedirá que podamos asignar una referencia de un nuevo objeto aunque no impedirá que se realicen cambios en los atributos del objeto:
+En cambio, cuando se pasa un objeto, lo que se pasa es una **copia de la referencia al objeto**, no el propio objeto en sí. Esto implica que los cambios realizados en los atributos del objeto dentro del método afectarán al objeto original, pero no se puede reasignar la referencia para que apunte a otro objeto.
+
+Es posible declarar un parámetro como `final`, lo que evitará que la referencia se reasigne dentro del método. Sin embargo, esto no impide modificar los atributos del objeto referenciado:
 
 ```java
 class Car {
