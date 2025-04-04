@@ -3273,12 +3273,19 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
   - [JEP 454](https://openjdk.org/jeps/454): Foreign Function & Memory API
   - [JEP 456](https://openjdk.org/jeps/456): Unnamed Variables & Patterns
 
-### :new: Java 23 (17/09/2024)
+### Java 23 (17/09/2024)
 
 - [JDK 23 Documentation](https://docs.oracle.com/en/java/javase/23/index.html)
 - [Java Language Changes for Java SE 23](https://docs.oracle.com/en/java/javase/23/language/java-language-changes.html)
-- [Significant Changes in JDK 23 Release](https://docs.oracle.com/en/java/javase/23/migrate/significant-changes-jdk-release.html)
+- [Significant Changes in JDK 23 Release](https://docs.oracle.com/en/java/javase/24/migrate/significant-changes-jdk-23.html)
 - [Lista completa de características - JEP](https://openjdk.org/projects/jdk/23/)
+
+### :new: Java 24 (18/03/2025)
+
+- [JDK 24 Documentation](https://docs.oracle.com/en/java/javase/24/index.html)
+- [Java Language Changes for Java SE 24](https://docs.oracle.com/en/java/javase/24/language/java-language-changes-release.html)
+- [Significant Changes in JDK 24 Release](https://docs.oracle.com/en/java/javase/24/migrate/significant-changes-jdk-24.html)
+- [Lista completa de características - JEP](https://openjdk.org/projects/jdk/24/)
 
 ---
 
@@ -3313,6 +3320,7 @@ Más información [aquí](https://dev.java/learn/jshell-tool/) o [aquí](https:/
 - ⭐ [The Java™ Tutorials](https://docs.oracle.com/javase/tutorial/index.html)
   - [The Java™ Tutorials](https://docs.oracle.com/javase/tutorial/reallybigindex.html)
   - [Java Tutorials Learning Paths](https://docs.oracle.com/javase/tutorial/tutorialLearningPaths.html)
+- ⭐⭐ <https://dev.java/learn/>
 - ⭐ [Eclipse Collections Kata](https://github.com/eclipse/eclipse-collections-kata)
 - ⭐ <https://roadmap.sh/java>
 - <https://www.tutorialspoint.com/java/index.htm>
