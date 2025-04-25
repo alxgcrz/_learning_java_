@@ -24,7 +24,7 @@
     "pdf": "npm run pdf:create && npm run pdf:copy",
     "pdf:create": "mdpdf README.md README.pdf",
     "pdf:copy": "copy README.pdf \"%PDF_BASE_PATH%/%npm_package_config_pdf%\"",
-    "live": "live-server %npm_package_config_html%",
+    "live": "node live.js",
     "live-edge": "live-server %npm_package_config_html% --browser=msedge"
   },
   "repository": {
